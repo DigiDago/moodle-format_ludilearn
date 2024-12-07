@@ -28,9 +28,9 @@ defined('MOODLE_INTERNAL') || die();
 $string['pluginname'] = 'Ludimoodle';
 $string['assignment'] = 'Allocation of game elements';
 $string['assignment_help'] = 'Allocation determines how game elements are assigned to learners. The 3 allocation modes are:<br>
-* Automatic: via the Ludimoodle algorithm which automatically assigns a game element according to the learne\'s profile.
-* Manually: by selecting a specific game element for all learners and for the whole course.
-* By section: by selecting the game element of your choice for each section of the course.';
+* Automatic: via the Ludimoodle algorithm which automatically assigns a game element according to the learner\'s profile (applied to all courses). If your learners are accessing a game-based course for the first time, they will have to fill in a questionnaire which will take 5 minutes.
+* Manual: by selecting a game element of your choice for all learners and for the whole course.
+* By section: by selecting a game element of your choice for all learners for each section of the course.';
 $string['default'] = 'Default';
 $string['manual'] = 'Manually for the whole course';
 $string['automatic'] = 'Automatic: based on a questionnaire and the LudiMoodle algorithm';
@@ -141,29 +141,25 @@ $string['settings:multiplier_help'] = 'The multiplier is a coefficient applied u
 The default value is 1. Increasing it (to 2 or 10, for example) will adjust all the scores obtained.<br>
 This option allows you to create a more playful dimension without altering the balance between the course activities.';
 $string['settings:percentagecompletion'] = 'Additional percentage for activities graded with completion';
-$string['settings:percentagecompletion_help'] = 'This parameter defines an additional bonus awarded when a learner completes an activity that is both graded and has a completion status.<br>
-The default value is 1. Increasing this value (for example, to 2 or 10) will amplify any scores achieved, adding a fun dimension to the learning experience.<br>
-This option allows you to create a more playful atmosphere without altering the balance between course activities.';
+$string['settings:percentagecompletion_help'] = 'This setting defines an additional bonus awarded when a learner completes an activity that is both graded and has a completion status (e.g. homework, quizzes, lessons).
+The bonus is calculated as a percentage of the maximum grade for the activity. For example, if this percentage is set at 10%:<br>
+* An assignment marked out of 100 points will give a bonus of 10 points on completion.<br>
+* A quiz marked out of 50 will give a bonus of 5 points on completion.<br>
+This bonus is added to the grade, rewarding learners for completing the activity, regardless of their performance.';
 $string['settings:bonuscompletion'] = 'Completion bonus';
 $string['settings:bonuscompletion_help'] = 'The completion bonus is a fixed number of points awarded when a learner completes an activity that does not have a grade and activity completion.<br>
 This bonus is applied consistently to all activities in the course that only have the completion option enabled (for example, viewing a resource or participating in an ungraded forum). Using this bonus encourages learners to interact with all elements of the course, even those that are not graded directly.';
-$string['settings:percentagecompletion'] = 'Additional percentage for activities graded with completion';
-$string['settings:percentagecompletion_help'] = 'This setting defines an additional bonus awarded when a learner completes an activity that is both graded and has a completion status (e.g. homework, quizzes, lessons).
-The bonus is calculated as a percentage of the maximum grade for the activity. For example, if this percentage is set at 10%:<br />
-* An assignment marked out of 100 will give a bonus of 10 points on completion <br />.
-* A quiz marked out of 50 will give a bonus of 5 points on completion.
-This bonus is added to the grade, rewarding learners for completing the activity, regardless of their performance.';
 $string['settings:badgegold'] = 'Gold badge threshold';
-$string['settings:badgegold_help'] = 'This parameter defines the minimum percentage of the mark that a learner must achieve to receive a gold badge in a graded activity. For example, if the threshold is set at 90%:<br />
+$string['settings:badgegold_help'] = 'This parameter defines the minimum percentage of the mark that a learner must achieve to receive a gold badge in a graded activity. For example, if the threshold is set at 90%:<br>
 * For an activity graded out of 100 points, the learner must obtain at least 90 points.<br>
 * For a quiz marked out of 50 points, the learner must obtain at least 45 points.';
 $string['settings:badgesilver'] = 'Silver badge threshold';
-$string['settings:badgesilver_help'] = 'This parameter defines the minimum percentage of the mark that a learner must achieve in order to receive a silver badge in a graded activity. For example, if the threshold is set at 85%:<br />
-* For an activity graded out of 100 points, the learner must obtain at least 85 points.<br>
-* For a quiz marked out of 50 points, the learner must obtain at least 42.5 points.';
+$string['settings:badgesilver_help'] = 'This parameter defines the minimum percentage of the mark that a learner must achieve in order to receive a silver badge in a graded activity. For example, if the threshold is set at 85%:<br>
+* For an activity marked out of 100 points, the learner must obtain at least 85 points.<br>
+* For a quiz marked out of 50 points, the learner must obtain at least 42.5 points';
 $string['settings:badgebronze'] = 'Bronze badge threshold';
-$string['settings:badgebronze_help'] = 'This parameter defines the minimum percentage of the mark that a learner must achieve in order to receive a bronze badge in a graded activity. For example, if the threshold is set at 70%:<br />
-* For an activity graded out of 100 points, the learner must obtain at least 70 points.<br>
+$string['settings:badgebronze_help'] = 'This parameter defines the minimum percentage of the mark that a learner must achieve in order to receive a bronze badge in a graded activity. For example, if the threshold is set at 70%:<br> * For an activity graded out of 100 points, the learner must obtain at least 70 points.<br>
+* For an activity graded out of 100 points, the learner must obtain at least 70 points.
 * For a quiz marked out of 50 points, the learner must obtain at least 35 points.';
 $string['settings:nosetting'] = 'This game element works automatically based on the existing structure and settings of your course. It requires no additional configuration and there are no options to adjust.';
 $string['settings:penalties'] = 'Penatlies by point lost';
@@ -175,13 +171,14 @@ $string['settings:thresholdtoearn_help'] = 'This parameter defines the minimum s
 * A score of 79%  will not unlock anything, even if the activity is completed.
 Adjust this threshold according to the difficulty of your activities and the frequency with which you want learners to unlock new avatar elements.';
 $string['settings:scoredescription'] = '<p>The score game element allows learners to accumulate points by completing course activities. It adapts automatically to the different types of activities offered.<br><br>
-1. For graded activities, the score is based directly on the mark obtained. For example, a mark of 80 out of 100 points translates into 80 points in the scoring system.<br>
-2. For completion-only activities, a fixed number called a completion bonus is awarded when activities are completed. <br>
-3. For activities combining grade and completion, the score takes into account both the grade and an additional percentage added to the grade.</p>';
-$string['settings:badgedescription'] = '<p>The badge game element rewards learners with badges by completing course activities.<br><br>
+1. For graded activities, the score is based directly on the mark obtained. For example, a mark of 16 out of 20 translates into 16 points.<br>
+A multiplication coefficient is applied to transform these points into a score, as in games. For example, a coefficient of 80 will show 1280 points in the scoring system.<br>
+2. For activities with only completion, a fixed number called the completion bonus is awarded when the activities are completed. For example, at the end of the activity, the learner is awarded 150 points.<br>
+3. In the case of activities combining grade and completion, the score takes into account both the grade and an additional percentage added to the grade. For example, completing the activity will add an additional 20% to the total score that can be achieved.</p>';
+$string['settings:badgedescription'] = '<p>This game element rewards learners with badges for completing activities. It adapts automatically to the different types of activities in the course<br><br>.
 1. For graded activities, three levels of badges (Gold, Silver, Bronze) are awarded automatically when the learner\'s grade reaches or exceeds the threshold defined for each level.<br>
 2. For non-graded activities with activity completion, learners are awarded Gold badges directly upon activity completion.<br>
-3. In the case of a graded activity with activity completion, learners will be able to earn one of 3 badge levels (Gold, Silver, Bronze) and a bonus badge linked to completion.</p>';
+3. In the case of a graded activity with completion of the activity, learners will be able to obtain one of the 3 levels of badges (Gold, Silver, Bronze) and a bonus badge linked to completion.</p>';
 $string['settings:progressiondescription'] = '<p>The progress game element displays the learner\'s overall progress through the course in the form of a journey. It automatically adapts to the different types of activities.<br><br>
 1. For graded activities, progress corresponds directly to the percentage of the grade obtained. For example, if a learner obtains 80% in a quiz, their progression for this activity will be 80%.<br>
 2. For activities with completion only, progress increases by 100%  as soon as the activity is marked as completed.<br>
@@ -190,13 +187,13 @@ $string['settings:avatardescription'] = '<p>The avatar game element allows learn
 1. For graded activities, unlocking avatar items is based on achieving a score above the threshold to earn an item. For example, if the threshold is set at 80%, the learner will need to score above 80% in a graded activity to unlock a new avatar item.<br>
 2. For completion-only activities, completion of the activity unlocks an avatar item. <br>
 3. For activities that combine scoring and completion, the score achieved is used. Activity completion has no additional impact.</p>';
-$string['settings:timerdescription'] = 'The timer game element adds a time dimension to the quizzes in your course. It works exclusively with test-type activities (or quizzes). Learners have to complete the quizzes as quickly as possible with as few errors as possible to avoid time penalties.<br><br>
-- The time used by the learner is counted in the quiz.<br>
-- The learner\'s best time is recorded and displayed<br>.
-- Penalties are applied for errors in the quizzes</p>.';
-$string['settings:rankingdescription'] = '<p>The ranking game element provides a comparative view of learners\'s performance against other learners in the course.<br><br>
-1. For graded activities, the mark obtained is converted directly into points which contribute to the ranking. For example, a mark of 80%  out of 100 points translates into 80 points in the ranking.<br>
-2. Activities with completion only have no impact on the ranking. <br>
+$string['settings:timerdescription'] = '<p>The timer game element adds a time dimension to your course quizzes. <strong>It works exclusively with test (or quiz)</strong> type activities. The element displays the time taken by the learner to complete the test, with overtime penalties applied for errors.<br>
+- The time used by the learner is counted at the quiz level.<br>
+- The learner\'s best time is recorded and displayed in the quiz, and the average quiz time is displayed in the course section.<br>
+- In the event of a mistake in the quiz, additional time (penalty) is added.</p>.';
+$string['settings:rankingdescription'] = '<p>The ranking game element provides a comparative view of learners\' performance against other learners in the course. It automatically adapts to the different types of activity in the course.<br>
+1. For graded activities, the mark obtained is converted directly into points which contribute to the ranking. For example, a mark of 80% out of 100 points translates into 80 points in the ranking. If 6 learners have obtained a better mark, they will be displayed in 7th position in the ranking.<br>
+2. Activities with only completion have no impact on the ranking.<br>
 3. In the case of activities combining grade and completion, only the grade is taken into account for the ranking.</p>';
 $string['settings:nogamifieddescription'] = '<p>The non-game element appears on all non-game activities and course resources.</p>';
 $string['gameprofile_desc'] = 'Based on your answers, here\'s your HEXAD-12 player profile :';
@@ -235,9 +232,8 @@ $string['privacy:metadata:ludimoodle_gameeele_user'] = 'The table ludimoodle_gam
 $string['privacy:metadata:ludimoodle_gameeele_user:attributionid'] = 'The attribution ID.';
 $string['privacy:metadata:ludimoodle_gameeele_user:name'] = 'The name of the data.';
 $string['privacy:metadata:ludimoodle_gameeele_user:value'] = 'The value of the data.';
-$string['privacy:metadata:ludimoodle_cm_user'] = 'The table ludimoodle_cm_user stores the data related to the game elements in a course module assigned to each user ';
+$string['privacy:metadata:ludimoodle_cm_user'] = 'The table ludimoodle_cm_user stores the data related to the game elements in a course module assigned to each user.';
 $string['privacy:metadata:ludimoodle_cm_user:attributionid'] = 'The attribution ID.';
 $string['privacy:metadata:ludimoodle_cm_user:cmid'] = 'The course module ID.';
 $string['privacy:metadata:ludimoodle_cm_user:name'] = 'The name of the data.';
 $string['privacy:metadata:ludimoodle_cm_user:value'] = 'The value of the data.';
-

@@ -114,7 +114,7 @@ $string['flag'] = 'Drapeau';
 $string['figurehead'] = 'Figure de proue';
 $string['propulsion'] = 'Propulsion';
 $string['theme'] = 'Thème';
-$string['timer'] = 'Temps';
+$string['timer'] = 'Chronomètre';
 $string['besttime'] = 'Meilleur temps';
 $string['averagetime'] = 'Temps moyen';
 $string['reference_time'] = 'Temps de référence';
@@ -129,7 +129,7 @@ $string['second'] = 'ème';
 $string['third'] = 'ème';
 $string['th'] = 'ème';
 $string['me'] = 'Moi';
-$string['gamify'] = 'Gamifier';
+$string['gamify'] = 'Ludifier';
 $string['notgamify'] = 'Ne pas ludifier';
 $string['seconds'] = 'secondes';
 $string['ofpenalties'] = 'de pénalités';
@@ -170,12 +170,12 @@ $string['settings:thresholdtoearn_help'] = 'Ce paramètre définit le score mini
 * Un score de 81%  dans un quiz débloquera un élément d\'avatar.<br>
 * Un score de 79%  ne débloquera rien, même si l\'activité est complétée.<br>
 Ajustez ce seuil en fonction de la difficulté de vos activités et de la fréquence à laquelle vous souhaitez que les apprenants débloquent de nouveaux éléments.';
-$string['settings:scoredescription'] = '<p> L\'élément de jeu score permet aux apprenants d\'accumuler des points en réalisant des activités du cours. Son fonctionnement s\'adapte automatiquement aux différents types d\'activités proposées.<br><br>
+$string['settings:scoredescription'] = '<p>L\'élément de jeu score permet aux apprenants d\'accumuler des points en réalisant des activités du cours. Son fonctionnement s\'adapte automatiquement aux différents types d\'activités proposées.<br><br>
 1. Pour les activités notées, le score est directement basé sur la note obtenue. Par exemple, une note de 16 sur 20 se traduit par 16 points.<br>
 Un coefficient multiplicateur est appliqué pour transformer ces points en score comme dans les jeux. Par exemple, un coefficient de 80 affichera 1280 points dans le système de score.<br>
 2. Pour les activités avec uniquement de l\'achèvement, un nombre fixe appelé bonus d\'achèvement est attribuée lorsque les activités sont achevées. Par exemple, à la fin de l\'activité, l\'apprenant obtient 150 points.<br>
-3. Dans le cas des activités combinant note et achèvement, le score prend en compte à la fois la note et un pourcentage additionnel ajouté à la note. Par exemple, achever l\'activité ajoutera 20% de points supplémentaires par rapport au score total pouvant être atteint.  </p>';
-$string['settings:badgedescription'] = '<p>Cet élément de jeu récompense les apprenants avec des badges en réalisant des activités   . Il s\'adapte automatiquement aux différents types d\'activités du cours<br><br>
+3. Dans le cas des activités combinant note et achèvement, le score prend en compte à la fois la note et un pourcentage additionnel ajouté à la note. Par exemple, achever l\'activité ajoutera 20% de points supplémentaires par rapport au score total pouvant être atteint.</p>';
+$string['settings:badgedescription'] = '<p>Cet élément de jeu récompense les apprenants avec des badges en réalisant des activités. Il s\'adapte automatiquement aux différents types d\'activités du cours<br><br>
 1. Pour les activités notées, trois niveaux de badges (Or, Argent, Bronze) sont attribués automatiquement lorsque la note de l\'apprenant atteint ou dépasse le seuil défini pour chaque niveau.<br>
 2. Dans le cas des activités non notées mais avec un achèvement d\'activité, les apprenants obtiennent directement le badge Or lorsqu\'ils complètent l\'activité.<br>
 3. Dans le cas d\'une activité notée et avec de l\'achèvement d\'activité, les apprenants pourront obtenir l\'un des 3 niveaux de badges (Or, argent, Bronze) et un badge bonus lié à l\'achèvement.</p>';
@@ -215,3 +215,25 @@ Pour les retours techniques, merci d\'utiliser le <a href="https://github.com/Di
 <b>À propos de Ludimoodle+</b><br><br>
 Le projet LudiMoodle+, porté par l\'Université de Lyon, bénéficie d\'une aide de l\'État gérée par l\'Agence nationale de la recherche au titre de France 2030 portant la référence « ANR-22-FRAN-0005 »</p>';
 $string['partner_text2'] = '<p><b>Les partenaires du projet</b></p>';
+// String for privacy provider.
+$string['privacy:metadata:ludimoodle_profile'] = 'La table ludimoodle_profile stocke le profil de joueur HEXAD-12 de chaque utilisateur.';
+$string['privacy:metadata:ludimoodle_profile:userid'] = 'L\'identifiant de l\'utilisateur';
+$string['privacy:metadata:ludimoodle_profile:combinedaffinities'] = 'Le profil de joueur HEXAD-12 de l\'utilisateur.';
+$string['privacy:metadata:ludimoodle_profile:type'] = 'Type d\'élément de jeu attribué à l\'utilisateur.';
+$string['privacy:metadata:ludimoodle_answers'] = 'La table ludimoodle_answers stocke les réponses au questionnaire HEXAD-12.';
+$string['privacy:metadata:ludimoodle_answers:questionid'] = 'L\'ID de la question';
+$string['privacy:metadata:ludimoodle_answers:userid'] = 'L\'ID de l\'utilisateur.';
+$string['privacy:metadata:ludimoodle_answers:score'] = 'Le score obtenu par l\'utilisateur pour la question.';
+$string['privacy:metadata:ludimoodle_attribution'] = 'Le tableau ludimoodle_attribution stocke les éléments de jeu attribués à chaque utilisateur.';
+$string['privacy:metadata:ludimoodle_attribution:gameelementid'] = 'L\'ID de l\'élément de jeu.';
+$string['privacy:metadata:ludimoodle_attribution:userid'] = 'L\'ID de l\'utilisateur.';
+$string['privacy:metadata:ludimoodle_attribution:timecreated'] = 'Heure à laquelle l\'élément de jeu a été attribué à l\'utilisateur.';
+$string['privacy:metadata:ludimoodle_gameeele_user'] = 'La table ludimoodle_gameeele_user stocke toutes les données relatives aux éléments de jeu attribués à chaque utilisateur.';
+$string['privacy:metadata:ludimoodle_gameeele_user:attributionid'] = 'L\'ID d\'attribution.';
+$string['privacy:metadata:ludimoodle_gameeele_user:name'] = 'Le nom de la donnée.';
+$string['privacy:metadata:ludimoodle_gameeele_user:value'] = 'La valeur de la donnée.';
+$string['privacy:metadata:ludimoodle_cm_user'] = 'La table ludimoodle_cm_user stocke les données relatives aux éléments de jeu dans un module de cours attribué à chaque utilisateur.';
+$string['privacy:metadata:ludimoodle_cm_user:attributionid'] = 'L\'ID lié à l\'attribution';
+$string['privacy:metadata:ludimoodle_cm_user:cmid'] = 'L\'ID du cours.';
+$string['privacy:metadata:ludimoodle_cm_user:name'] = 'Le nom de la donnée.';
+$string['privacy:metadata:ludimoodle_cm_user:value'] = 'La valeur de la donnée.';
