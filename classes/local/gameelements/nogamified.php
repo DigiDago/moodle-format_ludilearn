@@ -28,7 +28,7 @@ require_once($CFG->libdir . '/adminlib.php');
  * Nogamified game element class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

@@ -32,7 +32,7 @@ use templatable;
  * Ludimoodle Plus game element renderer.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -102,10 +102,10 @@ class format_ludimoodle_gameelement implements renderable, templatable {
         // If the user has capabilities to update the course and he is not enrolled or the course is assigned automatically.
         if (has_capability('moodle/course:update', $context) && (($options['assignment'] == 'automatic') || !$this->isenrolled)) {
             // Verify is there is an attribution for this user.
-            $attribution_exist = $manager->has_attribution($courseid, $USER->id);
-            // if not attribution exist, create one with nogamified type.
+            $attributionexist = $manager->has_attribution($courseid, $USER->id);
+            // If not attribution exist, create one with nogamified type.
             $gameelementtype = 'nogamified';
-            if (!$attribution_exist) {
+            if (!$attributionexist) {
                 $manager->check_attribution_course($courseid, $USER->id, $gameelementtype);
             }
             $this->notanswered = false;
@@ -124,7 +124,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     $gameelementtype);
             } else {
                 // Get the attributions by section.
-                $sql = "SELECT ge.id, ge.type FROM {ludimoodle_bysection} bs 
+                $sql = "SELECT ge.id, ge.type FROM {ludimoodle_bysection} bs
                         INNER JOIN {ludimoodle_gameelements} ge ON bs.gameelementid = ge.id
                         WHERE bs.courseid = :courseid AND bs.sectionid = :sectionid";
                 $bysection = $DB->get_record_sql($sql,
@@ -179,7 +179,6 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 }
             }
 
-
             // Get the course module.
             if ($cmid != -1) {
                 $this->cm = $DB->get_record('course_modules', ['id' => $cmid]);
@@ -204,9 +203,9 @@ class format_ludimoodle_gameelement implements renderable, templatable {
         if ($this->notanswered) {
             return new stdClass();
         }
-        
-        $contextcourse = context_course::instance($this->course->id, MUST_EXIST);
 
+        // Export the data.
+        $contextcourse = context_course::instance($this->course->id, MUST_EXIST);
         $manager = new manager();
         $data = new stdClass();
         $data->isenrolled = $this->isenrolled;
@@ -242,7 +241,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 }
 
                 // Populate the section parameters.
-                $sectiondata->parameters = $this->populateSection($sectiondata->parameters, $section, $type);
+                $sectiondata->parameters = $this->populate_section($sectiondata->parameters, $section, $type);
 
                 $sectiondata->parameters->gamified = false;
                 if ($section->gameelement->get_count_cm_gamified() > 0) {
@@ -275,7 +274,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
             }
 
             // Populate the section parameters.
-            $data->section->parameters = $this->populateSection($data->section->parameters, $this->section, $type);
+            $data->section->parameters = $this->populate_section($data->section->parameters, $this->section, $type);
 
             $data->section->parameters->gamified = false;
             if ($this->section->gameelement->get_count_cm_gamified() > 0) {
@@ -308,11 +307,11 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 }
 
                 // Populate the course module parameters.
-                $cmdata->parameters = $this->populateCm($cmdata->parameters, $cm, $this->section, $type);
+                $cmdata->parameters = $this->populate_cm($cmdata->parameters, $cm, $this->section, $type);
 
                 $contextactivity = context_module::instance($cminfo->id);
                 if (has_capability('moodle/course:viewhiddenactivities', $contextactivity)
-                || has_capability('moodle/course:update', $contextcourse) || $cminfo->available){
+                || has_capability('moodle/course:update', $contextcourse) || $cminfo->available) {
                     if ($cminfo->get_url()) {
                         $cmdata->url = $cminfo->get_url()->out(false);
                     }
@@ -320,7 +319,6 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 }
                 $data->section->cms[] = $cmdata;
             }
-
 
             // Course module view.
             if ($this->cm != null) {
@@ -339,7 +337,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     }
 
                     // Populate the course module parameters.
-                    $data->cm->parameters = $this->populateCm($data->cm->parameters, $this->cm, $this->section, $type);
+                    $data->cm->parameters = $this->populate_cm($data->cm->parameters, $this->cm, $this->section, $type);
                 }
                 // Check if the course module is restricted.
                 $data->cm->parameters->restricted = false;
@@ -394,7 +392,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
      * @param string $type Type of the section.
      * @return stdClass Populated parameters.
      */
-    protected function populateSection(stdClass $parameters, stdClass $section, string $type): stdClass {
+    protected function populate_section(stdClass $parameters, stdClass $section, string $type): stdClass {
         global $USER;
 
         $sectioninfo = get_fast_modinfo($this->course)->get_section_info($section->section);
@@ -472,11 +470,11 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     $rank->me = true;
                     $parameters->ranks[] = $rank;
 
-                    // User
+                    // User.
                     if ($parameters->ranking->succeeding_user_rank != null) {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank($parameters->ranking->succeeding_user_rank);
-                        if ($parameters->ranking->succeeding_user_total_score != NULL) {
+                        if ($parameters->ranking->succeeding_user_total_score != null) {
                             $rank->score = intval($parameters->ranking->succeeding_user_total_score);
                         } else {
                             $rank->score = 0;
@@ -503,14 +501,14 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     // First user.
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank(1);
-                    if ($parameters->ranking->first_user_total_score != NULL) {
+                    if ($parameters->ranking->first_user_total_score != null) {
                         $rank->score = intval($parameters->ranking->first_user_total_score);
                     } else {
                         $rank->score = 0;
                     }
                     $parameters->ranks[] = $rank;
 
-                    // User
+                    // User.
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank($parameters->rank);
                     $rank->score = intval($parameters->score);
@@ -521,7 +519,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     if ($parameters->ranking->succeeding_user_rank != null) {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank($parameters->ranking->succeeding_user_rank);
-                        if ($parameters->ranking->succeeding_user_total_score != NULL) {
+                        if ($parameters->ranking->succeeding_user_total_score != null) {
                             $rank->score = intval($parameters->ranking->succeeding_user_total_score);
                         } else {
                             $rank->score = 0;
@@ -536,7 +534,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     // First user.
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank(1);
-                    if ($parameters->ranking->first_user_total_score != NULL) {
+                    if ($parameters->ranking->first_user_total_score != null) {
                         $rank->score = intval($parameters->ranking->first_user_total_score);
                     } else {
                         $rank->score = 0;
@@ -547,7 +545,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     if ($parameters->ranking->preceding_user_rank != null) {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank($parameters->ranking->preceding_user_rank);
-                        if ($parameters->ranking->preceding_user_total_score != NULL) {
+                        if ($parameters->ranking->preceding_user_total_score != null) {
                             $rank->score = intval($parameters->ranking->preceding_user_total_score);
                         } else {
                             $rank->score = 0;
@@ -555,7 +553,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                         $parameters->ranks[] = $rank;
                     }
 
-                    // User
+                    // User.
                     $rank = new stdClass();
                     if ($parameters->rank != null) {
                         $rank->rank = $manager->stringify_rank($parameters->rank);
@@ -598,7 +596,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
      * @param string $type Type of the section.
      * @return stdClass Populated parameters.
      */
-    protected function populateCm(stdClass $parameters, stdClass $cm, stdClass $parentsection, string $type): stdClass {
+    protected function populate_cm(stdClass $parameters, stdClass $cm, stdClass $parentsection, string $type): stdClass {
         global $PAGE, $DB, $USER;
         $cminfo = get_fast_modinfo($this->course->id)->get_cm($cm->id);
         $manager = new manager();
@@ -614,7 +612,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 break;
             case 'badge':
                 if ($parameters->gamified) {
-                    if(isset($parameters->progression)) {
+                    if (isset($parameters->progression)) {
                         $parameters->badge = $parentsection->gameelement->get_cm_badge($parameters->progression);
                     } else {
                         $parameters->badge = $parentsection->gameelement->get_cm_badge(0);
@@ -646,9 +644,9 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 }
                 $parameters->sectionparameters = $parentsection->parameters;
                 break;
-            case 'timer';// Format current time.
+            case 'timer';
                 if ($parameters->gamified) {
-                    // Format best time
+                    // Format best time.
                     if ($parameters->besttime > 0) {
                         $besttime = intval($parameters->besttime);
                         $minutes = str_pad(intval($besttime / 60), 2, "0", STR_PAD_LEFT);
@@ -703,26 +701,26 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     if ($gradable && $parameters->gamified) {
                         $parameters->score = intval($parameters->score);
                         $before2 = $parameters->ranking->succeeding2_user_rank;
-                        if ($before2 != 0 && $before2 != NULL) {
+                        if ($before2 != 0 && $before2 != null) {
                             $parameters->before_2 = $before2;
                             $parameters->before_2_th = $manager->get_postfix($before2);
                         }
                         $before1 = $parameters->ranking->succeeding_user_rank;
-                        if ($before1 != 0 && $before1 != NULL) {
+                        if ($before1 != 0 && $before1 != null) {
                             $parameters->before_1 = $before1;
                             $parameters->before_1_th = $manager->get_postfix($before1);
                         }
                         $parameters->rank = $parameters->ranking->user_rank;
-                        if ($parameters->ranking->user_rank != 0 && $parameters->ranking->user_rank != NULL) {
+                        if ($parameters->ranking->user_rank != 0 && $parameters->ranking->user_rank != null) {
                             $parameters->postfix = $manager->get_postfix($parameters->ranking->user_rank);
                         }
                         $after1 = $parameters->ranking->preceding_user_rank;
-                        if ($after1 != 0 && $after1 != NULL) {
+                        if ($after1 != 0 && $after1 != null) {
                             $parameters->after_1 = $after1;
                             $parameters->after_1_th = $manager->get_postfix($after1);
                         }
                         $after2 = $parameters->ranking->preceding2_user_rank;
-                        if ($after2 != 0 && $after2 != NULL) {
+                        if ($after2 != 0 && $after2 != null) {
                             $parameters->after_2 = $after2;
                             $parameters->after_2_th = $manager->get_postfix($after2);
                         }

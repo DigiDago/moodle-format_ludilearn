@@ -34,17 +34,17 @@ use stdClass;
  * Class for submit questionnaire.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class submit_questionnaire extends external_api {
 
     /**
-     * Submit questionnaire external function.
+     * Execute the webservice.
      *
      * @param array $answers Array of answers.
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(array $answers): array {
         global $DB, $USER;
@@ -68,35 +68,35 @@ class submit_questionnaire extends external_api {
 
         if ($success) {
             $manager = new manager();
-            $test = suggestion_output::generateSuggestionBasedOnAffinities($USER->id);
+            $test = suggestion_output::generate_suggestion_based_on_affinities($USER->id);
         }
 
         return [
-            'success' => $success
+            'success' => $success,
         ];
     }
 
     /**
-     * Submit questionnaire external function parameters.
+     * Get the webservice parameters.
      *
-     * @return external_function_parameters
+     * @return external_function_parameters The webservice parameters.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
             'answers' => new external_multiple_structure(
                 new external_single_structure([
                     'id' => new external_value(PARAM_INT, 'Answer id'),
-                    'score' => new external_value(PARAM_TEXT, 'Answer score')
+                    'score' => new external_value(PARAM_TEXT, 'Answer score'),
                 ])
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * Submit questionnaire external function returns.
+     * Get the return structure.
      *
-     * @return external_single_structure
+     * @return external_single_structure The webservice return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -104,7 +104,7 @@ class submit_questionnaire extends external_api {
                 PARAM_BOOL,
                 'Success of the update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
 
         return new external_single_structure(

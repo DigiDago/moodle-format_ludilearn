@@ -17,9 +17,10 @@
 /**
  *  Format base class.
  *
- * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
- * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package          format_ludimoodle
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @author           Jordan Kesraoui
+ * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use core\output\inplace_editable;
@@ -27,23 +28,43 @@ use format_ludimoodle\local\gameelements\game_element;
 use format_ludimoodle\output\format_ludimoodle_gameelement;
 
 defined('MOODLE_INTERNAL') || die();
+
+global $CFG;
 require_once($CFG->dirroot . '/course/format/lib.php');
 
+/**
+ * Format class for the ludimoodle course format.
+ *
+ * @package          format_ludimoodle
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @author           Jordan Kesraoui
+ * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class format_ludimoodle extends core_courseformat\base {
 
     /**
      * Returns true if this course format uses sections.
      *
-     * @return bool
+     * @return bool true if this course format uses sections.
      */
-    public function uses_sections() {
+    public function uses_sections(): bool {
         return true;
     }
 
-    public function uses_course_index() {
+    /**
+     * Returns true if this course format uses course index.
+     *
+     * @return bool true if this course format uses course index.
+     */
+    public function uses_course_index(): bool {
         return true;
     }
 
+    /**
+     * Returns true if this course format uses indentation.
+     *
+     * @return bool true if this course format uses indentation.
+     */
     public function uses_indentation(): bool {
         return false;
     }
@@ -56,7 +77,7 @@ class format_ludimoodle extends core_courseformat\base {
      * @param int|stdClass $section Section object from database or just field section.section
      * @return string Display name that the course format prefers, e.g. "Topic 2"
      */
-    public function get_section_name($section) {
+    public function get_section_name($section): string {
         $section = $this->get_section($section);
         if ((string)$section->name !== '') {
             return format_string($section->name, true,
@@ -157,7 +178,12 @@ class format_ludimoodle extends core_courseformat\base {
         return $ajaxsupport;
     }
 
-    public function supports_components() {
+    /**
+     * Returns true if this course format is compatible with content components.
+     *
+     * @return bool
+     */
+    public function supports_components(): bool {
         return true;
     }
 
@@ -168,7 +194,7 @@ class format_ludimoodle extends core_courseformat\base {
      * @param navigation_node $node The course node within the navigation
      * @return void
      */
-    public function extend_course_navigation($navigation, navigation_node $node) {
+    public function extend_course_navigation($navigation, navigation_node $node): void {
         global $PAGE, $CFG;
         // If section is specified in course/view.php, make sure it is expanded in navigation.
         if ($navigation->includesectionnum === false) {
@@ -248,15 +274,15 @@ class format_ludimoodle extends core_courseformat\base {
             $courseformatoptions = [
                 'assignment' => [
                     'default' => 'manual',
-                    'type' => PARAM_TEXT
+                    'type' => PARAM_TEXT,
                 ],
                 'default_game_element' => [
                     'default' => 'score',
-                    'type' => PARAM_TEXT
+                    'type' => PARAM_TEXT,
                 ],
                 'world' => [
                     'default' => 'school',
-                    'type' => PARAM_TEXT
+                    'type' => PARAM_TEXT,
                 ],
             ];
         }
@@ -272,8 +298,8 @@ class format_ludimoodle extends core_courseformat\base {
                             'manual' => get_string('manual', "format_ludimoodle"),
                             'automatic' => get_string('automatic', "format_ludimoodle"),
                             'bysection' => get_string('bysection', "format_ludimoodle"),
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
                 'default_game_element' => [
                     'label' => get_string('default_game_element', "format_ludimoodle"),
@@ -288,9 +314,9 @@ class format_ludimoodle extends core_courseformat\base {
                             'avatar' => get_string('avatar', "format_ludimoodle"),
                             'timer' => get_string('timer', "format_ludimoodle"),
                             'ranking' => get_string('ranking', "format_ludimoodle"),
-                            'nogamified' => get_string('nogamified', "format_ludimoodle")
-                        ]
-                    ]
+                            'nogamified' => get_string('nogamified', "format_ludimoodle"),
+                        ],
+                    ],
                 ],
                 'world' => [
                     'label' => get_string('world', "format_ludimoodle"),
@@ -302,9 +328,9 @@ class format_ludimoodle extends core_courseformat\base {
                             'school' => get_string('school', "format_ludimoodle"),
                             'professional' => get_string('professional', "format_ludimoodle"),
                             'highschool' => get_string('highschool', "format_ludimoodle"),
-                        ]
-                    ]
-                ]
+                        ],
+                    ],
+                ],
             ];
             $courseformatoptions = array_merge_recursive($courseformatoptions, $optionsedit);
         }
@@ -379,6 +405,13 @@ class format_ludimoodle extends core_courseformat\base {
         return $this->update_format_options($data);
     }
 
+    /**
+     * Updates format options for a section.
+     *
+     * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
+     * @param int $sectionid section id.
+     * @return bool whether there were any changes to the options values.
+     */
     public function update_format_options($data, $sectionid = null): bool {
         $oldoptions = $this->get_format_options();
         $changed = parent::update_format_options($data, $sectionid);

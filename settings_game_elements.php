@@ -18,7 +18,7 @@
  * Format Ludimoodle plugin settings page.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,7 +27,7 @@ use format_ludimoodle\output\settings;
 
 require('../../../config.php');
 require_once('lib.php');
-global $PAGE, $CFG;
+global $PAGE, $CFG, $OUTPUT;
 $course = get_course(required_param('id', PARAM_INT));
 $type = optional_param('type', 'score', PARAM_TEXT);
 context_helper::preload_course($course->id);
@@ -38,7 +38,7 @@ $params = ['id' => $course->id, 'type' => $type, 'hideheader' => true];
 $PAGE->set_pagelayout('course');
 $PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php", $params));
 $PAGE->set_context($context);
-$PAGE->set_title(get_string('coursetitle', 'moodle', array('course' => $course->fullname)));
+$PAGE->set_title(get_string('coursetitle', 'moodle', ['course' => $course->fullname]));
 $PAGE->set_heading(
     $course->fullname . ' : ' .
     get_string('editgameeleements', 'format_ludimoodle')

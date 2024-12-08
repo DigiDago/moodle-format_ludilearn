@@ -23,8 +23,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Specialised backup for Ludimoodle course format.
  *
@@ -35,32 +33,37 @@ defined('MOODLE_INTERNAL') || die();
  */
 class backup_format_ludimoodle_plugin extends backup_format_plugin {
 
-    protected function define_section_plugin_structure() {
+    /**
+     * Define the backup ludimoodle_plugin section structure.
+     *
+     * @return backup_plugin_element The ludimoodle_plugin structure.
+     */
+    protected function define_section_plugin_structure(): backup_plugin_element {
         $plugin = $this->get_plugin_element(null, $this->get_format_condition(), 'ludimoodle');
 
-        // Table ludimoodle_gameelements
+        // Table ludimoodle_gameelements.
         $gameelements = new backup_nested_element('gameelements', ['id'], [
-            'type', 'courseid', 'sectionid', 'timecreated'
+            'type', 'courseid', 'sectionid', 'timecreated',
         ]);
 
-        // Table ludimoodle_attribution
+        // Table ludimoodle_attribution.
         $attributions = new backup_nested_element('attributions', ['id'], [
-            'gameelementid', 'userid', 'timecreated'
+            'gameelementid', 'userid', 'timecreated',
         ]);
 
-        // Table ludimoodle_params
+        // Table ludimoodle_params.
         $params = new backup_nested_element('params', ['id'], [
-            'gameelementid', 'name', 'value'
+            'gameelementid', 'name', 'value',
         ]);
 
-        // Table ludimoodle_bysection
+        // Table ludimoodle_bysection.
         $bysection = new backup_nested_element('bysection', ['id'], [
-            'courseid', 'gameelementid', 'sectionid'
+            'courseid', 'gameelementid', 'sectionid',
         ]);
 
-        // Table ludimoodle_gameele_user
+        // Table ludimoodle_gameele_user.
         $gameeleuser = new backup_nested_element('gameele_user', ['id'], [
-            'attributionid', 'name', 'value'
+            'attributionid', 'name', 'value',
         ]);
 
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
@@ -75,7 +78,6 @@ class backup_format_ludimoodle_plugin extends backup_format_plugin {
         // Filter the data to select only the gameelements of the current section.
         $gameelements->set_source_table('ludimoodle_gameelements',
             ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]);
-
 
         $bysection->set_source_sql('
             SELECT * FROM {ludimoodle_bysection} WHERE gameelementid IN (
@@ -110,17 +112,22 @@ class backup_format_ludimoodle_plugin extends backup_format_plugin {
         return $plugin;
     }
 
-    protected function define_module_plugin_structure() {
+    /**
+     * Define the backup ludimoodle_plugin module structure.
+     *
+     * @return backup_plugin_element The ludimoodle_plugin structure.
+     */
+    protected function define_module_plugin_structure(): backup_plugin_element {
         $plugin = $this->get_plugin_element(null, $this->get_format_condition(), 'ludimoodle');
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
-        // Table ludimoodle_cm_params
+        // Table ludimoodle_cm_params.
         $cmparams = new backup_nested_element('cm_params', ['id'], [
-            'gameelementid', 'cmid', 'name', 'value'
+            'gameelementid', 'cmid', 'name', 'value',
         ]);
 
-        // Table ludimoodle_cm_user
+        // Table ludimoodle_cm_user.
         $cmuser = new backup_nested_element('cm_user', ['id'], [
-            'attributionid', 'cmid', 'name', 'value'
+            'attributionid', 'cmid', 'name', 'value',
         ]);
 
         $pluginwrapper->add_child($cmparams);

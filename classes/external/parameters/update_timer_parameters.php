@@ -39,10 +39,11 @@ use format_ludimoodle\local\gameelements\timer;
 class update_timer_parameters extends external_api {
 
     /**
-     * Executes the timer update for a course.
+     * Execute the webservice.
      *
      * @param int $courseid The ID of the course to update.
-     * @return array The result of the timer update.
+     * @param int $penalties The penalties to set.
+     * @return array The web service return.
      */
     public static function execute(int $courseid, int $penalties): array {
 
@@ -55,7 +56,9 @@ class update_timer_parameters extends external_api {
     }
 
     /**
-     * @return external_function_parameters
+     * Get the webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -68,13 +71,15 @@ class update_timer_parameters extends external_api {
                 PARAM_INT,
                 'Penalties',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get the webservice return structure.
+     *
+     * @return external_single_structure The webservice return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -82,7 +87,7 @@ class update_timer_parameters extends external_api {
                 PARAM_BOOL,
                 'Success of the update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
 
         return new external_single_structure(

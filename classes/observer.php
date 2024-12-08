@@ -18,7 +18,7 @@
  * Event observers used by the ludimoodle course format.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -45,18 +45,14 @@ use mod_quiz\event\attempt_deleted;
 use mod_quiz\event\attempt_submitted;
 use mod_quiz\event\attempt_updated;
 
-
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Event observer for format_ludimoodle.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class format_ludimoodle_observer {
     /**
      * Triggered via \core\event\user_enrolment_created event.
@@ -186,7 +182,8 @@ class format_ludimoodle_observer {
                     if ($bysection) {
                         $type = $bysection->type;
                     } else {
-                        $bysection = $manager->update_attribution_by_section($course->id, $event->objectid, $gameelementbydefault->id);
+                        $bysection = $manager->update_attribution_by_section($course->id, $event->objectid,
+                            $gameelementbydefault->id);
                     }
                 }
                 // Attribution game element.
@@ -201,7 +198,12 @@ class format_ludimoodle_observer {
                             $manager->attribution_game_element($bysection->gameelementid, $user->id);
                         }
                     }
-                    $gameelement = $DB->get_record('ludimoodle_gameelements', ['sectionid' => $event->objectid, 'type' => $type]);
+                    $gameelement = $DB->get_record('ludimoodle_gameelements',
+                        [
+                            'sectionid' => $event->objectid,
+                            'type' => $type,
+                        ]
+                    );
                     if ($gameelement) {
                         $manager->attribution_game_element($gameelement->id, $user->id);
                     }
@@ -248,12 +250,18 @@ class format_ludimoodle_observer {
         }
 
         $manager = new manager();
-        $course = $DB->get_record('course', array('id' => $event->courseid));
-        $cm = $DB->get_record('course_modules', array('id' => $event->objectid));
+        $course = $DB->get_record('course', ['id' => $event->courseid]);
+        $cm = $DB->get_record('course_modules', ['id' => $event->objectid]);
         if ($course->format == 'ludimoodle') {
-            $gameelements = $DB->get_records('ludimoodle_gameelements', ['courseid' => $course->id, 'sectionid' => $cm->section]);
+            $gameelements = $DB->get_records('ludimoodle_gameelements',
+                [
+                    'courseid' => $course->id,
+                    'sectionid' => $cm->section,
+                ]
+            );
             foreach ($gameelements as $gameelement) {
-                $cmparameters = game_element::get_cm_parameters_default_by_type($gameelement->type, $event->other['modulename'], $event->objectid);
+                $cmparameters = game_element::get_cm_parameters_default_by_type($gameelement->type, $event->other['modulename'],
+                    $event->objectid);
                 foreach ($cmparameters as $name => $value) {
                     $DB->insert_record('ludimoodle_cm_params',
                         ['gameelementid' => $gameelement->id, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]);
@@ -295,7 +303,7 @@ class format_ludimoodle_observer {
                 $nextgameelement = $DB->get_record('ludimoodle_gameelements',
                     ['courseid' => $event->courseid, 'sectionid' => $cm->section, 'type' => $type]);
 
-                $previousgameelementsql = 'SELECT ge.id FROM {ludimoodle_cm_params} cmp 
+                $previousgameelementsql = 'SELECT ge.id FROM {ludimoodle_cm_params} cmp
                                     INNER JOIN {ludimoodle_gameelements} ge ON ge.id = cmp.gameelementid
                                     WHERE ge.type = :type
                                     AND cmp.cmid = :cmid';
@@ -311,7 +319,7 @@ class format_ludimoodle_observer {
                     continue;
                 }
                 // Update the game element of the course module.
-                $sql = 'UPDATE {ludimoodle_cm_params} SET gameelementid = :nextgameelement 
+                $sql = 'UPDATE {ludimoodle_cm_params} SET gameelementid = :nextgameelement
                         WHERE id = :id';
                 $DB->execute($sql, ['nextgameelement' => $nextgameelement->id, 'id' => $previsousgameelement->id]);
 
@@ -358,7 +366,7 @@ class format_ludimoodle_observer {
             [
                 'course' => $event->courseid,
                 'module' => $module->id,
-                'instance' => $gradeitem->iteminstance
+                'instance' => $gradeitem->iteminstance,
             ]
         );
 
@@ -414,7 +422,7 @@ class format_ludimoodle_observer {
             // Update avatar element.
             avatar::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
 
-            //Update timer element.
+            // Update timer element.
             timer::update_quiz_immediate_feedback($event->objectid, $quiz->id, $event->relateduserid);
 
             // Update ranking element.
@@ -501,8 +509,6 @@ class format_ludimoodle_observer {
                 game_element::reset_course($event->courseid);
             }
         }
-
-
     }
 
     /**
@@ -516,7 +522,8 @@ class format_ludimoodle_observer {
         require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
         require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 
-        return $DB->record_exists_sql('SELECT * FROM {backup_controllers} WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
+        return $DB->record_exists_sql('SELECT * FROM {backup_controllers}
+         WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
             ['type' => 'course', 'itemid' => $courseid, 'operation' => 'restore', 'status' => backup::STATUS_FINISHED_OK]);
     }
 }

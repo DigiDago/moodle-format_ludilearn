@@ -18,7 +18,7 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

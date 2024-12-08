@@ -25,7 +25,7 @@ use stdClass;
  * Renderer for the Ludimoodle elements settings.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -41,7 +41,7 @@ class settings_renderer extends plugin_renderer_base {
         global $DB;
 
         // Render menu.
-        $render_menu = $this->render_menu($settings->get_courseid(), $settings->get_url()->out(false));
+        $rendermenu = $this->render_menu($settings->get_courseid(), $settings->get_url()->out(false));
 
         // Call js.
         $this->page->requires->js_call_amd('format_ludimoodle/settings', 'init',
@@ -51,14 +51,21 @@ class settings_renderer extends plugin_renderer_base {
 
         // If the type is not a game element but the assignment by section setting page.
         if ($settings->get_type() == 'assignmentbysection') {
-            return $render_menu . $this->render_from_template('format_ludimoodle/settings_assignment_by_section',
+            return $rendermenu . $this->render_from_template('format_ludimoodle/settings_assignment_by_section',
                 $settings->export_for_template($this));
         }
 
-        return $render_menu . $this->render_from_template('format_ludimoodle/' . $settings->get_type() . '/settings',
+        return $rendermenu . $this->render_from_template('format_ludimoodle/' . $settings->get_type() . '/settings',
             $settings->export_for_template($this));
     }
 
+    /**
+     * Render the settings menu.
+     *
+     * @param int $courseid Course ID.
+     * @param string $activeurl Active URL.
+     * @return string HTML to output.
+     */
     public function render_menu(int $courseid, string $activeurl): string {
         global $CFG;
         $menu = [];

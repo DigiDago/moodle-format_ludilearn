@@ -30,7 +30,7 @@ require_once($CFG->libdir . '/adminlib.php');
  * Timer game element class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -81,7 +81,7 @@ class timer extends game_element {
                 $cmparameters[$key]['gamified'] = true;
 
                 // Do not gamify if the course module is not a quiz.
-                if (!$this->is_quiz($key)){
+                if (!$this->is_quiz($key)) {
                     $cmparameters[$key]['gamified'] = false;
                     continue;
                 }
@@ -138,8 +138,9 @@ class timer extends game_element {
             }
         }
         // Calculate the average of best times.
-        if ($count > 0)
+        if ($count > 0) {
             $this->averagetime = intval($totaltime / $count);
+        }
 
         $this->sectionparameters['averagetime'] = $this->averagetime;
         $this->cmparameters = $cmparameters;
@@ -174,27 +175,6 @@ class timer extends game_element {
     }
 
     /**
-     * Get the default cm parameters for a module.
-     *
-     * @param string $moduletype The type of module.
-     * @param int $cmid The cm id.
-     * @return array The default cm parameters for the module.
-     */
-    public static function get_cm_parameters_default(string $moduletype, int $cmid): array {
-        return parent::get_cm_parameters_default($moduletype, $cmid);
-    }
-
-    /**
-     * Get the type of a parameter.
-     *
-     * @param string $name Name of the parameter.
-     * @return string Type of the parameter.
-     */
-    public static function get_cm_parameter_type(string $name): string {
-        return parent::get_cm_parameter_type($name);
-    }
-
-    /**
      * Update game elements when quiz has immediate feedback.
      *
      * @param int $attemptid The attempt id.
@@ -212,7 +192,7 @@ class timer extends game_element {
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
-                'instance' => $quiz->id
+                'instance' => $quiz->id,
             ]
         );
 
@@ -223,11 +203,11 @@ class timer extends game_element {
         $attribution = $DB->get_record('ludimoodle_attribution',
             ['gameelementid' => $gameelement->id, 'userid' => $userid]);
         if ($attribution) {
-            $gameelement = timer::get($quiz->course, $coursemodule->section, $userid);
+            $gameelement = self::get($quiz->course, $coursemodule->section, $userid);
 
             // Get quiz questions attempts.
             $attempts = $DB->get_records('quiz_attempts', ['quiz' => $quizid, 'userid' => $userid]);
-            if(!$attempts) {
+            if (!$attempts) {
                 return;
             }
             $bestattempt = false;
@@ -235,7 +215,7 @@ class timer extends game_element {
             $besttime = 0;
 
             // Search best attempts and the current attempt.
-            foreach($attempts as $attempt) {
+            foreach ($attempts as $attempt) {
                 $penalties = 0;
                 $pointsnotyet = 0;
                 $questionattempts = $DB->get_records('question_attempts', ['questionusageid' => $attempt->uniqueid], 'id');
@@ -382,7 +362,7 @@ class timer extends game_element {
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
-                'instance' => $quiz->id
+                'instance' => $quiz->id,
             ]
         );
 
@@ -393,14 +373,14 @@ class timer extends game_element {
         $attribution = $DB->get_record('ludimoodle_attribution',
             ['gameelementid' => $gameelement->id, 'userid' => $userid]);
         if ($attribution) {
-            $gameelement = timer::get($quiz->course, $coursemodule->section, $userid);
+            $gameelement = self::get($quiz->course, $coursemodule->section, $userid);
 
             $condition = $DB->get_record('ludimoodle_cm_params',
                 ['gameelementid' => $gameelement->get_id(), 'cmid' => $coursemodule->id, 'name' => 'condition']);
 
             // Get quiz questions attempts.
             $attempts = $DB->get_records('quiz_attempts', ['quiz' => $quizid, 'userid' => $userid]);
-            if(!$attempts) {
+            if (!$attempts) {
                 return;
             }
             $bestattempt = false;
@@ -408,7 +388,7 @@ class timer extends game_element {
             $besttime = 0;
 
             // Search best attempts and the current attempt.
-            foreach($attempts as $attempt) {
+            foreach ($attempts as $attempt) {
                 $penalties = 0;
                 $pointsnotyet = 0;
                 $questionattempts = $DB->get_records('question_attempts', ['questionusageid' => $attempt->uniqueid], 'id');
@@ -511,7 +491,7 @@ class timer extends game_element {
      * @param int $courseid The course ID.
      * @param int $sectionid The section ID.
      * @param int $userid The user ID.
-     * @return timer|null
+     * @return timer|null The game element if it exists, null otherwise.
      */
     public static function get(int $courseid, int $sectionid, int $userid): ?timer {
         global $DB;
@@ -611,10 +591,11 @@ class timer extends game_element {
                     ['gameelementid' => $gameelement->id,
                         'name' => 'penalties']);
                 // Check value.
-                if ($penalties < 0)
+                if ($penalties < 0) {
                     $penalties = 0;
+                }
 
-                // If existing update values, else add value
+                // If existing update values, else add value.
                 if ($penaltiesecord) {
                     $penaltiesecord->value = $penalties;
                     $DB->update_record('ludimoodle_params', $penaltiesecord);
@@ -630,4 +611,3 @@ class timer extends game_element {
         return true;
     }
 }
-

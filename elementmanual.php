@@ -18,14 +18,16 @@
  * Format Ludimoodle plugin report page.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 require('../../../config.php');
 require_once('lib.php');
-global $PAGE, $DB;
+global $PAGE, $DB, $CFG, $OUTPUT;
 
 $context = context_system::instance();
 require_login();
@@ -45,7 +47,7 @@ echo $OUTPUT->header();
 
 // HTML de formulaire l'association d'un élément de jeu à un utilisateur (id).
 // L'élément de jeu est choisi dans une liste déroulante.
-// L'élément de jeu est associé à un utilisateur (id)
+// L'élément de jeu est associé à un utilisateur (id).
 $html = '<form action="elementmanual.php" method="post">
 <label for="element">Choisir un élément de jeu :</label>
 <select name="element" id="element">
@@ -66,7 +68,7 @@ echo $html;
 
 if (isset($_POST['element']) && isset($_POST['id'])) {
     $user = $DB->get_record('user', ['id' => $_POST['id']]);
-    if(!$user) {
+    if (!$user) {
         echo 'Utilisateur non trouvé';
         die();
     }
@@ -84,4 +86,3 @@ if (isset($_POST['element']) && isset($_POST['id'])) {
     echo 'L\'élément de jeu a bien été associé à l\'utilisateur';
 }
 echo $OUTPUT->footer();
-

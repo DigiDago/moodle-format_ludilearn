@@ -19,7 +19,7 @@
  *
  * @package     format_ludimoodle
  * @category    upgrade
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -44,7 +44,7 @@ function xmldb_format_ludimoodle_install() {
     $questions[] = ['content' => 'questionnaire:question11', 'label' => 'Disruptor', 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question12', 'label' => 'Player', 'type' => 'HEXAD'];
 
-    $DB->insert_records('ludimoodle_questions',$questions);
+    $DB->insert_records('ludimoodle_questions', $questions);
 
     return true;
 }

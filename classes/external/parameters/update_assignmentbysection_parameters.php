@@ -40,12 +40,11 @@ use format_ludimoodle\manager;
 class update_assignmentbysection_parameters extends external_api {
 
     /**
-     * Update course module parameters.
+     * Execute the webservice.
      *
      * @param int $courseid Id of the course.
      * @param array $sections Sections to update.
-     *
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(int $courseid, array $sections): array {
 
@@ -58,16 +57,18 @@ class update_assignmentbysection_parameters extends external_api {
             }
         } catch (\Exception $e) {
             return [
-                'success' => false
+                'success' => false,
             ];
         }
         return [
-            'success' => true
+            'success' => true,
         ];
     }
 
     /**
-     * @return external_function_parameters
+     * Get webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -88,18 +89,20 @@ class update_assignmentbysection_parameters extends external_api {
                             PARAM_INT,
                             'Game element ID',
                             VALUE_REQUIRED
-                        )
+                        ),
                     ]
                 ),
                 'Sections to update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get webservice return structure.
+     *
+     * @return external_single_structure The webservice return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -107,7 +110,7 @@ class update_assignmentbysection_parameters extends external_api {
                 PARAM_BOOL,
                 'Success of the update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
 
         return new external_single_structure(

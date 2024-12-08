@@ -31,7 +31,7 @@ use stdClass;
  * Ludimoodle Plus content class.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -88,7 +88,7 @@ class renderer extends section_renderer {
         $data = new stdClass();
         $data->questionsHEXAD = [];
         $number = 1;
-        foreach($questions as $question) {
+        foreach ($questions as $question) {
             $q = new stdClass();
             $q->id = $question->id;
             $q->content = get_string($question->content, 'format_ludimoodle');
@@ -110,7 +110,7 @@ class renderer extends section_renderer {
         $this->page->requires->js_call_amd('format_ludimoodle/questionnaire', 'init',
             ['courseid' => $courseid,
                 'questionscount' => $data->questionscount,
-                'urlgameprofile' => $urlgameprofile->out(false)
+                'urlgameprofile' => $urlgameprofile->out(false),
             ]
         );
         return $this->render_from_template(
@@ -119,6 +119,12 @@ class renderer extends section_renderer {
         );
     }
 
+    /**
+     * Render the report page.
+     *
+     * @param int $courseid Course ID.
+     * @return string HTML to output.
+     */
     public function render_report(int $courseid): string {
 
         $this->page->requires->js_call_amd('format_ludimoodle/report', 'init',
@@ -129,21 +135,27 @@ class renderer extends section_renderer {
         );
     }
 
+    /**
+     * Render the game profile page.
+     *
+     * @param int $courseid Course ID.
+     * @return string HTML to output.
+     */
     public function render_gameprofile(int $courseid): string {
         global $DB, $USER;
 
         $profile = $DB->get_record('ludimoodle_profile', ['userid' => $USER->id]);
-        $hexadScores = hexad_scores::fromDatabase($USER->id);
+        $hexadscores = hexad_scores::from_database($USER->id);
 
         $data = new stdClass();
         $data->courseid = $courseid;
         $data->hexadscores = new stdClass();
-        $data->hexadscores->achiever = $hexadScores->getValue('achiever');
-        $data->hexadscores->player = $hexadScores->getValue('player');
-        $data->hexadscores->socialiser = $hexadScores->getValue('socialiser');
-        $data->hexadscores->freeSpirit = $hexadScores->getValue('freeSpirit');
-        $data->hexadscores->disruptor = $hexadScores->getValue('disruptor');
-        $data->hexadscores->philanthropist = $hexadScores->getValue('philanthropist');
+        $data->hexadscores->achiever = $hexadscores->get_value('achiever');
+        $data->hexadscores->player = $hexadscores->get_value('player');
+        $data->hexadscores->socialiser = $hexadscores->get_value('socialiser');
+        $data->hexadscores->freeSpirit = $hexadscores->get_value('freeSpirit');
+        $data->hexadscores->disruptor = $hexadscores->get_value('disruptor');
+        $data->hexadscores->philanthropist = $hexadscores->get_value('philanthropist');
 
         $this->page->requires->js_call_amd('format_ludimoodle/gameprofile', 'init',
             ['hexadscores' => $data->hexadscores]);

@@ -36,18 +36,18 @@ use stdClass;
  * Class for get inventory.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_inventory extends external_api {
 
     /**
-     * Get inventory parameters.
+     * Execute the webservice.
      *
      * @param int $courseid Id of the course.
      * @param int $sectionid Id of the section.
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(int $courseid, int $sectionid): array {
         global $DB, $USER, $CFG;
@@ -116,12 +116,14 @@ class get_inventory extends external_api {
         }
 
         return [
-            'inventory' => $inventory
+            'inventory' => $inventory,
         ];
     }
 
     /**
-     * @return external_function_parameters
+     * Get webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -134,13 +136,15 @@ class get_inventory extends external_api {
                 PARAM_INT,
                 'Section ID',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get webservice return structure.
+     *
+     * @return external_single_structure The webservice return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -185,12 +189,12 @@ class get_inventory extends external_api {
                             PARAM_TEXT,
                             'World',
                             VALUE_REQUIRED
-                        )
+                        ),
                     ]
                 ),
                 'Inventory of the user',
-                VALUE_REQUIRED
-            )
+                VALUE_REQUIRED,
+            ),
         ];
 
         return new external_single_structure(

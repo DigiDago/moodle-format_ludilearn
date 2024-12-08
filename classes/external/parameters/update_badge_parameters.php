@@ -40,13 +40,13 @@ use format_ludimoodle\local\gameelements\badge;
 class update_badge_parameters extends external_api {
 
     /**
-     * Executes the badge update for a course.
+     * Executes the webservice.
      *
      * @param int $courseid The ID of the course to update.
      * @param int $badgegold The gold badge value.
      * @param int $badgesilver The silver badge value.
      * @param int $badgebronze The bronze badge value.
-     * @return array The result of the badge update.
+     * @return array The web service return.
      */
     public static function execute(int $courseid, int $badgegold, int $badgesilver, int $badgebronze): array {
 
@@ -59,7 +59,9 @@ class update_badge_parameters extends external_api {
     }
 
     /**
-     * @return external_function_parameters
+     * Get the webservice parameters structure.
+     *
+     * @return external_function_parameters The parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -82,13 +84,15 @@ class update_badge_parameters extends external_api {
                 PARAM_INT,
                 'Badge Bronze',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get the webservice return structure.
+     *
+     * @return external_single_structure The return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -96,7 +100,7 @@ class update_badge_parameters extends external_api {
                 PARAM_BOOL,
                 'Success of the update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
 
         return new external_single_structure(

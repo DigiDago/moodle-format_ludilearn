@@ -36,7 +36,7 @@ use pix_icon;
  * Base class to render a control menu content.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -57,7 +57,7 @@ class controlmenu extends controlmenu_base {
 
         if (has_capability('moodle/course:manageactivities', $modcontext)) {
             $course = $this->format->get_course();
-            $url =  $modcontext->get_url();
+            $url = $modcontext->get_url();
             $gamified = game_element::is_gamified($this->mod->id);
             if ($gamified) {
                 $url->param('gamify', 0);
@@ -76,11 +76,11 @@ class controlmenu extends controlmenu_base {
 
                 // State after action.
                 $swapname = get_string('notgamify', 'format_ludimoodle');
-                $swapicon ='i/checkedcircle';
+                $swapicon = 'i/checkedcircle';
             }
 
             $editactions[] = new action_menu_link_secondary(
-                new moodle_url($url, ['id' => $this->mod->id,'gamified' => !$gamified]),
+                new moodle_url($url, ['id' => $this->mod->id, 'gamified' => !$gamified]),
                 $icon,
                 $str,
                 [

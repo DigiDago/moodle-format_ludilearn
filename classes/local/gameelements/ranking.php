@@ -28,7 +28,7 @@ require_once($CFG->libdir . '/adminlib.php');
  * Ranking game element class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -291,7 +291,7 @@ class ranking extends game_element {
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
-                'instance' => $quiz->id
+                'instance' => $quiz->id,
             ]
         );
 
@@ -456,7 +456,7 @@ class ranking extends game_element {
             ),
             RankedScores AS (
                 SELECT
-                    RANK() OVER (ORDER BY score DESC) AS `rank`,
+                    RANK() OVER (ORDER BY score DESC) AS user_rank,
                     userid,
                     score
                 FROM UserScores
@@ -465,7 +465,7 @@ class ranking extends game_element {
                 SELECT
                     userid,
                     score,
-                    `rank`
+                    user_rank
                 FROM RankedScores
                 WHERE userid = :target_userid
             ),
@@ -473,60 +473,60 @@ class ranking extends game_element {
                 SELECT
                     userid,
                     score,
-                    `rank`
+                    user_rank
                 FROM RankedScores
-                WHERE `rank` = (CASE 
-                        WHEN (SELECT `rank` FROM TargetUser) > 1 
-                        THEN (SELECT `rank` FROM TargetUser) - 1 
-                        ELSE NULL 
+                WHERE user_rank = (CASE
+                        WHEN (SELECT user_rank FROM TargetUser) > 1
+                        THEN (SELECT user_rank FROM TargetUser) - 1
+                        ELSE NULL
                      END)
             ),
             PrecedingUser2 AS (
                 SELECT
                     userid,
                     score,
-                    `rank`
+                    user_rank
                 FROM RankedScores
-                WHERE `rank` = (CASE 
-                        WHEN (SELECT `rank` FROM TargetUser) > 2 
-                        THEN (SELECT `rank` FROM TargetUser) - 2
-                        ELSE NULL 
+                WHERE user_rank = (CASE
+                        WHEN (SELECT user_rank FROM TargetUser) > 2
+                        THEN (SELECT user_rank FROM TargetUser) - 2
+                        ELSE NULL
                      END)
             ),
             SucceedingUser AS (
                 SELECT
                     userid,
                     score,
-                    `rank`
+                    user_rank
                 FROM RankedScores
-                WHERE `rank` = (SELECT `rank` + 1 FROM TargetUser)
+                WHERE user_rank = (SELECT user_rank + 1 FROM TargetUser)
             ),
             SucceedingUser2 AS (
                 SELECT
                     userid,
                     score,
-                    `rank`
+                    user_rank
                 FROM RankedScores
-                WHERE `rank` = (SELECT `rank` + 2 FROM TargetUser)
+                WHERE user_rank = (SELECT user_rank + 2 FROM TargetUser)
             )
             SELECT
                 t.userid AS target_userid,
                 t.score AS target_user_score,
-                t.`rank` AS user_rank,
+                t.user_rank AS user_rank,
                 p.userid AS preceding_userid,
                 p.score AS preceding_user_score,
-                p.`rank` AS preceding_user_rank,
+                p.user_rank AS preceding_user_rank,
                 p2.userid AS preceding2_userid,
                 p2.score AS preceding2_user_score,
-                p2.`rank` AS preceding2_user_rank,
+                p2.user_rank AS preceding2_user_rank,
                 s.userid AS succeeding_userid,
                 s.score AS succeeding_user_score,
-                s.`rank` AS succeeding_user_rank,
+                s.user_rank AS succeeding_user_rank,
                 s2.userid AS succeeding2_userid,
                 s2.score AS succeeding2_user_score,
-                s2.`rank` AS succeeding2_user_rank
+                s2.user_rank AS succeeding2_user_rank
             FROM
-                TargetUser t 
+                TargetUser t
                 LEFT JOIN PrecedingUser p ON 1 = 1
                 LEFT JOIN PrecedingUser2 p2 ON 1 = 1
                 LEFT JOIN SucceedingUser s ON 1 = 1
@@ -535,7 +535,7 @@ class ranking extends game_element {
         $params = [
             'gameelementid' => $this->get_id(),
             'cmid' => $cmid,
-            'target_userid' => $this->userid
+            'target_userid' => $this->userid,
         ];
 
         $ranking = $DB->get_record_sql($sql, $params);
@@ -555,7 +555,7 @@ class ranking extends game_element {
                 ),
                 RankedScores AS (
                     SELECT
-                        RANK() OVER (ORDER BY score DESC) AS `rank`,
+                        RANK() OVER (ORDER BY score DESC) AS user_rank,
                         userid,
                         score
                     FROM UserScores
@@ -564,43 +564,43 @@ class ranking extends game_element {
                     SELECT
                         userid,
                         score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = 1
+                    WHERE user_rank = 1
                 ),
                 SecondUser AS (
                     SELECT
                         userid,
                         score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = 2
+                    WHERE user_rank = 2
                 ),
                 ThirdUser AS (
                     SELECT
                         userid,
                         score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = 3
+                    WHERE user_rank = 3
                 )
                 SELECT
                     f.userid AS first_userid,
                     f.score AS first_user_score,
-                    f.`rank` AS first_user_rank,
+                    f.user_rank AS first_user_rank,
                     s.userid AS preceding_userid,
                     s.score AS preceding_user_score,
-                    s.`rank` AS preceding_user_rank,
+                    s.user_rank AS preceding_user_rank,
                     s2.userid AS preceding2_userid,
                     s2.score AS preceding2_user_score,
-                    s2.`rank` AS preceding2_user_rank
+                    s2.user_rank AS preceding2_user_rank
                 FROM
                     FirstUser f
                     LEFT JOIN SecondUser s ON 1 = 1
                     LEFT JOIN ThirdUser s2 ON 1 = 1";
             $params = [
                 'gameelementid' => $this->get_id(),
-                'cmid' => $cmid
+                'cmid' => $cmid,
             ];
             $ranking = $DB->get_record_sql($sql, $params);
             if (!$ranking) {
@@ -637,8 +637,8 @@ class ranking extends game_element {
 
         // Get the ranking of all users sort by score.
         $sql = "WITH UserScores AS (
-                    SELECT 
-                        a.userid, 
+                    SELECT
+                        a.userid,
                         SUM(cmu.value) as total_score
                     FROM {ludimoodle_attribution} a
                     LEFT JOIN {ludimoodle_cm_user} cmu ON a.id = cmu.attributionid
@@ -647,88 +647,88 @@ class ranking extends game_element {
                     GROUP BY a.userid
                  ),
                 RankedScores AS (
-                    SELECT 
-                        RANK() OVER (ORDER BY total_score DESC) AS `rank`, 
-                        userid, 
+                    SELECT
+                        RANK() OVER (ORDER BY total_score DESC) AS user_rank,
+                        userid,
                         total_score
                     FROM UserScores
                 ),
                 TargetUser AS (
-                    SELECT 
+                    SELECT
                         userid,
                         total_score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
                     WHERE userid = :target_userid
                 ),
                 PrecedingUser AS (
-                    SELECT 
+                    SELECT
                         userid,
                         total_score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                   WHERE `rank` = (CASE 
-                        WHEN (SELECT `rank` FROM TargetUser) > 1 
-                        THEN (SELECT `rank` FROM TargetUser) - 1 
-                        ELSE NULL 
+                   WHERE user_rank = (CASE
+                        WHEN (SELECT user_rank FROM TargetUser) > 1
+                        THEN (SELECT user_rank FROM TargetUser) - 1
+                        ELSE NULL
                      END)
                 ),
                 PrecedingUser2 AS (
-                    SELECT 
+                    SELECT
                         userid,
                         total_score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = (CASE 
-                        WHEN (SELECT `rank` FROM TargetUser) > 2
-                        THEN (SELECT `rank` FROM TargetUser) - 2
-                        ELSE NULL 
+                    WHERE user_rank = (CASE
+                        WHEN (SELECT user_rank FROM TargetUser) > 2
+                        THEN (SELECT user_rank FROM TargetUser) - 2
+                        ELSE NULL
                      END)
                 ),
                 SucceedingUser AS (
-                    SELECT 
+                    SELECT
                         userid,
                         total_score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = (SELECT `rank` + 1 FROM TargetUser)
+                    WHERE user_rank = (SELECT user_rank + 1 FROM TargetUser)
                 ),
                 SucceedingUser2 AS (
-                    SELECT 
+                    SELECT
                         userid,
                         total_score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = (SELECT `rank` + 2 FROM TargetUser)
+                    WHERE user_rank = (SELECT user_rank + 2 FROM TargetUser)
                 ),
                 FirstUser AS (
-                    SELECT 
+                    SELECT
                         userid,
                         total_score,
-                        `rank`
+                        user_rank
                     FROM RankedScores
-                    WHERE `rank` = 1
+                    WHERE user_rank = 1
                 )
                 SELECT
-                    t.`rank` AS user_rank,
+                    t.user_rank AS user_rank,
                     t.total_score AS user_total_score,
-                    p.userid AS preceding_userid, 
-                    p.total_score AS preceding_user_total_score, 
-                    p.`rank` AS preceding_user_rank,
-                    p2.userid AS preceding2_userid, 
-                    p2.total_score AS preceding2_user_total_score, 
-                    p2.`rank` AS preceding2_user_rank,
-                    s.userid AS succeeding_userid, 
-                    s.total_score AS succeeding_user_total_score, 
-                    s.`rank` AS succeeding_user_rank,
-                    s2.userid AS succeeding2_userid, 
-                    s2.total_score AS succeeding2_user_total_score, 
-                    s2.`rank` AS succeeding2_user_rank,
+                    p.userid AS preceding_userid,
+                    p.total_score AS preceding_user_total_score,
+                    p.user_rank AS preceding_user_rank,
+                    p2.userid AS preceding2_userid,
+                    p2.total_score AS preceding2_user_total_score,
+                    p2.user_rank AS preceding2_user_rank,
+                    s.userid AS succeeding_userid,
+                    s.total_score AS succeeding_user_total_score,
+                    s.user_rank AS succeeding_user_rank,
+                    s2.userid AS succeeding2_userid,
+                    s2.total_score AS succeeding2_user_total_score,
+                    s2.user_rank AS succeeding2_user_rank,
                     f.userid AS first_userid,
                     f.total_score AS first_user_total_score,
-                    f.`rank` AS first_user_rank
+                    f.user_rank AS first_user_rank
                 FROM
-                    TargetUser t 
+                    TargetUser t
                     LEFT JOIN PrecedingUser p ON 1 = 1
                     LEFT JOIN PrecedingUser2 p2 ON 1 = 1
                     LEFT JOIN SucceedingUser s ON 1 = 1
@@ -739,8 +739,8 @@ class ranking extends game_element {
         if (!$ranking) {
             // Search the rankinf of 3 first users.
             $sql = "WITH UserScores AS (
-                        SELECT 
-                            a.userid, 
+                        SELECT
+                            a.userid,
                             SUM(cmu.value) as total_score
                         FROM {ludimoodle_attribution} a
                         LEFT JOIN {ludimoodle_cm_user} cmu ON a.id = cmu.attributionid
@@ -749,47 +749,47 @@ class ranking extends game_element {
                         GROUP BY a.userid
                     ),
                     RankedScores AS (
-                        SELECT 
-                            RANK() OVER (ORDER BY total_score DESC) AS `rank`, 
-                            userid, 
+                        SELECT
+                            RANK() OVER (ORDER BY total_score DESC) AS user_rank,
+                            userid,
                             total_score
                         FROM UserScores
                     ),
                     FirstUser AS (
-                        SELECT 
+                        SELECT
                             userid,
                             total_score,
-                            `rank`
+                            user_rank
                         FROM RankedScores
-                        WHERE `rank` = 1
+                        WHERE user_rank = 1
                     ),
                     SecondUser AS (
-                        SELECT 
+                        SELECT
                             userid,
                             total_score,
-                            `rank`
+                            user_rank
                         FROM RankedScores
-                        WHERE `rank` = 2
+                        WHERE user_rank = 2
                     ),
                     ThirdUser AS (
-                        SELECT 
+                        SELECT
                             userid,
                             total_score,
-                            `rank`
+                            user_rank
                         FROM RankedScores
-                        WHERE `rank` = 3
+                        WHERE user_rank = 3
                     )
                     SELECT
                         f.userid AS first_userid,
                         f.total_score AS first_user_total_score,
-                        f.`rank` AS first_user_rank,
-                        s.userid AS preceding_userid, 
-                        s.total_score AS preceding_user_total_score, 
-                        s.`rank` AS preceding_user_rank,
-                        s2.userid AS preceding2_userid, 
-                        s2.total_score AS preceding2_user_total_score, 
-                        s2.`rank` AS preceding2_user_rank
-                    FROM 
+                        f.user_rank AS first_user_rank,
+                        s.userid AS preceding_userid,
+                        s.total_score AS preceding_user_total_score,
+                        s.user_rank AS preceding_user_rank,
+                        s2.userid AS preceding2_userid,
+                        s2.total_score AS preceding2_user_total_score,
+                        s2.user_rank AS preceding2_user_rank
+                    FROM
                         FirstUser f
                         LEFT JOIN SecondUser s ON 1 = 1
                         LEFT JOIN ThirdUser s2 ON 1 = 1";

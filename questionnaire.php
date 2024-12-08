@@ -18,10 +18,13 @@
  * Format Ludimoodle plugin questionnaire page.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die();
+
 global $CFG, $PAGE, $OUTPUT, $USER, $DB;
 require('../../../config.php');
 require_once('lib.php');
