@@ -35,21 +35,21 @@ use stdClass;
  * Class for get report.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_report extends external_api {
 
     /**
-     * Get report parameters.
+     * Execute the webservice.
      *
      * @param int $courseid Id of the course.
      * @param string $contain Contain string in firstname or lastname.
      * @param int $limit Result limit.
      * @param int $offset Resultat limit offset.
      * @param string $sort Field sort.
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(int $courseid, string $contain, int $limit, int $offset, string $sort): array {
         global $DB, $USER, $CFG;
@@ -70,7 +70,7 @@ class get_report extends external_api {
         $sql .= " ORDER BY :sort";
         $params = [
             'courseid' => $courseid,
-            'sort' => $sort
+            'sort' => $sort,
         ];
         $usersenrolled = $DB->get_records_sql($sql, $params, $offset, $limit);
         foreach ($usersenrolled as $userrenrolled) {
@@ -102,16 +102,18 @@ class get_report extends external_api {
             $users[] = $user;
         }
 
-        $usersenrolledWithoutLimit = $DB->get_records_sql($sql, $params);
+        $usersenrolledwithoutlimit = $DB->get_records_sql($sql, $params);
 
         return [
             'users' => $users,
-            'countWithoutLimit' => count($usersenrolledWithoutLimit)
+            'countWithoutLimit' => count($usersenrolledwithoutlimit),
         ];
     }
 
     /**
-     * @return external_function_parameters
+     * Get webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -138,13 +140,15 @@ class get_report extends external_api {
             'sort' => new external_value(PARAM_TEXT,
                 'Field sort',
                 false
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get webservice return structure.
+     *
+     * @return external_single_structure The webservice return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -185,7 +189,7 @@ class get_report extends external_api {
                             PARAM_TEXT,
                             'Last access',
                             VALUE_REQUIRED
-                        )
+                        ),
                     ]
                 ),
                 'Report of the users',

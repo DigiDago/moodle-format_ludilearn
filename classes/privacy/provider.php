@@ -53,10 +53,14 @@ class provider implements
     \core_privacy\local\request\plugin\provider,
 
     // This plugin is capable of determining which users have data within it.
-    core_userlist_provider
+    core_userlist_provider {
 
-{
-
+    /**
+     * Get the metadata for this plugin.
+     *
+     * @param collection $collection The initialised collection to add the plugin's metadata to.
+     * @return collection The updated collection.
+     */
     public static function get_metadata(collection $collection): collection {
 
         // Adding description of table ludimoodle_profile to the collection.
@@ -65,7 +69,7 @@ class provider implements
             [
                 'userid' => 'privacy:metadata:ludimoodle_profile:userid',
                 'combinedaffinities' => 'privacy:metadata:ludimoodle_profile:combinedaffinities',
-                'type' => 'privacy:metadata:ludimoodle_profile:type'
+                'type' => 'privacy:metadata:ludimoodle_profile:type',
             ],
             'privacy:metadata:ludimoodle_profile'
         );
@@ -76,7 +80,7 @@ class provider implements
             [
                 'questionid' => 'privacy:metadata:ludimoodle_answers:questionid',
                 'userid' => 'privacy:metadata:ludimoodle_answers:userid',
-                'score' => 'privacy:metadata:ludimoodle_answers:score'
+                'score' => 'privacy:metadata:ludimoodle_answers:score',
             ],
             'privacy:metadata:ludimoodle_answers'
         );
@@ -87,7 +91,7 @@ class provider implements
             [
                 'gameelementid' => 'privacy:metadata:ludimoodle_attribution:gameelementid',
                 'userid' => 'privacy:metadata:ludimoodle_attribution:userid',
-                'timecreated' => 'privacy:metadata:ludimoodle_attribution:timecreated'
+                'timecreated' => 'privacy:metadata:ludimoodle_attribution:timecreated',
             ],
             'privacy:metadata:ludimoodle_attribution'
         );
@@ -98,7 +102,7 @@ class provider implements
             [
                 'attributionid' => 'privacy:metadata:ludimoodle_gameeele_user:attributionid',
                 'name' => 'privacy:metadata:ludimoodle_gameeele_user:name',
-                'value' => 'privacy:metadata:ludimoodle_gameeele_user:value'
+                'value' => 'privacy:metadata:ludimoodle_gameeele_user:value',
             ],
             'privacy:metadata:ludimoodle_gameeele_user'
         );
@@ -110,7 +114,7 @@ class provider implements
                 'attributionid' => 'privacy:metadata:ludimoodle_cm_user:attributionid',
                 'cmid' => 'privacy:metadata:ludimoodle_cm_user:cmid',
                 'name' => 'privacy:metadata:ludimoodle_cm_user:name',
-                'value' => 'privacy:metadata:ludimoodle_cm_user:value'
+                'value' => 'privacy:metadata:ludimoodle_cm_user:value',
             ],
             'privacy:metadata:ludimoodle_cm_user'
         );
@@ -129,7 +133,7 @@ class provider implements
 
         // Get all the contexts where the user has data.
         // Context modules.
-        $paramsCm = [
+        $paramscm = [
             'contextlevel' => CONTEXT_MODULE,
             'userid' => $userid,
         ];
@@ -139,10 +143,10 @@ class provider implements
                 INNER JOIN {ludimoodle_cm_user} cmu ON cmu.cmid = cm.id
                 INNER JOIN {ludimoodle_attribution} a ON a.id = cmu.attributionid
                 WHERE a.userid = :userid";
-        $contextlist->add_from_sql($sql, $paramsCm);
+        $contextlist->add_from_sql($sql, $paramscm);
 
         // Context course.
-        $paramsCourse = [
+        $paramscourse = [
             'contextlevel' => CONTEXT_COURSE,
             'userid' => $userid,
         ];
@@ -151,10 +155,10 @@ class provider implements
                 INNER JOIN {gameelements} g ON g.courseid = c.instanceid
                 INNER JOIN {ludimoodle_attribution} a ON g.id = a.gameelementid
                 WHERE c.contextlevel = :contextlevel AND a.userid = :userid";
-        $contextlist->add_from_sql($sql, $paramsCourse);
+        $contextlist->add_from_sql($sql, $paramscourse);
 
         // Context user.
-        $paramsUser = [
+        $paramsuser = [
             'contextlevel' => CONTEXT_USER,
             'userid' => $userid,
         ];
@@ -162,7 +166,7 @@ class provider implements
                 FROM {context} c
                 INNER JOIN {ludimoodle_profile} p ON c.instanceid = p.userid
                 WHERE c.contextlevel = :contextlevel AND p.userid = :userid";
-        $contextlist->add_from_sql($sql, $paramsUser);
+        $contextlist->add_from_sql($sql, $paramsuser);
 
         return $contextlist;
     }
@@ -198,7 +202,7 @@ class provider implements
                 // Export attribution data.
                 $params = [
                     'userid' => $user->id,
-                    'courseid' => $context->instanceid
+                    'courseid' => $context->instanceid,
                 ];
                 $sql = "SELECT g.id, g.courseid, g.sectionid, g.type, a.id as attributionid, a.timecreated
                         FROM {ludimoodle_attribution} a
@@ -213,7 +217,7 @@ class provider implements
                 // Export attribution data.
                 $params = [
                     'userid' => $user->id,
-                    'cmid' => $context->instanceid
+                    'cmid' => $context->instanceid,
                 ];
                 $sql = "SELECT cmu.*
                         FROM {ludimoodle_attribution} a
@@ -236,7 +240,7 @@ class provider implements
         // Prepare the data for export.
         $data = (object) [
             'combinedaffinities' => $profile->combinedaffinities,
-            'type' => get_string($profile->type, 'format_ludimoodle')
+            'type' => get_string($profile->type, 'format_ludimoodle'),
         ];
 
         // Export the data.
@@ -286,7 +290,7 @@ class provider implements
             foreach ($userdatas as $userdata) {
                 $subdatas[] = (object) [
                     'name' => $userdata->name,
-                    'value' => $userdata->value
+                    'value' => $userdata->value,
                 ];
             }
             $data[] = (object) [
@@ -294,7 +298,7 @@ class provider implements
                 'sectionid' => $gameelement->sectionid,
                 'type' => get_string($gameelement->type, 'format_ludimoodle'),
                 'timecreated' => $gameelement->timecreated,
-                'data' => $subdatas
+                'data' => $subdatas,
             ];
         }
 
@@ -315,7 +319,7 @@ class provider implements
         foreach ($cmusers as $cmuser) {
             $data[] = (object) [
                 'name' => $cmuser->name,
-                'value' => $cmuser->value
+                'value' => $cmuser->value,
             ];
         }
 
@@ -334,9 +338,7 @@ class provider implements
 
         // Check if the context is a module context.
         if ($context instanceof context_module) {
-            $params = [
-                'instanceid'    => $context->instanceid
-            ];
+            $params = ['instanceid'    => $context->instanceid];
             $sql = "DELETE cmu
                     FROM {ludimoodle_cm_user} cmu
                     WHERE cmu.cmid = :instanceid";
@@ -345,9 +347,7 @@ class provider implements
 
         // Check if the context is a course context.
         if ($context instanceof context_course) {
-            $params = [
-                'instanceid'    => $context->instanceid
-            ];
+            $params = ['instanceid'    => $context->instanceid];
             $sql = "DELETE gu
                     FROM {ludimoodle_gameele_user} gu
                     INNER JOIN {ludimoodle_attribution} a ON a.id = gu.attributionid
@@ -364,9 +364,7 @@ class provider implements
 
         // Check if the context is a user context.
         if ($context instanceof context_user) {
-            $params = [
-                'instanceid' => $context->instanceid
-            ];
+            $params = ['instanceid' => $context->instanceid];
             $sql = "DELETE p
                     FROM {ludimoodle_profile} p
                     WHERE p.userid = :instanceid";
@@ -397,9 +395,7 @@ class provider implements
         foreach ($contexts as $context) {
             // Check if the context is a module context.
             if ($context instanceof context_module) {
-                $params = [
-                    'instanceid'    => $context->instanceid
-                ];
+                $params = ['instanceid'    => $context->instanceid];
                 $sql = "DELETE cmu
                     FROM {ludimoodle_cm_user} cmu
                     INNER JOIN {ludimoodle_attribution} a ON a.id = cmu.attributionid
@@ -409,9 +405,7 @@ class provider implements
 
             // Check if the context is a course context.
             if ($context instanceof context_course) {
-                $params = [
-                    'instanceid'    => $context->instanceid
-                ];
+                $params = ['instanceid'    => $context->instanceid];
                 $sql = "DELETE gu
                     FROM {ludimoodle_gameele_user} gu
                     INNER JOIN {ludimoodle_attribution} a ON a.id = gu.attributionid
@@ -428,9 +422,7 @@ class provider implements
 
             // Check if the context is a user context.
             if ($context instanceof context_user) {
-                $params = [
-                    'userid' => $user->id
-                ];
+                $params = ['userid' => $user->id];
                 $sql = "DELETE p
                     FROM {ludimoodle_profile} p
                     WHERE p.userid = :userid";
@@ -454,9 +446,7 @@ class provider implements
 
         // Check if the context is a module context.
         if ($context instanceof context_module) {
-            $params = [
-                'instanceid'    => $context->instanceid
-            ];
+            $params = ['instanceid'    => $context->instanceid];
             $sql = "SELECT DISTINCT(a.userid)
                     FROM {ludimoodle_attribution} a
                     INNER JOIN {ludimoodle_cm_user} cmu ON cmu.attributionid = a.id
@@ -466,9 +456,7 @@ class provider implements
 
         // Check if the context is a course context.
         if ($context instanceof context_course) {
-            $params = [
-                'instanceid'    => $context->instanceid
-            ];
+            $params = ['instanceid'    => $context->instanceid];
             $sql = "SELECT DISTINCT(a.userid)
                     FROM {ludimoodle_attribution} a
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
@@ -478,9 +466,7 @@ class provider implements
 
         // Check if the context is a user context.
         if ($context instanceof context_user) {
-            $params = [
-                'instanceid' => $context->instanceid
-            ];
+            $params = ['instanceid' => $context->instanceid];
             $sql = "SELECT DISTINCT(p.userid)
                     FROM {ludimoodle_profile} p
                     WHERE p.userid = :instanceid";
@@ -504,7 +490,7 @@ class provider implements
             if ($context instanceof context_module) {
                 $params = [
                     'instanceid'    => $context->instanceid,
-                    'userid'        => $user->id
+                    'userid'        => $user->id,
                 ];
                 $sql = "DELETE cmu
                     FROM {ludimoodle_cm_user} cmu
@@ -517,7 +503,7 @@ class provider implements
             if ($context instanceof context_course) {
                 $params = [
                     'instanceid'    => $context->instanceid,
-                    'userid'        => $user->id
+                    'userid'        => $user->id,
                 ];
                 $sql = "DELETE gu
                     FROM {ludimoodle_gameele_user} gu
@@ -535,9 +521,7 @@ class provider implements
 
             // Check if the context is a user context.
             if ($context instanceof context_user) {
-                $params = [
-                    'userid' => $user->id
-                ];
+                $params = ['userid' => $user->id];
                 $sql = "DELETE p
                     FROM {ludimoodle_profile} p
                     WHERE p.userid = :userid";

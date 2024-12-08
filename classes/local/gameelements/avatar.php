@@ -28,7 +28,7 @@ require_once($CFG->libdir . '/adminlib.php');
  * Avatar game element class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,12 +42,12 @@ class avatar extends game_element {
     /**
      * @var array
      */
-    protected array $item_owned;
+    protected array $itemowned;
 
     /**
      * @var array
      */
-    protected array $item_equiped;
+    protected array $itemequiped;
 
     /**
      *
@@ -65,13 +65,12 @@ class avatar extends game_element {
     /**
      * @var int Count of items ownable.
      */
-    protected int $items_ownable_count;
+    protected int $itemsownablecount;
 
     /**
      * @var int Count of items owned.
      */
-    protected int $item_owned_count;
-
+    protected int $itemownedcount;
 
     /**
      * @var string World of the avatar.
@@ -92,7 +91,6 @@ class avatar extends game_element {
         parent::__construct($id, $courseid, $sectionid, $userid, $paramaters, $cmparameters);
         $this->type = 'avatar';
 
-
         // Set threshold to earn parameters.
         $this->sectionparameters['thresholdtoearn'] = $this->thresholdtoearn = self::DEFAULT_THRESHOLDTOEARN;
         if (isset($parameters['thresholdtoearn'])) {
@@ -104,11 +102,9 @@ class avatar extends game_element {
         $options = $format->get_format_options();
         $this->world = $options['world'];
         $this->sectionparameters['world'] = $this->world;
-
-
         $this->progression = 0;
-        $this->items_ownable_count = 0;
-        $this->item_owned_count = 0;
+        $this->itemsownablecount = 0;
+        $this->itemownedcount = 0;
         foreach ($cmparameters as $key => $value) {
             if (!isset($value['gamified']) || $value['gamified']) {
                 $cmparameters[$key]['gamified'] = true;
@@ -121,12 +117,11 @@ class avatar extends game_element {
                 }
 
                 // Set activity completion.
-                if ($this->is_completed($key))  {
+                if ($this->is_completed($key)) {
                     $cmparameters[$key]['completion'] = true;
                 } else {
                     $cmparameters[$key]['completion'] = false;
                 }
-
 
                 // Set progression.
                 if (isset($value['progression'])) {
@@ -144,7 +139,7 @@ class avatar extends game_element {
                 if (!isset($value['thresholdexceeded'])) {
                     $cmparameters[$key]['thresholdexceeded'] = false;
                 }
-                $this->items_ownable_count++;
+                $this->itemsownablecount++;
             } else {
                 $cmparameters[$key]['gamified'] = false;
             }
@@ -155,7 +150,7 @@ class avatar extends game_element {
         }
         $this->cmparameters = $cmparameters;
         $this->sectionparameters['progression'] = $this->progression;
-        $this->item_owned = $paramaters['itemowned'];
+        $this->itemowned = $paramaters['itemowned'];
 
         // Refresh item owned when we detect an activity is completed.
         foreach ($cmparameters as $key => $value) {
@@ -171,17 +166,15 @@ class avatar extends game_element {
         // Set item equiped.
         $itemequiped = [];
         // Initialize all items equiped to false and count item_own.
-        foreach ($this->item_owned as $theme => $slots) {
+        foreach ($this->itemowned as $theme => $slots) {
             foreach ($slots as $slot => $owned) {
                 $itemequiped[$theme][$slot] = false;
 
                 if ($owned) {
-                    $this->item_owned_count++;
+                    $this->itemownedcount++;
                 }
             }
         }
-
-
         foreach ($itemequiped as $theme => $slots) {
             foreach ($slots as $slot => $owned) {
                 if (isset($paramaters['item-equiped-' . $slot])) {
@@ -192,7 +185,7 @@ class avatar extends game_element {
             }
         }
 
-        $sectionparameters['itemequiped'] = $this->item_equiped = $itemequiped;
+        $sectionparameters['itemequiped'] = $this->itemequiped = $itemequiped;
     }
 
 
@@ -220,7 +213,7 @@ class avatar extends game_element {
      * @return int Count of items ownable.
      */
     public function get_items_ownable_count(): int {
-        return $this->items_ownable_count;
+        return $this->itemsownablecount;
     }
 
     /**
@@ -229,7 +222,7 @@ class avatar extends game_element {
      * @return int Count of items owned.
      */
     public function get_count_items_owned(): int {
-        return $this->item_owned_count;
+        return $this->itemownedcount;
     }
 
     /**
@@ -240,7 +233,7 @@ class avatar extends game_element {
      */
     public function get_count_theme_for_slot(int $slot): int {
         $count = 0;
-        foreach ($this->item_owned as $theme => $slots) {
+        foreach ($this->itemowned as $theme => $slots) {
             if (isset($slots[$slot])) {
                 $count++;
             }
@@ -256,7 +249,7 @@ class avatar extends game_element {
      */
     public function get_count_slot_for_theme(int $theme): int {
         $count = 0;
-        foreach ($this->item_owned[$theme] as $slot => $owned) {
+        foreach ($this->itemowned[$theme] as $slot => $owned) {
             if (isset($owned)) {
                 $count++;
             }
@@ -271,7 +264,7 @@ class avatar extends game_element {
      */
     public function get_max_count_slot(): int {
         $max = 0;
-        foreach ($this->item_owned as $theme => $slots) {
+        foreach ($this->itemowned as $theme => $slots) {
             $count = count($slots);
             if ($count > $max) {
                 $max = $count;
@@ -287,7 +280,7 @@ class avatar extends game_element {
      */
     public function get_count_theme(): int {
         $count = 0;
-        foreach ($this->item_owned as $theme => $slots) {
+        foreach ($this->itemowned as $theme => $slots) {
             $count++;
         }
         return $count;
@@ -313,27 +306,6 @@ class avatar extends game_element {
     }
 
     /**
-     * Get the default parameters for the given module type and cmid.
-     *
-     * @param string $moduletype The module type.
-     * @param int $cmid The cmid.
-     * @return array The default parameters.
-     */
-    public static function get_cm_parameters_default(string $moduletype, int $cmid): array {
-        return parent::get_cm_parameters_default($moduletype, $cmid);
-    }
-
-    /**
-     * Get the type of a parameter.
-     *
-     * @param string $name Name of the parameter.
-     * @return string Type of the parameter.
-     */
-    public static function get_cm_parameter_type(string $name): string {
-        return parent::get_cm_parameter_type($name);
-    }
-
-    /**
      * Return true if the item is owned.
      *
      * @param int $itemtheme Item theme.
@@ -341,7 +313,7 @@ class avatar extends game_element {
      * @return bool True if the item is owned.
      */
     public function item_is_owned(int $itemtheme, int $itemslot): bool {
-           return $this->item_owned[$itemtheme][$itemslot];
+           return $this->itemowned[$itemtheme][$itemslot];
     }
 
     /**
@@ -352,9 +324,8 @@ class avatar extends game_element {
      * @return int Item equiped.
      */
     public function item_is_equiped(int $itemtheme, int $itemslot): int {
-        return $this->item_equiped[$itemtheme][$itemslot];
+        return $this->itemequiped[$itemtheme][$itemslot];
     }
-
 
     /**
      * Get the item equiped.
@@ -364,7 +335,7 @@ class avatar extends game_element {
      */
     public function get_item_equiped(int $itemslot): int {
         $theme = 0;
-        foreach ($this->item_equiped as $itemtheme => $itemslots) {
+        foreach ($this->itemequiped as $itemtheme => $itemslots) {
             if ($itemslots[$itemslot]) {
                 $theme = $itemtheme;
                 break;
@@ -372,7 +343,6 @@ class avatar extends game_element {
         }
         return $theme;
     }
-
 
     /**
      * Get the threshold exceeded.
@@ -392,7 +362,7 @@ class avatar extends game_element {
      * @param int $equiped Item equiped.
      */
     public function set_item_equiped(int $itemtheme, int $itemslot, int $equiped): void {
-        $this->item_equiped[$itemtheme][$itemslot] = $equiped;
+        $this->itemequiped[$itemtheme][$itemslot] = $equiped;
     }
 
     /**
@@ -402,7 +372,7 @@ class avatar extends game_element {
      */
     public function get_count_owned(): int {
         $count = 0;
-        foreach ($this->item_owned as $itemthemes) {
+        foreach ($this->itemowned as $itemthemes) {
             foreach ($itemthemes as $item) {
                 if ($item) {
                     $count++;
@@ -412,6 +382,11 @@ class avatar extends game_element {
         return $count;
     }
 
+    /**
+     * Get empty items.
+     *
+     * @return array Empty items.
+     */
     public static function get_empty_items(string $world): array {
         $items = [];
         if ($world == 'school') {
@@ -518,7 +493,7 @@ class avatar extends game_element {
      */
     public function get_last_item_not_owned(): stdClass {
         $lastitem = new stdClass();
-        foreach ($this->item_owned as $theme => $slots) {
+        foreach ($this->itemowned as $theme => $slots) {
             foreach ($slots as $slot => $owned) {
                 if (!$owned) {
                     $lastitem->theme = $theme;
@@ -530,7 +505,12 @@ class avatar extends game_element {
         return $lastitem;
     }
 
-    public function earn_item(int $cmid) {
+    /**
+     * Earn an item.
+     *
+     * @param int $cmid The cmid.
+     */
+    public function earn_item(int $cmid): void {
         global $DB;
         // Retrieve attribution.
         $attribution = $DB->get_record('ludimoodle_attribution',
@@ -539,10 +519,12 @@ class avatar extends game_element {
         // We can earn a new item.
         $lastitemnotowned = $this->get_last_item_not_owned();
         $itemowned = $DB->get_record('ludimoodle_gameele_user',
-            ['attributionid' => $attribution->id,
-                'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot
-            ]);
-        if($itemowned) {
+            [
+                'attributionid' => $attribution->id,
+                'name' => 'itemowned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
+            ]
+        );
+        if ($itemowned) {
             $param = new stdClass();
             $param->id = $itemowned->id;
             $param->value = 1;
@@ -550,7 +532,7 @@ class avatar extends game_element {
         } else {
             $DB->insert_record('ludimoodle_gameele_user', [
                 'attributionid' => $attribution->id,
-                'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
+                'name' => 'itemowned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
                 'value' => 1]);
         }
 
@@ -571,9 +553,9 @@ class avatar extends game_element {
         }
 
         $this->cmparameters[$cmid]['thresholdexceeded'] = true;
-        $this->item_owned[$lastitemnotowned->theme][$lastitemnotowned->slot] = 1;
-        $this->sectionparameters['itemowned'] = $this->item_owned;
-        $this->item_owned_count++;
+        $this->itemowned[$lastitemnotowned->theme][$lastitemnotowned->slot] = 1;
+        $this->sectionparameters['itemowned'] = $this->itemowned;
+        $this->itemownedcount++;
     }
 
 
@@ -606,7 +588,7 @@ class avatar extends game_element {
         return $count;
     }
 
-    /*
+    /**
      * Get status of items owned by section
      *
      * @param int $courseid The course id.
@@ -623,7 +605,7 @@ class avatar extends game_element {
         $avatar = self::get($courseid, $sectionid, $userid);
         $count->ownable = $avatar->get_items_ownable_count();
 
-        //Get count of items owned in the game element.
+        // Get count of items owned in the game element.
         $sql = 'SELECT COUNT(*) as count FROM {ludimoodle_gameele_user} s
                 INNER JOIN {ludimoodle_attribution} a ON s.attributionid = a.id
                 INNER JOIN {ludimoodle_gameelements} g ON a.gameelementid = g.id
@@ -707,10 +689,12 @@ class avatar extends game_element {
                     // We can earn a new item.
                     $lastitemnotowned = $gameelement->get_last_item_not_owned();
                     $itemowned = $DB->get_record('ludimoodle_gameele_user',
-                        ['attributionid' => $attribution->id,
-                            'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot
-                        ]);
-                    if($itemowned) {
+                        [
+                            'attributionid' => $attribution->id,
+                            'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
+                        ]
+                    );
+                    if ($itemowned) {
                         $param = new stdClass();
                         $param->id = $itemowned->id;
                         $param->value = 1;
@@ -759,7 +743,7 @@ class avatar extends game_element {
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
-                'instance' => $quiz->id
+                'instance' => $quiz->id,
             ]
         );
 
@@ -803,7 +787,6 @@ class avatar extends game_element {
                     'value' => $progression]);
             }
 
-
             // If the progression is greater than the threshold to earn an item.
             if ($progression >= $gameelement->get_thresholdtoearn()) {
                 // If the threshold is not exceeded before.
@@ -811,10 +794,11 @@ class avatar extends game_element {
                     // We can earn a new item.
                     $lastitemnotowned = $gameelement->get_last_item_not_owned();
                     $itemowned = $DB->get_record('ludimoodle_gameele_user',
-                        ['attributionid' => $attribution->id,
-                            'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot
+                        [
+                            'attributionid' => $attribution->id,
+                            'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
                         ]);
-                    if($itemowned) {
+                    if ($itemowned) {
                         $param = new stdClass();
                         $param->id = $itemowned->id;
                         $param->value = 1;
@@ -909,7 +893,6 @@ class avatar extends game_element {
                 $cmparameters[$cmparameterreq->cmid][$cmparameterreq->name] = $cmparameterreq->value;
             }
 
-
         }
 
         $sqlcms = 'SELECT cm.id, cm.cmid, cm.name, cm.value
@@ -934,7 +917,6 @@ class avatar extends game_element {
                     AND a.userid = :userid
                     AND g.courseid = :courseid';
         $itemsownedreq = $DB->get_records_sql($sqlitemsowned, ['userid' => $userid, 'courseid' => $courseid]);
-
 
         // Set the world of the avatar.
         $format = course_get_format($courseid);

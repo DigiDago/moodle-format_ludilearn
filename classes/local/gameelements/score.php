@@ -29,7 +29,7 @@ require_once($CFG->libdir.'/completionlib.php');
  * Score game element class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -272,7 +272,7 @@ class score extends game_element {
                     'courseid' => $coursemodule->course,
                     'itemmodule' => $moduletype,
                     'iteminstance' => $coursemodule->instance,
-                    'itemnumber' => 0
+                    'itemnumber' => 0,
                 ]
             );
             if ($gradeitem) {
@@ -408,7 +408,7 @@ class score extends game_element {
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
-                'instance' => $quiz->id
+                'instance' => $quiz->id,
             ]
         );
 
@@ -466,8 +466,6 @@ class score extends game_element {
                     'cmid' => $coursemodule->id,
                     'value' => $maxscore]);
             }
-
-
         }
     }
 
@@ -564,7 +562,8 @@ class score extends game_element {
      *
      * @return bool Returns true if the course parameters were successfully updated, false otherwise.
      */
-    public static function update_course_parameters(int $courseid, int $multiplier, int $bonuscompletion, int $percentagecompletion): bool {
+    public static function update_course_parameters(int $courseid, int $multiplier, int $bonuscompletion,
+        int $percentagecompletion): bool {
         global $DB;
 
         // Retrieve all game elements of the course.
@@ -578,7 +577,7 @@ class score extends game_element {
                 $multiplierrecord = $DB->get_record('ludimoodle_params',
                     ['gameelementid' => $gameelement->id,
                     'name' => 'multiplier']);
-                // If existing update values, else add value
+                // If existing update values, else add value.
                 if ($multiplierrecord) {
                     $multiplierrecord->value = $multiplier;
                     $DB->update_record('ludimoodle_params', $multiplierrecord);
@@ -594,7 +593,7 @@ class score extends game_element {
                 $bonuscompletionrecord = $DB->get_record('ludimoodle_params',
                     ['gameelementid' => $gameelement->id,
                         'name' => 'bonuscompletion']);
-                // If existing update values, else add value
+                // If existing update values, else add value.
                 if ($bonuscompletionrecord) {
                     $bonuscompletionrecord->value = $bonuscompletion;
                     $DB->update_record('ludimoodle_params', $bonuscompletionrecord);
@@ -626,4 +625,3 @@ class score extends game_element {
         return true;
     }
 }
-

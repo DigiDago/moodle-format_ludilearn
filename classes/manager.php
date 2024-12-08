@@ -16,6 +16,7 @@
 
 namespace format_ludimoodle;
 
+use backup;
 use context_course;
 use format_ludimoodle\local\gameelements\avatar;
 use format_ludimoodle\local\gameelements\badge;
@@ -38,7 +39,7 @@ require_once($CFG->dirroot . '/mod/quiz/locallib.php');
  * Format Ludimoodle's manager class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -85,9 +86,9 @@ class manager {
     /**
      * Check the attribution of a game element to a user and attribute it if necessary.
      *
-     * @param int $courseid
-     * @param int $userid
-     * @param string $type
+     * @param int $courseid Course ID.
+     * @param int $userid User ID.
+     * @param string $type Type of the game element.
      */
     public function check_attribution_course(int $courseid, int $userid, string $type) {
         global $DB;
@@ -168,7 +169,7 @@ class manager {
     public function update_attribution_by_section(int $courseid, int $sectionid, int $gameelementid): stdClass {
         global $DB;
 
-        /// Update the attribution of the game element.
+        // Update the attribution of the game element.
         $bysection = $DB->get_record('ludimoodle_bysection', ['courseid' => $courseid, 'sectionid' => $sectionid]);
         if ($bysection) {
             if ($bysection->gameelementid != $gameelementid) {
@@ -190,17 +191,17 @@ class manager {
     /**
      * Get game elements with auto assignement.
      *
-     * @param string $type Type of the game elements
-     * @param int|null $courseid Course ID
-     * @return array Array of game elements with auto assignements
+     * @param string $type Type of the game elements.
+     * @param int|null $courseid Course ID.
+     * @return array Array of game elements with auto assignements.
      */
     public function get_gameelements_auto(string $type, int $courseid = null): array {
         global $DB;
 
         $gameelements = [];
         if ($courseid == null) {
-            $sqlcourses = 'SELECT * FROM {course_format_options} 
-                            WHERE format = :format AND name = :name 
+            $sqlcourses = 'SELECT * FROM {course_format_options}
+                            WHERE format = :format AND name = :name
                             AND ' . $DB->sql_compare_text("value") . ' = ' . $DB->sql_compare_text(":value");
             $courses = $DB->get_records_sql($sqlcourses,
                 ['format' => 'ludimoodle', 'name' => 'assignment', 'value' => 'automatic']);
@@ -457,7 +458,7 @@ class manager {
      * @param $attempts array Attempts.
      * @return float Best grade of the quiz.
      */
-    function quiz_calculate_best_grade(object $quiz, array $attempts): float {
+    public function quiz_calculate_best_grade(object $quiz, array $attempts): float {
         $result = 0;
         switch ($quiz->grademethod) {
 
@@ -541,11 +542,17 @@ class manager {
             'contextlevel' => CONTEXT_MODULE,
             'action' => 'viewed',
             'origin' => 'web',
-            'contextinstanceid' => $cmid
+            'contextinstanceid' => $cmid,
         ]);
     }
 
-    public function get_cm_possible_conditions($cmid): array {
+    /**
+     * Get the possible conditions of a course module.
+     *
+     * @param int $cmid Course module ID.
+     * @return array Possible conditions.
+     */
+    public function get_cm_possible_conditions(int $cmid): array {
         global $DB;
 
         $cm = $DB->get_record('course_modules', ['id' => $cmid]);
@@ -559,18 +566,24 @@ class manager {
         return $conditions;
     }
 
+    /**
+     * Get attempts of a quiz.
+     *
+     * @param int $attemptid Attempt ID.
+     * @return array Attempts.
+     */
     public function get_attempt(int $attemptid): array {
         global $DB;
 
-        $query = '
-            SELECT qa.questionid as questionid, max(qas.fraction) AS fraction, max(qa.maxmark) as maxgrade, max(qasd.value) as ludigrade, qas.state
+        $query = 'SELECT qa.questionid as questionid, max(qas.fraction) AS fraction, max(qa.maxmark) as maxgrade,
+                   max(qasd.value) as ludigrade, qas.state
             FROM {quiz_attempts} za
             JOIN {question_attempts} qa ON qa.questionusageid=za.uniqueid
-            JOIN {question_attempt_steps} qas ON qas.questionattemptid = qa.id AND qas.state IN ("complete", "gaveup", "gradedwrong", "gradedright", "gradedpartial")
+            JOIN {question_attempt_steps} qas ON qas.questionattemptid = qa.id AND qas.state
+                IN ("complete", "gaveup", "gradedwrong", "gradedright", "gradedpartial")
             LEFT JOIN {question_attempt_step_data} qasd ON qasd.attemptstepid = qas.id AND qasd.name = "-ludigrade"
             WHERE za.id=:attemptid
-            GROUP BY qa.id
-        ';
+            GROUP BY qa.id';
         $sqlresult = $DB->get_records_sql($query, ['attemptid' => $attemptid]);
 
         $result = [];
@@ -585,7 +598,9 @@ class manager {
                 continue;
             }
             $result[] = (object) [
-                "questionid" => $record->questionid, "grade" => $grade, "maxgrade" => $record->maxgrade
+                "questionid" => $record->questionid,
+                "grade" => $grade,
+                "maxgrade" => $record->maxgrade,
             ];
         }
         return $result;
@@ -604,7 +619,7 @@ class manager {
 
         $questionsnumber          = $DB->get_record_sql('
             SELECT count(*) as qnumber
-            FROM {question_attempts} 
+            FROM {question_attempts}
             WHERE questionusageid = ?
         ', [$attempt->uniqueid]);
         $attempt->questionsnumber = $questionsnumber->qnumber ?? 0;
@@ -682,6 +697,12 @@ class manager {
         return $rank . $this->get_postfix($rank);
     }
 
+    /**
+     * Get the postfix of a rank.
+     *
+     * @param int $rank Rank.
+     * @return string Postfix of the rank.
+     */
     public function get_postfix(int $rank): string {
         if ($rank == 1) {
             return get_string('first', 'format_ludimoodle');
@@ -703,7 +724,8 @@ class manager {
      * @param bool $assignmentchanged Assignment changed.
      * @return void
      */
-    public function sync_user_attribution(int $courseid, string $assignment, string $defaultgameelement, bool $assignmentchanged): void {
+    public function sync_user_attribution(int $courseid, string $assignment, string $defaultgameelement,
+        bool $assignmentchanged): void {
         global $DB;
 
         $context = context_course::instance($courseid);
@@ -714,7 +736,6 @@ class manager {
             // Create all the game elements (if not exist).
             $gameelements = $DB->get_records('ludimoodle_gameelements',
                 ['courseid' => $courseid, 'sectionid' => $section->id]);
-
 
             // Get the default game element.
             $gameelementbydefault = $DB->get_record('ludimoodle_gameelements',
@@ -759,13 +780,14 @@ class manager {
     /**
      * Sync the user attribution by user.
      *
-     * @param int $courseid Course ID
-     * @param string $assignment Assignment type
-     * @param string $defaultgameelement Default game element
-     * @param int $userid User ID
+     * @param int $courseid Course ID.
+     * @param string $assignment Assignment type.
+     * @param string $defaultgameelement Default game element.
+     * @param int $userid User ID.
      * @return void
      */
-    public function sync_user_attribution_by_user(int $courseid, string $assignment, string $defaultgameelement, int $userid): void {
+    public function sync_user_attribution_by_user(int $courseid, string $assignment, string $defaultgameelement,
+        int $userid): void {
         global $DB;
         $context = context_course::instance($courseid);
         $users = get_enrolled_users($context);
@@ -824,7 +846,8 @@ class manager {
         require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
         require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 
-        return $DB->record_exists_sql('SELECT * FROM {backup_controllers} WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
+        return $DB->record_exists_sql('SELECT * FROM {backup_controllers}
+         WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
             ['type' => 'course', 'itemid' => $courseid, 'operation' => 'restore', 'status' => backup::STATUS_FINISHED_OK]);
     }
 }

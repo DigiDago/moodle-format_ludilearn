@@ -77,13 +77,13 @@ class settings implements renderable, templatable {
         if ($this->type == 'assignmentbysection') {
             $this->parameterslist = [];
             // Get section of the course.
-            $sections =  $DB->get_records('course_sections', ['course' => $this->courseid], 'section', 'id');
+            $sections = $DB->get_records('course_sections', ['course' => $this->courseid], 'section', 'id');
             foreach ($sections as $section) {
                 $this->parameterslist[] = 'section_' . $section->id;
             }
             return;
         }
-        $classname =  "\\format_ludimoodle\\local\\gameelements\\$type";
+        $classname = "\\format_ludimoodle\\local\\gameelements\\$type";
         $this->parameterslist = $classname::get_parameters_list();
     }
 
@@ -245,17 +245,24 @@ class settings implements renderable, templatable {
     /**
      * Return data for template.
      *
-     * @param stdClass $data The data for template
-     * @return stdClass The data for template
+     * @param stdClass $data The data for template.
+     * @return stdClass The data for template.
      */
     protected function get_data_nogamified(stdClass $data): stdClass {
         return $data;
     }
 
+    /**
+     * Get data for assignment by section.
+     *
+     * @param stdClass $data The data for assignment by section.
+     * @return stdClass The data for assignment by section.
+     */
     protected function get_data_assignmentbysection(stdClass $data): stdClass {
         global $DB;
         $context = context_course::instance($this->courseid);
-        $sections =  $DB->get_records('course_sections', ['course' => $this->courseid], 'section', 'id, name, section');
+        $sections = $DB->get_records('course_sections', ['course' => $this->courseid],
+            'section', 'id, name, section');
         $data->sections = [];
         $courseformat = course_get_format($this->courseid);
 
@@ -311,7 +318,7 @@ class settings implements renderable, templatable {
     /**
      * Get course id.
      *
-     * @return int Course id
+     * @return int Course id.
      */
     public function get_courseid(): int {
         return $this->courseid;
@@ -320,7 +327,7 @@ class settings implements renderable, templatable {
     /**
      * Get game element type.
      *
-     * @return string
+     * @return string Game element type.
      */
     public function get_type(): string {
         return $this->type;
@@ -329,12 +336,17 @@ class settings implements renderable, templatable {
     /**
      * Get the URL for the settings.
      *
-     * @return moodle_url The URL for the settings
+     * @return moodle_url The URL for the settings.
      */
     public function get_url(): moodle_url {
         return $this->url;
     }
 
+    /**
+     * Get the list of parameters.
+     *
+     * @return array The list of parameters.
+     */
     public function get_parameterslist(): array {
         return $this->parameterslist;
     }

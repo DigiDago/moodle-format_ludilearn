@@ -33,19 +33,19 @@ use format_ludimoodle\manager;
  * Class for get inventory.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class set_item_equiped extends external_api {
 
     /**
-     * Set item equiped parameters.
+     * Execute the webservice.
      *
      * @param int $courseid Id of the course.
      * @param int $slot Slot of the item.
      * @param int $theme Theme of the item.
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(int $courseid, int $slot, int $theme): array {
         global $DB, $USER, $CFG;
@@ -75,12 +75,14 @@ class set_item_equiped extends external_api {
         }
 
         return [
-            'success' => $success
+            'success' => $success,
         ];
     }
 
     /**
-     * @return external_function_parameters
+     * Get webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -98,20 +100,22 @@ class set_item_equiped extends external_api {
                 PARAM_INT,
                 'Theme',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get webservice returns structure.
+     *
+     * @return external_single_structure The webservice returns structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
             'success' => new external_value(
                 PARAM_BOOL,
                 'Success'
-            )
+            ),
         ];
 
         return new external_single_structure(

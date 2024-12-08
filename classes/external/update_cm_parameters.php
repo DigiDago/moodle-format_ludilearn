@@ -32,21 +32,21 @@ use format_ludimoodle\manager;
  * Class for update course module parameters.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_cm_parameters extends external_api {
 
     /**
-     * Update course module parameters.
+     * Execute the webservice.
      *
      * @param int $courseid Id of the course.
      * @param int $gameelementid Id of the game element.
      * @param int $cmid Id of the course module.
      * @param string $name Name of the parameter.
      * @param string $value Value of the parameter.
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(int $courseid, int $gameelementid, int $cmid, string $name, string $value): array {
 
@@ -55,12 +55,14 @@ class update_cm_parameters extends external_api {
         $manager = new manager();
 
         return [
-            'success' => $manager->update_cm_parameter($gameelementid, $cmid, $name, $value)
+            'success' => $manager->update_cm_parameter($gameelementid, $cmid, $name, $value),
         ];
     }
 
     /**
-     * @return external_function_parameters
+     * Get webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -88,13 +90,15 @@ class update_cm_parameters extends external_api {
                 PARAM_TEXT,
                 'Value of the parameter',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get webservice return structure.
+     *
+     * @return external_single_structure The webservice return structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -102,7 +106,7 @@ class update_cm_parameters extends external_api {
                 PARAM_BOOL,
                 'Success of the update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
 
         return new external_single_structure(

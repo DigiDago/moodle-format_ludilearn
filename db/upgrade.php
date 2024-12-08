@@ -18,7 +18,7 @@
  * Plugin upgrade.php
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,193 +28,17 @@ use format_ludimoodle\local\gameelements\score;
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
 require_once($CFG->dirroot . '/course/format/lib.php');
 
+/**
+ * Custom code to be run on upgrading the plugin.
+ *
+ * @param int $oldversion The version we are upgrading from.
+ * @return bool Always returns true.
+ */
 function xmldb_format_ludimoodle_upgrade($oldversion = 0) {
-
     global $DB;
-
-    // Automatic 'Purge all caches'....
-    if ($oldversion < 2023041801) {
-        $cmrecords = $DB->get_records_sql("SELECT cmid
-            FROM (
-                SELECT cmid FROM {ludimoodle_cm_params}
-                UNION
-                SELECT cmid FROM {ludimoodle_cm_user}
-            ) AS unique_cmid");
-
-        foreach ($cmrecords as $cmrecord) {
-            if (!$DB->get_record_sql("SELECT cm.*, md.name as modname
-                               FROM {course_modules} cm,
-                                    {modules} md
-                               WHERE cm.id = $cmrecord->cmid AND
-                                     md.id = cm.module")) {
-                $DB->delete_records('ludimoodle_cm_params', ['cmid' => $cmrecord->cmid]);
-                $DB->delete_records('ludimoodle_cm_user', ['cmid' => $cmrecord->cmid]);
-            }
-        }
-        upgrade_plugin_savepoint(true, 2023041801, 'format', 'ludimoodle');
-    }
-    if ($oldversion < 2023052602) {
-        // Add new value to cm parameters.
-        $sql = 'SELECT id, gameelementid, cmid FROM {ludimoodle_cm_params} GROUP BY gameelementid, cmid';
-        $cmparams = $DB->get_records_sql($sql);
-        foreach ($cmparams as $cmparam) {
-            $cm = $DB->get_record('course_modules', ['id' => $cmparam->cmid]);
-            $modetype = $DB->get_field('modules', 'name', ['id' => $cm->module]);
-            $condition = game_element::get_cm_parameters_default($modetype)['condition'];
-            $DB->insert_record('ludimoodle_cm_params', [
-                'gameelementid' => $cmparam->gameelementid,
-                'cmid' => $cmparam->cmid,
-                'name' => 'condition',
-                'value' => $condition,
-            ]);
-        }
-        upgrade_plugin_savepoint(true, 2023052602, 'format', 'ludimoodle');
-    }
-    if ($oldversion < 2023102400) {
-        $reqcourses = 'SELECT DISTINCT courseid FROM {ludimoodle_gameelements}';
-        $courses = $DB->get_records_sql($reqcourses);
-
-        foreach ($courses as $course) {
-            $format = course_get_format($course->courseid);
-
-            // Get the format options.
-            $options = $format->get_format_options();
-
-            $manager = new \format_ludimoodle\manager();
-            game_element::create_all_for_course($course->courseid);
-
-            // Sync user attribution.
-            $manager->sync_user_attribution($course->courseid, $options['assignment'], $options['default_game_element'], false);
-        }
-        upgrade_plugin_savepoint(true, 2023102400, 'format', 'ludimoodle');
-    }
-    if ($oldversion < 2023111300) {
-        // Update questionnary
-        $question = new stdClass();
-        $question->id = 29;
-        $question->content = 'Cela me rend heureux de pouvoir aider les autres';
-        $question->label = 'Philanthropist';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 30;
-        $question->content = 'J\'apprécie les activités de groupe';
-        $question->label = 'Socialiser';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 31;
-        $question->content = 'Le bien-être des autres m\'est important';
-        $question->label = 'Philanthropist';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 32;
-        $question->content = 'J\'aime faire partie d\'une équipe';
-        $question->label = 'Socialiser';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 33;
-        $question->content = 'J\'aime gérer des tâches difficiles';
-        $question->label = 'Achiever';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 34;
-        $question->content = 'J\'aime sortir victorieux de circonstances difficiles';
-        $question->label = 'Achiever';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 35;
-        $question->content = 'Être indépendant est une chose importante pour moi';
-        $question->label = 'Free Spirit';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 36;
-        $question->content = 'Je n\'aime pas suivre les règles';
-        $question->label = 'Disruptor';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 37;
-        $question->content = 'Si la récompense est suffisante, je ferai des efforts';
-        $question->label = 'Player';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 38;
-        $question->content = 'Il est important pour moi de suivre ma propre voie';
-        $question->label = 'Free Spirit';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 39;
-        $question->content = 'Je me perçois comme étant rebelle';
-        $question->label = 'Disruptor';
-        $DB->update_record('ludimoodle_questions', $question);
-        $question->id = 40;
-        $question->content = 'Les récompenses sont un bon moyen de me motiver';
-        $question->label = 'Player';
-        $DB->update_record('ludimoodle_questions', $question);
-
-        // Delete question with id > 40
-        $deletesql = 'DELETE FROM {ludimoodle_questions} WHERE id > 40';
-        $DB->execute($deletesql);
-    }
-    if ($oldversion < 2023112100) {
-        $dbman = $DB->get_manager();
-        $table = new xmldb_table('ludimoodle_log');
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('timestamp', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('user', XMLDB_TYPE_CHAR, '255', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('gameelement', XMLDB_TYPE_CHAR, '255', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('action', XMLDB_TYPE_CHAR, '255', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('info', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-        $table->add_field('info2', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-        $table->add_field('info3', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-        $table->add_field('info4', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-        $table->add_field('info5', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-        $table->add_field('info6', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-        $table->add_field('info7', XMLDB_TYPE_TEXT, null, null,
-            null, null, null);
-
-        // Adding keys to table ludimoodle_questions.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
-        try {
-            if (!$dbman->table_exists($table)) {
-                $dbman->create_table($table);
-            }
-        } catch (ddl_exception $e) {
-            return false;
-        }
-
-        upgrade_plugin_savepoint(true, 2023112100, 'format', 'ludimoodle');
-    }
-    if ($oldversion < 2024052702) {
-
-        // Update max score because of the new score game element working.
-        // Retrieve all score game element.
-        $scoregameelements = $DB->get_records('ludimoodle_gameelements', ['type' => 'score']);
-        foreach ($scoregameelements as $scoregameelement) {
-            // Retrieve all max score parameters.
-            $parameters = $DB->get_records('ludimoodle_cm_params',
-                ['gameelementid' => $scoregameelement->id, 'name' => 'maxscore']);
-            foreach ($parameters as $parameter) {
-                $coursemodule = $DB->get_record('course_modules', ['id' => $parameter->cmid]);
-
-                // Retrieve course module type.
-                $module = $DB->get_record('modules', ['id' => $coursemodule->module]);
-
-                // And get default parameters.
-                // In this function an array with the property max score is updated.
-                $defaultparameters = score::get_cm_parameters_default($module->name, $coursemodule->id);
-                $parameter->value = $defaultparameters['maxscore'];
-                // Update maxscore.
-                $DB->update_record('ludimoodle_cm_params', $parameter);
-            }
-        }
-        upgrade_plugin_savepoint(true, 2024052702, 'format', 'ludimoodle');
-    }
-    if ($oldversion < 2024081900) {
-        // Remove all AMS questions from questionnary.
-        $DB->delete_records('ludimoodle_questions', ['type' => 'AMS']);
-    }
 
     if ($oldversion < 2024081902) {
         // Set the new setting world to all courses with ludimoodle.

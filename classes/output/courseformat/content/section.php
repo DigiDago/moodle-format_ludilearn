@@ -26,13 +26,14 @@ namespace format_ludimoodle\output\courseformat\content;
 
 use core_courseformat\base as course_format;
 use core_courseformat\output\local\content\section as section_base;
+use renderer_base;
 use stdClass;
 
 /**
  * Base class to render a course section.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -41,11 +42,16 @@ class section extends section_base {
     /** @var course_format the course format */
     protected $format;
 
-    public function export_for_template(\renderer_base $output): stdClass {
+    /**
+     * Export the section for template.
+     *
+     * @param renderer_base $output the renderer
+     * @return stdClass the data to be used in the template
+     */
+    public function export_for_template(renderer_base $output): stdClass {
         $format = $this->format;
 
         $data = parent::export_for_template($output);
-
         if (!$this->format->get_section_number()) {
             $addsectionclass = $format->get_output_classname('content\\addsection');
             $addsection = new $addsectionclass($format);

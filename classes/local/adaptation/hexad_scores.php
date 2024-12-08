@@ -18,14 +18,12 @@ namespace format_ludimoodle\local\adaptation;
 
 use Exception;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Hexad scores class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
- * @authors          Jordan Kesraoui, Nihal Ouherrou
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @author           Jordan Kesraoui, Nihal Ouherrou
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class hexad_scores {
@@ -33,22 +31,27 @@ class hexad_scores {
      * @var float
      */
     public float $achiever;
+
     /**
      * @var float
      */
     public float $player;
+
     /**
      * @var float
      */
     public float $socialiser;
+
     /**
      * @var float
      */
-    public float $freeSpirit;
+    public float $freespirit;
+
     /**
      * @var float
      */
     public float $disruptor;
+
     /**
      * @var float
      */
@@ -57,92 +60,94 @@ class hexad_scores {
     /**
      * Constructor
      *
-     * @param float $achiever
-     * @param float $player
-     * @param float $socialiser
-     * @param float $freeSpirit
-     * @param float $disruptor
-     * @param float $philanthropist
+     * @param float $achiever Achiever score.
+     * @param float $player Player score.
+     * @param float $socialiser Socialiser score.
+     * @param float $freespirit Free Spirit score.
+     * @param float $disruptor Disruptor score.
+     * @param float $philanthropist Philanthropist score.
      */
-    public function __construct(float $achiever, float $player, float $socialiser, float $freeSpirit, float $disruptor, float $philanthropist) {
+    public function __construct(float $achiever,
+        float $player,
+        float $socialiser,
+        float $freespirit,
+        float $disruptor,
+        float $philanthropist) {
         $this->achiever = $achiever;
         $this->player = $player;
         $this->socialiser = $socialiser;
-        $this->freeSpirit = $freeSpirit;
+        $this->freespirit = $freespirit;
         $this->disruptor = $disruptor;
         $this->philanthropist = $philanthropist;
     }
 
     /**
-     * Retrieve Hexad scores from the database based on the user's questionnaire responses
+     * Retrieve Hexad scores from the database based on the user's questionnaire responses.
      *
-     * @param int $userId User ID
-     * @return hexad_scores Hexad scores
+     * @param int $userid User ID.
+     * @return hexad_scores Hexad scores.
      */
-    public static function fromDatabase(int $userId): hexad_scores {
+    public static function from_database(int $userid): hexad_scores {
         global $DB;
 
-        // Define the question correspondences for each Hexad type
-        $questionCorrespondences = [
+        // Define the question correspondences for each Hexad type.
+        $questioncorrespondences = [
             "achiever" => [5, 6],
             "player" => [9, 12],
             "socialiser" => [2, 4],
             "freeSpirit" => [7, 10],
             "disruptor" => [8, 11],
-            "philanthropist" => [1, 3]
+            "philanthropist" => [1, 3],
         ];
 
-        // Initialize the Hexad scores
-        $hexadScores = new hexad_scores(0, 0, 0, 0, 0, 0);
+        // Initialize the Hexad scores.
+        $hexadscores = new hexad_scores(0, 0, 0, 0, 0, 0);
 
-        // Retrieve the scores for each Hexad type
-        foreach ($questionCorrespondences as $hexadType => $questionIds) {
-            $questionIdsString = implode(',', $questionIds);
+        // Retrieve the scores for each Hexad type.
+        foreach ($questioncorrespondences as $hexadtype => $questionids) {
+            $questionidsstring = implode(',', $questionids);
 
             $query = "SELECT questionid, score
                 FROM {ludimoodle_answers}
                 WHERE userid = :userid
-                AND questionid IN ($questionIdsString)";
-            $params = ['userid' => $userId];
+                AND questionid IN ($questionidsstring)";
+            $params = ['userid' => $userid];
             $scores = $DB->get_records_sql($query, $params);
 
             foreach ($scores as $score) {
-                $questionScore = intval($score->score);
-                // Add the score of each question to the total of the corresponding profile
-                $hexadScores->{$hexadType} += $questionScore;
+                $questionscore = intval($score->score);
+                // Add the score of each question to the total of the corresponding profile.
+                $hexadscores->{$hexadtype} += $questionscore;
             }
         }
 
-        // Initialize a new HexadScores object with the calculated total scores
+        // Initialize a new hexadscores object with the calculated total scores.
         return new hexad_scores(
-            $hexadScores->achiever,
-            $hexadScores->player,
-            $hexadScores->socialiser,
-            $hexadScores->freeSpirit,
-            $hexadScores->disruptor,
-            $hexadScores->philanthropist
+            $hexadscores->achiever,
+            $hexadscores->player,
+            $hexadscores->socialiser,
+            $hexadscores->freespirit,
+            $hexadscores->disruptor,
+            $hexadscores->philanthropist
         );
     }
 
-    // Get the score for a specific Hexad type
-
     /**
-     * Get the score for a specific Hexad type
+     * Get the score for a specific Hexad type.
      *
-     * @param string $typeName Hexad type name
-     * @return float Hexad score
-     * @throws Exception
+     * @param string $typename Hexad type name.
+     * @return float Hexad score.
      */
-    public function getValue(string $typeName): float {
-        $typeName = strtolower($typeName);
-        return match ($typeName) {
+    public function get_value(string $typename): float {
+        $typename = strtolower($typename);
+        return match ($typename) {
             "achiever" => $this->achiever,
             "player" => $this->player,
             "socialiser" => $this->socialiser,
-            "freespirit" => $this->freeSpirit,
+            "freespirit" => $this->freespirit,
             "disruptor" => $this->disruptor,
             "philanthropist" => $this->philanthropist,
-            default => throw new Exception("Type not found in Hexad Data: " . $typeName),
+            default => throw new Exception("Type not found in Hexad Data: " . $typename),
         };
     }
 }

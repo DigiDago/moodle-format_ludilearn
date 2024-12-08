@@ -18,7 +18,7 @@
  * Ludimoodle format plugin event handler definition.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,58 +28,58 @@ defined('MOODLE_INTERNAL') || die();
 $observers = [
     [
         'eventname' => '\core\event\user_enrolment_created',
-        'callback' => 'format_ludimoodle_observer::user_enrolment_created'
+        'callback' => 'format_ludimoodle_observer::user_enrolment_created',
     ],
     [
         'eventname' => '\core\event\user_enrolment_updated',
-        'callback' => 'format_ludimoodle_observer::user_enrolment_updated'
+        'callback' => 'format_ludimoodle_observer::user_enrolment_updated',
     ],
     [
         'eventname' => '\core\event\role_assigned',
-        'callback' => 'format_ludimoodle_observer::role_assigned'
+        'callback' => 'format_ludimoodle_observer::role_assigned',
     ],
     [
         'eventname' => '\core\event\course_section_created',
-        'callback' => 'format_ludimoodle_observer::section_created'
+        'callback' => 'format_ludimoodle_observer::section_created',
     ],
     [
         'eventname' => '\core\event\course_section_deleted',
-        'callback' => 'format_ludimoodle_observer::section_deleted'
+        'callback' => 'format_ludimoodle_observer::section_deleted',
     ],
     [
         'eventname' => '\core\event\course_module_created',
-        'callback' => 'format_ludimoodle_observer::course_module_created'
+        'callback' => 'format_ludimoodle_observer::course_module_created',
     ],
     [
         'eventname' => '\core\event\course_deleted',
-        'callback' => 'format_ludimoodle_observer::course_deleted'
+        'callback' => 'format_ludimoodle_observer::course_deleted',
     ],
     [
         'eventname' => '\core\event\course_module_deleted',
-        'callback' => 'format_ludimoodle_observer::course_module_deleted'
+        'callback' => 'format_ludimoodle_observer::course_module_deleted',
     ],
     [
         'eventname' => '\core\event\course_module_updated',
-        'callback' => 'format_ludimoodle_observer::course_module_updated'
+        'callback' => 'format_ludimoodle_observer::course_module_updated',
     ],
     [
         'eventname' => '\core\event\user_graded',
-        'callback' => 'format_ludimoodle_observer::user_graded'
+        'callback' => 'format_ludimoodle_observer::user_graded',
     ],
     [
         'eventname' => '\mod_quiz\event\attempt_updated',
-        'callback' => 'format_ludimoodle_observer::attempt_updated'
+        'callback' => 'format_ludimoodle_observer::attempt_updated',
     ],
     [
         'eventname' => '\mod_quiz\event\attempt_deleted',
-        'callback' => 'format_ludimoodle_observer::attempt_deleted'
+        'callback' => 'format_ludimoodle_observer::attempt_deleted',
     ],
     [
         'eventname' => '\mod_quiz\event\attempt_submitted',
-        'callback' => 'format_ludimoodle_observer::attempt_submitted'
+        'callback' => 'format_ludimoodle_observer::attempt_submitted',
     ],
     [
         'eventname' => '\core\event\course_reset_ended',
-        'callback' => 'format_ludimoodle_observer::course_reset_ended'
-    ]
+        'callback' => 'format_ludimoodle_observer::course_reset_ended',
+    ],
 ];

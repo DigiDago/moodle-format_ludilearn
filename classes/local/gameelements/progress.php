@@ -28,7 +28,7 @@ require_once($CFG->libdir . '/adminlib.php');
  * Progress game element class.
  *
  * @package          format_ludimoodle
- * @copyright        2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -67,7 +67,7 @@ class progress extends game_element {
                 }
 
                 // Get the completion status.
-                if ($this->is_completed($key))  {
+                if ($this->is_completed($key)) {
                     $cmparameters[$key]['completion'] = true;
                 } else {
                     $cmparameters[$key]['completion'] = false;
@@ -106,27 +106,6 @@ class progress extends game_element {
     }
 
     /**
-     * Get default module parameters for a course module.
-     *
-     * @param string $moduletype The module type.
-     * @param int $cmid The course module ID.
-     * @return array The default module parameters.
-     */
-    public static function get_cm_parameters_default(string $moduletype, int $cmid): array {
-        return parent::get_cm_parameters_default($moduletype, $cmid);
-    }
-
-    /**
-     * Get the type of a parameter.
-     *
-     * @param string $name Name of the parameter.
-     * @return string Type of the parameter.
-     */
-    public static function get_cm_parameter_type(string $name): string {
-        return parent::get_cm_parameter_type($name);
-    }
-
-    /**
      * Update progress elements.
      *
      * @param int $courseid The course id.
@@ -155,7 +134,7 @@ class progress extends game_element {
             $progression = 0;
             if (count($grades->items) > 0) {
                 $grade = $grades->items[0]->grades[$userid]->grade;
-                if ($grade  == null) {
+                if ($grade == null) {
                     $grade = 0;
                 }
                 $grademax = $grades->items[0]->grademax;
@@ -205,7 +184,7 @@ class progress extends game_element {
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
-                'instance' => $quiz->id
+                'instance' => $quiz->id,
             ]
         );
 
@@ -256,7 +235,7 @@ class progress extends game_element {
      * @param int $courseid The course ID.
      * @param int $sectionid The section ID.
      * @param int $userid The user ID.
-     * @return progress|null
+     * @return progress|null The game element.
      */
     public static function get(int $courseid, int $sectionid, int $userid): ?progress {
         global $DB;
@@ -334,4 +313,3 @@ class progress extends game_element {
             $cmparameters);
     }
 }
-

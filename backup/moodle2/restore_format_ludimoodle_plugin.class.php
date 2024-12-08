@@ -23,8 +23,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Specialised restore for Ludimoodle course format.
  *
@@ -35,7 +33,11 @@ defined('MOODLE_INTERNAL') || die();
  */
 class restore_format_ludimoodle_plugin extends restore_format_plugin {
 
-
+    /**
+     * Define the restore structure of the section plugin.
+     *
+     * @return array Array of restore paths.
+     */
     protected function define_section_plugin_structure(): array {
         $paths = [];
 
@@ -48,7 +50,7 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
         // Path to restore ludimoodle_params.
         $paths[] = new restore_path_element('params', $this->get_pathfor('/params'));
 
-        // Path to restore ludimoodle_bysection
+        // Path to restore ludimoodle_bysection.
         $paths[] = new restore_path_element('bysection', $this->get_pathfor('/bysection'));
 
         // Path to restore ludimoodle_gameele_user.
@@ -57,6 +59,11 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
         return $paths;
     }
 
+    /**
+     * Define the restore structure of the module plugin.
+     *
+     * @return array Array of restore paths.
+     */
     protected function define_module_plugin_structure(): array {
         $paths = [];
 
@@ -69,28 +76,33 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
         return $paths;
     }
 
-
-    public function process_gameelements($data) {
+    /**
+     * Process restore ludimoodle_gameelements.
+     *
+     * @param array $data Data to restore.
+     * @return void
+     */
+    public function process_gameelements(array $data): void {
         global $DB;
-        var_dump($data);
+
         $data = (object)$data;
+
+        // Mapping of ids.
         $data->courseid = $this->task->get_courseid();
         $data->sectionid = $this->task->get_sectionid();
 
-        var_dump($data);
-
-        // Insert data into the table ludimoodle_gameelements
+        // Insert data into the table ludimoodle_gameelements.
         $newitemid = $DB->insert_record('ludimoodle_gameelements', $data);
-        $this->set_mapping('gameelements', $data->id, $newitemid, true);  // Mapping des IDs
+        $this->set_mapping('gameelements', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore ludimoodle_params
+     * Process restore ludimoodle_params.
      *
-     * @param $data
+     * @param array $data Data to restore.
      * @return void
      */
-    public function process_params($data) {
+    public function process_params(array $data): void {
         global $DB;
 
         $data = (object)$data;
@@ -102,23 +114,23 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table ludimoodle_params
+        // Insert data into the table ludimoodle_params.
         $newitemid = $DB->insert_record('ludimoodle_params', $data);
         $this->set_mapping('params', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore ludimoodle_bysection
+     * Process restore ludimoodle_bysection.
      *
-     * @param $data
+     * @param array $data Data to restore.
      * @return void
      */
-    public function process_bysection($data) {
+    public function process_bysection(array $data): void {
         global $DB;
 
         $data = (object)$data;
 
-        // Mapping of gameelementid.
+        // Mapping of ids.
         $data->courseid = $this->task->get_courseid();
         $data->gameelementid = $this->get_mappingid('gameelements', $data->gameelementid);
         $data->sectionid = $this->task->get_sectionid();
@@ -127,17 +139,23 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table ludimoodle_bysection
+        // Insert data into the table ludimoodle_bysection.
         $newitemid = $DB->insert_record('ludimoodle_bysection', $data);
         $this->set_mapping('bysection', $data->id, $newitemid, true);
     }
 
-    public function process_cm_params($data) {
+    /**
+     * Process restore ludimoodle_cm_params.
+     *
+     * @param array $data Data to restore.
+     * @return void
+     */
+    public function process_cm_params(array $data): void {
         global $DB;
 
         $data = (object)$data;
 
-        // Mapping of gameelementid.
+        // Mapping of ids.
         $data->gameelementid = $this->get_mappingid('gameelements', $data->gameelementid);
         $data->cmid = $this->task->get_moduleid();
 
@@ -145,13 +163,18 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table ludimoodle_cm_params
+        // Insert data into the table ludimoodle_cm_params.
         $newitemid = $DB->insert_record('ludimoodle_cm_params', $data);
         $this->set_mapping('cm_params', $data->id, $newitemid, true);
     }
 
-    public function process_attributions($data) {
-        // Restaurer les données de la table 'ludimoodle_attribution'
+    /**
+     * Process restore ludimoodle_attribution.
+     *
+     * @param array $data Data to restore.
+     * @return void
+     */
+    public function process_attributions(array $data): void {
         global $DB;
 
         $data = (object)$data;
@@ -164,13 +187,18 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insertion des données restaurées dans la table ludimoodle_attribution
+        // Insert data into the table ludimoodle_attribution.
         $newitemid = $DB->insert_record('ludimoodle_attribution', $data);
         $this->set_mapping('attributions', $data->id, $newitemid, true);
     }
 
-    public function process_gameele_user($data) {
-        // Restaurer les données de la table 'ludimoodle_gameele_user'
+    /**
+     * Process restore ludimoodle_gameele_user.
+     *
+     * @param array $data Data to restore.
+     * @return void
+     */
+    public function process_gameele_user(array $data): void {
         global $DB;
 
         $data = (object)$data;
@@ -182,13 +210,18 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insertion des données restaurées dans la table ludimoodle_gameele_user
+        // Insert data into the table ludimoodle_gameele_user.
         $newitemid = $DB->insert_record('ludimoodle_gameele_user', $data);
         $this->set_mapping('gameele_user', $data->id, $newitemid, true);
     }
 
-    public function process_cm_user($data) {
-        // Restaurer les données de la table 'ludimoodle_cm_user'
+    /**
+     * Process restore ludimoodle_cm_user.
+     *
+     * @param array $data  Data to restore.
+     * @return void
+     */
+    public function process_cm_user(array $data): void {
         global $DB;
 
         $data = (object)$data;
@@ -201,7 +234,7 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insertion des données restaurées dans la table ludimoodle_cm_user
+        // Insert data into the table ludimoodle_cm_user.
         $newitemid = $DB->insert_record('ludimoodle_cm_user', $data);
         $this->set_mapping('cm_user', $data->id, $newitemid, true);
     }

@@ -28,9 +28,12 @@ require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->libdir . '/gradelib.php');
 
 /**
- * Update a game element.
+ * Class game_element
  *
- * @param array $data Data to update.
+ * @package          format_ludimoodle
+ * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @author           Jordan Kesraoui
+ * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class game_element {
 
@@ -109,7 +112,7 @@ abstract class game_element {
         if ($info->is_enabled()) {
             $cm = get_coursemodule_from_id('', $cmid);
             $data = $info->get_data($cm, false, $this->userid);
-            if($data->completionstate != COMPLETION_INCOMPLETE) {
+            if ($data->completionstate != COMPLETION_INCOMPLETE) {
                 return true;
             }
         }
@@ -159,7 +162,7 @@ abstract class game_element {
         $modulename = $cm->modname;
         $libfile = $CFG->dirroot . "/mod/{$modulename}/lib.php";
 
-        // Verify if the lib file exists
+        // Verify if the lib file exists.
         if (file_exists($libfile)) {
             require_once($libfile);
 
@@ -176,12 +179,12 @@ abstract class game_element {
         }
 
         // Check if there is a grade item for this course module.
-        $grade_item = $DB->get_record('grade_items',
+        $gradeitem = $DB->get_record('grade_items',
             ['iteminstance' => $cm->instance,
             'itemmodule' => $cm->modname,
                 'courseid' => $this->courseid,
                 'itemnumber' => 0]);
-        if ($grade_item && $grade_item->gradetype != GRADE_TYPE_NONE) {
+        if ($gradeitem && $gradeitem->gradetype != GRADE_TYPE_NONE) {
             return true;
         }
 
@@ -195,7 +198,7 @@ abstract class game_element {
      * @param int $userid The user ID.
      * @return bool Returns true if the activity is available for the user, false otherwise.
      */
-    function is_activity_available_for_user(int $cmid, int $userid = 0): bool {
+    public function is_activity_available_for_user(int $cmid, int $userid = 0): bool {
         global $DB, $USER;
 
         // If the user ID is not set, use the current user ID.
@@ -575,15 +578,15 @@ abstract class game_element {
             'avatar',
             'timer',
             'ranking',
-            'nogamified'
+            'nogamified',
         ];
     }
 
     /**
      * Return if a course module is gamified.
      *
-     * @param int $cmid Cm id
-     * @return bool true if is gamified
+     * @param int $cmid Cm id.
+     * @return bool true if is gamified.
      */
     public static function is_gamified(int $cmid): bool {
         global $DB;
@@ -592,7 +595,7 @@ abstract class game_element {
             ['cmid' => $cmid, 'name' => 'gamified'], 'id', 'value', 0, 1);
         if ($cmparamexist) {
             $cmparam = reset($cmparamexist);
-           return boolval($cmparam->value);
+            return boolval($cmparam->value);
         }
         return true;
     }
@@ -600,8 +603,8 @@ abstract class game_element {
     /**
      * Gamify the given course module.
      *
-     * @param  int $courseid Course ID
-     * @param int $cmid Course module ID
+     * @param  int $courseid Course ID.
+     * @param int $cmid Course module ID.
      * @return void
      */
     public static function gamify(int $courseid, int $cmid): void {
@@ -610,7 +613,7 @@ abstract class game_element {
         // Retrieve all game element for a course id.
         $gameelements = $DB->get_records('ludimoodle_gameelements', ['courseid' => $courseid]);
 
-        // For each game element, check if the param exist for the course module
+        // For each game element, check if the param exist for the course module.
         foreach ($gameelements as $gameelement) {
             $cmparamexist = $DB->get_record('ludimoodle_cm_params',
                 ['gameelementid' => $gameelement->id, 'cmid' => $cmid, 'name' => 'gamified']);
@@ -627,7 +630,7 @@ abstract class game_element {
     /**
      * Not gamify the given course module.
      *
-     * @param int $courseid Course ID
+     * @param int $courseid Course ID.
      * @param int $cmid Course module ID.
      * @return void
      */
@@ -637,7 +640,7 @@ abstract class game_element {
         // Retrieve all game element for a course id.
         $gameelements = $DB->get_records('ludimoodle_gameelements', ['courseid' => $courseid]);
 
-        // For each game element, check if the param exist for the course module
+        // For each game element, check if the param exist for the course module.
         foreach ($gameelements as $gameelement) {
             $cmparamexist = $DB->get_record('ludimoodle_cm_params',
                 ['gameelementid' => $gameelement->id, 'cmid' => $cmid, 'name' => 'gamified']);
@@ -678,22 +681,28 @@ abstract class game_element {
         return $courseparameters;
     }
 
+    /**
+     * Reset the course progression.
+     *
+     * @param int $courseid The course ID.
+     * @return void
+     */
     public static function reset_course(int $courseid): void {
         global $DB;
 
         // Remove all cm user progression.
-        $sqlCms = 'DELETE FROM {ludimoodle_cm_user}
-                    WHERE attributionid IN 
-                    (SELECT a.id FROM {ludimoodle_attribution} a WHERE a.gameelementid IN 
+        $sqlcms = 'DELETE FROM {ludimoodle_cm_user}
+                    WHERE attributionid IN
+                    (SELECT a.id FROM {ludimoodle_attribution} a WHERE a.gameelementid IN
                         (SELECT g.id FROM {ludimoodle_gameelements} g WHERE g.courseid = :courseid))';
-        $DB->execute($sqlCms, ['courseid' => $courseid]);
+        $DB->execute($sqlcms, ['courseid' => $courseid]);
 
         // Remove all section user progression.
-        $sqlSections = 'DELETE FROM {ludimoodle_gameele_user}
-                        WHERE attributionid IN 
-                        (SELECT a.id FROM {ludimoodle_attribution} a WHERE a.gameelementid IN 
+        $sqlsections = 'DELETE FROM {ludimoodle_gameele_user}
+                        WHERE attributionid IN
+                        (SELECT a.id FROM {ludimoodle_attribution} a WHERE a.gameelementid IN
                             (SELECT g.id FROM {ludimoodle_gameelements} g WHERE g.courseid = :courseid))';
-        $DB->execute($sqlSections, ['courseid' => $courseid]);
+        $DB->execute($sqlsections, ['courseid' => $courseid]);
     }
 
     /**
@@ -705,6 +714,3 @@ abstract class game_element {
         return [];
     }
 }
-
-
-

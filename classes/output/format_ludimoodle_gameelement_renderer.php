@@ -29,16 +29,18 @@ use stdClass;
  * Ludimoodle Plus game element renderer.
  *
  * @package     format_ludimoodle
- * @copyright   2023 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class format_ludimoodle_gameelement_renderer extends plugin_renderer_base {
     /**
+     * Render the game element.
+     *
      * @param format_ludimoodle_gameelement $formatludimoodlegameelement
-     * @return mixed
+     * @return mixed HTML output
      */
-    protected function render_format_ludimoodle_gameelement(format_ludimoodle_gameelement $formatludimoodlegameelement) {
+    protected function render_format_ludimoodle_gameelement(format_ludimoodle_gameelement $formatludimoodlegameelement): mixed {
         return null;
     }
 }

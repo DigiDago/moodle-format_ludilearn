@@ -39,14 +39,13 @@ use format_ludimoodle\local\gameelements\score;
 class update_score_parameters extends external_api {
 
     /**
-     * Update course module parameters.
+     * Execute the webservice.
      *
      * @param int $courseid Id of the course.
      * @param int $multiplier Multiplier for the score.
      * @param int $bonuscompletion Bonus completion for the score.
      * @param int $percentagecompletion Percentage completion for the score.
-     *
-     * @return array
+     * @return array The web service return.
      */
     public static function execute(int $courseid, int $multiplier, int $bonuscompletion, int $percentagecompletion): array {
 
@@ -54,12 +53,14 @@ class update_score_parameters extends external_api {
         self::validate_context($context);
 
         return [
-            'success' => score::update_course_parameters($courseid, $multiplier, $bonuscompletion, $percentagecompletion)
+            'success' => score::update_course_parameters($courseid, $multiplier, $bonuscompletion, $percentagecompletion),
         ];
     }
 
     /**
-     * @return external_function_parameters
+     * Get webservice parameters structure.
+     *
+     * @return external_function_parameters The webservice parameters structure.
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
@@ -82,13 +83,15 @@ class update_score_parameters extends external_api {
                 PARAM_INT,
                 'Percentage completion',
                 VALUE_REQUIRED
-            )
+            ),
         ];
         return new external_function_parameters($parameters);
     }
 
     /**
-     * @return external_single_structure
+     * Get webservice returns structure.
+     *
+     * @return external_single_structure The webservice returns structure.
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
@@ -96,7 +99,7 @@ class update_score_parameters extends external_api {
                 PARAM_BOOL,
                 'Success of the update',
                 VALUE_REQUIRED
-            )
+            ),
         ];
 
         return new external_single_structure(
