@@ -468,7 +468,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     // First user.
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank(1);
-                    $rank->score = $parameters->score;
+                    $rank->score = intval($parameters->score);
                     $rank->me = true;
                     $parameters->ranks[] = $rank;
 
@@ -477,7 +477,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank($parameters->ranking->succeeding_user_rank);
                         if ($parameters->ranking->succeeding_user_total_score != NULL) {
-                            $rank->score = $parameters->ranking->succeeding_user_total_score;
+                            $rank->score = intval($parameters->ranking->succeeding_user_total_score);
                         } else {
                             $rank->score = 0;
                         }
@@ -489,7 +489,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank(3);
                         if ($parameters->ranking->succeeding2_user_total_score != null) {
-                            $rank->score = $parameters->ranking->succeeding2_user_total_score;
+                            $rank->score = intval($parameters->ranking->succeeding2_user_total_score);
                         } else {
                             $rank->score = 0;
                         }
@@ -504,7 +504,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank(1);
                     if ($parameters->ranking->first_user_total_score != NULL) {
-                        $rank->score = $parameters->ranking->first_user_total_score;
+                        $rank->score = intval($parameters->ranking->first_user_total_score);
                     } else {
                         $rank->score = 0;
                     }
@@ -513,7 +513,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     // User
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank($parameters->rank);
-                    $rank->score = $parameters->score;
+                    $rank->score = intval($parameters->score);
                     $rank->me = true;
                     $parameters->ranks[] = $rank;
 
@@ -522,7 +522,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank($parameters->ranking->succeeding_user_rank);
                         if ($parameters->ranking->succeeding_user_total_score != NULL) {
-                            $rank->score = $parameters->ranking->succeeding_user_total_score;
+                            $rank->score = intval($parameters->ranking->succeeding_user_total_score);
                         } else {
                             $rank->score = 0;
                         }
@@ -537,7 +537,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     $rank = new stdClass();
                     $rank->rank = $manager->stringify_rank(1);
                     if ($parameters->ranking->first_user_total_score != NULL) {
-                        $rank->score = $parameters->ranking->first_user_total_score;
+                        $rank->score = intval($parameters->ranking->first_user_total_score);
                     } else {
                         $rank->score = 0;
                     }
@@ -548,7 +548,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                         $rank = new stdClass();
                         $rank->rank = $manager->stringify_rank($parameters->ranking->preceding_user_rank);
                         if ($parameters->ranking->preceding_user_total_score != NULL) {
-                            $rank->score = $parameters->ranking->preceding_user_total_score;
+                            $rank->score = intval($parameters->ranking->preceding_user_total_score);
                         } else {
                             $rank->score = 0;
                         }
@@ -560,7 +560,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     if ($parameters->rank != null) {
                         $rank->rank = $manager->stringify_rank($parameters->rank);
                     }
-                    $rank->score = $parameters->score;
+                    $rank->score = intval($parameters->score);
                     $rank->me = true;
                     $parameters->ranks[] = $rank;
                 }
@@ -701,6 +701,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                     // Only if gradable.
                     $gradable = $parentsection->gameelement->is_gradable($cminfo->id);
                     if ($gradable && $parameters->gamified) {
+                        $parameters->score = intval($parameters->score);
                         $before2 = $parameters->ranking->succeeding2_user_rank;
                         if ($before2 != 0 && $before2 != NULL) {
                             $parameters->before_2 = $before2;
