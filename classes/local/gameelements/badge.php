@@ -144,43 +144,47 @@ class badge extends game_element {
                 }
 
                 $cmparameters[$key]['completion'] = false;
-                if (isset($value['progression'])) {
-                    $sumprogression += $value['progression'];
+                // If the module is gradable.
+                if ($gradable) {
                     $maxprogression += 100;
+                    if (isset($value['progression'])) {
+                            $sumprogression += $value['progression'];
 
-                    // Define badge.
-                    if ($value['progression'] >= $this->badgegold) {
+                            // Define badge.
+                            if ($value['progression'] >= $this->badgegold) {
+                                $cmparameters[$key]['badge'] = 'gold';
+                                $this->goldcount++;
+                            } else if ($value['progression'] >= $this->badgesilver) {
+                                $cmparameters[$key]['badge'] = 'silver';
+                                $this->silvercount++;
+                            } else if ($value['progression'] >= $this->badgebronze) {
+                                $cmparameters[$key]['badge'] = 'bronze';
+                                $this->bronzecount++;
+                            } else {
+                                $cmparameters[$key]['badge'] = 'none';
+                            }
+                    }
+                }
+
+                $completed = $this->is_completed($key);
+                // If the module is not gradable but completion is enabled.
+                if (!$gradable && $completion) {
+                    // If the module is completed, the progression is 100% and the badge is gold.
+                    if ($completed) {
+                        $cmparameters[$key]['progression'] = 100;
                         $cmparameters[$key]['badge'] = 'gold';
                         $this->goldcount++;
-                    } else if ($value['progression'] >= $this->badgesilver) {
-                        $cmparameters[$key]['badge'] = 'silver';
-                        $this->silvercount++;
-                    } else if ($value['progression'] >= $this->badgebronze) {
-                        $cmparameters[$key]['badge'] = 'bronze';
-                        $this->bronzecount++;
                     } else {
+                        $cmparameters[$key]['progression'] = 0;
                         $cmparameters[$key]['badge'] = 'none';
                     }
-                } else {
-                    $completed = $this->is_completed($key);
-
-                    // If the module is not gradable and completien is enabled.
-                    if (!$gradable && $completion) {
-                        // If the module is completed, the progression is 100% and the badge is gold.
-                        if ($completed) {
-                            $cmparameters[$key]['progression'] = 100;
-                            $cmparameters[$key]['badge'] = 'gold';
-                            $this->goldcount++;
-                        } else {
-                            $cmparameters[$key]['progression'] = 0;
-                            $cmparameters[$key]['badge'] = 'none';
-                        }
-                    } else if ($gradable && $completion) { // If the module is gradable and completien is enabled.
-                        // If the module is completed, we mark it as completed and add a completed count (for the completion badge).
-                        if ($completed) {
-                            $cmparameters[$key]['completion'] = true;
-                            $this->completioncount++;
-                        }
+                }
+                // If completien is enabled.
+                if ($completion) {
+                    // If the module is completed, we mark it as completed and add a completed count (for the completion badge).
+                    if ($completed) {
+                        $cmparameters[$key]['completion'] = true;
+                        $this->completioncount++;
                     }
                 }
             } else {
