@@ -27,7 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Ludimoodle';
 $string['assignment'] = 'Allocation of game elements';
-$string['assignment_help'] = 'Allocation determines how game elements are assigned to learners. The 3 allocation modes are:<br>
+$string['assignment_help'] = 'Reminder: Ludimoodle is a powerful course format, but its effectiveness depends on your mastery of the concepts of gamification and your pedagogical scripting.<br><br>
+Allocation determines how game elements are assigned to learners. The 3 allocation modes are:<br><br>
 * Automatic: via the Ludimoodle algorithm which automatically assigns a game element according to the learner\'s profile (applied to all courses). If your learners are accessing a game-based course for the first time, they will have to fill in a questionnaire which will take 5 minutes.
 * Manual: by selecting a game element of your choice for all learners and for the whole course.
 * By section: by selecting a game element of your choice for all learners for each section of the course.';

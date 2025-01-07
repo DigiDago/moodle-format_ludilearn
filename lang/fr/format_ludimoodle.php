@@ -27,7 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Ludimoodle';
 $string['assignment'] = 'Mode d\'attribution des éléments de jeu';
-$string['assignment_help'] = 'L\'attribution détermine comment les éléments de jeu sont assignés aux apprenants. Les 3 modes d\'attribution sont :<br>
+$string['assignment_help'] = 'Rappel : Ludimoodle est un format de cours puissant mais son efficacité repose sur votre maîtrise des concepts de ludification et votre scénarisation pédagogique.<br><br>
+L\'attribution détermine comment les éléments de jeu sont assignés aux apprenants. Les 3 modes d\'attribution sont :<br><br>
 * Automatique : via l\'algorithme Ludimoodle qui attribue automatiquement un élément de jeu selon le profil de l\'apprenant (appliqué sur tous les cours). Si vos apprenants accèdent à un cours ludifié pour la première fois, ils auront à remplir un questionnaire qui prendra 5 minutes.<br>
 * Manuel : en sélectionnant un élément de jeu de votre choix pour tous les apprenants et pour tout le cours.<br>
 * Par section : en sélectionnant en élément de jeu de votre choix pour tous les apprenants pour chaque section de cours.';
