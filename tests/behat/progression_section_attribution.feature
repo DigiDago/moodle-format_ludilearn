@@ -35,13 +35,49 @@ Feature: Progression game element section attribution in Ludimoodle course forma
       | forum | Progress No Gamification | Test progression without gamification | L1 | prog4 | 1 | 0 | 0 | 0 | | | | | |
     And I log out
 
-  @progression_section_display
-  Scenario: Verify progression elements appear only in configured section
+  @score_section_display_homepage
+  Scenario: Verify progression sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
     And I am on "Ludimoodle Progression" course homepage
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
+    And I am on "Ludimoodle Progression" course homepage
+    And I edit the section "3" and I fill the form with:
+      | name | Empty Section |
+    And I turn editing mode off
+    And I am on "Ludimoodle Progression" course homepage
+    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    And I set the field "Settings" to "Allocation of game elements by section"
+    And I set the field "Progression Section" to "Task progression"
+    And I set the field "No Game Section" to "No gamified"
+    And I set the field "Empty Section" to "Task progression"
+    And I press "Save"
+    Then I should see "The changes made have been applied"
+    And I log out
+
+    # State verification
+    Given I log in as "student1"
+    And I am on "Ludimoodle Progression" course homepage
+    Then I should see "General" in the ".col-6:nth-child(1) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(1)" "css_element"
+    And I should see "Progression Section" in the ".col-6:nth-child(2) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(2)" "css_element"
+    And I should see "No Game Section" in the ".col-6:nth-child(3) .sectionname" "css_element"
+    And "img[src*='none.svg']" "css_element" should exist in the ".col-6:nth-child(3)" "css_element"
+    And I should see "Empty Section" in the ".col-6:nth-child(4) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(4)" "css_element"
+
+  @progression_section_display
+  Scenario: Verify progression elements for activies and resources appear only in configured section
+    Given I log in as "teacher1"
+    And I am on "Ludimoodle Progression" course homepage
+    And I turn editing mode on
+    And I edit the section "2" and I fill the form with:
+      | name | No Game Section |
+    And I am on "Ludimoodle Progression" course homepage
+    And I edit the section "3" and I fill the form with:
+      | name | Empty Section |
     And I turn editing mode off
     And I am on "Ludimoodle Progression" course homepage
     And the following "activities" exist:
@@ -54,6 +90,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I set the field "No Game Section" to "No gamified"
+    And I set the field "Empty Section" to "Task progression"
     And I press "Save"
     Then I should see "The changes made have been applied"
     And I log out
@@ -99,6 +136,11 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(3) .cm-nogamified" "css_element"
     And I should see "Progress No Gamification" in the ".col-sm-4:nth-child(4) .cm-nogamified .cmname" "css_element"
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(4) .cm-nogamified" "css_element"
+
+   # Check empty section
+    When I am on "Ludimoodle Progression" course homepage
+    And I click on "Empty Section" "link" in the "region-main" "region"
+    Then I should see "Empty Section" in the ".section-progress h4" "css_element"
 
   @progression_completion
   Scenario: Progression updates correctly when activity is completed

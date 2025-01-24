@@ -1,8 +1,8 @@
 @format @format_ludimoodle @javascript @_file_upload @ludimoodle_badge
-Feature: Badge game element section attribution in Ludimoodle course format
-  In order to motivate students with badges in specific sections
+Feature: Badge game element configuration and validation by section in Ludimoodle
+  In order to create engaging learning course with gamification elements
   As a teacher
-  I need to configure badge element for a section and verify it works with different activities in that section
+  I need to configure badge elements per section and verify their behavior across different activity types and completion scenarios
 
   Background:
     Given the following "users" exist:
@@ -35,6 +35,39 @@ Feature: Badge game element section attribution in Ludimoodle course format
       | forum | Badge No Gamification | Test badge without gamification | L1 | badge4 | 1 | 0 | 0 | 0 | | | | | |
     And I log out
 
+  @score_section_display_homepage
+  Scenario: Verify badge sections visualization and titles on course homepage before visiting sections
+    Given I log in as "teacher1"
+    And I am on "Ludimoodle Badge" course homepage
+    And I turn editing mode on
+    And I edit the section "2" and I fill the form with:
+      | name | No Game Section |
+    And I am on "Ludimoodle Badge" course homepage
+    And I edit the section "3" and I fill the form with:
+      | name | Empty Section |
+    And I turn editing mode off
+    And I am on "Ludimoodle Badge" course homepage
+    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    And I set the field "Settings" to "Allocation of game elements by section"
+    And I set the field "Badge Section" to "Badge"
+    And I set the field "No Game Section" to "No gamified"
+    And I set the field "Empty Section" to "Badge"
+    And I press "Save"
+    Then I should see "The changes made have been applied"
+    And I log out
+
+    # State verification
+    Given I log in as "student1"
+    And I am on "Ludimoodle Badge" course homepage
+    Then I should see "General" in the ".col-6:nth-child(1) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(1)" "css_element"
+    And I should see "Badge Section" in the ".col-6:nth-child(2) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(2)" "css_element"
+    And I should see "No Game Section" in the ".col-6:nth-child(3) .sectionname" "css_element"
+    And "img[src*='none.svg']" "css_element" should exist in the ".col-6:nth-child(3)" "css_element"
+    And I should see "Empty Section" in the ".col-6:nth-child(4) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(4)" "css_element"
+
   @badge_section_display
   Scenario: Verify badge elements appear only in configured section
     Given I log in as "teacher1"
@@ -42,6 +75,9 @@ Feature: Badge game element section attribution in Ludimoodle course format
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
+    And I am on "Ludimoodle Badge" course homepage
+    And I edit the section "3" and I fill the form with:
+      | name | Empty Section |
     And I turn editing mode off
     And I am on "Ludimoodle Badge" course homepage
     And the following "activities" exist:
@@ -54,6 +90,7 @@ Feature: Badge game element section attribution in Ludimoodle course format
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I set the field "No Game Section" to "No gamified"
+    And I set the field "Empty Section" to "Badge"
     And I press "Save"
     Then I should see "The changes made have been applied"
     And I log out
@@ -84,9 +121,8 @@ Feature: Badge game element section attribution in Ludimoodle course format
     And I should see "Badge No Gamification" in the ".col-sm-4:nth-child(4) .cmname" "css_element"
     # Check display for non-gamified section
     When I am on "Ludimoodle Badge" course homepage
-    When I click on "No Game Section" "link" in the "region-main" "region"
+    And I click on "No Game Section" "link" in the "region-main" "region"
     Then I should see "No Game Section" in the ".section-nogamified h4" "css_element"
-    # Check non-gamified activities
     And I should see "Regular Note Only" in the ".col-sm-4:nth-child(1) .cmname" "css_element"
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(1) .cm-nogamified" "css_element"
     And I should see "Regular Completion Only" in the ".col-sm-4:nth-child(2) .cmname" "css_element"
@@ -95,6 +131,10 @@ Feature: Badge game element section attribution in Ludimoodle course format
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(3) .cm-nogamified" "css_element"
     And I should see "Regular Forum" in the ".col-sm-4:nth-child(4) .cmname" "css_element"
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(4) .cm-nogamified" "css_element"
+    # Check empty section
+    When I am on "Ludimoodle Badge" course homepage
+    And I click on "Empty Section" "link" in the "region-main" "region"
+    Then I should see "Empty Section" in the ".section-badge h4" "css_element"
 
   @badge_completion
   Scenario: Badge updates correctly when activity is completed
@@ -234,10 +274,6 @@ Feature: Badge game element section attribution in Ludimoodle course format
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
       | Test questions   | truefalse | Second question| This is the second question| False   | 50    |
-    And quiz "Badge Both" contains the following questions:
-      | question       | page | maxmark |
-      | First question | 1    | 50      |
-      | Second question| 1    | 50      |
     And quiz "Badge Both" contains the following questions:
       | question       | page | maxmark |
       | First question | 1    | 50      |

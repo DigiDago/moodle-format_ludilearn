@@ -35,13 +35,60 @@ Feature: Score game element section attribution in Ludimoodle course format
       | forum | Score No Gamification | Test score without gamification | L1 | score4 | 1 | 0 | 0 | 0 | | | | | |
     And I log out
 
-  @score_section_display
-  Scenario: Verify score elements appear only in configured section
+  @score_section_display_homepage
+  Scenario: Verify score sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
     And I am on "Ludimoodle Score" course homepage
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
+    And I am on "Ludimoodle Score" course homepage
+    And I edit the section "3" and I fill the form with:
+      | name | Empty Section |
+    And I turn editing mode off
+    And I am on "Ludimoodle Score" course homepage
+    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    And I set the field "Settings" to "Allocation of game elements by section"
+    And I set the field "Score Section" to "Score"
+    And I set the field "No Game Section" to "No gamified"
+    And I set the field "Empty Section" to "Score"
+    And I press "Save"
+    Then I should see "The changes made have been applied"
+    And I log out
+
+    # State verification
+    Given I log in as "student1"
+    And I am on "Ludimoodle Score" course homepage
+    Then I should see "General" in the ".col-6:nth-child(1) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(1)" "css_element"
+    And I should see "Score Section" in the ".col-6:nth-child(2) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(2)" "css_element"
+    And I should see "No Game Section" in the ".col-6:nth-child(3) .sectionname" "css_element"
+    And "img[src*='none.svg']" "css_element" should exist in the ".col-6:nth-child(3)" "css_element"
+    And I should see "Empty Section" in the ".col-6:nth-child(4) .sectionname" "css_element"
+    And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(4)" "css_element"
+
+  @score_section_display
+  Scenario: Verify score elements for activities and resources appear only in configured section
+    Given I log in as "teacher1"
+    And the following "question categories" exist:
+      | contextlevel | reference | name           |
+      | Course       | L1        | Test questions |
+    And the following "questions" exist:
+      | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
+      | Test questions   | truefalse | First question | This is the first question| True     | 50    |
+      | Test questions   | truefalse | Second question| This is the second question| False   | 50    |
+    And quiz "Score Both" contains the following questions:
+      | question       | page | maxmark |
+      | First question | 1    | 50      |
+      | Second question| 1    | 50      |
+    And I am on "Ludimoodle Score" course homepage
+    And I turn editing mode on
+    And I edit the section "2" and I fill the form with:
+      | name | No Game Section |
+    And I am on "Ludimoodle Score" course homepage
+    And I edit the section "3" and I fill the form with:
+      | name | Empty Section |
     And I turn editing mode off
     And I am on "Ludimoodle Score" course homepage
     And the following "activities" exist:
@@ -54,6 +101,7 @@ Feature: Score game element section attribution in Ludimoodle course format
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I set the field "No Game Section" to "No gamified"
+    And I set the field "Empty Section" to "Score"
     And I press "Save"
     Then I should see "The changes made have been applied"
     And I log out
@@ -88,13 +136,12 @@ Feature: Score game element section attribution in Ludimoodle course format
 
     # Score No Gamification
     And "img.ludimoodle-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(4) .cm-score" "css_element"
-    And I should see "Score No Gamificatio" in the ".col-8 .row div:nth-child(4) .cm-score .cmname" "css_element"
+    And I should see "Score No Gamification" in the ".col-8 .row div:nth-child(4) .cm-score .cmname" "css_element"
 
-    # Checking the display for the section without gamification
+    # Check display for non-gamified section
     When I am on "Ludimoodle Score" course homepage
-    Then "//img[contains(@src, '/course/format/ludimoodle/pix/school/score/chest.svg')]" "xpath_element" should exist
-    When I click on "No Game Section" "link" in the "region-main" "region"
-    Then I should see "No Game Section" in the "div.section-nogamified h4" "css_element"
+    And I click on "No Game Section" "link" in the "region-main" "region"
+    And I should see "No Game Section" in the "div.section-nogamified h4" "css_element"
     And I should see "Regular Note Only" in the ".col-8 .row div:nth-child(1) .cm-nogamified .cmname" "css_element"
     And "img.ludimoodle-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(1)" "css_element"
     And I should see "Regular Completion Only" in the ".col-8 .row div:nth-child(2) .cm-nogamified .cmname" "css_element"
@@ -103,6 +150,11 @@ Feature: Score game element section attribution in Ludimoodle course format
     And "img.ludimoodle-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(3)" "css_element"
     And I should see "Regular Forum" in the ".col-8 .row div:nth-child(4) .cm-nogamified .cmname" "css_element"
     And "img.ludimoodle-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(4)" "css_element"
+
+    # Check empty section
+    And I am on "Ludimoodle Score" course homepage
+    When I click on "Empty Section" "link" in the "region-main" "region"
+    Then I should see "Empty Section" in the ".section-score h4" "css_element"
 
   @score_section_update @score_grade
   Scenario: Score updates correctly when student receives grade
