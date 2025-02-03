@@ -22,93 +22,93 @@
 }}
 
 <div class="course-badge">
-    <a href="{{ url }}" class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
-    <div class="row m-2 block_section">
-        {{#parameters.lastaccess}}
-            {{#parameters.gamified}}
-            <div class="col-9 rightdottedscore">
-                <div class="row mr-1">
-                    <div class="col-4 mt-0 p-0 ">
-                        <div class="text-center mb-1 badge-number
-                            {{#parameters.bronzecount }} badge-number-bronze spinning {{/parameters.bronzecount}}">
-                            {{ parameters.bronzecount }}
+    <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
+        <div class="row m-2 block_section">
+            {{#parameters.lastaccess}}
+                {{#parameters.gamified}}
+                <div class="col-9 rightdottedscore">
+                    <div class="row mr-1">
+                        <div class="col-4 mt-0 p-0 ">
+                            <div class="text-center mb-1 badge-number
+                                {{#parameters.bronzecount }} badge-number-bronze spinning {{/parameters.bronzecount}}">
+                                {{ parameters.bronzecount }}
+                            </div>
+                            <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                                {{#parameters.bronzecount }}
+                                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze.svg"
+                                {{/parameters.bronzecount}}
+                                {{^parameters.bronzecount }}
+                                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze_none.svg"
+                                {{/parameters.bronzecount }}
+                                 alt="Image badge">
                         </div>
-                        <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                            {{#parameters.bronzecount }}
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze.svg"
-                            {{/parameters.bronzecount}}
-                            {{^parameters.bronzecount }}
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze_none.svg"
-                            {{/parameters.bronzecount }}
-                             alt="Image badge">
-                    </div>
-                    <div class="col-4 mt-0 p-0">
-                        <div class="text-center mb-1 badge-number
-                            {{#parameters.silvercount }} badge-number-silver spinning {{/parameters.silvercount}}">
-                            {{ parameters.silvercount }}
+                        <div class="col-4 mt-0 p-0">
+                            <div class="text-center mb-1 badge-number
+                                {{#parameters.silvercount }} badge-number-silver spinning {{/parameters.silvercount}}">
+                                {{ parameters.silvercount }}
+                            </div>
+                            <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                                {{#parameters.silvercount }}
+                                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver.svg"
+                                {{/parameters.silvercount}}
+                                {{^parameters.silvercount }}
+                                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver_none.svg"
+                                {{/parameters.silvercount }}
+                                 alt="Image badge">
                         </div>
-                        <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                            {{#parameters.silvercount }}
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver.svg"
-                            {{/parameters.silvercount}}
-                            {{^parameters.silvercount }}
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver_none.svg"
-                            {{/parameters.silvercount }}
-                             alt="Image badge">
-                    </div>
-                    <div class="col-4 mt-0 p-0">
-                        <div class="text-center mb-1 badge-number
-                            {{#parameters.goldcount }} badge-number-gold spinning {{/parameters.goldcount}}">
-                            {{ parameters.goldcount }}
+                        <div class="col-4 mt-0 p-0">
+                            <div class="text-center mb-1 badge-number
+                                {{#parameters.goldcount }} badge-number-gold spinning {{/parameters.goldcount}}">
+                                {{ parameters.goldcount }}
+                            </div>
+                            <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                                {{#parameters.goldcount }}
+                                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold.svg"
+                                {{/parameters.goldcount}}
+                                {{^parameters.goldcount }}
+                                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold_none.svg"
+                                {{/parameters.goldcount }}
+                                 alt="Image badge">
                         </div>
-                        <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                            {{#parameters.goldcount }}
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold.svg"
-                            {{/parameters.goldcount}}
-                            {{^parameters.goldcount }}
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold_none.svg"
-                            {{/parameters.goldcount }}
-                             alt="Image badge">
                     </div>
                 </div>
-            </div>
-            <div class="col-3" >
-                <div class="text-center mb-1 badge-number
-                            {{#parameters.completioncount }} badge-number-bronze spinning {{/parameters.completioncount}}">
-                    {{ parameters.bronzecount }}
+                <div class="col-3" >
+                    <div class="text-center mb-1 badge-number
+                                {{#parameters.completioncount }} badge-number-bronze spinning {{/parameters.completioncount}}">
+                        {{ parameters.bronzecount }}
+                    </div>
+                    <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                        {{#parameters.completioncount }}
+                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion.svg"
+                        {{/parameters.completioncount}}
+                        {{^parameters.completioncount }}
+                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion_none.svg"
+                        {{/parameters.completioncount }}
+                         alt="Image badge">
                 </div>
-                <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                    {{#parameters.completioncount }}
-                     src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion.svg"
-                    {{/parameters.completioncount}}
-                    {{^parameters.completioncount }}
-                     src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion_none.svg"
-                    {{/parameters.completioncount }}
-                     alt="Image badge">
-            </div>
-            {{/parameters.gamified}}
-            {{^parameters.gamified}}
-            <div class="col-12">
-                <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no gamified">
-            </div>
-            {{/parameters.gamified}}
-        {{/parameters.lastaccess}}
-        {{^parameters.lastaccess}}
-            <div class="col-12">
-                <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/unkown.svg" alt="Image not viewed">
-            </div>
-        {{/parameters.lastaccess}}
-    </div>
-    <p class="text-center scoretext">
-        <span class="sectionname">{{ name }}</span>
-    </p>
-    {{#parameters.restricted }}
-        <div class="sectionrestrictedinfo small text-center"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
-    {{/parameters.restricted }}
-    {{^visible}}
-        <div class="section-hidden text-center">
-            <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
+                {{/parameters.gamified}}
+                {{^parameters.gamified}}
+                <div class="col-12">
+                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no gamified">
+                </div>
+                {{/parameters.gamified}}
+            {{/parameters.lastaccess}}
+            {{^parameters.lastaccess}}
+                <div class="col-12">
+                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/unkown.svg" alt="Image not viewed">
+                </div>
+            {{/parameters.lastaccess}}
         </div>
-    {{/visible}}
-    </a>
+        <p class="text-center scoretext">
+            <span class="sectionname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
+        </p>
+        {{#parameters.restricted }}
+            <div class="sectionrestrictedinfo small text-center"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
+        {{/parameters.restricted }}
+        {{^visible}}
+            <div class="section-hidden text-center">
+                <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
+            </div>
+        {{/visible}}
+    </div>
 </div>

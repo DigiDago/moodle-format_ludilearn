@@ -43,15 +43,15 @@
                     {{^label}}
                         <div class="col-6 col-sm-4 col-md-4 col-lg-4">
                             <div class="cm-nogamified">
-                                <a href="{{ url }}" class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
+                                <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                                     <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
                                     <p class="text-center scoretext">
-                                        <span class="cmname">{{ name }}</span>
+                                        <span class="cmname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
                                     </p>
                                     {{#parameters.restricted }}
                                         <div class="cmrestrictedinfo text-center small"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
                                     {{/parameters.restricted }}
-                                </a>
+                                </div>
                             </div>
                         </div>
                     {{/label}}
