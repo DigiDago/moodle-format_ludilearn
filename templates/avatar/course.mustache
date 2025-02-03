@@ -24,7 +24,7 @@
 <div class="course-avatar">
     <div class="row">
         <div class="col-12">
-            <a href="{{ url }}" class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
+            <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                 <div class="row">
                     {{#parameters.gamified}}
                     <div class="{{#parameters.lastaccess}}col-6{{/parameters.lastaccess}}
@@ -116,7 +116,7 @@
                     {{/parameters.lastaccess}}
                 </div>
                 <p class="text-center">
-                    <span class="sectionname">{{ name }}</span>
+                    <span class="sectionname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
                 </p>
                 {{#parameters.restricted }}
                     <div class="sectionrestrictedinfo small text-center"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
@@ -126,7 +126,7 @@
                         <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
                     </div>
                 {{/visible}}
-            </a>
+            </div>
         </div>
     </div>
 </div>

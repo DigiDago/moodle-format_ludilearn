@@ -24,7 +24,7 @@
 <div class="course-timer">
     <div class="row">
         <div class="col-12">
-            <a href="{{ url }}" class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
+            <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                 {{#parameters.lastaccess}}
                     {{#parameters.gamified}}
                     <img class="ludimoodle-img img-responsive d-block mx-auto"
@@ -44,7 +44,7 @@
                     <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/unkown.svg" alt="Image not viewed">
                 {{/parameters.lastaccess}}
                 <p class="text-center">
-                    <span class="sectionname">{{ name }}</span>
+                    <span class="sectionname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
                 </p>
                 {{#parameters.restricted }}
                     <div class="sectionrestrictedinfo small text-center"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
@@ -54,7 +54,7 @@
                         <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
                     </div>
                 {{/visible}}
-            </a>
+            </div>
         </div>
     </div>
 </div>

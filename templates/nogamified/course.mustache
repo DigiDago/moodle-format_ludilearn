@@ -24,10 +24,10 @@
 <div class="course-nogamified">
     <div class="row">
         <div class="col-12">
-            <a href="{{ url }}" class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
+            <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                 <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
                 <p class="text-center scoretext">
-                    <span class="sectionname">{{ name }}</span>
+                    <span class="sectionname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
                 </p>
                 {{#parameters.restricted }}
                     <div class="sectionrestrictedinfo small text-center"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
@@ -37,7 +37,7 @@
                         <span class="badge badge-info">{{#str}} hiddenfromstudents {{/str}}</span>
                     </div>
                 {{/visible}}
-            </a>
+            </div>
         </div>
     </div>
 </div>

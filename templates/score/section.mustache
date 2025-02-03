@@ -53,7 +53,7 @@
                     {{^label}}
                         <div class="col-6 col-sm-4 col-md-4 col-lg-4">
                             <div class="cm-score">
-                                <a href="{{ url }}" class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
+                                <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                                     {{#parameters.gamified}}
                                         <img class="ludimoodle-img {{#parameters.restricted }}restricted{{/parameters.restricted }} img-responsive mb-1 d-block mx-auto"
                                              src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/score/bag.svg" alt="Image score chest">
@@ -71,12 +71,12 @@
                                         {{#parameters.gamified}}
                                             {{^parameters.noscore}}<span class="playerscore">{{ parameters.score }}</span> / {{ parameters.maxscore }} pts {{/parameters.noscore}}<br>
                                         {{/parameters.gamified}}
-                                        <span class="cmname">{{ name }}</span>
+                                        <span class="cmname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
                                     </p>
                                     {{#parameters.restricted }}
                                         <div class="cmrestrictedinfo text-center small"><i class="fa fa-lock"></i> {{{ parameters.restrictedinfo }}}</div>
                                     {{/parameters.restricted }}
-                                </a>
+                                </div>
                             </div>
                         </div>
                     {{/label}}
