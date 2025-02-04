@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\external;
+namespace format_ludilearn\external;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -27,15 +27,15 @@ use external_api;
 use external_function_parameters;
 use external_single_structure;
 use external_value;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\manager;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\manager;
 use stdClass;
 
 /**
  * Class for get report.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -85,7 +85,7 @@ class get_report extends external_api {
             $firstgameelement = reset($gameelements);
             $user->gameelement = 'N/A';
             if ($firstgameelement) {
-                $user->gameelement = get_string($firstgameelement->get_type(), 'format_ludimoodle');
+                $user->gameelement = get_string($firstgameelement->get_type(), 'format_ludilearn');
             }
             $user->progression = \core_completion\progress::get_course_progress_percentage($course, $user->id);
             if ($user->progression) {

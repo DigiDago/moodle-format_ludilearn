@@ -1,5 +1,5 @@
-@format @format_ludimoodle @ludimoodle_label @javascript
-Feature: Sections labels displays in Ludimoodle format
+@format @format_ludilearn @ludilearn_label @javascript
+Feature: Sections labels displays in Ludilearn format
   In order to present course content clearly
   As a teacher
   I need to be able to add and view labels
@@ -11,7 +11,7 @@ Feature: Sections labels displays in Ludimoodle format
       | student1 | Student   | 1        | student1@example.com |
     And the following "courses" exist:
       | fullname           | shortname | format     | numsections |
-      | Ludimoodle section | L1        | ludimoodle | 3          |
+      | Ludilearn section | L1        | ludilearn | 3          |
     And the following "course enrolments" exist:
       | user     | course | role           |
       | teacher1 | L1     | editingteacher |
@@ -21,23 +21,23 @@ Feature: Sections labels displays in Ludimoodle format
       | label    | Label 1 | First section label | L1     | 1       | label1   |
       | label    | Label 2 | Second section label| L1     | 2       | label2   |
 
-  @ludimoodle_label_display
+  @ludilearn_label_display
   Scenario: Teacher and student can view section labels
     # Check teacher view
     Given I log in as "teacher1"
-    And I am on "Ludimoodle section" course homepage with editing mode off
+    And I am on "Ludilearn section" course homepage with editing mode off
     When I click on "Section 1" "link" in the "region-main" "region"
     Then I should see "First section label" in the ".row .col-12 .cm-score:first-child" "css_element"
-    And I am on "Ludimoodle section" course homepage
+    And I am on "Ludilearn section" course homepage
     And I click on "Section 2" "link" in the "region-main" "region"
     And I should see "Second section label" in the ".row .col-12 .cm-score:first-child" "css_element"
 
     # Check student view
     When I log out
     And I log in as "student1"
-    And I am on "Ludimoodle section" course homepage
+    And I am on "Ludilearn section" course homepage
     And I click on "Section 1" "link" in the "region-main" "region"
     Then I should see "First section label" in the ".row .col-12 .cm-score:first-child" "css_element"
-    And I am on "Ludimoodle section" course homepage
+    And I am on "Ludilearn section" course homepage
     And I click on "Section 2" "link" in the "region-main" "region"
     And I should see "Second section label" in the ".row .col-12 .cm-score:first-child" "css_element"

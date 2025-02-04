@@ -17,12 +17,12 @@
 /**
  * Contains the default section controls output class.
  *
- * @package   format_ludimoodle
+ * @package   format_ludilearn
  * @copyright 2020 Ferran Recio <ferran@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace format_ludimoodle\output\courseformat\content;
+namespace format_ludilearn\output\courseformat\content;
 
 use core_courseformat\base as course_format;
 use core_courseformat\output\local\content\section as section_base;
@@ -32,8 +32,8 @@ use stdClass;
 /**
  * Base class to render a course section.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

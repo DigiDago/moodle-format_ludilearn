@@ -17,13 +17,13 @@
 /**
  * Contains the default content output class.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace format_ludimoodle\output\courseformat;
+namespace format_ludilearn\output\courseformat;
 
 use core_courseformat\output\local\content as content_base;
 use renderer_base;
@@ -32,15 +32,15 @@ use stdClass;
 /**
  * Base class to render a course content.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class content extends content_base {
 
     /**
-     * @var bool Ludimoodle format has add section after each topic.
+     * @var bool Ludilearn format has add section after each topic.
      *
      * The responsible for the buttons is core_courseformat\output\local\content\section.
      */
@@ -55,8 +55,8 @@ class content extends content_base {
      */
     public function export_for_template(renderer_base $output) {
         global $PAGE;
-        $PAGE->requires->js_call_amd('format_ludimoodle/mutations', 'init');
-        $PAGE->requires->js_call_amd('format_ludimoodle/cm', 'init');
+        $PAGE->requires->js_call_amd('format_ludilearn/mutations', 'init');
+        $PAGE->requires->js_call_amd('format_ludilearn/cm', 'init');
         return parent::export_for_template($output);
     }
 }

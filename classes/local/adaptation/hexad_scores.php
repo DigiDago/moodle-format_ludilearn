@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\local\adaptation;
+namespace format_ludilearn\local\adaptation;
 
 use Exception;
 
 /**
  * Hexad scores class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui, Nihal Ouherrou
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -110,7 +110,7 @@ class hexad_scores {
             $questionidsstring = implode(',', $questionids);
 
             $query = "SELECT questionid, score
-                FROM {format_ludimoodle_answers}
+                FROM {format_ludilearn_answers}
                 WHERE userid = :userid
                 AND questionid IN ($questionidsstring)";
             $params = ['userid' => $userid];

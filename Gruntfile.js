@@ -15,8 +15,8 @@
 /**
  * Grunt for compile scss file.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

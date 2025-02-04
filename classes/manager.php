@@ -14,18 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle;
+namespace format_ludilearn;
 
 use backup;
 use context_course;
-use format_ludimoodle\local\gameelements\avatar;
-use format_ludimoodle\local\gameelements\badge;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\local\gameelements\nogamified;
-use format_ludimoodle\local\gameelements\progress;
-use format_ludimoodle\local\gameelements\ranking;
-use format_ludimoodle\local\gameelements\score;
-use format_ludimoodle\local\gameelements\timer;
+use format_ludilearn\local\gameelements\avatar;
+use format_ludilearn\local\gameelements\badge;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\local\gameelements\nogamified;
+use format_ludilearn\local\gameelements\progress;
+use format_ludilearn\local\gameelements\ranking;
+use format_ludilearn\local\gameelements\score;
+use format_ludilearn\local\gameelements\timer;
 use question_engine;
 use stdClass;
 
@@ -36,10 +36,10 @@ require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 
 /**
- * Format Ludimoodle's manager class.
+ * Format Ludilearn's manager class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -58,7 +58,7 @@ class manager {
         global $DB;
 
         $gameelementsid = [];
-        $gameelementsreq = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid, 'sectionid' => $sectionid]);
+        $gameelementsreq = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid, 'sectionid' => $sectionid]);
         foreach ($gameelementsreq as $gameelementreq) {
             $gameelementsid[] = $gameelementreq->id;
         }
@@ -78,8 +78,8 @@ class manager {
     public function has_attribution(int $courseid, int $userid): bool {
         global $DB;
 
-        $sql = "SELECT COUNT(*) FROM {format_ludimoodle_attributio} a
-                JOIN {format_ludimoodle_elements} ge ON ge.id = a.gameelementid
+        $sql = "SELECT COUNT(*) FROM {format_ludilearn_attributio} a
+                JOIN {format_ludilearn_elements} ge ON ge.id = a.gameelementid
                 WHERE ge.courseid = :courseid AND a.userid = :userid";
         $attributions = $DB->count_records_sql($sql, ['courseid' => $courseid, 'userid' => $userid]);
         return $attributions > 0;
@@ -97,10 +97,10 @@ class manager {
     public function check_attribution_course(int $courseid, int $userid, string $type) {
         global $DB;
 
-        $gameelements = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid, 'type' => $type]);
+        $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid, 'type' => $type]);
         foreach ($gameelements as $gameelement) {
             // Check attribution.
-            $attribution = $DB->get_record('format_ludimoodle_attributio',
+            $attribution = $DB->get_record('format_ludilearn_attributio',
                 ['gameelementid' => $gameelement->id, 'userid' => $userid]);
             if (!$attribution) {
                 $this->attribution_game_element($gameelement->id, $userid);
@@ -121,23 +121,23 @@ class manager {
     public function attribution_game_element(int $gameelementid, int $userid, bool $force = false): int {
         global $DB;
 
-        $gameelement = $DB->get_record('format_ludimoodle_elements', ['id' => $gameelementid]);
-        $attribution = $DB->get_record('format_ludimoodle_attributio', ['gameelementid' => $gameelementid, 'userid' => $userid]);
-        $req = 'SELECT * FROM {format_ludimoodle_elements} WHERE courseid = :courseid AND sectionid = :sectionid AND type != :type';
+        $gameelement = $DB->get_record('format_ludilearn_elements', ['id' => $gameelementid]);
+        $attribution = $DB->get_record('format_ludilearn_attributio', ['gameelementid' => $gameelementid, 'userid' => $userid]);
+        $req = 'SELECT * FROM {format_ludilearn_elements} WHERE courseid = :courseid AND sectionid = :sectionid AND type != :type';
         $gameelementtodeletes = $DB->get_records_sql($req,
             ['courseid' => $gameelement->courseid, 'sectionid' => $gameelement->sectionid, 'type' => $gameelement->type]);
         foreach ($gameelementtodeletes as $gameelementtodelete) {
-            $DB->delete_records('format_ludimoodle_attributio', ['gameelementid' => $gameelementtodelete->id, 'userid' => $userid]);
+            $DB->delete_records('format_ludilearn_attributio', ['gameelementid' => $gameelementtodelete->id, 'userid' => $userid]);
         }
         if ($attribution) {
             if ($force) {
-                $DB->delete_records('format_ludimoodle_attributio', ['gameelementid' => $gameelementid, 'userid' => $userid]);
+                $DB->delete_records('format_ludilearn_attributio', ['gameelementid' => $gameelementid, 'userid' => $userid]);
                 return $this->attribution_game_element($gameelementid, $userid, false);
             }
 
             return $attribution->id;
         } else {
-            return $DB->insert_record('format_ludimoodle_attributio', ['gameelementid' => $gameelementid,
+            return $DB->insert_record('format_ludilearn_attributio', ['gameelementid' => $gameelementid,
                 'userid' => $userid,
                 'timecreated' => time()]);
         }
@@ -179,18 +179,18 @@ class manager {
         global $DB;
 
         // Update the attribution of the game element.
-        $bysection = $DB->get_record('format_ludimoodle_bysection', ['courseid' => $courseid, 'sectionid' => $sectionid]);
+        $bysection = $DB->get_record('format_ludilearn_bysection', ['courseid' => $courseid, 'sectionid' => $sectionid]);
         if ($bysection) {
             if ($bysection->gameelementid != $gameelementid) {
                 $bysection->gameelementid = $gameelementid;
-                $DB->update_record('format_ludimoodle_bysection', $bysection);
+                $DB->update_record('format_ludilearn_bysection', $bysection);
             }
         } else {
             $bysection = new stdClass();
             $bysection->courseid = $courseid;
             $bysection->sectionid = $sectionid;
             $bysection->gameelementid = $gameelementid;
-            $id = $DB->insert_record('format_ludimoodle_bysection',
+            $id = $DB->insert_record('format_ludilearn_bysection',
                 ['courseid' => $courseid, 'sectionid' => $sectionid, 'gameelementid' => $gameelementid]);
             $bysection->id = $id;
         }
@@ -215,14 +215,14 @@ class manager {
                             WHERE format = :format AND name = :name
                             AND ' . $DB->sql_compare_text("value") . ' = ' . $DB->sql_compare_text(":value");
             $courses = $DB->get_records_sql($sqlcourses,
-                ['format' => 'ludimoodle', 'name' => 'assignment', 'value' => 'automatic']);
+                ['format' => 'ludilearn', 'name' => 'assignment', 'value' => 'automatic']);
             foreach ($courses as $course) {
-                $gameelems = $DB->get_records('format_ludimoodle_elements',
+                $gameelems = $DB->get_records('format_ludilearn_elements',
                     ['courseid' => $course->courseid, 'type' => $type]);
                 $gameelements = array_merge($gameelements, $gameelems);
             }
         } else {
-            $gameelems = $DB->get_records('format_ludimoodle_elements',
+            $gameelems = $DB->get_records('format_ludilearn_elements',
                 ['courseid' => $courseid, 'type' => $type]);
             $gameelements = $gameelems;
         }
@@ -245,18 +245,18 @@ class manager {
         $params = new stdClass();
         $params->id = $gameelementid;
         $params->type = $type;
-        $DB->update_record('format_ludimoodle_elements', $params);
+        $DB->update_record('format_ludilearn_elements', $params);
 
-        $gameelement = $DB->get_record('format_ludimoodle_elements', ['id' => $gameelementid]);
+        $gameelement = $DB->get_record('format_ludilearn_elements', ['id' => $gameelementid]);
 
         // Get the default parameters of the game element.
         $parameters = $this->get_parameters_default($type, $gameelement->courseid);
 
         // Create parameters if not exist.
         foreach ($parameters as $name => $value) {
-            $exist = $DB->record_exists('format_ludimoodle_params', ['gameelementid' => $gameelementid, 'name' => $name]);
+            $exist = $DB->record_exists('format_ludilearn_params', ['gameelementid' => $gameelementid, 'name' => $name]);
             if (!$exist) {
-                $DB->insert_record('format_ludimoodle_params',
+                $DB->insert_record('format_ludilearn_params',
                     ['gameelementid' => $gameelementid, 'name' => $name, 'value' => $value]);
             }
         }
@@ -268,10 +268,10 @@ class manager {
             $cmparameters = game_element::get_cm_parameters_default_by_type($type, $modetype);
             foreach ($cmparameters as $name => $value) {
 
-                $exist = $DB->record_exists('format_ludimoodle_cm_params',
+                $exist = $DB->record_exists('format_ludilearn_cm_params',
                     ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name]);
                 if (!$exist) {
-                    $DB->insert_record('format_ludimoodle_cm_params',
+                    $DB->insert_record('format_ludilearn_cm_params',
                         ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]);
                 }
             }
@@ -291,7 +291,7 @@ class manager {
      */
     public function update_cm_parameter(int $gameelementid, int $cmid, string $name, string $value): bool {
         global $DB;
-        return $DB->set_field('format_ludimoodle_cm_params', 'value', $value,
+        return $DB->set_field('format_ludilearn_cm_params', 'value', $value,
             ['gameelementid' => $gameelementid, 'cmid' => $cmid, 'name' => $name]);
     }
 
@@ -308,8 +308,8 @@ class manager {
     public function get_global_type_game_element(int $courseid, int $userid): string {
         global $DB;
         $sql = "SELECT ge.id, ge.type
-                FROM {format_ludimoodle_elements} ge
-                JOIN {format_ludimoodle_attributio} a ON a.gameelementid = ge.id
+                FROM {format_ludilearn_elements} ge
+                JOIN {format_ludilearn_attributio} a ON a.gameelementid = ge.id
                 WHERE ge.courseid = :courseid AND a.userid = :userid
                 LIMIT 1";
         $gameelementres = $DB->get_record_sql($sql, ['courseid' => $courseid, 'userid' => $userid]);
@@ -332,11 +332,11 @@ class manager {
      */
     public function remove_game_element(int $gameelementid): void {
         global $DB;
-        $DB->delete_records('format_ludimoodle_elements', ['id' => $gameelementid]);
-        $DB->delete_records('format_ludimoodle_params', ['gameelementid' => $gameelementid]);
-        $DB->delete_records('format_ludimoodle_cm_params', ['gameelementid' => $gameelementid]);
-        $DB->delete_records('format_ludimoodle_attributio', ['gameelementid' => $gameelementid]);
-        $DB->delete_records('format_ludimoodle_bysection', ['gameelementid' => $gameelementid]);
+        $DB->delete_records('format_ludilearn_elements', ['id' => $gameelementid]);
+        $DB->delete_records('format_ludilearn_params', ['gameelementid' => $gameelementid]);
+        $DB->delete_records('format_ludilearn_cm_params', ['gameelementid' => $gameelementid]);
+        $DB->delete_records('format_ludilearn_attributio', ['gameelementid' => $gameelementid]);
+        $DB->delete_records('format_ludilearn_bysection', ['gameelementid' => $gameelementid]);
     }
 
     /**
@@ -348,7 +348,7 @@ class manager {
      */
     public function remove_game_element_by_section(int $sectionid): void {
         global $DB;
-        $gameelementid = $DB->get_field('format_ludimoodle_elements', 'id', ['sectionid' => $sectionid]);
+        $gameelementid = $DB->get_field('format_ludilearn_elements', 'id', ['sectionid' => $sectionid]);
         if ($gameelementid) {
             $this->remove_game_element($gameelementid);
         }
@@ -364,7 +364,7 @@ class manager {
      */
     public function remove_game_element_by_course(int $courseid): void {
         global $DB;
-        $gameelements = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid], '', 'id');
+        $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid], '', 'id');
         if ($gameelements) {
             foreach ($gameelements as $gameelement) {
                 $this->remove_game_element($gameelement->id);
@@ -429,17 +429,17 @@ class manager {
      */
     public function update_cm_user(int $gameelementid, int $cmid, int $userid, string $name, string $value): bool {
         global $DB;
-        $attributionid = $DB->get_field('format_ludimoodle_attributio', 'id',
+        $attributionid = $DB->get_field('format_ludilearn_attributio', 'id',
             ['gameelementid' => $gameelementid, 'userid' => $userid]);
-        $exists = $DB->record_exists('format_ludimoodle_cm_user',
+        $exists = $DB->record_exists('format_ludilearn_cm_user',
             ['attributionid' => $attributionid, 'name' => $name]);
 
         // Update the value of the parameter if it exists, otherwise insert a new record.
         if ($exists) {
-            return $DB->set_field('format_ludimoodle_cm_user', 'value', $value,
+            return $DB->set_field('format_ludilearn_cm_user', 'value', $value,
                 ['attributionid' => $attributionid, 'name' => $name]);
         } else {
-            return $DB->insert_record('format_ludimoodle_cm_user',
+            return $DB->insert_record('format_ludilearn_cm_user',
                 ['attributionid' => $attributionid,
                     'name' => $name,
                     'value' => $value]
@@ -460,17 +460,17 @@ class manager {
      */
     public function update_gameelement_user(int $gameelementid, int $userid, string $name, string $value): bool {
         global $DB;
-        $attributionid = $DB->get_field('format_ludimoodle_attributio', 'id',
+        $attributionid = $DB->get_field('format_ludilearn_attributio', 'id',
             ['gameelementid' => $gameelementid, 'userid' => $userid]);
-        $exists = $DB->record_exists('format_ludimoodle_ele_user',
+        $exists = $DB->record_exists('format_ludilearn_ele_user',
             ['attributionid' => $attributionid, 'name' => $name]);
 
         // Update the value of the parameter if it exists, otherwise insert a new record.
         if ($exists) {
-            return $DB->set_field('format_ludimoodle_ele_user', 'value', $value,
+            return $DB->set_field('format_ludilearn_ele_user', 'value', $value,
                 ['attributionid' => $attributionid, 'name' => $name]);
         } else {
-            return $DB->insert_record('format_ludimoodle_ele_user',
+            return $DB->insert_record('format_ludilearn_ele_user',
                 ['attributionid' => $attributionid,
                     'name' => $name,
                     'value' => $value]
@@ -670,15 +670,15 @@ class manager {
     public function get_global_user_game_element(int $userid, $courseid = null): string {
         global $DB;
 
-        $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $userid]);
+        $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $userid]);
         if ($profile) {
             return $profile->type;
         } else {
             if ($courseid) {
                 return $this->get_global_type_game_element($courseid, $userid);
             } else {
-                $req = 'SELECT g.type FROM {format_ludimoodle_elements} g
-                        JOIN {format_ludimoodle_attributio} a ON a.gameelementid = g.id
+                $req = 'SELECT g.type FROM {format_ludilearn_elements} g
+                        JOIN {format_ludilearn_attributio} a ON a.gameelementid = g.id
                         WHERE a.userid = :userid
                         LIMIT 1';
                 $gameelement = $DB->get_record_sql($req, ['userid' => $userid]);
@@ -739,13 +739,13 @@ class manager {
      */
     public function get_postfix(int $rank): string {
         if ($rank == 1) {
-            return get_string('first', 'format_ludimoodle');
+            return get_string('first', 'format_ludilearn');
         } else if ($rank == 2) {
-            return get_string('second', 'format_ludimoodle');
+            return get_string('second', 'format_ludilearn');
         } else if ($rank == 3) {
-            return get_string('third', 'format_ludimoodle');
+            return get_string('third', 'format_ludilearn');
         } else {
-            return get_string('th', 'format_ludimoodle');
+            return get_string('th', 'format_ludilearn');
         }
     }
 
@@ -770,11 +770,11 @@ class manager {
         $sections = $DB->get_records('course_sections', ['course' => $courseid]);
         foreach ($sections as $section) {
             // Get the default game element.
-            $gameelementbydefault = $DB->get_record('format_ludimoodle_elements',
+            $gameelementbydefault = $DB->get_record('format_ludilearn_elements',
                 ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]);
 
             // To verify if attribution by section already exist in case the attribtion is by section.
-            $bysection = $DB->get_record('format_ludimoodle_bysection',
+            $bysection = $DB->get_record('format_ludilearn_bysection',
                 ['courseid' => $courseid, 'sectionid' => $section->id]);
             if (!$bysection && $assignment == 'bysection') {
                 $bysection = $this->update_attribution_by_section($courseid, $section->id, $gameelementbydefault->id);
@@ -787,7 +787,7 @@ class manager {
                     $type = $defaultgameelement;
                 } else if ($assignment == 'automatic') {
                     // Else if assignment is automatic, we attribute the game element to the user based on his profile.
-                    $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $user->id]);
+                    $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $user->id]);
                     if ($profile) {
                         $type = $profile->type;
                     }
@@ -795,7 +795,7 @@ class manager {
                 // Attribution game element.
                 if (isset($type)) {
                     if ($assignment != 'bysection') {
-                        $gameelement = $DB->get_record('format_ludimoodle_elements',
+                        $gameelement = $DB->get_record('format_ludilearn_elements',
                             ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $type]);
                         $this->attribution_game_element($gameelement->id, $user->id);
                     } else {
@@ -828,11 +828,11 @@ class manager {
         foreach ($sections as $section) {
 
             // Get the default game element.
-            $gameelementbydefault = $DB->get_record('format_ludimoodle_elements',
+            $gameelementbydefault = $DB->get_record('format_ludilearn_elements',
                 ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]);
 
             // To verify if attribution by section already exist in case the attribtion is by section.
-            $bysection = $DB->get_record('format_ludimoodle_bysection',
+            $bysection = $DB->get_record('format_ludilearn_bysection',
                 ['courseid' => $courseid, 'sectionid' => $section->id]);
             if (!$bysection && $assignment == 'bysection') {
                 $bysection = $this->update_attribution_by_section($courseid, $section->id, $gameelementbydefault->id);
@@ -843,7 +843,7 @@ class manager {
                 $type = $defaultgameelement;
             } else if ($assignment == 'automatic') {
                 // Else if assignment is automatic, we attribute the game element to the user based on his profile.
-                $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $userid]);
+                $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $userid]);
                 if ($profile) {
                     $type = $profile->type;
                 }
@@ -851,7 +851,7 @@ class manager {
             // Attribution game element.
             if (isset($type)) {
                 if ($assignment != 'bysection') {
-                    $gameelement = $DB->get_record('format_ludimoodle_elements',
+                    $gameelement = $DB->get_record('format_ludilearn_elements',
                         ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $type]);
                     $this->attribution_game_element($gameelement->id, $userid);
                 } else {
@@ -897,10 +897,10 @@ class manager {
         global $DB;
 
         // Get all the game elements of the course.
-        $gameelementrecords = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid]);
+        $gameelementrecords = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid]);
         foreach ($gameelementrecords as $gameelementrecord) {
             // Get all the attributions of the game element.
-            $attributions = $DB->get_records('format_ludimoodle_attributio', ['gameelementid' => $gameelementrecord->id]);
+            $attributions = $DB->get_records('format_ludilearn_attributio', ['gameelementid' => $gameelementrecord->id]);
             foreach ($attributions as $attribution) {
                 // Get the game element of the user.
                 $gameelement = game_element::get_element($courseid, $gameelementrecord->sectionid,

@@ -16,9 +16,9 @@
 /**
  * Settongs.
  *
- * @module      format_ludimoodle/settings
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @module      format_ludilearn/settings
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/str', 'core/modal_factory
         // Set item equiped.
         let set_item_equiped = (slot, theme) => {
             Ajax.call([{
-                methodname: 'format_ludimoodle_set_item_equiped',
+                methodname: 'format_ludilearn_set_item_equiped',
                 args: {
                     courseid: COURSE_ID,
                     slot: slot,
@@ -73,7 +73,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/str', 'core/modal_factory
         // Get inventory.
         let get_inventory = () => {
             Ajax.call([{
-                methodname: 'format_ludimoodle_get_inventory',
+                methodname: 'format_ludilearn_get_inventory',
                 args: {
                     courseid: COURSE_ID,
                     sectionid: SECTION_ID
@@ -98,9 +98,9 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/str', 'core/modal_factory
 
         // Creation of the Modal displaying inventory.
         let createModal = async() => {
-            const bodyContent = await Templates.render('format_ludimoodle/avatar/items', {inventory: INVENTORY});
+            const bodyContent = await Templates.render('format_ludilearn/avatar/items', {inventory: INVENTORY});
             const modal = await ModalFactory.create({
-                title: Str.get_string('inventory', 'format_ludimoodle'),
+                title: Str.get_string('inventory', 'format_ludilearn'),
                 body: bodyContent,
                 footer: '',
             });

@@ -1,5 +1,5 @@
-@format @format_ludimoodle @ludimoodle_subsections @javascript
-Feature: Subsections display in Ludimoodle format
+@format @format_ludilearn @ludilearn_subsections @javascript
+Feature: Subsections display in Ludilearn format
   In order to organize course content hierarchically
   As a teacher
   I need to be able to add and view subsections
@@ -12,7 +12,7 @@ Feature: Subsections display in Ludimoodle format
       | student1 | Student   | 1        | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname | format | numsections | enablecompletion |
-      | Ludimoodle subsections | L1 | ludimoodle | 3 | 1 |
+      | Ludilearn subsections | L1 | ludilearn | 3 | 1 |
     And the following "course enrolments" exist:
       | user     | course | role           |
       | student1 | L1     | student        |
@@ -26,7 +26,7 @@ Feature: Subsections display in Ludimoodle format
 
   Scenario: Student can view subsections correctly
     When I log in as "student1"
-    And I am on "Ludimoodle subsections" course homepage
+    And I am on "Ludilearn subsections" course homepage
     Then I should see "Section 1" in the "region-main" "region"
     And I click on "Section 1" "link" in the "region-main" "region"
     And I should see "Subsection" in the "region-main" "region"

@@ -17,51 +17,51 @@
 /**
  * Code to be executed after the plugin's database scheme has been installed is defined here.
  *
- * @package     format_ludimoodle
+ * @package     format_ludilearn
  * @category    upgrade
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
  * Custom code to be run on installing the plugin.
  *
- * Function xmldb_format_ludimoodle_install
+ * Function xmldb_format_ludilearn_install
  *
  * @return bool
  * @throws coding_exception
  * @throws dml_exception
  */
-function xmldb_format_ludimoodle_install() {
+function xmldb_format_ludilearn_install() {
     global $DB;
     // Insert question data.
     $questions = [];
     $questions[] = ['content' => 'questionnaire:question1',
-        'label' => get_string('philanthropist', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('philanthropist', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question2',
-        'label' => get_string('socialiser', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('socialiser', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question3',
-        'label' => get_string('philanthropist', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('philanthropist', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question4',
-        'label' => get_string('socialiser', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('socialiser', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question5',
-        'label' => get_string('achiever', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('achiever', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question6',
-        'label' => get_string('achiever', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('achiever', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question7',
-        'label' => get_string('free_spirit', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('free_spirit', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question8',
-        'label' => get_string('disruptor', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('disruptor', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question9',
-        'label' => get_string('player', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('player', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question10',
-        'label' => get_string('free_spirit', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('free_spirit', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question11',
-        'label' => get_string('disruptor', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('disruptor', 'format_ludilearn'), 'type' => 'HEXAD'];
     $questions[] = ['content' => 'questionnaire:question12',
-        'label' => get_string('player', 'format_ludimoodle'), 'type' => 'HEXAD'];
+        'label' => get_string('player', 'format_ludilearn'), 'type' => 'HEXAD'];
 
-    $DB->insert_records('format_ludimoodle_questions', $questions);
+    $DB->insert_records('format_ludilearn_questions', $questions);
 
     return true;
 }

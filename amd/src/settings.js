@@ -16,9 +16,9 @@
 /**
  * Settongs.
  *
- * @module      format_ludimoodle/settings
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @module      format_ludilearn/settings
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -65,7 +65,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'core/str'],
 
                     // Call the web service to update the parameters.
                     Ajax.call([{
-                        methodname: 'format_ludimoodle_update_' + TYPE + '_parameters',
+                        methodname: 'format_ludilearn_update_' + TYPE + '_parameters',
                         args: data
                     }], true, true)[0].done((response) => {
                         $('.editsettingssuccess').show();

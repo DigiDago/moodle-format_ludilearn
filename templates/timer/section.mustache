@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -27,10 +27,10 @@
         {{#parameters.gamified}}
             <h4 class="text-center">{{ name }}</h4>
             <img class="img-responsive d-block mx-auto"
-                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/default-timer.svg"
+                 src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/default-timer.svg"
                  alt="Image best reference time">
             <p class="text-center">
-                {{#str}} averagetime, format_ludimoodle {{/str}}
+                {{#str}} averagetime, format_ludilearn {{/str}}
             </p>
             <div class="progression-text">
                 <p class="text-center">
@@ -39,7 +39,7 @@
             </div>
         {{/parameters.gamified}}
         {{^parameters.gamified}}
-            <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+            <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
         {{/parameters.gamified}}
             <div class="section-summary">
                 {{{ summary }}}
@@ -61,17 +61,17 @@
                                 <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                                     {{#parameters.gamified}}
                                         <img class="img-responsive d-block mx-auto"
-                                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/icon.svg"
+                                             src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/icon.svg"
                                              alt="Image activity timer">
                                         {{#parameters.bestpenaltiescalc}}
                                             <div class="penalties">
                                                 <span class="penalties-value">+ {{ parameters.bestpenaltiescalc }}s </span>
-                                                <span class="penalties-str">{{#str}} ofpenalties, format_ludimoodle {{/str}}</span>
+                                                <span class="penalties-str">{{#str}} ofpenalties, format_ludilearn {{/str}}</span>
                                             </div>
                                         {{/parameters.bestpenaltiescalc}}
                                     {{/parameters.gamified}}
                                     {{^parameters.gamified}}
-                                        <img class="img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+                                        <img class="img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
                                     {{/parameters.gamified}}
                                     <div class="progression-text progression-cm">
                                         <p class="text-center">

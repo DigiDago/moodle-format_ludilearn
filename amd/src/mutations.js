@@ -21,18 +21,18 @@
  * be declared as class attributes, not a simple methods. The reason is because many
  * plugins can add extra mutations to the course editor.
  *
- * @module     format_ludimoodle/mutations
- * @copyright  2024 Pimenko <contact@pimenko.com>
+ * @module     format_ludilearn/mutations
+ * @copyright  2025 Pimenko <contact@pimenko.com>
  * @author     Jordan Kesraoui
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// AMD module definition for LudimoodleMutations
+// AMD module definition for LudilearnMutations
 define(['core_courseformat/courseeditor',
     'core_courseformat/local/courseeditor/mutations',
     'core_courseformat/local/content/actions'],
     function(CourseEditor, DefaultMutations, CourseActions) {
-    class LudimoodleMutations extends DefaultMutations {
+    class LudilearnMutations extends DefaultMutations {
         /**
          * Gamify course modules.
          *
@@ -78,7 +78,7 @@ define(['core_courseformat/courseeditor',
             const courseEditor = CourseEditor.getCurrentCourseEditor();
             // Some plugin (activity or block) may have their own mutations already registered.
             // This is why we use addMutations instead of setMutations here.
-            courseEditor.addMutations(new LudimoodleMutations());
+            courseEditor.addMutations(new LudilearnMutations());
             // Add direct mutation content actions.
 
             CourseActions.addActions({

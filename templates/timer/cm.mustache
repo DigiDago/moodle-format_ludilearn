@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -26,13 +26,13 @@
     <div class="row">
         <div class="col-12">
             <img class="img-responsive d-block mx-auto"
-                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/default-timer.svg"
+                 src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/default-timer.svg"
                  alt="Image reference time">
             {{#parameters.currenttime }}
             {{#parameters.currentpenaltiescalc}}
             <div class="penalties penalties-cm">
                 <span class="penalties-value">+ {{ parameters.currentpenaltiescalc }}s </span>
-                <span class="penalties-str">{{#str}} ofpenalties, format_ludimoodle {{/str}}</span>
+                <span class="penalties-str">{{#str}} ofpenalties, format_ludilearn {{/str}}</span>
             </div>
             {{/parameters.currentpenaltiescalc}}
             {{/parameters.currenttime }}
@@ -42,7 +42,7 @@
         {{#parameters.currenttime }}
         <div class="col-6 rightdottedscore">
             <div class="chrono text-center progression-text progression-cm">
-                <img src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/chrono.svg" alt="Icone chrono">
+                <img src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/chrono.svg" alt="Icone chrono">
                 <span class="current-time">
                     {{ parameters.currenttime }}
                 </span>
@@ -51,8 +51,8 @@
         {{/parameters.currenttime }}
         <div class="{{#parameters.currenttime }}col-6{{/parameters.currenttime }} {{^parameters.currenttime }}col-12{{/parameters.currenttime }}">
             <div class="reference-time text-center progression-text progression-cm">
-                <span>{{#str}} besttime, format_ludimoodle {{/str}}</span>
-                <img src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/reftime.svg" alt="Icon besttime">
+                <span>{{#str}} besttime, format_ludilearn {{/str}}</span>
+                <img src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/reftime.svg" alt="Icon besttime">
                 <span>{{ parameters.besttime }}</span>
             </div>
         </div>
@@ -60,6 +60,6 @@
 
 {{/parameters.gamified }}
 {{^parameters.gamified }}
-    <img class="img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+    <img class="img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
 {{/parameters.gamified }}
 </div>

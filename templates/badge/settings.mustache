@@ -15,61 +15,61 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
 }}
 
-<div id="ludimoodle-settings" class="ludimoodle-world-{{ world }}">
+<div id="ludilearn-settings" class="ludilearn-world-{{ world }}">
     <div class="row justify-content-center">
             <div class="col-6">
                 <div class="row block_section">
                     <div class="col-9 rightdottedscore">
                         <div class="row mr-1">
                             <div class="col-4 mt-0 p-0">
-                                <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                                     src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze.svg"
+                                <img class="ludilearn-img little-img img-responsive d-block mx-auto"
+                                     src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_bronze.svg"
                                      alt="Image badge">
                             </div>
                             <div class="col-4 mt-0 p-0">
-                                <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                                     src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver.svg"
+                                <img class="ludilearn-img little-img img-responsive d-block mx-auto"
+                                     src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_silver.svg"
                                      alt="Image badge">
                             </div>
                             <div class="col-4 mt-0 p-0">
-                                <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                                     src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold.svg"
+                                <img class="ludilearn-img little-img img-responsive d-block mx-auto"
+                                     src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_gold.svg"
                                      alt="Image badge">
                             </div>
                         </div>
                     </div>
                     <div class="col-3" >
-                        <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
-                             src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion.svg"
+                        <img class="ludilearn-img little-img img-responsive d-block mx-auto"
+                             src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_completion.svg"
                              alt="Image badge">
                     </div>
             </div>
         </div>
     </div>
     <div class="alert alert-success editsettingssuccess" role="alert">
-        {{#str}} editsettingssuccess, format_ludimoodle {{/str}}
+        {{#str}} editsettingssuccess, format_ludilearn {{/str}}
     </div>
     <div class="alert alert-danger editsettingsfailed" role="alert">
-        {{#str}} editsettingsfailed, format_ludimoodle {{/str}}
+        {{#str}} editsettingsfailed, format_ludilearn {{/str}}
     </div>
-    <p class="align-center">{{#str}} settings:badgedescription, format_ludimoodle {{/str}}</p>
+    <p class="align-center">{{#str}} settings:badgedescription, format_ludilearn {{/str}}</p>
     <form id="form-parameters" class="form-parameters mform" action="#">
         <input type="hidden" name="courseid" value="{{ courseid }}">
         <div class="form-group row">
             <div class="col-form-label col-md-3 d-flex pb-0 pr-md-0">
-                <label for="input-badgegold" class="d-inline word-break">{{#str}} settings:badgegold, format_ludimoodle  {{/str}}</label>
+                <label for="input-badgegold" class="d-inline word-break">{{#str}} settings:badgegold, format_ludilearn  {{/str}}</label>
                 <div class="form-label-addon d-flex align-items-center align-self-start">
                     <div class="text-danger">
                         <i class="icon fa fa-exclamation-circle text-danger fa-fw " role="img"></i>
                     </div>
                     <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
-                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:badgegold_help, format_ludimoodle  {{/str}}</p></div>"
+                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:badgegold_help, format_ludilearn  {{/str}}</p></div>"
                        data-html="true" tabindex="0" data-trigger="focus">
                         <i class="icon fa fa-question-circle text-info fa-fw"></i>
                     </a>
@@ -86,13 +86,13 @@
         </div>
         <div class="form-group row">
             <div class="col-form-label col-md-3 d-flex pb-0 pr-md-0">
-                <label for="input-badgesilver" class="d-inline word-break">{{#str}} settings:badgesilver, format_ludimoodle  {{/str}}</label>
+                <label for="input-badgesilver" class="d-inline word-break">{{#str}} settings:badgesilver, format_ludilearn  {{/str}}</label>
                 <div class="form-label-addon d-flex align-items-center align-self-start">
                     <div class="text-danger">
                         <i class="icon fa fa-exclamation-circle text-danger fa-fw " role="img"></i>
                     </div>
                     <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
-                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:badgesilver_help, format_ludimoodle  {{/str}}</p></div>"
+                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:badgesilver_help, format_ludilearn  {{/str}}</p></div>"
                        data-html="true" tabindex="0" data-trigger="focus">
                         <i class="icon fa fa-question-circle text-info fa-fw"></i>
                     </a>
@@ -109,13 +109,13 @@
         </div>
         <div class="form-group row">
             <div class="col-form-label col-md-3 d-flex pb-0 pr-md-0">
-                <label for="input-badgebronze" class="d-inline word-break">{{#str}} settings:badgebronze, format_ludimoodle  {{/str}}</label>
+                <label for="input-badgebronze" class="d-inline word-break">{{#str}} settings:badgebronze, format_ludilearn  {{/str}}</label>
                 <div class="form-label-addon d-flex align-items-center align-self-start">
                     <div class="text-danger">
                         <i class="icon fa fa-exclamation-circle text-danger fa-fw " role="img"></i>
                     </div>
                     <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
-                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:badgebronze_help, format_ludimoodle  {{/str}}</p></div>"
+                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:badgebronze_help, format_ludilearn  {{/str}}</p></div>"
                        data-html="true" tabindex="0" data-trigger="focus">
                         <i class="icon fa fa-question-circle text-info fa-fw"></i>
                     </a>
@@ -132,5 +132,5 @@
         </div>
         <button class="btn btn-primary" type="submit">{{#str}} save {{/str}}</button>
     </form>
-    {{> format_ludimoodle/settings_footer}}
+    {{> format_ludilearn/settings_footer}}
 </div>

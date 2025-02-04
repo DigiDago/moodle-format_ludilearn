@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\local\gameelements;
+namespace format_ludilearn\local\gameelements;
 
-use format_ludimoodle\manager;
+use format_ludilearn\manager;
 use format_theunittest\output\courseformat\state\course;
 use stdClass;
 use tool_admin_presets\form\continue_form;
@@ -29,8 +29,8 @@ require_once($CFG->libdir . '/adminlib.php');
 /**
  * Timer game element class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -200,11 +200,11 @@ class timer extends game_element {
             ]
         );
 
-        $gameelement = $DB->get_record('format_ludimoodle_elements',
+        $gameelement = $DB->get_record('format_ludilearn_elements',
             ['sectionid' => $coursemodule->section, 'type' => 'timer']);
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludimoodle_attributio',
+        $attribution = $DB->get_record('format_ludilearn_attributio',
             ['gameelementid' => $gameelement->id, 'userid' => $userid]);
         if ($attribution) {
             $gameelement = self::get($quiz->course, $coursemodule->section, $userid);
@@ -262,15 +262,15 @@ class timer extends game_element {
                     $currentpenalties = $penalties - $pointsnotyet;
 
                     // Save current attempt start.
-                    $currentstart = $DB->get_record('format_ludimoodle_cm_user',
+                    $currentstart = $DB->get_record('format_ludilearn_cm_user',
                         ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'currentstart']);
                     if ($currentstart) {
                         if ($currentstart->value != $attempt->timestart) {
                             $currentstart->value = $attempt->timestart;
-                            $DB->update_record('format_ludimoodle_cm_user', $currentstart);
+                            $DB->update_record('format_ludilearn_cm_user', $currentstart);
                         }
                     } else {
-                        $DB->insert_record('format_ludimoodle_cm_user', [
+                        $DB->insert_record('format_ludilearn_cm_user', [
                             'attributionid' => $attribution->id,
                             'name' => 'currentstart',
                             'cmid' => $coursemodule->id,
@@ -278,15 +278,15 @@ class timer extends game_element {
                     }
 
                     // Save current attempt penalties.
-                    $currentpenaltiesold = $DB->get_record('format_ludimoodle_cm_user',
+                    $currentpenaltiesold = $DB->get_record('format_ludilearn_cm_user',
                         ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'currentpenalties']);
                     if ($currentpenaltiesold) {
                         if ($currentpenaltiesold->value != $currentpenalties) {
                             $currentpenaltiesold->value = $currentpenalties;
-                            $DB->update_record('format_ludimoodle_cm_user', $currentpenaltiesold);
+                            $DB->update_record('format_ludilearn_cm_user', $currentpenaltiesold);
                         }
                     } else {
-                        $DB->insert_record('format_ludimoodle_cm_user', [
+                        $DB->insert_record('format_ludilearn_cm_user', [
                             'attributionid' => $attribution->id,
                             'name' => 'currentpenalties',
                             'cmid' => $coursemodule->id,
@@ -298,15 +298,15 @@ class timer extends game_element {
             // If a best attempt is found.
             if ($bestattempt) {
                 // Save the time start of the best attempt.
-                $beststart = $DB->get_record('format_ludimoodle_cm_user',
+                $beststart = $DB->get_record('format_ludilearn_cm_user',
                     ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'beststart']);
                 if ($beststart) {
                     if ($beststart->value != $bestattempt->timestart) {
                         $beststart->value = $bestattempt->timestart;
-                        $DB->update_record('format_ludimoodle_cm_user', $beststart);
+                        $DB->update_record('format_ludilearn_cm_user', $beststart);
                     }
                 } else {
-                    $DB->insert_record('format_ludimoodle_cm_user', [
+                    $DB->insert_record('format_ludilearn_cm_user', [
                         'attributionid' => $attribution->id,
                         'name' => 'beststart',
                         'cmid' => $coursemodule->id,
@@ -314,15 +314,15 @@ class timer extends game_element {
                 }
 
                 // Save the time finish of the best attempt.
-                $bestfinish = $DB->get_record('format_ludimoodle_cm_user',
+                $bestfinish = $DB->get_record('format_ludilearn_cm_user',
                     ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'bestfinish']);
                 if ($bestfinish) {
                     if ($bestfinish->value != $bestattempt->timefinish) {
                         $bestfinish->value = $bestattempt->timefinish;
-                        $DB->update_record('format_ludimoodle_cm_user', $bestfinish);
+                        $DB->update_record('format_ludilearn_cm_user', $bestfinish);
                     }
                 } else {
-                    $DB->insert_record('format_ludimoodle_cm_user', [
+                    $DB->insert_record('format_ludilearn_cm_user', [
                         'attributionid' => $attribution->id,
                         'name' => 'bestfinish',
                         'cmid' => $coursemodule->id,
@@ -330,15 +330,15 @@ class timer extends game_element {
                 }
 
                 // Save penalties of the best attempt.
-                $bestpenaltiesold = $DB->get_record('format_ludimoodle_cm_user',
+                $bestpenaltiesold = $DB->get_record('format_ludilearn_cm_user',
                     ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'bestpenalties']);
                 if ($bestpenaltiesold) {
                     if ($bestpenaltiesold->value != $bestpenalties) {
                         $bestpenaltiesold->value = $bestpenalties;
-                        $DB->update_record('format_ludimoodle_cm_user', $bestpenaltiesold);
+                        $DB->update_record('format_ludilearn_cm_user', $bestpenaltiesold);
                     }
                 } else {
-                    $DB->insert_record('format_ludimoodle_cm_user', [
+                    $DB->insert_record('format_ludilearn_cm_user', [
                         'attributionid' => $attribution->id,
                         'name' => 'bestpenalties',
                         'cmid' => $coursemodule->id,
@@ -371,11 +371,11 @@ class timer extends game_element {
             ]
         );
 
-        $gameelement = $DB->get_record('format_ludimoodle_elements',
+        $gameelement = $DB->get_record('format_ludilearn_elements',
             ['sectionid' => $coursemodule->section, 'type' => 'timer']);
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludimoodle_attributio',
+        $attribution = $DB->get_record('format_ludilearn_attributio',
             ['gameelementid' => $gameelement->id, 'userid' => $userid]);
         if ($attribution) {
             $gameelement = self::get($quiz->course, $coursemodule->section, $userid);
@@ -426,25 +426,25 @@ class timer extends game_element {
             }
 
             // Save current attempt penalties.
-            $currentpenaltiesres = $DB->get_record('format_ludimoodle_cm_user',
+            $currentpenaltiesres = $DB->get_record('format_ludilearn_cm_user',
                 ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'currentpenalties']);
             if ($currentpenaltiesres) {
                 $currentpenaltiesres->value = 0;
-                $DB->update_record('format_ludimoodle_cm_user', $currentpenaltiesres);
+                $DB->update_record('format_ludilearn_cm_user', $currentpenaltiesres);
             }
 
             // If a best attempt is found.
             if ($bestattempt) {
                 // Save the time start of the best attempt.
-                $beststart = $DB->get_record('format_ludimoodle_cm_user',
+                $beststart = $DB->get_record('format_ludilearn_cm_user',
                     ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'beststart']);
                 if ($beststart) {
                     if ($beststart->value != $bestattempt->timestart) {
                         $beststart->value = $bestattempt->timestart;
-                        $DB->update_record('format_ludimoodle_cm_user', $beststart);
+                        $DB->update_record('format_ludilearn_cm_user', $beststart);
                     }
                 } else {
-                    $DB->insert_record('format_ludimoodle_cm_user', [
+                    $DB->insert_record('format_ludilearn_cm_user', [
                         'attributionid' => $attribution->id,
                         'name' => 'beststart',
                         'cmid' => $coursemodule->id,
@@ -452,15 +452,15 @@ class timer extends game_element {
                 }
 
                 // Save the time finish of the best attempt.
-                $bestfinish = $DB->get_record('format_ludimoodle_cm_user',
+                $bestfinish = $DB->get_record('format_ludilearn_cm_user',
                     ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'bestfinish']);
                 if ($bestfinish) {
                     if ($bestfinish->value != $bestattempt->timefinish) {
                         $bestfinish->value = $bestattempt->timefinish;
-                        $DB->update_record('format_ludimoodle_cm_user', $bestfinish);
+                        $DB->update_record('format_ludilearn_cm_user', $bestfinish);
                     }
                 } else {
-                    $DB->insert_record('format_ludimoodle_cm_user', [
+                    $DB->insert_record('format_ludilearn_cm_user', [
                         'attributionid' => $attribution->id,
                         'name' => 'bestfinish',
                         'cmid' => $coursemodule->id,
@@ -468,15 +468,15 @@ class timer extends game_element {
                 }
 
                 // Save penalties of the best attempt.
-                $bestpenaltiesold = $DB->get_record('format_ludimoodle_cm_user',
+                $bestpenaltiesold = $DB->get_record('format_ludilearn_cm_user',
                     ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'bestpenalties']);
                 if ($bestpenaltiesold) {
                     if ($bestpenaltiesold->value != $bestpenalties) {
                         $bestpenaltiesold->value = $bestpenalties;
-                        $DB->update_record('format_ludimoodle_cm_user', $bestpenaltiesold);
+                        $DB->update_record('format_ludilearn_cm_user', $bestpenaltiesold);
                     }
                 } else {
-                    $DB->insert_record('format_ludimoodle_cm_user', [
+                    $DB->insert_record('format_ludilearn_cm_user', [
                         'attributionid' => $attribution->id,
                         'name' => 'bestpenalties',
                         'cmid' => $coursemodule->id,
@@ -501,8 +501,8 @@ class timer extends game_element {
     public static function get(int $courseid, int $sectionid, int $userid): ?timer {
         global $DB;
 
-        $gameelementsql = 'SELECT * FROM {format_ludimoodle_elements} g
-                            INNER JOIN {format_ludimoodle_attributio} a ON g.id = a.gameelementid
+        $gameelementsql = 'SELECT * FROM {format_ludilearn_elements} g
+                            INNER JOIN {format_ludilearn_attributio} a ON g.id = a.gameelementid
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
@@ -523,15 +523,15 @@ class timer extends game_element {
 
         // Get game element parameters.
         $parameters = [];
-        $sqlparameters = 'SELECT * FROM {format_ludimoodle_params} section_params WHERE gameelementid = :gameelementid';
+        $sqlparameters = 'SELECT * FROM {format_ludilearn_params} section_params WHERE gameelementid = :gameelementid';
         $parametersreq = $DB->get_records_sql($sqlparameters, $params);
         foreach ($parametersreq as $parameterreq) {
             $parameters[$parameterreq->name] = $parameterreq->value;
         }
 
         $sqlgameeleuser = 'SELECT s.id, s.name, s.value
-                    FROM {format_ludimoodle_ele_user} s
-                    INNER JOIN {format_ludimoodle_attributio} a ON s.attributionid = a.id
+                    FROM {format_ludilearn_ele_user} s
+                    INNER JOIN {format_ludilearn_attributio} a ON s.attributionid = a.id
                     WHERE a.gameelementid = :gameelementid
                     AND a.userid = :userid';
         $gameleuserreq = $DB->get_records_sql($sqlgameeleuser, $params);
@@ -545,7 +545,7 @@ class timer extends game_element {
             $cmparameters[$cm->id] = [];
             $cmparameters[$cm->id]['id'] = $cm->id;
         }
-        $sqlcmparameters = 'SELECT * FROM {format_ludimoodle_cm_params} cm_params WHERE gameelementid = :gameelementid';
+        $sqlcmparameters = 'SELECT * FROM {format_ludilearn_cm_params} cm_params WHERE gameelementid = :gameelementid';
         $cmparametersreq = $DB->get_records_sql($sqlcmparameters, $params);
         foreach ($cmparametersreq as $cmparameterreq) {
             if (key_exists($cmparameterreq->cmid, $cmparameters)) {
@@ -554,8 +554,8 @@ class timer extends game_element {
         }
 
         $sqlcms = 'SELECT cm.id, cm.cmid, cm.name, cm.value
-                    FROM {format_ludimoodle_cm_user} cm
-                    INNER JOIN {format_ludimoodle_attributio} a ON cm.attributionid = a.id
+                    FROM {format_ludilearn_cm_user} cm
+                    INNER JOIN {format_ludilearn_attributio} a ON cm.attributionid = a.id
                     WHERE a.gameelementid = :gameelementid
                     AND a.userid = :userid';
         $cmsreq = $DB->get_records_sql($sqlcms, $params);
@@ -586,14 +586,14 @@ class timer extends game_element {
         global $DB;
 
         // Retrieve all game elements of the course.
-        $gameelements = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid, 'type' => 'timer']);
+        $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid, 'type' => 'timer']);
 
         if (!$gameelements) {
             return false;
         } else {
             foreach ($gameelements as $gameelement) {
                 // Retrieve existing values for penalties parameter.
-                $penaltiesecord = $DB->get_record('format_ludimoodle_params',
+                $penaltiesecord = $DB->get_record('format_ludilearn_params',
                     ['gameelementid' => $gameelement->id,
                         'name' => 'penalties']);
                 // Check value.
@@ -604,13 +604,13 @@ class timer extends game_element {
                 // If existing update values, else add value.
                 if ($penaltiesecord) {
                     $penaltiesecord->value = $penalties;
-                    $DB->update_record('format_ludimoodle_params', $penaltiesecord);
+                    $DB->update_record('format_ludilearn_params', $penaltiesecord);
                 } else {
                     $penaltiesecord = new stdClass();
                     $penaltiesecord->gameelementid = $gameelement->id;
                     $penaltiesecord->name = 'penalties';
                     $penaltiesecord->value = $penalties;
-                    $DB->insert_record('format_ludimoodle_params', $penaltiesecord);
+                    $DB->insert_record('format_ludilearn_params', $penaltiesecord);
                 }
             }
         }

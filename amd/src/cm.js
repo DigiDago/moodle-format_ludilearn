@@ -14,9 +14,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Format ludimoodle section extra logic component.
+ * Format ludilearn section extra logic component.
  *
- * @copyright  2024 Pimenko <contact@pimenko.com>
+ * @copyright  2025 Pimenko <contact@pimenko.com>
  * @author     Jordan Kesraoui
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -31,7 +31,7 @@ define(['core_courseformat/local/courseeditor/dndcmitem',
          * Constructor hook.
          */
         create() {
-            this.name = 'format_ludimoodle_cm';
+            this.name = 'format_ludilearn_cm';
             this.selectors = {
                 CM: '[data-for="cm"]',
                 GAMIFY: '[data-action="cmGamify"]',

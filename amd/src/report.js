@@ -16,13 +16,13 @@
 /**
  * Show the report.
  *
- * @module     format_ludimoodle/report
+ * @module     format_ludilearn/report
  * @package
- * @copyright  2024 Pimenko <contact@pimenko.com>
+ * @copyright  2025 Pimenko <contact@pimenko.com>
  * @author     Jordan Kesraoui
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define(['jquery', 'core/ajax', 'core/templates', 'format_ludimoodle/pagination', 'format_ludimoodle/loading'],
+define(['jquery', 'core/ajax', 'core/templates', 'format_ludilearn/pagination', 'format_ludilearn/loading'],
     ($, Ajax, Templates, Pagination, Loading) => {
         let COURSE_ID;
 
@@ -45,12 +45,12 @@ define(['jquery', 'core/ajax', 'core/templates', 'format_ludimoodle/pagination',
 
             // Request.
             Ajax.call([{
-                methodname: 'format_ludimoodle_get_report',
+                methodname: 'format_ludilearn_get_report',
                 args: data
             }], true, true)[0].done((response) => {
 
                 // Render the table of programs.
-                Templates.render('format_ludimoodle/report/table_report', response)
+                Templates.render('format_ludilearn/report/table_report', response)
                     .then((html) => {
 
                         if (tbody.length > 0) {
