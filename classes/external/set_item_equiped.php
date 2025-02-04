@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\external;
+namespace format_ludilearn\external;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -26,14 +26,14 @@ use external_api;
 use external_function_parameters;
 use external_single_structure;
 use external_value;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\manager;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\manager;
 
 /**
  * Class for get inventory.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

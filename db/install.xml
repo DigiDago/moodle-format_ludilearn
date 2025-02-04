@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="course/format/ludimoodle/db" VERSION="20211018" COMMENT="XMLDB file for Moodle format/ludimoodle"
+<XMLDB PATH="course/format/ludilearn/db" VERSION="20211018" COMMENT="XMLDB file for Moodle format/ludilearn"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
 >
     <TABLES>
-        <TABLE NAME="format_ludimoodle_elements" COMMENT="Stores the ludimoodle game elements">
+        <TABLE NAME="format_ludilearn_elements" COMMENT="Stores the ludilearn game elements">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique id"/>
                 <FIELD NAME="type" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"
@@ -20,7 +20,7 @@
                 <KEY NAME="section" TYPE="foreign" FIELDS="sectionid" REFTABLE="course_sections" REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_params" COMMENT="Stores the ludimoodle game elements">
+        <TABLE NAME="format_ludilearn_params" COMMENT="Stores the ludilearn game elements">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="gameelementid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
@@ -30,11 +30,11 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludimoodle_elements"
+                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludilearn_elements"
                      REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_cm_params" COMMENT="Stores the ludimoodle game elements">
+        <TABLE NAME="format_ludilearn_cm_params" COMMENT="Stores the ludilearn game elements">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="gameelementid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
@@ -45,12 +45,12 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludimoodle_elements"
+                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludilearn_elements"
                      REFFIELDS="id"/>
                 <KEY NAME="cm" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_attributio" COMMENT="Attribution of gameelements to users">
+        <TABLE NAME="format_ludilearn_attributio" COMMENT="Attribution of gameelements to users">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="gameelementid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
@@ -61,12 +61,12 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludimoodle_elements"
+                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludilearn_elements"
                      REFFIELDS="id"/>
                 <KEY NAME="user" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_ele_user" COMMENT="Game element parameters for users">
+        <TABLE NAME="format_ludilearn_ele_user" COMMENT="Game element parameters for users">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="attributionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
@@ -76,11 +76,11 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="attribution" TYPE="foreign" FIELDS="attributionid" REFTABLE="format_ludimoodle_attributio"
+                <KEY NAME="attribution" TYPE="foreign" FIELDS="attributionid" REFTABLE="format_ludilearn_attributio"
                      REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_cm_user" COMMENT="Game element cm parameters for users">
+        <TABLE NAME="format_ludilearn_cm_user" COMMENT="Game element cm parameters for users">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="attributionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"
@@ -91,12 +91,12 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="attribution" TYPE="foreign" FIELDS="attributionid" REFTABLE="format_ludimoodle_attributio"
+                <KEY NAME="attribution" TYPE="foreign" FIELDS="attributionid" REFTABLE="format_ludilearn_attributio"
                      REFFIELDS="id"/>
                 <KEY NAME="cm" TYPE="foreign" FIELDS="cmid" REFTABLE="course_modules" REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_questions" COMMENT="Game element questions">
+        <TABLE NAME="format_ludilearn_questions" COMMENT="Game element questions">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="label" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Question title"/>
@@ -108,7 +108,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_answers" COMMENT="Game element answers">
+        <TABLE NAME="format_ludilearn_answers" COMMENT="Game element answers">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Question id"/>
@@ -117,12 +117,12 @@
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-                <KEY NAME="questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="format_ludimoodle_questions"
+                <KEY NAME="questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="format_ludilearn_questions"
                      REFFIELDS="id"/>
                 <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_profile" COMMENT="Game element profile">
+        <TABLE NAME="format_ludilearn_profile" COMMENT="Game element profile">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User id"/>
@@ -136,7 +136,7 @@
                 <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
             </KEYS>
         </TABLE>
-        <TABLE NAME="format_ludimoodle_bysection" COMMENT="Attribution of gameelements by section">
+        <TABLE NAME="format_ludilearn_bysection" COMMENT="Attribution of gameelements by section">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Unique ID"/>
                 <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course id"/>
@@ -148,7 +148,7 @@
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
                 <KEY NAME="course" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
                 <KEY NAME="section" TYPE="foreign" FIELDS="sectionid" REFTABLE="course_sections" REFFIELDS="id"/>
-                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludimoodle_elements"
+                <KEY NAME="gameelement" TYPE="foreign" FIELDS="gameelementid" REFTABLE="format_ludilearn_elements"
                      REFFIELDS="id"/>
             </KEYS>
         </TABLE>

@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -24,11 +24,11 @@
 <div class="cm-score {{#cm.parameters.restricted }}restricted{{/cm.parameters.restricted }}">
 
     {{#parameters.gamified }}
-        <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/score/bag.svg" alt="Image score chest">
+        <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/score/bag.svg" alt="Image score chest">
         {{#parameters.bonuscompletion}}
         <div class="bonuscompletion bonuscompletion-cm">
             <span class="bonuscompletion-value">+ {{ parameters.bonuscompletion }}</span>
-            <span class="bonuscompletion-str">{{#str}} settings:bonuscompletion, format_ludimoodle {{/str}}</span>
+            <span class="bonuscompletion-str">{{#str}} settings:bonuscompletion, format_ludilearn {{/str}}</span>
         </div>
         {{/parameters.bonuscompletion}}
         {{^parameters.noscore}}
@@ -38,6 +38,6 @@
         {{/parameters.noscore}}
     {{/parameters.gamified }}
     {{^parameters.gamified }}
-        <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no score">
+        <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image no score">
     {{/parameters.gamified }}
 </div>

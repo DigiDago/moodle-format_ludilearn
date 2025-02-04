@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\output;
+namespace format_ludilearn\output;
 
 use cm_info;
 use context_course;
 use context_module;
-use format_ludimoodle\local\gameelements\avatar;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\manager;
+use format_ludilearn\local\gameelements\avatar;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\manager;
 use moodle_url;
 use renderable;
 use renderer_base;
@@ -29,14 +29,14 @@ use stdClass;
 use templatable;
 
 /**
- * Ludimoodle Plus game element renderer.
+ * Ludilearn Plus game element renderer.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class format_ludimoodle_gameelement implements renderable, templatable {
+class format_ludilearn_gameelement implements renderable, templatable {
 
     /**
      * @var stdClass $course The course.
@@ -64,6 +64,11 @@ class format_ludimoodle_gameelement implements renderable, templatable {
     protected $notanswered = false;
 
     /**
+     * @var string $assignment The assignment.
+     */
+    protected $assignment = null;
+
+    /**
      * Constructor.
      *
      * @param int $courseid  The course id.
@@ -84,10 +89,10 @@ class format_ludimoodle_gameelement implements renderable, templatable {
 
         // Get the default game element.
         $gameelementtype = $options['default_game_element'];
-
+        $this->assignment = $options['assignment'];
         // Verify if the cours is assigned automatically and if the user has answered yet to the questionnaire.
-        if ($options['assignment'] == 'automatic') {
-            $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $USER->id]);
+        if ($this->assignment == 'automatic') {
+            $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $USER->id]);
             if ($profile) {
                 $gameelementtype = $profile->type;
 
@@ -103,7 +108,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
         }
 
         // If the user has capabilities to update the course and he is not enrolled or the course is assigned automatically.
-        if (has_capability('moodle/course:update', $context) && (($options['assignment'] == 'automatic') || !$this->isenrolled)) {
+        if (has_capability('moodle/course:update', $context) && (($this->assignment == 'automatic') || !$this->isenrolled)) {
             // Verify is there is an attribution for this user.
             $attributionexist = $manager->has_attribution($courseid, $USER->id);
             // If not attribution exist, create one with nogamified type.
@@ -120,57 +125,13 @@ class format_ludimoodle_gameelement implements renderable, templatable {
         $this->course->sections = $DB->get_records('course_sections', ['course' => $this->course->id], 'section');
 
         foreach ($this->course->sections as $key => $value) {
-            if ($options['assignment'] != 'bysection' || !$this->isenrolled) {
-                $this->course->sections[$key]->gameelement = game_element::get_element($courseid,
-                    $value->id,
-                    $USER->id,
-                    $gameelementtype);
-            } else {
-                // Get the attributions by section.
-                $sql = "SELECT ge.id, ge.type FROM {format_ludimoodle_bysection} bs
-                        INNER JOIN {format_ludimoodle_elements} ge ON bs.gameelementid = ge.id
-                        WHERE bs.courseid = :courseid AND bs.sectionid = :sectionid";
-                $bysection = $DB->get_record_sql($sql,
-                    ['courseid' => $this->course->id, 'sectionid' => $value->id]);
-                if ($bysection) {
-                    $this->course->sections[$key]->gameelement = game_element::get_element($courseid,
-                        $value->id,
-                        $USER->id,
-                        $bysection->type);
-                } else {
-                    $this->course->sections[$key]->gameelement = game_element::get_element($courseid,
-                        $value->id,
-                        $USER->id,
-                        $gameelementtype);
-                }
-            }
+            $this->course->sections[$key]->gameelement = $this->get_element_by_section($value->id, $gameelementtype);
         }
 
         // Get the section.
         if ($sectionid != -1) {
             $this->section = $DB->get_record('course_sections', ['id' => $sectionid]);
-            if ($options['assignment'] != 'bysection' || !$this->isenrolled) {
-                $this->section->gameelement = game_element::get_element($courseid, $sectionid, $USER->id,
-                    $gameelementtype);
-            } else {
-                // Get the attributions by section.
-                $sql = "SELECT ge.id, ge.type FROM {format_ludimoodle_bysection} bs
-                        INNER JOIN {format_ludimoodle_elements} ge ON bs.gameelementid = ge.id
-                        WHERE bs.courseid = :courseid AND bs.sectionid = :sectionid";
-                $bysection = $DB->get_record_sql($sql,
-                    ['courseid' => $this->course->id, 'sectionid' => $this->section->id]);
-                if ($bysection) {
-                    $this->section->gameelement = game_element::get_element($courseid,
-                        $this->section->id,
-                        $USER->id,
-                        $bysection->type);
-                } else {
-                    $this->section->gameelement = game_element::get_element($courseid,
-                        $this->section->id,
-                        $USER->id,
-                        $gameelementtype);
-                }
-            }
+            $this->section->gameelement = $this->get_element_by_section($sectionid, $gameelementtype);
 
             // Get the cmid sorted.
             $sequence = explode(",", $this->section->sequence);
@@ -375,13 +336,13 @@ class format_ludimoodle_gameelement implements renderable, templatable {
             }
 
             $urlimages = $CFG->wwwroot .
-                '/course/format/ludimoodle/pix/' .
+                '/course/format/ludilearn/pix/' .
                 $this->course->formatoptions['world'] .
                 '/avatar/items/images/';
 
             // Call Js only if the section is an avatar game element.
             if ($this->section->gameelement instanceof avatar) {
-                $PAGE->requires->js_call_amd('format_ludimoodle/items', 'init',
+                $PAGE->requires->js_call_amd('format_ludilearn/items', 'init',
                     ['courseid' => $this->course->id,
                         'sectionid' => $this->section->id,
                         'urlimages' => $urlimages]);
@@ -704,7 +665,7 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                                 $parameters->currentpenaltiescalc = $parameters->currentpenalties *
                                     $parentsection->gameelement->get_penalties();
                             }
-                            $PAGE->requires->js_call_amd('format_ludimoodle/chrono', 'init',
+                            $PAGE->requires->js_call_amd('format_ludilearn/chrono', 'init',
                                 ['timestart' => $attempt->timestart]);
 
                         }
@@ -781,6 +742,66 @@ class format_ludimoodle_gameelement implements renderable, templatable {
                 \core_availability\info::format_info($cminfo->availableinfo, $this->course->id);
         }
         return $parameters;
+    }
+
+    /**
+     * Get the element by section.
+     *
+     * @param int $sectionid The section id.
+     * @param string $type The type of the game element.
+     *
+     * @return game_element The game element.
+     * @throws \coding_exception
+     */
+    protected function get_element_by_section(int $sectionid, string $type): game_element {
+        global $DB, $USER;
+        $gameelement = null;
+        $manager = new manager();
+        if ($this->assignment != 'bysection' || !$this->isenrolled) {
+            $gameelement = game_element::get_element($this->course->id, $sectionid, $USER->id,
+                $type);
+            // If attribution is missing, create one.
+            if ($gameelement == null && $this->isenrolled) {
+                $gameelement = $DB->get_record('format_ludilearn_elements',
+                    ['courseid' => $this->course->id, 'sectionid' => $sectionid, 'type' => $type]);
+                $manager->attribution_game_element($gameelement->id, $USER->id);
+                $gameelement = game_element::get_element($this->course->id, $sectionid, $USER->id,
+                    $type);
+            }
+        } else {
+            // Get the attributions by section.
+            $sql = "SELECT ge.id, ge.type FROM {format_ludilearn_bysection} bs
+                        INNER JOIN {format_ludilearn_elements} ge ON bs.gameelementid = ge.id
+                        WHERE bs.courseid = :courseid AND bs.sectionid = :sectionid";
+            $bysection = $DB->get_record_sql($sql,
+                ['courseid' => $this->course->id, 'sectionid' => $sectionid]);
+            if ($bysection) {
+                $gameelement = game_element::get_element($this->course->id,
+                    $sectionid,
+                    $USER->id,
+                    $bysection->type);
+                // If attribution is missing, create one.
+                if ($gameelement == null) {
+                    $manager->attribution_game_element($bysection->id, $USER->id);
+                    $gameelement = game_element::get_element($this->course->id, $sectionid, $USER->id,
+                        $bysection->type);
+                }
+            } else {
+                $gameelement = game_element::get_element($this->course->id,
+                    $sectionid,
+                    $USER->id,
+                    $type);
+                // If attribution is missing, create one.
+                if ($gameelement == null) {
+                    $gameelement = $DB->get_record('format_ludilearn_elements',
+                        ['courseid' => $this->course->id, 'sectionid' => $sectionid, 'type' => $type]);
+                    $manager->attribution_game_element($gameelement->id, $USER->id);
+                    $gameelement = game_element::get_element($this->course->id, $sectionid, $USER->id,
+                        $type);
+                }
+            }
+        }
+        return $gameelement;
     }
 
     /**

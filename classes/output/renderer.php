@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\output;
+namespace format_ludilearn\output;
 
 use core_courseformat\output\section_renderer;
-use format_ludimoodle\local\adaptation\hexad_scores;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\manager;
+use format_ludilearn\local\adaptation\hexad_scores;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\manager;
 use moodle_exception;
 use moodle_page;
 use moodle_url;
@@ -28,10 +28,10 @@ use section_info;
 use stdClass;
 
 /**
- * Ludimoodle Plus content class.
+ * Ludilearn Plus content class.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -46,7 +46,7 @@ class renderer extends section_renderer {
     public function __construct(moodle_page $page, $target) {
         parent::__construct($page, $target);
 
-        // Since format_ludimoodle_renderer::section_edit_control_items() only displays the 'Highlight' control
+        // Since format_ludilearn_renderer::section_edit_control_items() only displays the 'Highlight' control
         // when editing mode is on we need to be sure that the link 'Turn editing mode on' is available for a user
         // who does not have any other managing capability.
         $page->set_other_editing_capability('moodle/course:setcurrentsection');
@@ -89,7 +89,7 @@ class renderer extends section_renderer {
     public function render_questionnaire(int $courseid): string {
         global $DB, $CFG;
 
-        $questions = $DB->get_records('format_ludimoodle_questions');
+        $questions = $DB->get_records('format_ludilearn_questions');
 
         $data = new stdClass();
         $data->questionsHEXAD = [];
@@ -97,7 +97,7 @@ class renderer extends section_renderer {
         foreach ($questions as $question) {
             $q = new stdClass();
             $q->id = $question->id;
-            $q->content = get_string($question->content, 'format_ludimoodle');
+            $q->content = get_string($question->content, 'format_ludilearn');
             $q->answers = [];
             $q->number = $number;
 
@@ -112,15 +112,15 @@ class renderer extends section_renderer {
             $number++;
         }
         $data->questionscount = $number - 1;
-        $urlgameprofile = new moodle_url("$CFG->wwwroot/course/format/ludimoodle/gameprofile.php", ['id' => $courseid]);
-        $this->page->requires->js_call_amd('format_ludimoodle/questionnaire', 'init',
+        $urlgameprofile = new moodle_url("$CFG->wwwroot/course/format/ludilearn/gameprofile.php", ['id' => $courseid]);
+        $this->page->requires->js_call_amd('format_ludilearn/questionnaire', 'init',
             ['courseid' => $courseid,
                 'questionscount' => $data->questionscount,
                 'urlgameprofile' => $urlgameprofile->out(false),
             ]
         );
         return $this->render_from_template(
-            'format_ludimoodle/questionnaire',
+            'format_ludilearn/questionnaire',
             $data
         );
     }
@@ -134,10 +134,10 @@ class renderer extends section_renderer {
      */
     public function render_report(int $courseid): string {
 
-        $this->page->requires->js_call_amd('format_ludimoodle/report', 'init',
+        $this->page->requires->js_call_amd('format_ludilearn/report', 'init',
             ['courseid' => $courseid]);
         return $this->render_from_template(
-            'format_ludimoodle/report/report',
+            'format_ludilearn/report/report',
             ['courseid' => $courseid]
         );
     }
@@ -165,10 +165,10 @@ class renderer extends section_renderer {
         $data->hexadscores->disruptor = $hexadscores->get_value('disruptor');
         $data->hexadscores->philanthropist = $hexadscores->get_value('philanthropist');
 
-        $this->page->requires->js_call_amd('format_ludimoodle/gameprofile', 'init',
+        $this->page->requires->js_call_amd('format_ludilearn/gameprofile', 'init',
             ['hexadscores' => $data->hexadscores]);
         return $this->render_from_template(
-            'format_ludimoodle/gameprofile',
+            'format_ludilearn/gameprofile',
             $data
         );
     }

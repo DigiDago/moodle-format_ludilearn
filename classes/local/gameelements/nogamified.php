@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\local\gameelements;
+namespace format_ludilearn\local\gameelements;
 
-use format_ludimoodle\manager;
+use format_ludilearn\manager;
 use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
@@ -27,8 +27,8 @@ require_once($CFG->libdir . '/adminlib.php');
 /**
  * Nogamified game element class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -63,8 +63,8 @@ class nogamified extends game_element {
     public static function get(int $courseid, int $sectionid, int $userid): ?nogamified {
         global $DB;
 
-        $gameelementsql = 'SELECT * FROM {format_ludimoodle_elements} g
-                            INNER JOIN {format_ludimoodle_attributio} a ON g.id = a.gameelementid
+        $gameelementsql = 'SELECT * FROM {format_ludilearn_elements} g
+                            INNER JOIN {format_ludilearn_attributio} a ON g.id = a.gameelementid
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
@@ -75,7 +75,7 @@ class nogamified extends game_element {
                 'type' => 'nogamified']);
 
         if (!$gameelementreq) {
-            $nogamifiedelement = $DB->get_record('format_ludimoodle_elements',
+            $nogamifiedelement = $DB->get_record('format_ludilearn_elements',
                 ['courseid' => $courseid,
                     'sectionid' => $sectionid,
                     'type' => 'nogamified']);
@@ -100,15 +100,15 @@ class nogamified extends game_element {
 
         // Get game element parameters.
         $parameters = [];
-        $sqlparameters = 'SELECT * FROM {format_ludimoodle_params} section_params WHERE gameelementid = :gameelementid';
+        $sqlparameters = 'SELECT * FROM {format_ludilearn_params} section_params WHERE gameelementid = :gameelementid';
         $parametersreq = $DB->get_records_sql($sqlparameters, $params);
         foreach ($parametersreq as $parameterreq) {
             $parameters[$parameterreq->name] = $parameterreq->value;
         }
 
         $sqlgameeleuser = 'SELECT s.id, s.name, s.value
-                    FROM {format_ludimoodle_ele_user} s
-                    INNER JOIN {format_ludimoodle_attributio} a ON s.attributionid = a.id
+                    FROM {format_ludilearn_ele_user} s
+                    INNER JOIN {format_ludilearn_attributio} a ON s.attributionid = a.id
                     WHERE a.gameelementid = :gameelementid
                     AND a.userid = :userid';
         $gameleuserreq = $DB->get_records_sql($sqlgameeleuser, $params);
@@ -122,7 +122,7 @@ class nogamified extends game_element {
             $cmparameters[$cm->id] = [];
             $cmparameters[$cm->id]['id'] = $cm->id;
         }
-        $sqlcmparameters = 'SELECT * FROM {format_ludimoodle_cm_params} cm_params WHERE gameelementid = :gameelementid';
+        $sqlcmparameters = 'SELECT * FROM {format_ludilearn_cm_params} cm_params WHERE gameelementid = :gameelementid';
         $cmparametersreq = $DB->get_records_sql($sqlcmparameters, $params);
         foreach ($cmparametersreq as $cmparameterreq) {
             if (key_exists($cmparameterreq->cmid, $cmparameters)) {
@@ -131,8 +131,8 @@ class nogamified extends game_element {
         }
 
         $sqlcms = 'SELECT cm.id, cm.cmid, cm.name, cm.value
-                    FROM {format_ludimoodle_cm_user} cm
-                    INNER JOIN {format_ludimoodle_attributio} a ON cm.attributionid = a.id
+                    FROM {format_ludilearn_cm_user} cm
+                    INNER JOIN {format_ludilearn_attributio} a ON cm.attributionid = a.id
                     WHERE a.gameelementid = :gameelementid
                     AND a.userid = :userid';
         $cmsreq = $DB->get_records_sql($sqlcms, $params);

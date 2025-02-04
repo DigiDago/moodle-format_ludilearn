@@ -14,14 +14,14 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Styles files for ludimoodle format.
+ * Styles files for ludilearn format.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 @use 'progress-rocket';
-.format-ludimoodle {
+.format-ludilearn {
 
     .btn {
         min-height: 40px;
@@ -38,7 +38,7 @@
         }
     }
 
-    .ludimoodle-content {
+    .ludilearn-content {
         border: none;
         max-width: 830px;
         margin: 15px auto auto;
@@ -154,8 +154,8 @@
         }
     }
 
-    .ludimoodle-img,
-    #pills-activity .ludimoodle-img {
+    .ludilearn-img,
+    #pills-activity .ludilearn-img {
         height: 160px;
 
         &.little-img {
@@ -441,7 +441,7 @@
         }
     }
 
-   .ludimoodle-world-professional {
+   .ludilearn-world-professional {
 
    }
 
@@ -528,7 +528,7 @@
             border-top: none;
         }
     }
-    .ludimoodle-world-school {
+    .ludilearn-world-school {
         @keyframes percentrocket {
             0% {
                 left: 10%;
@@ -593,7 +593,7 @@
         }
     }
 
-    .ludimoodle-world-professional {
+    .ludilearn-world-professional {
         // Avatar image.
         .avatar-image {
             background-size: auto;
@@ -653,7 +653,7 @@
     }
 
     // Style only for the world highschool.
-    .ludimoodle-world-highschool {
+    .ludilearn-world-highschool {
         // Avatar.
         .avatar-image {
             &:has(.item-equiped) {
@@ -678,11 +678,11 @@
 
         // Progression game element.
         .progression-planet-inprogress {
-            background-image: url('[[pix:format_ludimoodle|highschool/progress/course-planet-bg]]');
+            background-image: url('[[pix:format_ludilearn|highschool/progress/course-planet-bg]]');
             background-size: contain;
         }
         .progression-planet-max {
-            background-image: url('[[pix:format_ludimoodle|highschool/progress/course-planet-max-bg]]');
+            background-image: url('[[pix:format_ludilearn|highschool/progress/course-planet-max-bg]]');
             background-size: contain;
         }
 
@@ -737,7 +737,7 @@
     }
 
     /* Settings pages */
-    #ludimoodle-settings {
+    #ludilearn-settings {
         .editsettingssuccess,
         .editsettingsfailed {
             display: none;

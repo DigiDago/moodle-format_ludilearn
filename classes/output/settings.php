@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\output;
+namespace format_ludilearn\output;
 
 use coding_exception;
 use context_course;
-use format_ludimoodle\local\gameelements\avatar;
-use format_ludimoodle\local\gameelements\badge;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\local\gameelements\score;
-use format_ludimoodle\local\gameelements\timer;
+use format_ludilearn\local\gameelements\avatar;
+use format_ludilearn\local\gameelements\badge;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\local\gameelements\score;
+use format_ludilearn\local\gameelements\timer;
 use mod_bigbluebuttonbn\local\helpers\reset;
 use moodle_url;
 use renderable;
@@ -31,10 +31,10 @@ use stdClass;
 use templatable;
 
 /**
- * Ludimoodle settings renderer.
+ * Ludilearn settings renderer.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -74,7 +74,7 @@ class settings implements renderable, templatable {
         $this->courseid = $courseid;
         $this->type = $type;
         $params = ["id" => $this->courseid, "type" => $type, "hideheader" => 1];
-        $this->url = new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php", $params);
+        $this->url = new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php", $params);
 
         // If the type is not a game element but the assignment by section setting page.
         if ($this->type == 'assignmentbysection') {
@@ -89,7 +89,7 @@ class settings implements renderable, templatable {
             $this->parameterslist = [];
             return;
         }
-        $classname = "\\format_ludimoodle\\local\\gameelements\\$type";
+        $classname = "\\format_ludilearn\\local\\gameelements\\$type";
         $this->parameterslist = $classname::get_parameters_list();
     }
 
@@ -295,20 +295,20 @@ class settings implements renderable, templatable {
             }
 
             // Get the game element of the section.
-            $bysection = $DB->get_record('format_ludimoodle_bysection',
+            $bysection = $DB->get_record('format_ludilearn_bysection',
                 ['courseid' => $this->courseid, 'sectionid' => $section->id]);
-            $gameelements = $DB->get_records('format_ludimoodle_elements',
+            $gameelements = $DB->get_records('format_ludilearn_elements',
                 ['courseid' => $this->courseid, 'sectionid' => $section->id]);
 
             if ($bysection) {
                 $s->gameelementid = $bysection->gameelementid;
-                $gameelement = $DB->get_record('format_ludimoodle_elements',
+                $gameelement = $DB->get_record('format_ludilearn_elements',
                     ['id' => $s->gameelementid]);
                 $s->type = $gameelement->type;
             } else {
                 // If no game element is set, set the default game element.
                 $defaultgameelement = $courseformat->get_format_options()['default_game_element'];
-                $gameelement = $DB->get_record('format_ludimoodle_elements',
+                $gameelement = $DB->get_record('format_ludilearn_elements',
                     ['courseid' => $this->courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]);
                 $s->gameelementid = $gameelement->id;
                 $s->type = $gameelement->type;
@@ -318,7 +318,7 @@ class settings implements renderable, templatable {
             foreach ($gameelements as $gameelement) {
                 $ge = new stdClass();
                 $ge->gameelementid = $gameelement->id;
-                $ge->type = get_string($gameelement->type, 'format_ludimoodle');
+                $ge->type = get_string($gameelement->type, 'format_ludilearn');
                 if ($gameelement->type == $s->type) {
                     $ge->selected = true;
                 } else {

@@ -15,22 +15,22 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
 }}
 
-<div id="ludimoodle-settings">
+<div id="ludilearn-settings">
     <div class="alert alert-success editsettingssuccess" role="alert">
-        {{#str}} editsettingssuccess, format_ludimoodle {{/str}}
+        {{#str}} editsettingssuccess, format_ludilearn {{/str}}
     </div>
     <div class="alert alert-danger editsettingsfailed" role="alert">
-        {{#str}} editsettingsfailed, format_ludimoodle {{/str}}
+        {{#str}} editsettingsfailed, format_ludilearn {{/str}}
     </div>
-    <p class="align-center">{{#str}} settings:updateprogressiondescription, format_ludimoodle {{/str}}</p>
+    <p class="align-center">{{#str}} settings:updateprogressiondescription, format_ludilearn {{/str}}</p>
     <form id="form-parameters" class="form-parameters mform" action="#">
         <input type="hidden" name="courseid" value="{{ courseid }}">
-        <button class="btn btn-primary" type="submit">{{#str}} execute, format_ludimoodle {{/str}}</button>
+        <button class="btn btn-primary" type="submit">{{#str}} execute, format_ludilearn {{/str}}</button>
     </form>
 </div>

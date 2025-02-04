@@ -15,14 +15,14 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
 }}
 
-<div id="ludimoodle-gameprofile">
-    <p>{{#str}} gameprofile_desc, format_ludimoodle  {{/str}}</p>
+<div id="ludilearn-gameprofile">
+    <p>{{#str}} gameprofile_desc, format_ludilearn  {{/str}}</p>
 
     <!-- div pour contenire le canvas centré et avec une taille maximale -->
     <div class="row">
@@ -35,7 +35,7 @@
     <!-- Button back to course align in the middle -->
     <div class="row">
         <div class="col-12">
-            <a href="{{globals.config.wwwroot}}/course/view.php?id={{courseid}}" class="btn btn-primary float-right">{{#str}} backtocourse, format_ludimoodle {{/str}}</a>
+            <a href="{{globals.config.wwwroot}}/course/view.php?id={{courseid}}" class="btn btn-primary float-right">{{#str}} backtocourse, format_ludilearn {{/str}}</a>
         </div>
     </div>
 </div>

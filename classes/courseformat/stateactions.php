@@ -14,20 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\courseformat;
+namespace format_ludilearn\courseformat;
 
 use context_course;
 use context_module;
 use core_courseformat\stateactions as stateactions_base;
 use core_courseformat\stateupdates;
-use format_ludimoodle\local\gameelements\game_element;
+use format_ludilearn\local\gameelements\game_element;
 use stdClass;
 
 /**
- * Contains the core course state actions specific to Ludimoodle format.
+ * Contains the core course state actions specific to Ludilearn format.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

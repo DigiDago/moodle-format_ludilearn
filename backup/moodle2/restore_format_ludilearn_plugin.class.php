@@ -15,23 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Specialised restore for Ludimoodle course format.
+ * Specialised restore for Ludilearn course format.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Specialised restore for Ludimoodle course format.
+ * Specialised restore for Ludilearn course format.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_format_ludimoodle_plugin extends restore_format_plugin {
+class restore_format_ludilearn_plugin extends restore_format_plugin {
 
     /**
      * Define the restore structure of the section plugin.
@@ -41,19 +41,19 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
     protected function define_section_plugin_structure(): array {
         $paths = [];
 
-        // Path to restore format_ludimoodle_elements.
+        // Path to restore format_ludilearn_elements.
         $paths[] = new restore_path_element('gameelements', $this->get_pathfor('/gameelements'));
 
-        // Path to restore format_ludimoodle_attributio.
+        // Path to restore format_ludilearn_attributio.
         $paths[] = new restore_path_element('attributions', $this->get_pathfor('/attributions'));
 
-        // Path to restore format_ludimoodle_params.
+        // Path to restore format_ludilearn_params.
         $paths[] = new restore_path_element('params', $this->get_pathfor('/params'));
 
-        // Path to restore format_ludimoodle_bysection.
+        // Path to restore format_ludilearn_bysection.
         $paths[] = new restore_path_element('bysection', $this->get_pathfor('/bysection'));
 
-        // Path to restore format_ludimoodle_ele_user.
+        // Path to restore format_ludilearn_ele_user.
         $paths[] = new restore_path_element('gameele_user', $this->get_pathfor('/gameele_user'));
 
         return $paths;
@@ -67,17 +67,17 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
     protected function define_module_plugin_structure(): array {
         $paths = [];
 
-        // Path to restore format_ludimoodle_cm_params.
+        // Path to restore format_ludilearn_cm_params.
         $paths[] = new restore_path_element('cm_params', $this->get_pathfor('/cm_params'));
 
-        // Path to restore format_ludimoodle_cm_user.
+        // Path to restore format_ludilearn_cm_user.
         $paths[] = new restore_path_element('cm_user', $this->get_pathfor('/cm_user'));
 
         return $paths;
     }
 
     /**
-     * Process restore format_ludimoodle_elements.
+     * Process restore format_ludilearn_elements.
      *
      * @param array $data Data to restore.
      *
@@ -93,13 +93,13 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
         $data->courseid = $this->task->get_courseid();
         $data->sectionid = $this->task->get_sectionid();
 
-        // Insert data into the table format_ludimoodle_elements.
-        $newitemid = $DB->insert_record('format_ludimoodle_elements', $data);
+        // Insert data into the table format_ludilearn_elements.
+        $newitemid = $DB->insert_record('format_ludilearn_elements', $data);
         $this->set_mapping('gameelements', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore format_ludimoodle_params.
+     * Process restore format_ludilearn_params.
      *
      * @param array $data Data to restore.
      *
@@ -118,13 +118,13 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table format_ludimoodle_params.
-        $newitemid = $DB->insert_record('format_ludimoodle_params', $data);
+        // Insert data into the table format_ludilearn_params.
+        $newitemid = $DB->insert_record('format_ludilearn_params', $data);
         $this->set_mapping('params', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore format_ludimoodle_bysection.
+     * Process restore format_ludilearn_bysection.
      *
      * @param array $data Data to restore.
      *
@@ -145,13 +145,13 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table format_ludimoodle_bysection.
-        $newitemid = $DB->insert_record('format_ludimoodle_bysection', $data);
+        // Insert data into the table format_ludilearn_bysection.
+        $newitemid = $DB->insert_record('format_ludilearn_bysection', $data);
         $this->set_mapping('bysection', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore format_ludimoodle_cm_params.
+     * Process restore format_ludilearn_cm_params.
      *
      * @param array $data Data to restore.
      *
@@ -171,13 +171,13 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table format_ludimoodle_cm_params.
-        $newitemid = $DB->insert_record('format_ludimoodle_cm_params', $data);
+        // Insert data into the table format_ludilearn_cm_params.
+        $newitemid = $DB->insert_record('format_ludilearn_cm_params', $data);
         $this->set_mapping('cm_params', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore format_ludimoodle_attributio.
+     * Process restore format_ludilearn_attributio.
      *
      * @param array $data Data to restore.
      *
@@ -197,13 +197,13 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table format_ludimoodle_attributio.
-        $newitemid = $DB->insert_record('format_ludimoodle_attributio', $data);
+        // Insert data into the table format_ludilearn_attributio.
+        $newitemid = $DB->insert_record('format_ludilearn_attributio', $data);
         $this->set_mapping('attributions', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore format_ludimoodle_ele_user.
+     * Process restore format_ludilearn_ele_user.
      *
      * @param array $data Data to restore.
      *
@@ -222,13 +222,13 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table format_ludimoodle_ele_user.
-        $newitemid = $DB->insert_record('format_ludimoodle_ele_user', $data);
+        // Insert data into the table format_ludilearn_ele_user.
+        $newitemid = $DB->insert_record('format_ludilearn_ele_user', $data);
         $this->set_mapping('gameele_user', $data->id, $newitemid, true);
     }
 
     /**
-     * Process restore format_ludimoodle_cm_user.
+     * Process restore format_ludilearn_cm_user.
      *
      * @param array $data Data to restore.
      *
@@ -248,8 +248,8 @@ class restore_format_ludimoodle_plugin extends restore_format_plugin {
             return;
         }
 
-        // Insert data into the table format_ludimoodle_cm_user.
-        $newitemid = $DB->insert_record('format_ludimoodle_cm_user', $data);
+        // Insert data into the table format_ludilearn_cm_user.
+        $newitemid = $DB->insert_record('format_ludilearn_cm_user', $data);
         $this->set_mapping('cm_user', $data->id, $newitemid, true);
     }
 }

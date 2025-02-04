@@ -17,8 +17,8 @@
 /**
  *  Display the whole course.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -45,17 +45,17 @@ if (($marker >= 0) && has_capability('moodle/course:setcurrentsection', $context
 course_create_sections_if_missing($course, 0);
 
 if ($options['assignment'] == 'automatic') {
-    $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $USER->id]);
+    $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $USER->id]);
     if (!$profile) {
         // Verify if the user is a teacher or a manager.
         if (!has_capability('moodle/course:update', $context)) {
             // If the user is not a teacher or a manager, redirect him to the questionnaire page.
-            redirect(new moodle_url("$CFG->wwwroot/course/format/ludimoodle/questionnaire.php", ['id' => $course->id]));
+            redirect(new moodle_url("$CFG->wwwroot/course/format/ludilearn/questionnaire.php", ['id' => $course->id]));
         }
     }
 }
 
-$renderer = $PAGE->get_renderer('format_ludimoodle');
+$renderer = $PAGE->get_renderer('format_ludilearn');
 
 if (!empty($displaysection)) {
     $format->set_section_number($displaysection);

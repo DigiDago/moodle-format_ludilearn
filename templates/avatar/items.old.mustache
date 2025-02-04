@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -32,10 +32,10 @@
                 avatar-slot-{{ slot }}"
                      data-slot="{{ slot }}" data-theme="{{ theme }}">
                     {{#owned}}
-                        <img class="avatar-item-img" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/avatar/items/icons/icon-0{{slot}}-{{theme}}.svg" alt="Image item {{slot}}">
+                        <img class="avatar-item-img" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/avatar/items/icons/icon-0{{slot}}-{{theme}}.svg" alt="Image item {{slot}}">
                     {{/owned}}
                     {{^owned}}
-                        <img class="avatar-item-img" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/avatar/item_icon_default.svg" alt="Image item {{slot}}">
+                        <img class="avatar-item-img" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/avatar/item_icon_default.svg" alt="Image item {{slot}}">
                     {{/owned}}
                 </div>
             {{/items}}

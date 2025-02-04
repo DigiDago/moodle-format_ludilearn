@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Format Ludimoodle plugin game profile page.
+ * Format Ludilearn plugin game profile page.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -33,25 +33,25 @@ $context = context_course::instance($course->id, MUST_EXIST);
 require_login($course);
 $params = ['id' => $course->id];
 $PAGE->set_pagelayout('course');
-$PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludimoodle/questionnaire.php", $params));
+$PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludilearn/questionnaire.php", $params));
 $PAGE->set_context($context);
 $PAGE->set_title(get_string('coursetitle', 'moodle', ['course' => $course->fullname]));
 $PAGE->set_heading(
     $course->fullname . ' : ' .
-    get_string('gameprofile', 'format_ludimoodle')
+    get_string('gameprofile', 'format_ludilearn')
 );
 $PAGE->add_body_class('limitedwidth');
 $format = course_get_format($course);
 $course->format = $format->get_format();
 
-$renderer = $PAGE->get_renderer('format_ludimoodle');
+$renderer = $PAGE->get_renderer('format_ludilearn');
 
 echo $OUTPUT->header();
 
 // If user has not already answered the questionnaire, redirect to the questionnaire page.
-$profile = $DB->record_exists('format_ludimoodle_profile', ['userid' => $USER->id]);
+$profile = $DB->record_exists('format_ludilearn_profile', ['userid' => $USER->id]);
 if (!$profile) {
-    redirect(new moodle_url("$CFG->wwwroot/course/format/ludimoodle/questionnaire.php", ['id' => $course->id]));
+    redirect(new moodle_url("$CFG->wwwroot/course/format/ludilearn/questionnaire.php", ['id' => $course->id]));
 }
 echo $renderer->render_gameprofile($course->id);
 
