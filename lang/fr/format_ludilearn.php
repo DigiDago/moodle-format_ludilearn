@@ -27,6 +27,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Ludilearn';
+$string['plugin_description'] = 'Le cours propose une ludification avec des éléments de jeu (score, badge, progression, avatar, chronomètre, classement) attribués automatiquement selon le profil de l’apprenant ou choisis par l’enseignant.';
 $string['assignment'] = 'Mode d\'attribution des éléments de jeu';
 $string['assignment_help'] = 'Rappel : Ludilearn est un format de cours puissant mais son efficacité repose sur votre maîtrise des concepts de ludification et votre scénarisation pédagogique.<br><br>
 L\'attribution détermine comment les éléments de jeu sont assignés aux apprenants. Les 3 modes d\'attribution sont :<br><br>
@@ -35,7 +36,7 @@ L\'attribution détermine comment les éléments de jeu sont assignés aux appre
 * Par section : en sélectionnant en élément de jeu de votre choix pour tous les apprenants pour chaque section de cours.';
 $string['default'] = 'Par défaut';
 $string['manual'] = 'Manuellement pour tout le cours';
-$string['automatic'] = 'Automatique : basé sur un questionnaire et l\'algorithme LudiMoodle';
+$string['automatic'] = 'Automatique : basé sur un questionnaire et l\'algorithme LudiLearn';
 $string['bysection'] = 'Par section';
 $string['assignmentbysection'] = 'Attribution des éléments de jeu par section';
 $string['world'] = 'Univers';
@@ -50,7 +51,7 @@ $string['editsectionname'] = 'Modifier le nom de la section';
 $string['deletesection'] = 'Supprimer la section';
 $string['newsectionname'] = 'Nouveau nom de la section {$a}';
 $string['sectionname'] = 'Section';
-$string['settingsname'] = 'Personnalisation des éléments de jeu LudiMoodle';
+$string['settingsname'] = 'Personnalisation des éléments de jeu LudiLearn';
 $string['section0name'] = 'Général';
 $string['hidefromothers'] = 'Cacher la section';
 $string['showfromothers'] = 'Afficher la section';

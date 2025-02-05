@@ -27,6 +27,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Ludilearn';
+$string['plugin_description'] = 'The course offers gamification with game elements (score, badge, progression, avatar, timer, ranking) automatically assigned based on the learner\'s profile or chosen by the teacher.';
 $string['assignment'] = 'Allocation of game elements';
 $string['assignment_help'] = 'Reminder: Ludilearn is a powerful course format, but its effectiveness depends on your mastery of the concepts of gamification and your pedagogical scripting.<br><br>
 Allocation determines how game elements are assigned to learners. The 3 allocation modes are:<br><br>
@@ -35,7 +36,7 @@ Allocation determines how game elements are assigned to learners. The 3 allocati
 * By section: by selecting a game element of your choice for all learners for each section of the course.';
 $string['default'] = 'Default';
 $string['manual'] = 'Manually for the whole course';
-$string['automatic'] = 'Automatic: based on a questionnaire and the LudiMoodle algorithm';
+$string['automatic'] = 'Automatic: based on a questionnaire and the LudiLearn algorithm';
 $string['bysection'] = 'By section';
 $string['assignmentbysection'] = 'Allocation of game elements by section';
 $string['world'] = 'World';
@@ -50,7 +51,7 @@ $string['editsectionname'] = 'Edit section name';
 $string['deletesection'] = 'Delete section';
 $string['newsectionname'] = 'New name for section {$a}';
 $string['sectionname'] = 'Section';
-$string['settingsname'] = 'LudiMoodle customisation of game elements';
+$string['settingsname'] = 'LudiLearn customisation of game elements';
 $string['section0name'] = 'General';
 $string['hidefromothers'] = 'Hide section';
 $string['showfromothers'] = 'Show section';
