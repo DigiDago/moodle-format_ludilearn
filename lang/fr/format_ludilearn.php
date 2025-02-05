@@ -18,19 +18,19 @@
 /**
  * Plugin strings are defined here.
  *
- * @package     format_ludimoodle
+ * @package     format_ludilearn
  * @category    string
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Ludimoodle';
+$string['pluginname'] = 'Ludilearn';
 $string['assignment'] = 'Mode d\'attribution des éléments de jeu';
-$string['assignment_help'] = 'Rappel : Ludimoodle est un format de cours puissant mais son efficacité repose sur votre maîtrise des concepts de ludification et votre scénarisation pédagogique.<br><br>
+$string['assignment_help'] = 'Rappel : Ludilearn est un format de cours puissant mais son efficacité repose sur votre maîtrise des concepts de ludification et votre scénarisation pédagogique.<br><br>
 L\'attribution détermine comment les éléments de jeu sont assignés aux apprenants. Les 3 modes d\'attribution sont :<br><br>
-* Automatique : via l\'algorithme Ludimoodle qui attribue automatiquement un élément de jeu selon le profil de l\'apprenant (appliqué sur tous les cours). Si vos apprenants accèdent à un cours ludifié pour la première fois, ils auront à remplir un questionnaire qui prendra 5 minutes.<br>
+* Automatique : via l\'algorithme Ludilearn qui attribue automatiquement un élément de jeu selon le profil de l\'apprenant (appliqué sur tous les cours). Si vos apprenants accèdent à un cours ludifié pour la première fois, ils auront à remplir un questionnaire qui prendra 5 minutes.<br>
 * Manuel : en sélectionnant un élément de jeu de votre choix pour tous les apprenants et pour tout le cours.<br>
 * Par section : en sélectionnant en élément de jeu de votre choix pour tous les apprenants pour chaque section de cours.';
 $string['default'] = 'Par défaut';
@@ -218,29 +218,29 @@ $string['freeSpirit_desc'] = 'Motivé par l’autonomie';
 $string['disruptor_desc'] = 'Motivé par le changement';
 $string['philanthropist_desc'] = 'Motivé par le sens et l\’utilité';
 $string['partner_text'] = '<p>Développé par <a href="https://pimenko.com" target="_blank">Pimenko</a>.<br>
-Pour les retours techniques, merci d\'utiliser le <a href="https://github.com/DigiDago/moodle-format_ludimoodle" target="_blank">répertoire Github</a><br><br>
-<b>À propos de Ludimoodle+</b><br><br>
+Pour les retours techniques, merci d\'utiliser le <a href="https://github.com/DigiDago/moodle-format_ludilearn" target="_blank">répertoire Github</a><br><br>
+<b>À propos de Ludilearn+</b><br><br>
 Le projet LudiMoodle+, porté par l\'Université de Lyon, bénéficie d\'une aide de l\'État gérée par l\'Agence nationale de la recherche au titre de France 2030 portant la référence « ANR-22-FRAN-0005 »</p>';
 $string['partner_text2'] = '<p><b>Les partenaires du projet</b></p>';
 // String for privacy provider.
-$string['privacy:metadata:format_ludimoodle_profile'] = 'La table format_ludimoodle_profile stocke le profil de joueur HEXAD-12 de chaque utilisateur.';
-$string['privacy:metadata:format_ludimoodle_profile:userid'] = 'L\'identifiant de l\'utilisateur';
-$string['privacy:metadata:format_ludimoodle_profile:combinedaffinities'] = 'Le profil de joueur HEXAD-12 de l\'utilisateur.';
-$string['privacy:metadata:format_ludimoodle_profile:type'] = 'Type d\'élément de jeu attribué à l\'utilisateur.';
-$string['privacy:metadata:format_ludimoodle_answers'] = 'La table format_ludimoodle_answers stocke les réponses au questionnaire HEXAD-12.';
-$string['privacy:metadata:format_ludimoodle_answers:questionid'] = 'L\'ID de la question';
-$string['privacy:metadata:format_ludimoodle_answers:userid'] = 'L\'ID de l\'utilisateur.';
-$string['privacy:metadata:format_ludimoodle_answers:score'] = 'Le score obtenu par l\'utilisateur pour la question.';
-$string['privacy:metadata:format_ludimoodle_attributio'] = 'Le tableau format_ludimoodle_attributio stocke les éléments de jeu attribués à chaque utilisateur.';
-$string['privacy:metadata:format_ludimoodle_attributio:gameelementid'] = 'L\'ID de l\'élément de jeu.';
-$string['privacy:metadata:format_ludimoodle_attributio:userid'] = 'L\'ID de l\'utilisateur.';
-$string['privacy:metadata:format_ludimoodle_attributio:timecreated'] = 'Heure à laquelle l\'élément de jeu a été attribué à l\'utilisateur.';
-$string['privacy:metadata:ludimoodle_gameeele_user'] = 'La table ludimoodle_gameeele_user stocke toutes les données relatives aux éléments de jeu attribués à chaque utilisateur.';
-$string['privacy:metadata:ludimoodle_gameeele_user:attributionid'] = 'L\'ID d\'attribution.';
-$string['privacy:metadata:ludimoodle_gameeele_user:name'] = 'Le nom de la donnée.';
-$string['privacy:metadata:ludimoodle_gameeele_user:value'] = 'La valeur de la donnée.';
-$string['privacy:metadata:format_ludimoodle_cm_user'] = 'La table format_ludimoodle_cm_user stocke les données relatives aux éléments de jeu dans un module de cours attribué à chaque utilisateur.';
-$string['privacy:metadata:format_ludimoodle_cm_user:attributionid'] = 'L\'ID lié à l\'attribution';
-$string['privacy:metadata:format_ludimoodle_cm_user:cmid'] = 'L\'ID du cours.';
-$string['privacy:metadata:format_ludimoodle_cm_user:name'] = 'Le nom de la donnée.';
-$string['privacy:metadata:format_ludimoodle_cm_user:value'] = 'La valeur de la donnée.';
+$string['privacy:metadata:format_ludilearn_profile'] = 'La table format_ludilearn_profile stocke le profil de joueur HEXAD-12 de chaque utilisateur.';
+$string['privacy:metadata:format_ludilearn_profile:userid'] = 'L\'identifiant de l\'utilisateur';
+$string['privacy:metadata:format_ludilearn_profile:combinedaffinities'] = 'Le profil de joueur HEXAD-12 de l\'utilisateur.';
+$string['privacy:metadata:format_ludilearn_profile:type'] = 'Type d\'élément de jeu attribué à l\'utilisateur.';
+$string['privacy:metadata:format_ludilearn_answers'] = 'La table format_ludilearn_answers stocke les réponses au questionnaire HEXAD-12.';
+$string['privacy:metadata:format_ludilearn_answers:questionid'] = 'L\'ID de la question';
+$string['privacy:metadata:format_ludilearn_answers:userid'] = 'L\'ID de l\'utilisateur.';
+$string['privacy:metadata:format_ludilearn_answers:score'] = 'Le score obtenu par l\'utilisateur pour la question.';
+$string['privacy:metadata:format_ludilearn_attributio'] = 'Le tableau format_ludilearn_attributio stocke les éléments de jeu attribués à chaque utilisateur.';
+$string['privacy:metadata:format_ludilearn_attributio:gameelementid'] = 'L\'ID de l\'élément de jeu.';
+$string['privacy:metadata:format_ludilearn_attributio:userid'] = 'L\'ID de l\'utilisateur.';
+$string['privacy:metadata:format_ludilearn_attributio:timecreated'] = 'Heure à laquelle l\'élément de jeu a été attribué à l\'utilisateur.';
+$string['privacy:metadata:ludilearn_gameeele_user'] = 'La table ludilearn_gameeele_user stocke toutes les données relatives aux éléments de jeu attribués à chaque utilisateur.';
+$string['privacy:metadata:ludilearn_gameeele_user:attributionid'] = 'L\'ID d\'attribution.';
+$string['privacy:metadata:ludilearn_gameeele_user:name'] = 'Le nom de la donnée.';
+$string['privacy:metadata:ludilearn_gameeele_user:value'] = 'La valeur de la donnée.';
+$string['privacy:metadata:format_ludilearn_cm_user'] = 'La table format_ludilearn_cm_user stocke les données relatives aux éléments de jeu dans un module de cours attribué à chaque utilisateur.';
+$string['privacy:metadata:format_ludilearn_cm_user:attributionid'] = 'L\'ID lié à l\'attribution';
+$string['privacy:metadata:format_ludilearn_cm_user:cmid'] = 'L\'ID du cours.';
+$string['privacy:metadata:format_ludilearn_cm_user:name'] = 'Le nom de la donnée.';
+$string['privacy:metadata:format_ludilearn_cm_user:value'] = 'La valeur de la donnée.';

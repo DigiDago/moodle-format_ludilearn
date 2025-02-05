@@ -16,9 +16,9 @@
 /**
  * Rendering pagination.
  *
- * @module     format_ludimoodle/pagination
+ * @module     format_ludilearn/pagination
  * @package
- * @copyright  2024 Pimenko <contact@pimenko.com>
+ * @copyright  2025 Pimenko <contact@pimenko.com>
  * @author     Jordan Kesraoui
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -60,7 +60,7 @@ define(['jquery', 'core/ajax', 'core/templates'],
             }
 
             // Render the table of programs.
-            Templates.render('format_ludimoodle/report/pagination', template)
+            Templates.render('format_ludilearn/report/pagination', template)
                 .then((html) => {
                     // Add the element to the DOM.
                     let element = document.getElementById(that.elementid);

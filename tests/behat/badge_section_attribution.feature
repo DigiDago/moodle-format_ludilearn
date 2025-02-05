@@ -1,5 +1,5 @@
-@format @format_ludimoodle @javascript @_file_upload @ludimoodle_badge
-Feature: Badge game element configuration and validation by section in Ludimoodle
+@format @format_ludilearn @javascript @_file_upload @ludilearn_badge
+Feature: Badge game element configuration and validation by section in Ludilearn
   In order to create engaging learning course with gamification elements
   As a teacher
   I need to configure badge elements per section and verify their behavior across different activity types and completion scenarios
@@ -11,13 +11,13 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
       | student1 | Student | One | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname | format | numsections | enablecompletion |
-      | Ludimoodle Badge | L1 | ludimoodle | 3 | 1 |
+      | Ludilearn Badge | L1 | ludilearn | 3 | 1 |
     And the following "course enrolments" exist:
       | user | course | role |
       | teacher1 | L1 | editingteacher |
       | student1 | L1 | student |
     And I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I navigate to "Settings" in current page administration
     And I expand all fieldsets
     And I set the following fields to these values:
@@ -26,7 +26,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I turn editing mode on
     And I edit the section "1" and I fill the form with:
       | name | Badge Section |
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
       | assign | Badge Note Only | Test badge with grade | L1 | badge1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
@@ -38,15 +38,15 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
   @score_section_display_homepage
   Scenario: Verify badge sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I edit the section "3" and I fill the form with:
       | name | Empty Section |
     And I turn editing mode off
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
@@ -58,7 +58,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # State verification
     Given I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     Then I should see "General" in the ".col-6:nth-child(1) .sectionname" "css_element"
     And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(1)" "css_element"
     And I should see "Badge Section" in the ".col-6:nth-child(2) .sectionname" "css_element"
@@ -71,15 +71,15 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
   @badge_section_display
   Scenario: Verify badge elements appear only in configured section
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I edit the section "3" and I fill the form with:
       | name | Empty Section |
     And I turn editing mode off
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
       | assign | Regular Note Only | Test without game element | L1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
@@ -96,7 +96,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     # Check badge display at section level
     When I click on "Badge Section" "link" in the "region-main" "region"
     Then I should see "Badge Section" in the ".section-badge h4" "css_element"
@@ -120,7 +120,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(4) .cm-badge" "css_element"
     And I should see "Badge No Gamification" in the ".col-sm-4:nth-child(4) .cmname" "css_element"
     # Check display for non-gamified section
-    When I am on "Ludimoodle Badge" course homepage
+    When I am on "Ludilearn Badge" course homepage
     And I click on "No Game Section" "link" in the "region-main" "region"
     Then I should see "No Game Section" in the ".section-nogamified h4" "css_element"
     And I should see "Regular Note Only" in the ".col-sm-4:nth-child(1) .cmname" "css_element"
@@ -132,14 +132,14 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I should see "Regular Forum" in the ".col-sm-4:nth-child(4) .cmname" "css_element"
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(4) .cm-nogamified" "css_element"
     # Check empty section
-    When I am on "Ludimoodle Badge" course homepage
+    When I am on "Ludilearn Badge" course homepage
     And I click on "Empty Section" "link" in the "region-main" "region"
     Then I should see "Empty Section" in the ".section-badge h4" "css_element"
 
   @badge_completion
   Scenario: Badge updates correctly when activity is completed
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
@@ -148,13 +148,13 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     And I click on "Badge Completion Only" "link"
     # Complete the activity
     And I press "Mark as done"
     # Check updated badges
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     # Check section badge counters
     Then "img[src*='badge_completion.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -171,7 +171,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
   @badge_grade
   Scenario: Badge updates correctly from silver to gold when student receives grade
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
@@ -181,7 +181,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Student submits assignment
     Given I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     # Check initial state
     Then "img[src*='badge_bronze_none.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -202,7 +202,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Teacher grades submission
     And I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I click on "Badge Section" "link" in the "region-main" "region"
     And I click on "Badge Note Only" "link" in the "region-main" "region"
     And I navigate to "Submissions" in current page administration
@@ -214,7 +214,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Student verifies updated badges
     And I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     # Check badges after grading
     Then "img[src*='badge_bronze.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -235,7 +235,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I log out
     # Student verifies updated badges after grade
     And I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     Then "img[src*='badge_silver.svg']" "css_element" should exist in the ".rightlined" "css_element"
     And I should see "0" in the ".col-3:nth-child(1) .badge-number" "css_element"
@@ -254,7 +254,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I log out
     # Student verifies updated badges after grade
     And I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     # Check badges after perfect grade
     Then "img[src*='badge_gold.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -278,7 +278,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
       | question       | page | maxmark |
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
@@ -287,7 +287,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     # Check initial state
     Then "img[src*='badge_bronze_none.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -307,7 +307,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I click on "Badge Section" "link" in the "region-main" "region"
     # Check badges after quiz completion
     Then "img[src*='badge_gold.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -320,7 +320,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
     # Complete the activity
     And I am on the "badge3" "quiz activity" page
     And I press "Mark as done"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I click on "Badge Section" "link" in the "region-main" "region"
     # Check final state with both badges
     Then "img[src*='badge_gold.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -336,7 +336,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
   Scenario: Teacher can configure badge thresholds and student gets the expected badges
     # Teacher configures game elements allocation
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
@@ -354,7 +354,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Check initial state - no badges earned
     Given I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     Then "img[src*='badge_bronze_none.svg']" "css_element" should exist in the ".rightlined" "css_element"
     And "img[src*='badge_silver_none.svg']" "css_element" should exist in the ".rightlined" "css_element"
@@ -374,7 +374,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Teacher grades submission - Bronze badge (55%)
     And I log in as "teacher1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     And I click on "Badge Section" "link" in the "region-main" "region"
     And I click on "Badge Note Only" "link" in the "region-main" "region"
     And I navigate to "Submissions" in current page administration
@@ -386,7 +386,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Student verifies Bronze badge earned
     And I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     Then "img[src*='badge_bronze.svg']" "css_element" should exist in the ".rightlined" "css_element"
     And I should see "1" in the ".col-3:nth-child(1) .badge-number" "css_element"
@@ -408,7 +408,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Student verifies Silver badge earned
     And I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     Then "img[src*='badge_silver.svg']" "css_element" should exist in the ".rightlined" "css_element"
     And I should see "0" in the ".col-3:nth-child(1) .badge-number" "css_element"
@@ -430,7 +430,7 @@ Feature: Badge game element configuration and validation by section in Ludimoodl
 
     # Student verifies Gold badge earned
     And I log in as "student1"
-    And I am on "Ludimoodle Badge" course homepage
+    And I am on "Ludilearn Badge" course homepage
     When I click on "Badge Section" "link" in the "region-main" "region"
     Then "img[src*='badge_gold.svg']" "css_element" should exist in the ".rightlined" "css_element"
     And I should see "0" in the ".col-3:nth-child(1) .badge-number" "css_element"

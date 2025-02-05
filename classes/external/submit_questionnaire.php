@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\external;
+namespace format_ludilearn\external;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -26,15 +26,15 @@ use external_api;
 use external_function_parameters;
 use external_single_structure;
 use external_value;
-use format_ludimoodle\local\adaptation\suggestion_output;
-use format_ludimoodle\manager;
+use format_ludilearn\local\adaptation\suggestion_output;
+use format_ludilearn\manager;
 use stdClass;
 
 /**
  * Class for submit questionnaire.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -54,17 +54,17 @@ class submit_questionnaire extends external_api {
         $success = true;
 
         foreach ($answers as $answer) {
-            $existing = $DB->get_record('format_ludimoodle_answers',
+            $existing = $DB->get_record('format_ludilearn_answers',
                 ['userid' => $USER->id, 'questionid' => $answer['id']]);
             if ($existing) {
                 $existing->score = $answer['score'];
-                $success = $success && $DB->update_record('format_ludimoodle_answers', $existing);
+                $success = $success && $DB->update_record('format_ludilearn_answers', $existing);
             } else {
                 $notexisting = new stdClass();
                 $notexisting->userid = $USER->id;
                 $notexisting->questionid = $answer['id'];
                 $notexisting->score = $answer['score'];
-                $success = $success && $DB->insert_record('format_ludimoodle_answers', $notexisting);
+                $success = $success && $DB->insert_record('format_ludilearn_answers', $notexisting);
             }
         }
 

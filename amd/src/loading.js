@@ -16,9 +16,9 @@
 /**
  * Rendering loading.
  *
- * @module     format_ludimoodle/loading
+ * @module     format_ludilearn/loading
  * @package
- * @copyright  2024 Pimenko <contact@pimenko.com>
+ * @copyright  2025 Pimenko <contact@pimenko.com>
  * @author     Jordan Kesraoui
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -57,7 +57,7 @@ define(['jquery', 'core/ajax', 'core/templates'],
             let that = this;
 
             // Render the table of programs.
-            Templates.render('format_ludimoodle/report/noresult', {})
+            Templates.render('format_ludilearn/report/noresult', {})
                 .then((html) => {
                     // Add the element to the DOM.
                     let element = document.getElementById(that.parentelementid);

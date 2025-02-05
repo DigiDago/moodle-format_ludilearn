@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
 /**
- * Event observers used by the ludimoodle course format.
+ * Event observers used by the ludilearn course format.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,26 +34,26 @@ use core\event\role_assigned;
 use core\event\user_enrolment_created;
 use core\event\user_enrolment_updated;
 use core\event\user_graded;
-use format_ludimoodle\local\gameelements\avatar;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\local\gameelements\progress;
-use format_ludimoodle\local\gameelements\ranking;
-use format_ludimoodle\local\gameelements\score;
-use format_ludimoodle\local\gameelements\timer;
-use format_ludimoodle\manager;
+use format_ludilearn\local\gameelements\avatar;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\local\gameelements\progress;
+use format_ludilearn\local\gameelements\ranking;
+use format_ludilearn\local\gameelements\score;
+use format_ludilearn\local\gameelements\timer;
+use format_ludilearn\manager;
 use mod_quiz\event\attempt_deleted;
 use mod_quiz\event\attempt_submitted;
 use mod_quiz\event\attempt_updated;
 
 /**
- * Event observer for format_ludimoodle.
+ * Event observer for format_ludilearn.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class format_ludimoodle_observer {
+class format_ludilearn_observer {
     /**
      * Triggered via \core\event\user_enrolment_created event.
      *
@@ -65,7 +65,7 @@ class format_ludimoodle_observer {
         if (is_enrolled(context_course::instance($event->courseid), $event->relateduserid)) {
             $manager = new manager();
             $course = get_course($event->courseid);
-            if ($course->format == 'ludimoodle') {
+            if ($course->format == 'ludilearn') {
                 $userid = $event->relateduserid;
                 $format = course_get_format($course);
                 // Get the format options.
@@ -92,7 +92,7 @@ class format_ludimoodle_observer {
         if (is_enrolled(context_course::instance($event->courseid), $event->relateduserid)) {
             $manager = new manager();
             $course = get_course($event->courseid);
-            if ($course->format == 'ludimoodle') {
+            if ($course->format == 'ludilearn') {
                 $userid = $event->relateduserid;
                 $format = course_get_format($course);
                 // Get the format options.
@@ -121,7 +121,7 @@ class format_ludimoodle_observer {
                 if (is_enrolled(context_course::instance($parentcontext->instanceid), $event->relateduserid)) {
                     $manager = new manager();
                     $course = get_course($parentcontext->instanceid);
-                    if ($course->format == 'ludimoodle') {
+                    if ($course->format == 'ludilearn') {
                         $userid = $event->relateduserid;
                         $format = course_get_format($course);
 
@@ -163,7 +163,7 @@ class format_ludimoodle_observer {
         // Get the format options.
         $options = $format->get_format_options();
 
-        if ($course->format == 'ludimoodle') {
+        if ($course->format == 'ludilearn') {
             // Create game elements.
             game_element::create_all($course->id, $event->objectid);
 
@@ -171,19 +171,19 @@ class format_ludimoodle_observer {
             $users = get_enrolled_users(context_course::instance($course->id));
 
             // Get the default game element.
-            $gameelementbydefault = $DB->get_record('format_ludimoodle_elements',
+            $gameelementbydefault = $DB->get_record('format_ludilearn_elements',
                 ['courseid' => $course->id, 'sectionid' => $event->objectid, 'type' => $options['default_game_element']]);
 
             foreach ($users as $user) {
                 $type = $options['default_game_element'];
                 if ($options['assignment'] == 'automatic') {
                     // Else if assignment is automatic, we attribute the game element to the user based on his profile.
-                    $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $user->id]);
+                    $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $user->id]);
                     if ($profile) {
                         $type = $profile->type;
                     }
                 } else if ($options['assignment'] == 'bysection') {
-                    $bysection = $DB->get_record('format_ludimoodle_bysection',
+                    $bysection = $DB->get_record('format_ludilearn_bysection',
                         ['courseid' => $course->id, 'sectionid' => $event->objectid]);
                     if ($bysection) {
                         $type = 'bysection';
@@ -195,7 +195,7 @@ class format_ludimoodle_observer {
                 // Attribution game element.
                 if (isset($type)) {
                     if ($options['assignment'] != 'bysection') {
-                        $gameelement = $DB->get_record('format_ludimoodle_elements',
+                        $gameelement = $DB->get_record('format_ludilearn_elements',
                             ['courseid' => $course->id, 'sectionid' => $event->objectid, 'type' => $type]);
                         $manager->attribution_game_element($gameelement->id, $user->id);
                     } else {
@@ -204,7 +204,7 @@ class format_ludimoodle_observer {
                             $manager->attribution_game_element($bysection->gameelementid, $user->id);
                         }
                     }
-                    $gameelement = $DB->get_record('format_ludimoodle_elements',
+                    $gameelement = $DB->get_record('format_ludilearn_elements',
                         [
                             'sectionid' => $event->objectid,
                             'type' => $type,
@@ -264,8 +264,8 @@ class format_ludimoodle_observer {
 
         $course = $DB->get_record('course', ['id' => $event->courseid]);
         $cm = $DB->get_record('course_modules', ['id' => $event->objectid]);
-        if ($course->format == 'ludimoodle') {
-            $gameelements = $DB->get_records('format_ludimoodle_elements',
+        if ($course->format == 'ludilearn') {
+            $gameelements = $DB->get_records('format_ludilearn_elements',
                 [
                     'courseid' => $course->id,
                     'sectionid' => $cm->section,
@@ -275,7 +275,7 @@ class format_ludimoodle_observer {
                 $cmparameters = game_element::get_cm_parameters_default_by_type($gameelement->type, $event->other['modulename'],
                     $event->objectid);
                 foreach ($cmparameters as $name => $value) {
-                    $DB->insert_record('format_ludimoodle_cm_params',
+                    $DB->insert_record('format_ludilearn_cm_params',
                         ['gameelementid' => $gameelement->id, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]);
                 }
             }
@@ -292,8 +292,8 @@ class format_ludimoodle_observer {
      */
     public static function course_module_deleted(course_module_deleted $event): void {
         global $DB;
-        $DB->delete_records('format_ludimoodle_cm_params', ['cmid' => $event->contextinstanceid]);
-        $DB->delete_records('format_ludimoodle_cm_user', ['cmid' => $event->contextinstanceid]);
+        $DB->delete_records('format_ludilearn_cm_params', ['cmid' => $event->contextinstanceid]);
+        $DB->delete_records('format_ludilearn_cm_user', ['cmid' => $event->contextinstanceid]);
     }
 
     /**
@@ -308,18 +308,18 @@ class format_ludimoodle_observer {
         global $DB;
         $course = $DB->get_record('course', ['id' => $event->courseid]);
         $cm = $DB->get_record('course_modules', ['id' => $event->contextinstanceid]);
-        if ($course->format == 'ludimoodle') {
+        if ($course->format == 'ludilearn') {
             // Retrieve the course module object.
             $cmid = $event->contextinstanceid;
 
             // If the section has changed, we need to update the game element.
             foreach (game_element::get_all_types() as $type) {
                 // Game element of the next section.
-                $nextgameelement = $DB->get_record('format_ludimoodle_elements',
+                $nextgameelement = $DB->get_record('format_ludilearn_elements',
                     ['courseid' => $event->courseid, 'sectionid' => $cm->section, 'type' => $type]);
 
-                $previousgameelementsql = 'SELECT ge.id FROM {format_ludimoodle_cm_params} cmp
-                                    INNER JOIN {format_ludimoodle_elements} ge ON ge.id = cmp.gameelementid
+                $previousgameelementsql = 'SELECT ge.id FROM {format_ludilearn_cm_params} cmp
+                                    INNER JOIN {format_ludilearn_elements} ge ON ge.id = cmp.gameelementid
                                     WHERE ge.type = :type
                                     AND cmp.cmid = :cmid';
                 $previsousgameelement = $DB->get_record_sql($previousgameelementsql, ['type' => $type, 'cmid' => $cmid]);
@@ -334,17 +334,17 @@ class format_ludimoodle_observer {
                     continue;
                 }
                 // Update the game element of the course module.
-                $sql = 'UPDATE {format_ludimoodle_cm_params} SET gameelementid = :nextgameelement
+                $sql = 'UPDATE {format_ludilearn_cm_params} SET gameelementid = :nextgameelement
                         WHERE id = :id';
                 $DB->execute($sql, ['nextgameelement' => $nextgameelement->id, 'id' => $previsousgameelement->id]);
 
                 // Attributions of the next section.
-                $attributions = $DB->get_records('format_ludimoodle_attributio',
+                $attributions = $DB->get_records('format_ludilearn_attributio',
                     ['gameelementid' => $nextgameelement->id]);
 
                 // Update the attribution of the course module.
                 foreach ($attributions as $attribution) {
-                    $sql = 'UPDATE {format_ludimoodle_cm_user} SET attributionid = :attributionid WHERE cmid = :cmid';
+                    $sql = 'UPDATE {format_ludilearn_cm_user} SET attributionid = :attributionid WHERE cmid = :cmid';
                     $DB->execute($sql, ['attributionid' => $attribution->id, 'cmid' => $cmid]);
                 }
             }
@@ -388,12 +388,12 @@ class format_ludimoodle_observer {
         );
 
         $course = $DB->get_record('course', ['id' => $event->courseid]);
-        if ($course->format == 'ludimoodle') {
+        if ($course->format == 'ludilearn') {
             // Update score elements.
             score::update_elements($event->courseid, $coursemodule, $module->name, $userid);
 
             // Update badge elements.
-            \format_ludimoodle\local\gameelements\badge::update_elements($event->courseid, $coursemodule,
+            \format_ludilearn\local\gameelements\badge::update_elements($event->courseid, $coursemodule,
                 $module->name, $userid);
 
             // Update progress elements.
@@ -419,9 +419,9 @@ class format_ludimoodle_observer {
         global $DB;
         $quiz = $DB->get_record('quiz', ['id' => $event->other['quizid']]);
 
-        // Check if the quiz is in a ludimoodle course.
+        // Check if the quiz is in a ludilearn course.
         $course = $DB->get_record('course', ['id' => $event->courseid]);
-        if ($course->format == 'ludimoodle') {
+        if ($course->format == 'ludilearn') {
 
             // Ignore if quiz with defered feedback.
             if (!$quiz || $quiz->preferredbehaviour != 'immediatefeedback') {
@@ -432,7 +432,7 @@ class format_ludimoodle_observer {
             score::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
 
             // Update badge element.
-            \format_ludimoodle\local\gameelements\badge::update_quiz_immediate_feedback($quiz->id,
+            \format_ludilearn\local\gameelements\badge::update_quiz_immediate_feedback($quiz->id,
                 $event->relateduserid);
 
             // Update progress element.
@@ -461,9 +461,9 @@ class format_ludimoodle_observer {
         global $DB;
         $quiz = $DB->get_record('quiz', ['id' => $event->other['quizid']]);
 
-        // Check if the quiz is in a ludimoodle course.
+        // Check if the quiz is in a ludilearn course.
         $course = $DB->get_record('course', ['id' => $event->courseid]);
-        if ($course->format == 'ludimoodle') {
+        if ($course->format == 'ludilearn') {
             // Ignore if quiz with defered feedback.
             if ($quiz->preferredbehaviour != 'immediatefeedback') {
                 return;
@@ -472,7 +472,7 @@ class format_ludimoodle_observer {
             score::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
 
             // Update badge element.
-            \format_ludimoodle\local\gameelements\badge::update_quiz_immediate_feedback($quiz->id,
+            \format_ludilearn\local\gameelements\badge::update_quiz_immediate_feedback($quiz->id,
                 $event->relateduserid);
 
             // Update progress element.
@@ -504,9 +504,9 @@ class format_ludimoodle_observer {
         global $DB;
         $quiz = $DB->get_record('quiz', ['id' => $event->other['quizid']]);
 
-        // Check if the quiz is in a ludimoodle course.
+        // Check if the quiz is in a ludilearn course.
         $course = $DB->get_record('course', ['id' => $event->courseid]);
-        if ($course->format == 'ludimoodle') {
+        if ($course->format == 'ludilearn') {
             // Update timer element.
             timer::submit_quiz($event->objectid, $quiz->id, $event->relateduserid);
         }
@@ -526,7 +526,7 @@ class format_ludimoodle_observer {
         // If reset gradebook grades is checked when reset course.
         if (!empty($event->other['reset_options']['reset_gradebook_grades'])) {
             $course = $DB->get_record('course', ['id' => $event->courseid]);
-            if ($course->format == 'ludimoodle') {
+            if ($course->format == 'ludilearn') {
                 // Reset all game elements progression in this course.
                 game_element::reset_course($event->courseid);
             }

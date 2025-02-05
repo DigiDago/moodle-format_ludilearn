@@ -15,38 +15,38 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
 }}
 
-<div id="ludimoodle-settings" class="ludimoodle-world-{{ world }}">
+<div id="ludilearn-settings" class="ludilearn-world-{{ world }}">
     <div class="row justify-content-center">
         <div class="col-6 block_section">
-            <img class="ludimoodle-img img-responsive d-block mx-auto"
-                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/default-timer.svg"
+            <img class="ludilearn-img img-responsive d-block mx-auto"
+                 src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/default-timer.svg"
                  alt="Image best reference time">
         </div>
     </div>
     <div class="alert alert-success editsettingssuccess" role="alert">
-        {{#str}} editsettingssuccess, format_ludimoodle {{/str}}
+        {{#str}} editsettingssuccess, format_ludilearn {{/str}}
     </div>
     <div class="alert alert-danger editsettingsfailed" role="alert">
-        {{#str}} editsettingsfailed, format_ludimoodle {{/str}}
+        {{#str}} editsettingsfailed, format_ludilearn {{/str}}
     </div>
-    <p class="align-center">{{#str}} settings:timerdescription, format_ludimoodle {{/str}}</p>
+    <p class="align-center">{{#str}} settings:timerdescription, format_ludilearn {{/str}}</p>
     <form id="form-parameters" class="form-parameters mform" action="#">
         <input type="hidden" name="courseid" value="{{ courseid }}">
         <div class="form-group row">
             <div class="col-form-label col-md-3 d-flex pb-0 pr-md-0">
-                <label for="input-badgegold" class="d-inline word-break">{{#str}} settings:penalties, format_ludimoodle  {{/str}}</label>
+                <label for="input-badgegold" class="d-inline word-break">{{#str}} settings:penalties, format_ludilearn  {{/str}}</label>
                 <div class="form-label-addon d-flex align-items-center align-self-start">
                     <div class="text-danger">
                         <i class="icon fa fa-exclamation-circle text-danger fa-fw " role="img"></i>
                     </div>
                     <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
-                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:penalties_help, format_ludimoodle  {{/str}}</p></div>"
+                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:penalties_help, format_ludilearn  {{/str}}</p></div>"
                        data-html="true" tabindex="0" data-trigger="focus">
                         <i class="icon fa fa-question-circle text-info fa-fw"></i>
                     </a>
@@ -56,12 +56,12 @@
                 <div class="input-group">
                     <input class="form-control" id="input-penalties" name="penalties" type="number" min="0" value="{{ penalties }}">
                     <div class="input-group-append">
-                        <span class="input-group-text"> {{#str}} seconds, format_ludimoodle  {{/str}} </span>
+                        <span class="input-group-text"> {{#str}} seconds, format_ludilearn  {{/str}} </span>
                     </div>
                 </div>
             </div>
         </div>
         <button class="btn btn-primary" type="submit">{{#str}} save {{/str}}</button>
-        {{> format_ludimoodle/settings_footer}}
+        {{> format_ludilearn/settings_footer}}
     </form>
 </div>

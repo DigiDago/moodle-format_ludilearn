@@ -1,5 +1,5 @@
-@format @format_ludimoodle @javascript @_file_upload @ludimoodle_progression
-Feature: Progression game element section attribution in Ludimoodle course format
+@format @format_ludilearn @javascript @_file_upload @ludilearn_progression
+Feature: Progression game element section attribution in Ludilearn course format
   In order to motivate students with progression tracking in specific sections
   As a teacher
   I need to configure progression element for a section and verify it works with different activities
@@ -11,13 +11,13 @@ Feature: Progression game element section attribution in Ludimoodle course forma
       | student1 | Student | One | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname | format | numsections | enablecompletion |
-      | Ludimoodle Progression | L1 | ludimoodle | 3 | 1 |
+      | Ludilearn Progression | L1 | ludilearn | 3 | 1 |
     And the following "course enrolments" exist:
       | user | course | role |
       | teacher1 | L1 | editingteacher |
       | student1 | L1 | student |
     And I log in as "teacher1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And I navigate to "Settings" in current page administration
     And I expand all fieldsets
     And I set the following fields to these values:
@@ -26,7 +26,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I turn editing mode on
     And I edit the section "1" and I fill the form with:
       | name | Progression Section |
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
       | assign | Progress Note Only | Test progression with grade | L1 | prog1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
@@ -38,15 +38,15 @@ Feature: Progression game element section attribution in Ludimoodle course forma
   @score_section_display_homepage
   Scenario: Verify progression sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And I edit the section "3" and I fill the form with:
       | name | Empty Section |
     And I turn editing mode off
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
@@ -58,7 +58,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
 
     # State verification
     Given I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     Then I should see "General" in the ".col-6:nth-child(1) .sectionname" "css_element"
     And "img[src*='unkown.svg']" "css_element" should exist in the ".col-6:nth-child(1)" "css_element"
     And I should see "Progression Section" in the ".col-6:nth-child(2) .sectionname" "css_element"
@@ -71,15 +71,15 @@ Feature: Progression game element section attribution in Ludimoodle course forma
   @progression_section_display
   Scenario: Verify progression elements for activies and resources appear only in configured section
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And I turn editing mode on
     And I edit the section "2" and I fill the form with:
       | name | No Game Section |
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And I edit the section "3" and I fill the form with:
       | name | Empty Section |
     And I turn editing mode off
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And the following "activities" exist:
      | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
       | assign | Progress Note Only | Test progression with grade | L1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
@@ -96,7 +96,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     # Check progression display at section level
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "Progression Section" in the ".section-progress h4" "css_element"
@@ -125,7 +125,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I should see "Progress No Gamification" in the ".col-sm-4:nth-child(4) .cmname" "css_element"
 
     # Check display for non-gamified section
-    When I am on "Ludimoodle Progression" course homepage
+    When I am on "Ludilearn Progression" course homepage
     When I click on "No Game Section" "link" in the "region-main" "region"
     Then I should see "No Game Section" in the "div.section-nogamified h4" "css_element"
     And I should see "Progress Note Only" in the ".col-sm-4:nth-child(1) .cm-nogamified .cmname" "css_element"
@@ -138,14 +138,14 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And "img[src*='none.svg']" "css_element" should exist in the ".col-sm-4:nth-child(4) .cm-nogamified" "css_element"
 
    # Check empty section
-    When I am on "Ludimoodle Progression" course homepage
+    When I am on "Ludilearn Progression" course homepage
     And I click on "Empty Section" "link" in the "region-main" "region"
     Then I should see "Empty Section" in the ".section-progress h4" "css_element"
 
   @progression_completion
   Scenario: Progression updates correctly when activity is completed
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
@@ -154,7 +154,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     # Check initial state
     Then I should see "0%" in the ".rightdottedscore .progression-text span.progression" "css_element"
@@ -166,7 +166,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     When I click on "Progress Completion Only" "link"
     And I press "Mark as done"
     And I wait until the page is ready
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
 
     # Check updated progression
@@ -179,7 +179,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
   @progression_grade
   Scenario: Progression updates correctly when student receives grade
     Given I log in as "teacher1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
@@ -188,7 +188,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     # Check initial state
     Then I should see "0%" in the ".rightdottedscore .progression-text span.progression" "css_element"
@@ -215,7 +215,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
 
     # Student verifies updated progression
     And I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "26%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "80%" in the ".col-sm-4:nth-child(1) .progression-text.progression-cm span.progression" "css_element"
@@ -236,7 +236,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
 
     # Student verifies updated progression
     And I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "30%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "90%" in the ".col-sm-4:nth-child(1) .progression-text.progression-cm span.progression" "css_element"
@@ -257,7 +257,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
 
     # Student verifies updated progression
     And I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "33%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "100%" in the ".col-sm-4:nth-child(1) .progression-text.progression-cm span.progression" "css_element"
@@ -280,7 +280,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
       | question       | page | maxmark |
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
@@ -289,7 +289,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     # Check initial state
     Then I should see "0%" in the ".rightdottedscore .progression-text span.progression" "css_element"
@@ -300,7 +300,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     # Complete the activity
     And I am on the "prog3" "quiz activity" page
     And I press "Mark as done"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "0%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "0%" in the ".col-sm-4:nth-child(3) .progression-text.progression-cm span.progression" "css_element"
@@ -316,7 +316,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "16%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "50%" in the ".col-sm-4:nth-child(3) .progression-text.progression-cm span.progression" "css_element"
@@ -329,7 +329,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "33%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "100%" in the ".col-sm-4:nth-child(3) .progression-text.progression-cm span.progression" "css_element"
@@ -348,7 +348,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
       | question       | page | maxmark |
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I navigate to "LudiMoodle customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
@@ -357,7 +357,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I log out
 
     Given I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     # Check initial state
     Then I should see "0%" in the ".rightdottedscore .progression-text span.progression" "css_element"
@@ -371,7 +371,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I press "Save changes"
     And I log out
     And I log in as "teacher1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     And I click on "Progression Section" "link" in the "region-main" "region"
     And I click on "Progress Note Only" "link" in the "region-main" "region"
     And I navigate to "Submissions" in current page administration
@@ -381,7 +381,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I press "Save changes"
     And I log out
     And I log in as "student1"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "33%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     # Verify  state of all activities
@@ -393,7 +393,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     # Complete Progress Completion Only (Page)
     When I click on "Progress Completion Only" "link"
     And I press "Mark as done"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "66%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     # Verify  state of all activities
@@ -405,7 +405,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     # Complete Progress Both (Quiz with grade and completion)
     And I am on the "prog3" "quiz activity" page
     And I press "Mark as done"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "66%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "0%" in the ".col-sm-4:nth-child(3) .progression-text.progression-cm span.progression" "css_element"
@@ -416,7 +416,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "83%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "50%" in the ".col-sm-4:nth-child(3) .progression-text.progression-cm span.progression" "css_element"
@@ -427,7 +427,7 @@ Feature: Progression game element section attribution in Ludimoodle course forma
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
-    And I am on "Ludimoodle Progression" course homepage
+    And I am on "Ludilearn Progression" course homepage
     When I click on "Progression Section" "link" in the "region-main" "region"
     Then I should see "100%" in the ".rightdottedscore .progression-text span.progression" "css_element"
     And I should see "100%" in the ".col-sm-4:nth-child(1) .progression-text.progression-cm span.progression" "css_element"

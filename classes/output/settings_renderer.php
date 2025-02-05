@@ -14,18 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\output;
+namespace format_ludilearn\output;
 
 use core_reportbuilder\external\filters\set;
-use format_ludimoodle\local\gameelements\game_element;
+use format_ludilearn\local\gameelements\game_element;
 use moodle_url;
 use plugin_renderer_base;
 
 /**
- * Renderer for the Ludimoodle elements settings.
+ * Renderer for the Ludilearn elements settings.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -47,21 +47,21 @@ class settings_renderer extends plugin_renderer_base {
         $rendermenu = $this->render_menu($settings->get_courseid(), $settings->get_url()->out(false));
 
         // Call js.
-        $this->page->requires->js_call_amd('format_ludimoodle/settings', 'init',
+        $this->page->requires->js_call_amd('format_ludilearn/settings', 'init',
             ['courseid' => $settings->get_courseid(),
                 'type' => $settings->get_type(),
                 'parameterslist' => $settings->get_parameterslist()]);
 
         // If the type is not a game element but the assignment by section setting page.
         if ($settings->get_type() == 'assignmentbysection') {
-            return $rendermenu . $this->render_from_template('format_ludimoodle/settings_assignment_by_section',
+            return $rendermenu . $this->render_from_template('format_ludilearn/settings_assignment_by_section',
                     $settings->export_for_template($this));
         } else if ($settings->get_type() == 'updateprogression') {
-            return $rendermenu . $this->render_from_template('format_ludimoodle/settings_update_progression',
+            return $rendermenu . $this->render_from_template('format_ludilearn/settings_update_progression',
                     $settings->export_for_template($this));
         }
 
-        return $rendermenu . $this->render_from_template('format_ludimoodle/' . $settings->get_type() . '/settings',
+        return $rendermenu . $this->render_from_template('format_ludilearn/' . $settings->get_type() . '/settings',
                 $settings->export_for_template($this));
     }
 
@@ -88,27 +88,27 @@ class settings_renderer extends plugin_renderer_base {
 
         // Global game element settings.
         $params = ['id' => $courseid, 'type' => 'assignmentbysection', 'hideheader' => 1];
-        $url = new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php", $params);
+        $url = new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php", $params);
         if ($assignment == 'bysection') {
-            $settingsview[$url->out(false)] = get_string('assignmentbysection', 'format_ludimoodle');
+            $settingsview[$url->out(false)] = get_string('assignmentbysection', 'format_ludilearn');
         }
 
         // Game elements settings by type.
         foreach (game_element::get_all_types() as $type) {
             $params = ['id' => $courseid, 'type' => $type, 'hideheader' => 1];
-            $url = new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php", $params);
-            $settingsview[$url->out(false)] = get_string($type, 'format_ludimoodle');
+            $url = new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php", $params);
+            $settingsview[$url->out(false)] = get_string($type, 'format_ludilearn');
         }
 
         // Tools part.
         $toolsview = [];
         $params = ['id' => $courseid, 'type' => 'updateprogression', 'hideheader' => 1];
-        $url = new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php", $params);
-        $toolsview[$url->out(false)] = get_string('settings:updateprogression', 'format_ludimoodle');
+        $url = new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php", $params);
+        $toolsview[$url->out(false)] = get_string('settings:updateprogression', 'format_ludilearn');
 
         // Render tertiary navigation.
         $menu[][get_string('settings')] = $settingsview;
-        $menu[][get_string('tools', 'format_ludimoodle')] = $toolsview;
+        $menu[][get_string('tools', 'format_ludilearn')] = $toolsview;
         $selectmenu = new \core\output\select_menu('settings', $menu, $activeurl);
         $selectmenu->set_label(get_string('settings'), ['class' => 'sr-only']);
         $options = \html_writer::tag(

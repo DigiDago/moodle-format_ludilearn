@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -28,18 +28,18 @@
                 {{#parameters.lastaccess}}
                     {{#parameters.gamified}}
                         {{#parameters.noscore}}
-                            <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no score">
+                            <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image no score">
                         {{/parameters.noscore}}
                         {{^parameters.noscore}}
-                            <img class="ludimoodle-img img-responsive mb-1 d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/score/chest.svg" alt="Image score chest">
+                            <img class="ludilearn-img img-responsive mb-1 d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/score/chest.svg" alt="Image score chest">
                         {{/parameters.noscore}}
                     {{/parameters.gamified}}
                     {{^parameters.gamified}}
-                        <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+                        <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
                     {{/parameters.gamified}}
                 {{/parameters.lastaccess}}
                 {{^parameters.lastaccess}}
-                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/unkown.svg" alt="Image no score">
+                    <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/unkown.svg" alt="Image no score">
                 {{/parameters.lastaccess}}
                 <p class="text-center scoretext">
                     {{#parameters.lastaccess}}

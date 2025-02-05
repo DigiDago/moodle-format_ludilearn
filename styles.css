@@ -1,9 +1,9 @@
 @charset "UTF-8";
 /**
- * Styles files for ludimoodle format.
+ * Styles files for ludilearn format.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 .rect-auto,
@@ -1202,8 +1202,8 @@
   border-color: #e08833 !important;
 }
 
-.c100.ludimoodle .bar,
-.c100.ludimoodle .fill {
+.c100.ludilearn .bar,
+.c100.ludilearn .fill {
   border-color: #f8b334 !important;
 }
 
@@ -1211,44 +1211,44 @@
   color: #e08833;
 }
 
-.format-ludimoodle {
+.format-ludilearn {
   /* Largeur d'écran inférieure à 600px. */
   /* Settings pages */
 }
-.format-ludimoodle .btn {
+.format-ludilearn .btn {
   min-height: 40px;
   font-weight: bold;
 }
-.format-ludimoodle #pills-tab {
+.format-ludilearn #pills-tab {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--primary), rgba(0, 0, 0, 0) 32px);
   height: 60px;
   line-height: 60px;
 }
-.format-ludimoodle #pills-tab .nav-item {
+.format-ludilearn #pills-tab .nav-item {
   flex: none;
 }
-.format-ludimoodle .ludimoodle-content {
+.format-ludilearn .ludilearn-content {
   border: none;
   max-width: 830px;
   margin: 15px auto auto;
 }
-.format-ludimoodle .ludimoodle-content .card-header {
+.format-ludilearn .ludilearn-content .card-header {
   background: transparent;
 }
-.format-ludimoodle .scoretext {
+.format-ludilearn .scoretext {
   font-size: 1em;
   font-weight: 500;
   color: #5c5854;
 }
-.format-ludimoodle .scoretext .playerscore {
+.format-ludilearn .scoretext .playerscore {
   color: var(--primary);
   filter: brightness(75%);
   font-size: 1.5em;
 }
-.format-ludimoodle .cmname, .format-ludimoodle .sectionname {
+.format-ludilearn .cmname, .format-ludilearn .sectionname {
   color: black;
 }
-.format-ludimoodle .bonuscompletion, .format-ludimoodle .penalties {
+.format-ludilearn .bonuscompletion, .format-ludilearn .penalties {
   position: absolute;
   top: 0;
   right: 0;
@@ -1260,109 +1260,109 @@
   box-shadow: 4px -4px orange;
   width: 50%;
 }
-.format-ludimoodle .bonuscompletion.bonuscompletion-cm, .format-ludimoodle .bonuscompletion.penalties-cm, .format-ludimoodle .penalties.bonuscompletion-cm, .format-ludimoodle .penalties.penalties-cm {
+.format-ludilearn .bonuscompletion.bonuscompletion-cm, .format-ludilearn .bonuscompletion.penalties-cm, .format-ludilearn .penalties.bonuscompletion-cm, .format-ludilearn .penalties.penalties-cm {
   position: relative;
   width: 100%;
   max-width: 200px;
   margin: auto;
   box-shadow: 4px 4px orange;
 }
-.format-ludimoodle .bonuscompletion span.bonuscompletion-value, .format-ludimoodle .bonuscompletion span.penalties-value, .format-ludimoodle .penalties span.bonuscompletion-value, .format-ludimoodle .penalties span.penalties-value {
+.format-ludilearn .bonuscompletion span.bonuscompletion-value, .format-ludilearn .bonuscompletion span.penalties-value, .format-ludilearn .penalties span.bonuscompletion-value, .format-ludilearn .penalties span.penalties-value {
   display: block;
   text-align: center;
   font-size: 1em;
   line-height: 1em;
 }
-.format-ludimoodle .bonuscompletion span.bonuscompletion-str, .format-ludimoodle .bonuscompletion span.penalties-str, .format-ludimoodle .penalties span.bonuscompletion-str, .format-ludimoodle .penalties span.penalties-str {
+.format-ludilearn .bonuscompletion span.bonuscompletion-str, .format-ludilearn .bonuscompletion span.penalties-str, .format-ludilearn .penalties span.bonuscompletion-str, .format-ludilearn .penalties span.penalties-str {
   /* width: 60%; */
   display: block;
   text-align: center;
   font-size: 0.8em;
   line-height: 0.8em;
 }
-.format-ludimoodle .badgecompletion {
+.format-ludilearn .badgecompletion {
   position: absolute;
   top: -10px;
   right: 5px;
   padding: 3px 6px;
   width: 50px;
 }
-.format-ludimoodle .badgecompletion img {
+.format-ludilearn .badgecompletion img {
   width: 100%;
 }
-.format-ludimoodle .badgecompletion.badgecompletion-cm {
+.format-ludilearn .badgecompletion.badgecompletion-cm {
   width: 75px;
   margin: auto;
   left: 50%;
   right: unset;
   top: -65px;
 }
-.format-ludimoodle .ranking-text {
+.format-ludilearn .ranking-text {
   font-size: 1.2rem;
   margin-top: -60px;
 }
-.format-ludimoodle .rightdottedscore {
+.format-ludilearn .rightdottedscore {
   border-right: var(--primary) 5px dotted;
 }
 @media (max-width: 576px) {
-  .format-ludimoodle .rightdottedscore.rightdottedscore-notsm {
+  .format-ludilearn .rightdottedscore.rightdottedscore-notsm {
     border-right: none;
   }
 }
-.format-ludimoodle .bottomdotted {
+.format-ludilearn .bottomdotted {
   border-bottom: var(--primary) 5px dotted;
 }
-.format-ludimoodle .rightlined {
+.format-ludilearn .rightlined {
   border-right: var(--primary) 2px solid;
   border-color: grey;
 }
-.format-ludimoodle a:hover {
+.format-ludilearn a:hover {
   text-decoration: none;
 }
-.format-ludimoodle a.restricted.nourl {
+.format-ludilearn a.restricted.nourl {
   pointer-events: none;
   cursor: default;
 }
-.format-ludimoodle .ludimoodle-img,
-.format-ludimoodle #pills-activity .ludimoodle-img {
+.format-ludilearn .ludilearn-img,
+.format-ludilearn #pills-activity .ludilearn-img {
   height: 160px;
 }
-.format-ludimoodle .ludimoodle-img.little-img,
-.format-ludimoodle #pills-activity .ludimoodle-img.little-img {
+.format-ludilearn .ludilearn-img.little-img,
+.format-ludilearn #pills-activity .ludilearn-img.little-img {
   height: 55px;
 }
-.format-ludimoodle .img-timer {
+.format-ludilearn .img-timer {
   margin-top: 32px;
 }
-.format-ludimoodle #pills-activity .scoretext {
+.format-ludilearn #pills-activity .scoretext {
   font-size: 1.5em;
 }
-.format-ludimoodle .restricted {
+.format-ludilearn .restricted {
   filter: grayscale(1);
 }
-.format-ludimoodle .maxseriesquare {
+.format-ludilearn .maxseriesquare {
   padding: 0;
   margin-top: 10%;
 }
-.format-ludimoodle .notreached {
+.format-ludilearn .notreached {
   opacity: 0.5;
   filter: grayscale(1);
 }
-.format-ludimoodle .block_section {
+.format-ludilearn .block_section {
   height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.format-ludimoodle .block_section.block_section_avatar {
+.format-ludilearn .block_section.block_section_avatar {
   align-items: end;
 }
-.format-ludimoodle .block_section .progression {
+.format-ludilearn .block_section .progression {
   font-size: 48px;
   font-weight: 900;
   color: #f8b334;
 }
-.format-ludimoodle .badge-number {
+.format-ludilearn .badge-number {
   position: relative;
   width: 30px;
   height: 30px;
@@ -1374,25 +1374,25 @@
   border: 2px solid #ddd;
   color: #ddd;
 }
-.format-ludimoodle .badge-number.badge-number-bronze {
+.format-ludilearn .badge-number.badge-number-bronze {
   color: #ffffff;
   background: linear-gradient(135deg, #cd7f32, #eee, #cd7f32, #eee, #cd7f32);
   border: 1px solid #cd7f32;
   font-weight: 900;
 }
-.format-ludimoodle .badge-number.badge-number-silver {
+.format-ludilearn .badge-number.badge-number-silver {
   color: #ffffff;
   background: linear-gradient(135deg, #c0c0c0, #eee, #c0c0c0, #eee, #c0c0c0);
   border: 1px solid #c0c0c0;
   font-weight: 900;
 }
-.format-ludimoodle .badge-number.badge-number-gold {
+.format-ludilearn .badge-number.badge-number-gold {
   color: #ffffff;
   background: linear-gradient(135deg, #ffd700, #eee, #ffd700, #eee, #ffd700);
   border: 1px solid #ffd700;
   font-weight: 900;
 }
-.format-ludimoodle .badge-number.spinning {
+.format-ludilearn .badge-number.spinning {
   animation: spinY 2s linear infinite;
 }
 @keyframes spinY {
@@ -1403,8 +1403,8 @@
     transform: rotateY(360deg);
   }
 }
-.format-ludimoodle .progress-image,
-.format-ludimoodle .avatar-image {
+.format-ludilearn .progress-image,
+.format-ludilearn .avatar-image {
   position: relative;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -1414,46 +1414,46 @@
   padding-bottom: 100%;
   background-size: cover;
 }
-.format-ludimoodle .progress-image .progression-steps-component,
-.format-ludimoodle .progress-image .avatar-slot,
-.format-ludimoodle .progress-image .avatar-character,
-.format-ludimoodle .avatar-image .progression-steps-component,
-.format-ludimoodle .avatar-image .avatar-slot,
-.format-ludimoodle .avatar-image .avatar-character {
+.format-ludilearn .progress-image .progression-steps-component,
+.format-ludilearn .progress-image .avatar-slot,
+.format-ludilearn .progress-image .avatar-character,
+.format-ludilearn .avatar-image .progression-steps-component,
+.format-ludilearn .avatar-image .avatar-slot,
+.format-ludilearn .avatar-image .avatar-character {
   position: absolute;
   top: 0;
   left: 0;
   max-width: 100%;
   max-height: 100%;
 }
-.format-ludimoodle .avatar-bag {
+.format-ludilearn .avatar-bag {
   display: block;
   max-width: 75px;
   margin: auto;
   cursor: pointer;
 }
-.format-ludimoodle .avatar-bag.avatar-bag-open {
+.format-ludilearn .avatar-bag.avatar-bag-open {
   display: none;
 }
-.format-ludimoodle .modal-dialog {
+.format-ludilearn .modal-dialog {
   max-width: 830px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory {
   display: none;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory.active {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory.active {
   display: block;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert {
   color: white;
   padding: 0;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item {
   margin: 10px;
   text-align: center;
   cursor: pointer;
@@ -1462,34 +1462,34 @@
   max-width: 100px;
   flex: auto;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .avatar-item-img {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .avatar-item-img {
   width: 100px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned {
   cursor: pointer;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:hover, .format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:focus {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:hover, .format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:focus {
   transform: scale(1.1);
   border: 2px solid #007bff;
   border-radius: 10px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned.selected {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned.selected {
   border: 2px solid #007bff;
   padding: 10px;
   border-radius: 10px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .alert-equiped {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .alert-equiped {
   display: none;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped {
   border: 2px solid green;
   padding: 10px;
   border-radius: 10px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped .alert-equiped {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped .alert-equiped {
   display: block;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button {
   display: none;
   margin-top: 10px;
   padding: 5px 10px;
@@ -1501,13 +1501,13 @@
   transition: background 0.3s;
   outline: none;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:focus, .format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:hover {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:focus, .format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:hover {
   background: darkgreen;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert {
   margin-top: 10px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .sr-only {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1517,12 +1517,12 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tabs {
+.format-ludilearn .modal-dialog .avatar-inventory .tabs {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tabs .tab-inventory {
+.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory {
   padding: 10px 20px;
   background: #f0f0f0;
   border: 1px solid orange;
@@ -1532,17 +1532,17 @@
   outline: none;
   width: 100%;
 }
-.format-ludimoodle .modal-dialog .avatar-inventory .tabs .tab-inventory:focus, .format-ludimoodle .modal-dialog .avatar-inventory .tabs .tab-inventory:hover, .format-ludimoodle .modal-dialog .avatar-inventory .tabs .tab-inventory.active {
+.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory:focus, .format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory:hover, .format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory.active {
   background: orange;
   color: white;
 }
-.format-ludimoodle .count-items {
+.format-ludilearn .count-items {
   width: 100%;
   height: 100%;
   display: inline-block;
   position: relative;
 }
-.format-ludimoodle .count-items .numerator {
+.format-ludilearn .count-items .numerator {
   color: #F7B53C;
   font-size: 48px;
   font-weight: bold;
@@ -1550,17 +1550,17 @@
   bottom: 9px;
   left: 0;
 }
-.format-ludimoodle .count-items .numerator.two-digits {
+.format-ludilearn .count-items .numerator.two-digits {
   left: -24px;
 }
-.format-ludimoodle .count-items .fraction {
+.format-ludilearn .count-items .fraction {
   color: #C9BEB6;
   font-size: 32px;
   position: absolute;
   left: 32px;
   bottom: 12px;
 }
-.format-ludimoodle .count-items .denumerator {
+.format-ludilearn .count-items .denumerator {
   color: #C9BEB6;
   font-size: 32px;
   font-weight: bold;
@@ -1568,7 +1568,7 @@
   bottom: 0;
   left: 43px;
 }
-.format-ludimoodle .progression-text {
+.format-ludilearn .progression-text {
   width: fit-content;
   border-radius: 8px;
   background-color: #f8b334;
@@ -1579,15 +1579,15 @@
   padding-left: 15px;
   padding-right: 15px;
 }
-.format-ludimoodle .progression-text.progression-cm {
+.format-ludilearn .progression-text.progression-cm {
   font-size: 20px;
   padding-left: 10px;
   padding-right: 10px;
 }
-.format-ludimoodle .progression-text.progression-cm p {
+.format-ludilearn .progression-text.progression-cm p {
   margin-bottom: 0.2rem;
 }
-.format-ludimoodle .progression-bar-component.rocket {
+.format-ludilearn .progression-bar-component.rocket {
   position: absolute;
   width: 1200px;
   height: 1200px;
@@ -1597,44 +1597,44 @@
   top: 10%;
   animation: percentrocket 0.5333s infinite step-end;
 }
-.format-ludimoodle .circle-progression.biggest {
+.format-ludilearn .circle-progression.biggest {
   float: none;
   margin: auto;
   font-size: 300px;
 }
-.format-ludimoodle .circle-progression.biggest span.show {
+.format-ludilearn .circle-progression.biggest span.show {
   max-width: 300px;
   max-height: 300px;
 }
-.format-ludimoodle .circle-progression.biggest::after {
+.format-ludilearn .circle-progression.biggest::after {
   top: 0.15em;
   left: 0.15em;
   width: 0.7em;
   height: 0.7em;
 }
-.format-ludimoodle .ranking-group-view {
+.format-ludilearn .ranking-group-view {
   margin: auto;
   width: 100%;
 }
-.format-ludimoodle .chrono img {
+.format-ludilearn .chrono img {
   width: 100%;
   max-width: 80px;
 }
-.format-ludimoodle .chrono .current-time {
+.format-ludilearn .chrono .current-time {
   font-size: 2rem;
   vertical-align: middle;
 }
-.format-ludimoodle .reference-time {
+.format-ludilearn .reference-time {
   font-size: 1.2rem;
 }
-.format-ludimoodle .reference-time span {
+.format-ludilearn .reference-time span {
   vertical-align: middle;
 }
-.format-ludimoodle .ranking-summary {
+.format-ludilearn .ranking-summary {
   margin: auto;
   width: 100%;
 }
-.format-ludimoodle .ranking-table td, .format-ludimoodle .ranking-table tr {
+.format-ludilearn .ranking-table td, .format-ludilearn .ranking-table tr {
   border-top: none;
 }
 @keyframes percentrocket {
@@ -1699,29 +1699,29 @@
     top: -290%;
   }
 }
-.format-ludimoodle .ludimoodle-world-professional .avatar-image {
+.format-ludilearn .ludilearn-world-professional .avatar-image {
   background-size: auto;
 }
-.format-ludimoodle .ludimoodle-world-professional .avatar-slot,
-.format-ludimoodle .ludimoodle-world-professional .avatar-character {
+.format-ludilearn .ludilearn-world-professional .avatar-slot,
+.format-ludilearn .ludilearn-world-professional .avatar-character {
   top: 15%;
 }
-.format-ludimoodle .ludimoodle-world-professional .ranking-summary {
+.format-ludilearn .ludilearn-world-professional .ranking-summary {
   display: block;
   max-height: 160px;
   margin-left: auto;
   margin-right: auto;
 }
-.format-ludimoodle .ludimoodle-world-professional .section-progress .asteroids {
+.format-ludilearn .ludilearn-world-professional .section-progress .asteroids {
   display: none;
 }
-.format-ludimoodle .ludimoodle-world-professional .circle-progression.biggest span.show {
+.format-ludilearn .ludilearn-world-professional .circle-progression.biggest span.show {
   max-width: 210px;
   max-height: 210px;
   left: 45px;
   top: 45px;
 }
-.format-ludimoodle .ludimoodle-world-professional .progression-bar-component.rocket {
+.format-ludilearn .ludilearn-world-professional .progression-bar-component.rocket {
   position: absolute;
   width: 1200px;
   height: 210px;
@@ -1748,35 +1748,35 @@
     left: calc(-75px - 400%);
   }
 }
-.format-ludimoodle .ludimoodle-world-highschool .avatar-image:has(.item-equiped) .avatar-character {
+.format-ludilearn .ludilearn-world-highschool .avatar-image:has(.item-equiped) .avatar-character {
   display: none;
 }
-.format-ludimoodle .ludimoodle-world-highschool .avatar-image .avatar-slot,
-.format-ludimoodle .ludimoodle-world-highschool .avatar-image .avatar-character {
+.format-ludilearn .ludilearn-world-highschool .avatar-image .avatar-slot,
+.format-ludilearn .ludilearn-world-highschool .avatar-image .avatar-character {
   width: 100%;
 }
-.format-ludimoodle .ludimoodle-world-highschool .ranking-summary {
+.format-ludilearn .ludilearn-world-highschool .ranking-summary {
   display: block;
   max-height: 175px;
   margin-left: auto;
   margin-right: auto;
   margin-top: -15px;
 }
-.format-ludimoodle .ludimoodle-world-highschool .progression-planet-inprogress {
-  background-image: url("[[pix:format_ludimoodle|highschool/progress/course-planet-bg]]");
+.format-ludilearn .ludilearn-world-highschool .progression-planet-inprogress {
+  background-image: url("[[pix:format_ludilearn|highschool/progress/course-planet-bg]]");
   background-size: contain;
 }
-.format-ludimoodle .ludimoodle-world-highschool .progression-planet-max {
-  background-image: url("[[pix:format_ludimoodle|highschool/progress/course-planet-max-bg]]");
+.format-ludilearn .ludilearn-world-highschool .progression-planet-max {
+  background-image: url("[[pix:format_ludilearn|highschool/progress/course-planet-max-bg]]");
   background-size: contain;
 }
-.format-ludimoodle .ludimoodle-world-highschool .section-progress .asteroids {
+.format-ludilearn .ludilearn-world-highschool .section-progress .asteroids {
   display: none;
 }
-.format-ludimoodle .ludimoodle-world-highschool .c100 > span {
+.format-ludilearn .ludilearn-world-highschool .c100 > span {
   line-height: 0;
 }
-.format-ludimoodle .ludimoodle-world-highschool .progression-bar-component.rocket {
+.format-ludilearn .ludilearn-world-highschool .progression-bar-component.rocket {
   position: relative;
   width: auto;
   height: auto;
@@ -1786,31 +1786,31 @@
   top: 0;
   animation: none;
 }
-.format-ludimoodle li.explanation-li {
+.format-ludilearn li.explanation-li {
   height: 50px;
   margin-top: auto;
   margin-bottom: auto;
 }
-.format-ludimoodle li.explanation-li .explanation-button {
+.format-ludilearn li.explanation-li .explanation-button {
   width: 50px;
   height: 50px;
   padding: 10px;
   background: orange;
   border-radius: 50%;
 }
-.format-ludimoodle li.explanation-li .explanation-button .explanation {
+.format-ludilearn li.explanation-li .explanation-button .explanation {
   vertical-align: top;
 }
 @media screen and (max-width: 600px) {
-  .format-ludimoodle table.ranking-table tr, .format-ludimoodle table.ranking-table td {
+  .format-ludilearn table.ranking-table tr, .format-ludilearn table.ranking-table td {
     padding-left: 0;
     padding-right: 0;
   }
 }
-.format-ludimoodle #ludimoodle-settings .editsettingssuccess,
-.format-ludimoodle #ludimoodle-settings .editsettingsfailed {
+.format-ludilearn #ludilearn-settings .editsettingssuccess,
+.format-ludilearn #ludilearn-settings .editsettingsfailed {
   display: none;
 }
-.format-ludimoodle #ludimoodle-settings .setting-footer {
+.format-ludilearn #ludilearn-settings .setting-footer {
   margin-top: 5em;
 }

@@ -16,9 +16,9 @@
 /**
  * Questionnaire.
  *
- * @module      format_ludimoodle/questionnaire
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @module      format_ludilearn/questionnaire
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -50,7 +50,7 @@ define(['jquery', 'core/ajax', 'core/str'],
                 }
                 if (!missinganswers) {
                     Ajax.call([{
-                        methodname: 'format_ludimoodle_submit_questionnaire',
+                        methodname: 'format_ludilearn_submit_questionnaire',
                         args: data
                     }], true, true)[0].done((response) => {
                         window.location.href = URL_GAME_PROFILE;
@@ -60,7 +60,7 @@ define(['jquery', 'core/ajax', 'core/str'],
                 } else {
                     $('.invalid-feedback').html('');
                     let message = '';
-                    Str.get_string('missinganswers', 'format_ludimoodle').then((string) => {
+                    Str.get_string('missinganswers', 'format_ludilearn').then((string) => {
                         message = string;
                         let elementerror = $('#id_error_' + answersmissing);
                         elementerror.html(message);

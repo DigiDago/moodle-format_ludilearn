@@ -14,16 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\local\adaptation;
+namespace format_ludilearn\local\adaptation;
 
-use format_ludimoodle\manager;
+use format_ludilearn\manager;
 use stdClass;
 
 /**
  * Suggestion output class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui, Nihal Ouherrou
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -78,19 +78,19 @@ class suggestion_output {
         $combinedaffinitiesjson = json_encode($combinedscores);
         $manager = new manager();
         $gameelements = $manager->get_gameelements_auto($suggestion, $courseid);
-        $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $userid]);
+        $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $userid]);
 
         if ($profile) {
             $profile->userid = $userid;
             $profile->type = $suggestion;
             $profile->combinedaffinities = $combinedaffinitiesjson;
-            $DB->update_record('format_ludimoodle_profile', $profile);
+            $DB->update_record('format_ludilearn_profile', $profile);
         } else {
             $profile = new stdClass();
             $profile->userid = $userid;
             $profile->type = $suggestion;
             $profile->combinedaffinities = $combinedaffinitiesjson;
-            $DB->insert_record('format_ludimoodle_profile', $profile);
+            $DB->insert_record('format_ludilearn_profile', $profile);
         }
 
         foreach ($gameelements as $gameelement) {

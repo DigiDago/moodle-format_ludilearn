@@ -15,39 +15,39 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
 }}
 
-<div id="ludimoodle-settings" class="ludimoodle-world-{{ world }}">
+<div id="ludilearn-settings" class="ludilearn-world-{{ world }}">
     <div class="row justify-content-center">
         <div class="col-6">
             <div class="avatar-image"
-                 style="background-image: url({{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/avatar/backgrounds/background-1.svg)">
-                <img class="avatar-character" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/avatar/avatar.svg" style="z-index:0;" alt="Image avatar">
+                 style="background-image: url({{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/avatar/backgrounds/background-1.svg)">
+                <img class="avatar-character" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/avatar/avatar.svg" style="z-index:0;" alt="Image avatar">
             </div>
         </div>
     </div>
     <div class="alert alert-success editsettingssuccess" role="alert">
-        {{#str}} editsettingssuccess, format_ludimoodle {{/str}}
+        {{#str}} editsettingssuccess, format_ludilearn {{/str}}
     </div>
     <div class="alert alert-danger editsettingsfailed" role="alert">
-        {{#str}} editsettingsfailed, format_ludimoodle {{/str}}
+        {{#str}} editsettingsfailed, format_ludilearn {{/str}}
     </div>
-    <p class="align-center">{{#str}} settings:avatardescription, format_ludimoodle {{/str}}</p>
+    <p class="align-center">{{#str}} settings:avatardescription, format_ludilearn {{/str}}</p>
     <form id="form-parameters" class="form-parameters mform" action="#">
         <input type="hidden" name="courseid" value="{{ courseid }}">
         <div class="form-group row">
             <div class="col-form-label col-md-3 d-flex pb-0 pr-md-0">
-                <label for="input-thresholdtoearn" class="d-inline word-break">{{#str}} settings:thresholdtoearn, format_ludimoodle  {{/str}}</label>
+                <label for="input-thresholdtoearn" class="d-inline word-break">{{#str}} settings:thresholdtoearn, format_ludilearn  {{/str}}</label>
                 <div class="form-label-addon d-flex align-items-center align-self-start">
                     <div class="text-danger">
                         <i class="icon fa fa-exclamation-circle text-danger fa-fw " role="img"></i>
                     </div>
                     <a class="btn btn-link p-0" role="button" data-container="body" data-toggle="popover" data-placement="right"
-                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:thresholdtoearn_help, format_ludimoodle  {{/str}}</p></div>"
+                       data-content="<div class=&quot;no-overflow&quot;><p>{{#str}} settings:thresholdtoearn_help, format_ludilearn  {{/str}}</p></div>"
                        data-html="true" tabindex="0" data-trigger="focus">
                         <i class="icon fa fa-question-circle text-info fa-fw"></i>
                     </a>
@@ -64,5 +64,5 @@
         </div>
         <button class="btn btn-primary" type="submit">{{#str}} save {{/str}}</button>
     </form>
-    {{> format_ludimoodle/settings_footer}}
+    {{> format_ludilearn/settings_footer}}
 </div>
