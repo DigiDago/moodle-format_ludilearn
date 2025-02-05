@@ -47,7 +47,7 @@ Feature: Score game element section attribution in Ludilearn course format
       | name | Empty Section |
     And I turn editing mode off
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I set the field "No Game Section" to "No gamified"
@@ -97,7 +97,7 @@ Feature: Score game element section attribution in Ludilearn course format
       | page | Regular Completion Only | Test without game element | L1 | reg2 | 2 | 2 | 0 |
       | quiz | Regular Both | Test without game element | L1 | reg3 | 2 | 1 | 100 |
       | forum | Regular Forum | Test without game element | L1 | reg4 | 2 | 0 | 0 |
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I set the field "No Game Section" to "No gamified"
@@ -160,7 +160,7 @@ Feature: Score game element section attribution in Ludilearn course format
   Scenario: Score updates correctly when student receives grade
     Given I log in as "teacher1"
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
@@ -195,7 +195,7 @@ Feature: Score game element section attribution in Ludilearn course format
   Scenario: Score updates correctly when activity is completed
     Given I log in as "teacher1"
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
@@ -229,7 +229,7 @@ Feature: Score game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
@@ -286,12 +286,12 @@ Feature: Score game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
     Then I should see "The changes made have been applied"
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Score"
     And I set the field "Multiplier" to "200"
     And I set the field "Completion bonus" to "300"

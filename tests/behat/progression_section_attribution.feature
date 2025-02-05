@@ -47,7 +47,7 @@ Feature: Progression game element section attribution in Ludilearn course format
       | name | Empty Section |
     And I turn editing mode off
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I set the field "No Game Section" to "No gamified"
@@ -86,7 +86,7 @@ Feature: Progression game element section attribution in Ludilearn course format
       | page | Progress Completion Only | Test progression with completion | L1 | reg2 | 2 | 1 | 0 | 0 | | | | | |
       | quiz | Progress Both | Test progression with grade and completion | L1 | reg3 | 2 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
       | forum | Progress No Gamification | Test progression without gamification | L1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I set the field "No Game Section" to "No gamified"
@@ -146,7 +146,7 @@ Feature: Progression game element section attribution in Ludilearn course format
   Scenario: Progression updates correctly when activity is completed
     Given I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -180,7 +180,7 @@ Feature: Progression game element section attribution in Ludilearn course format
   Scenario: Progression updates correctly when student receives grade
     Given I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -281,7 +281,7 @@ Feature: Progression game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -349,7 +349,7 @@ Feature: Progression game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"

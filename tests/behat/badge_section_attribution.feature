@@ -47,7 +47,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
       | name | Empty Section |
     And I turn editing mode off
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I set the field "No Game Section" to "No gamified"
@@ -86,7 +86,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
       | page | Regular Completion Only | Test without game element | L1 | reg2 | 2 | 2 | 0 | 0 | | | | | |
       | quiz | Regular Both | Test without game element | L1 | reg3 | 2 | 1 | 100 | 1 | ##yesterday## | ##tomorrow## | | | |
       | forum | Regular Forum | Test without game element | L1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I set the field "No Game Section" to "No gamified"
@@ -140,7 +140,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
   Scenario: Badge updates correctly when activity is completed
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
@@ -172,7 +172,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
   Scenario: Badge updates correctly from silver to gold when student receives grade
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
@@ -279,7 +279,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
@@ -337,14 +337,14 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     # Teacher configures game elements allocation
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
     Then I should see "The changes made have been applied"
 
     # Teacher sets badge thresholds
-    When I navigate to "LudiMoodle customisation of game elements" in current page administration
+    When I navigate to "LudiLearn customisation of game elements" in current page administration
     And I set the field "Settings" to "Badge"
     And I set the field "Gold badge threshold" to "85"
     And I set the field "Silver badge threshold" to "70"
