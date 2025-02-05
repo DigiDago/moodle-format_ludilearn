@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -27,8 +27,8 @@
             <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                 {{#parameters.lastaccess}}
                     {{#parameters.gamified}}
-                    <img class="ludimoodle-img img-responsive d-block mx-auto"
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/timer/default-timer.svg"
+                    <img class="ludilearn-img img-responsive d-block mx-auto"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/timer/default-timer.svg"
                          alt="Image best reference time">
                         <div class="progression-text">
                             <p class="text-center">
@@ -37,11 +37,11 @@
                         </div>
                     {{/parameters.gamified}}
                     {{^parameters.gamified}}
-                        <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+                        <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
                     {{/parameters.gamified}}
                 {{/parameters.lastaccess}}
                 {{^parameters.lastaccess}}
-                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/unkown.svg" alt="Image not viewed">
+                    <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/unkown.svg" alt="Image not viewed">
                 {{/parameters.lastaccess}}
                 <p class="text-center">
                     <span class="sectionname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>

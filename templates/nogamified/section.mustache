@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -25,7 +25,7 @@
     <div class="row">
         <div class="col-4 rightdottedscore">
             <h4 class="text-center">{{ name }}</h4>
-            <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+            <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
             <div class="section-summary">
                 {{{ summary }}}
             </div>
@@ -44,7 +44,7 @@
                         <div class="col-6 col-sm-4 col-md-4 col-lg-4">
                             <div class="cm-nogamified">
                                 <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
-                                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+                                    <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
                                     <p class="text-center scoretext">
                                         <span class="cmname"><a href="{{ url }}" class="stretched-link">{{{ name }}}</a></span>
                                     </p>

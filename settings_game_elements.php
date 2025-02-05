@@ -15,15 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Format Ludimoodle plugin settings page.
+ * Format Ludilearn plugin settings page.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use format_ludimoodle\output\settings;
+use format_ludilearn\output\settings;
 
 require('../../../config.php');
 require_once('lib.php');
@@ -36,19 +36,19 @@ require_login($course);
 has_capability('moodle/course:update', $context);
 $params = ['id' => $course->id, 'type' => $type, 'hideheader' => true];
 $PAGE->set_pagelayout('course');
-$PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php", $params));
+$PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php", $params));
 $PAGE->set_context($context);
 $PAGE->set_title(get_string('coursetitle', 'moodle', ['course' => $course->fullname]));
 $PAGE->set_heading(
     $course->fullname . ' : ' .
-    get_string('editgameeleements', 'format_ludimoodle')
+    get_string('editgameeleements', 'format_ludilearn')
 );
 $PAGE->add_body_class('limitedwidth');
 $format = course_get_format($course);
 $course->format = $format->get_format();
 $PAGE->set_pagetype('course-view-' . $course->format);
 
-$renderer = $PAGE->get_renderer('format_ludimoodle', 'settings');
+$renderer = $PAGE->get_renderer('format_ludilearn', 'settings');
 
 // Renderer settings.
 echo $OUTPUT->header();

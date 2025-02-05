@@ -15,15 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Privacy Subsystem implementation for format_ludimoodle.
+ * Privacy Subsystem implementation for format_ludilearn.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace format_ludimoodle\privacy;
+namespace format_ludilearn\privacy;
 
 use context;
 use context_course;
@@ -39,10 +39,10 @@ use core_privacy\local\request\writer;
 use stdClass;
 
 /**
- * Privacy Subsystem for format_ludimoodle implementing provider.
+ * Privacy Subsystem for format_ludilearn implementing provider.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -65,60 +65,60 @@ class provider implements
      */
     public static function get_metadata(collection $collection): collection {
 
-        // Adding description of table format_ludimoodle_profile to the collection.
+        // Adding description of table format_ludilearn_profile to the collection.
         $collection->add_database_table(
-            'format_ludimoodle_profile',
+            'format_ludilearn_profile',
             [
-                'userid' => 'privacy:metadata:format_ludimoodle_profile:userid',
-                'combinedaffinities' => 'privacy:metadata:format_ludimoodle_profile:combinedaffinities',
-                'type' => 'privacy:metadata:format_ludimoodle_profile:type',
+                'userid' => 'privacy:metadata:format_ludilearn_profile:userid',
+                'combinedaffinities' => 'privacy:metadata:format_ludilearn_profile:combinedaffinities',
+                'type' => 'privacy:metadata:format_ludilearn_profile:type',
             ],
-            'privacy:metadata:format_ludimoodle_profile'
+            'privacy:metadata:format_ludilearn_profile'
         );
 
-        // Adding description of table format_ludimoodle_answers to the collection.
+        // Adding description of table format_ludilearn_answers to the collection.
         $collection->add_database_table(
-            'format_ludimoodle_answers',
+            'format_ludilearn_answers',
             [
-                'questionid' => 'privacy:metadata:format_ludimoodle_answers:questionid',
-                'userid' => 'privacy:metadata:format_ludimoodle_answers:userid',
-                'score' => 'privacy:metadata:format_ludimoodle_answers:score',
+                'questionid' => 'privacy:metadata:format_ludilearn_answers:questionid',
+                'userid' => 'privacy:metadata:format_ludilearn_answers:userid',
+                'score' => 'privacy:metadata:format_ludilearn_answers:score',
             ],
-            'privacy:metadata:format_ludimoodle_answers'
+            'privacy:metadata:format_ludilearn_answers'
         );
 
-        // Adding description of table format_ludimoodle_attributio to the collection.
+        // Adding description of table format_ludilearn_attributio to the collection.
         $collection->add_database_table(
-            'format_ludimoodle_attributio',
+            'format_ludilearn_attributio',
             [
-                'gameelementid' => 'privacy:metadata:format_ludimoodle_attributio:gameelementid',
-                'userid' => 'privacy:metadata:format_ludimoodle_attributio:userid',
-                'timecreated' => 'privacy:metadata:format_ludimoodle_attributio:timecreated',
+                'gameelementid' => 'privacy:metadata:format_ludilearn_attributio:gameelementid',
+                'userid' => 'privacy:metadata:format_ludilearn_attributio:userid',
+                'timecreated' => 'privacy:metadata:format_ludilearn_attributio:timecreated',
             ],
-            'privacy:metadata:format_ludimoodle_attributio'
+            'privacy:metadata:format_ludilearn_attributio'
         );
 
-        // Adding description of table ludimoodle_gameeele_user.
+        // Adding description of table ludilearn_gameeele_user.
         $collection->add_database_table(
-            'format_ludimoodle_gameeele_user',
+            'format_ludilearn_gameeele_user',
             [
-                'attributionid' => 'privacy:metadata:ludimoodle_gameeele_user:attributionid',
-                'name' => 'privacy:metadata:ludimoodle_gameeele_user:name',
-                'value' => 'privacy:metadata:ludimoodle_gameeele_user:value',
+                'attributionid' => 'privacy:metadata:ludilearn_gameeele_user:attributionid',
+                'name' => 'privacy:metadata:ludilearn_gameeele_user:name',
+                'value' => 'privacy:metadata:ludilearn_gameeele_user:value',
             ],
-            'privacy:metadata:ludimoodle_gameeele_user'
+            'privacy:metadata:ludilearn_gameeele_user'
         );
 
-        // Adding description of table format_ludimoodle_cm_user.
+        // Adding description of table format_ludilearn_cm_user.
         $collection->add_database_table(
-            'format_ludimoodle_cm_user',
+            'format_ludilearn_cm_user',
             [
-                'attributionid' => 'privacy:metadata:format_ludimoodle_cm_user:attributionid',
-                'cmid' => 'privacy:metadata:format_ludimoodle_cm_user:cmid',
-                'name' => 'privacy:metadata:format_ludimoodle_cm_user:name',
-                'value' => 'privacy:metadata:format_ludimoodle_cm_user:value',
+                'attributionid' => 'privacy:metadata:format_ludilearn_cm_user:attributionid',
+                'cmid' => 'privacy:metadata:format_ludilearn_cm_user:cmid',
+                'name' => 'privacy:metadata:format_ludilearn_cm_user:name',
+                'value' => 'privacy:metadata:format_ludilearn_cm_user:value',
             ],
-            'privacy:metadata:format_ludimoodle_cm_user'
+            'privacy:metadata:format_ludilearn_cm_user'
         );
 
         return $collection;
@@ -143,8 +143,8 @@ class provider implements
         $sql = "SELECT DISTINCT(c.id)
                 FROM {context} c
                 INNER JOIN {course_modules} cm ON c.instanceid = cm.id AND c.contextlevel = :contextlevel
-                INNER JOIN {format_ludimoodle_cm_user} cmu ON cmu.cmid = cm.id
-                INNER JOIN {format_ludimoodle_attributio} a ON a.id = cmu.attributionid
+                INNER JOIN {format_ludilearn_cm_user} cmu ON cmu.cmid = cm.id
+                INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
                 WHERE a.userid = :userid";
         $contextlist->add_from_sql($sql, $paramscm);
 
@@ -156,7 +156,7 @@ class provider implements
         $sql = "SELECT DISTINCT(c.id)
                 FROM {context} c
                 INNER JOIN {gameelements} g ON g.courseid = c.instanceid
-                INNER JOIN {format_ludimoodle_attributio} a ON g.id = a.gameelementid
+                INNER JOIN {format_ludilearn_attributio} a ON g.id = a.gameelementid
                 WHERE c.contextlevel = :contextlevel AND a.userid = :userid";
         $contextlist->add_from_sql($sql, $paramscourse);
 
@@ -167,7 +167,7 @@ class provider implements
         ];
         $sql = "SELECT DISTINCT(c.id)
                 FROM {context} c
-                INNER JOIN {format_ludimoodle_profile} p ON c.instanceid = p.userid
+                INNER JOIN {format_ludilearn_profile} p ON c.instanceid = p.userid
                 WHERE c.contextlevel = :contextlevel AND p.userid = :userid";
         $contextlist->add_from_sql($sql, $paramsuser);
 
@@ -194,11 +194,11 @@ class provider implements
             // If context is user context.
             if ($context instanceof context_user) {
                 // Export profile data.
-                $profile = $DB->get_record('format_ludimoodle_profile', ['userid' => $user->id]);
+                $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $user->id]);
                 self::export_profile_data($profile, $context);
 
                 // Export answers data.
-                $answers = $DB->get_records('format_ludimoodle_answers', ['userid' => $user->id]);
+                $answers = $DB->get_records('format_ludilearn_answers', ['userid' => $user->id]);
                 self::export_answers_data($answers, $context);
             }
 
@@ -210,8 +210,8 @@ class provider implements
                     'courseid' => $context->instanceid,
                 ];
                 $sql = "SELECT g.id, g.courseid, g.sectionid, g.type, a.id as attributionid, a.timecreated
-                        FROM {format_ludimoodle_attributio} a
-                        INNER JOIN {format_ludimoodle_elements} g ON g.id = a.gameelementid
+                        FROM {format_ludilearn_attributio} a
+                        INNER JOIN {format_ludilearn_elements} g ON g.id = a.gameelementid
                         WHERE a.userid = :userid AND g.courseid = :courseid";
                 $attributions = $DB->get_records_sql($sql, $params);
                 self::export_gameelements_data($attributions, $context);
@@ -225,8 +225,8 @@ class provider implements
                     'cmid' => $context->instanceid,
                 ];
                 $sql = "SELECT cmu.*
-                        FROM {format_ludimoodle_attributio} a
-                        INNER JOIN {format_ludimoodle_cm_user} cmu ON cmu.attributionid = a.id
+                        FROM {format_ludilearn_attributio} a
+                        INNER JOIN {format_ludilearn_cm_user} cmu ON cmu.attributionid = a.id
                         WHERE cmu.cmid = :cmid AND a.userid = :userid";
                 $cmuser = $DB->get_records_sql($sql, $params);
                 self::export_course_module_data($cmuser, $context);
@@ -247,7 +247,7 @@ class provider implements
         // Prepare the data for export.
         $data = (object)[
             'combinedaffinities' => $profile->combinedaffinities,
-            'type' => get_string($profile->type, 'format_ludimoodle'),
+            'type' => get_string($profile->type, 'format_ludilearn'),
         ];
 
         // Export the data.
@@ -269,11 +269,11 @@ class provider implements
 
         // Prepare the data for export.
         $data = [];
-        $question = $DB->get_records('format_ludimoodle_questions');
+        $question = $DB->get_records('format_ludilearn_questions');
         foreach ($answers as $answer) {
             $content = $question[$answer->questionid]->content;
             $data[] = (object)[
-                'question' => get_string($content, 'format_ludimoodle'),
+                'question' => get_string($content, 'format_ludilearn'),
                 'score' => $answer->score,
             ];
         }
@@ -298,7 +298,7 @@ class provider implements
         // Prepare the data for export.
         $data = [];
         foreach ($gameelements as $gameelement) {
-            $userdatas = $DB->get_records('format_ludimoodle_ele_user', ['attributionid' => $gameelement->attributionid]);
+            $userdatas = $DB->get_records('format_ludilearn_ele_user', ['attributionid' => $gameelement->attributionid]);
             $subdatas = [];
             foreach ($userdatas as $userdata) {
                 $subdatas[] = (object)[
@@ -309,7 +309,7 @@ class provider implements
             $data[] = (object)[
                 'gameelementid' => $gameelement->id,
                 'sectionid' => $gameelement->sectionid,
-                'type' => get_string($gameelement->type, 'format_ludimoodle'),
+                'type' => get_string($gameelement->type, 'format_ludilearn'),
                 'timecreated' => $gameelement->timecreated,
                 'data' => $subdatas,
             ];
@@ -355,7 +355,7 @@ class provider implements
         if ($context instanceof context_module) {
             $params = ['instanceid' => $context->instanceid];
             $sql = "DELETE cmu
-                    FROM {format_ludimoodle_cm_user} cmu
+                    FROM {format_ludilearn_cm_user} cmu
                     WHERE cmu.cmid = :instanceid";
             $DB->execute($sql, $params);
         }
@@ -364,14 +364,14 @@ class provider implements
         if ($context instanceof context_course) {
             $params = ['instanceid' => $context->instanceid];
             $sql = "DELETE gu
-                    FROM {format_ludimoodle_ele_user} gu
-                    INNER JOIN {format_ludimoodle_attributio} a ON a.id = gu.attributionid
+                    FROM {format_ludilearn_ele_user} gu
+                    INNER JOIN {format_ludilearn_attributio} a ON a.id = gu.attributionid
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid";
             $DB->execute($sql, $params);
 
             $sql = "DELETE a
-                    FROM {format_ludimoodle_attributio} a
+                    FROM {format_ludilearn_attributio} a
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid";
             $DB->execute($sql, $params);
@@ -381,12 +381,12 @@ class provider implements
         if ($context instanceof context_user) {
             $params = ['instanceid' => $context->instanceid];
             $sql = "DELETE p
-                    FROM {format_ludimoodle_profile} p
+                    FROM {format_ludilearn_profile} p
                     WHERE p.userid = :instanceid";
             $DB->execute($sql, $params);
 
             $sql = "DELETE a
-                    FROM {format_ludimoodle_answers} a
+                    FROM {format_ludilearn_answers} a
                     WHERE a.userid = :instanceid";
             $DB->execute($sql, $params);
         }
@@ -413,8 +413,8 @@ class provider implements
             if ($context instanceof context_module) {
                 $params = ['instanceid' => $context->instanceid];
                 $sql = "DELETE cmu
-                    FROM {format_ludimoodle_cm_user} cmu
-                    INNER JOIN {format_ludimoodle_attributio} a ON a.id = cmu.attributionid
+                    FROM {format_ludilearn_cm_user} cmu
+                    INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
                     WHERE cmu.cmid = :instanceid AND a.userid = :userid";
                 $DB->execute($sql, $params);
             }
@@ -423,14 +423,14 @@ class provider implements
             if ($context instanceof context_course) {
                 $params = ['instanceid' => $context->instanceid];
                 $sql = "DELETE gu
-                    FROM {format_ludimoodle_ele_user} gu
-                    INNER JOIN {format_ludimoodle_attributio} a ON a.id = gu.attributionid
+                    FROM {format_ludilearn_ele_user} gu
+                    INNER JOIN {format_ludilearn_attributio} a ON a.id = gu.attributionid
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid AND a.userid = :userid";
                 $DB->execute($sql, $params);
 
                 $sql = "DELETE a
-                    FROM {format_ludimoodle_attributio} a
+                    FROM {format_ludilearn_attributio} a
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid AND a.userid = :userid";
                 $DB->execute($sql, $params);
@@ -440,12 +440,12 @@ class provider implements
             if ($context instanceof context_user) {
                 $params = ['userid' => $user->id];
                 $sql = "DELETE p
-                    FROM {format_ludimoodle_profile} p
+                    FROM {format_ludilearn_profile} p
                     WHERE p.userid = :userid";
                 $DB->execute($sql, $params);
 
                 $sql = "DELETE a
-                    FROM {format_ludimoodle_answers} a
+                    FROM {format_ludilearn_answers} a
                     WHERE a.userid = :userid";
                 $DB->execute($sql, $params);
             }
@@ -465,8 +465,8 @@ class provider implements
         if ($context instanceof context_module) {
             $params = ['instanceid' => $context->instanceid];
             $sql = "SELECT DISTINCT(a.userid)
-                    FROM {format_ludimoodle_attributio} a
-                    INNER JOIN {format_ludimoodle_cm_user} cmu ON cmu.attributionid = a.id
+                    FROM {format_ludilearn_attributio} a
+                    INNER JOIN {format_ludilearn_cm_user} cmu ON cmu.attributionid = a.id
                     WHERE cmu.cmid = :instanceid";
             $userlist->add_from_sql('userid', $sql, $params);
         }
@@ -475,7 +475,7 @@ class provider implements
         if ($context instanceof context_course) {
             $params = ['instanceid' => $context->instanceid];
             $sql = "SELECT DISTINCT(a.userid)
-                    FROM {format_ludimoodle_attributio} a
+                    FROM {format_ludilearn_attributio} a
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid";
             $userlist->add_from_sql('userid', $sql, $params);
@@ -485,7 +485,7 @@ class provider implements
         if ($context instanceof context_user) {
             $params = ['instanceid' => $context->instanceid];
             $sql = "SELECT DISTINCT(p.userid)
-                    FROM {format_ludimoodle_profile} p
+                    FROM {format_ludilearn_profile} p
                     WHERE p.userid = :instanceid";
             $userlist->add_from_sql('userid', $sql, $params);
         }
@@ -512,8 +512,8 @@ class provider implements
                     'userid' => $user->id,
                 ];
                 $sql = "DELETE cmu
-                    FROM {format_ludimoodle_cm_user} cmu
-                    INNER JOIN {format_ludimoodle_attributio} a ON a.id = cmu.attributionid
+                    FROM {format_ludilearn_cm_user} cmu
+                    INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
                     WHERE cmu.cmid = :instanceid AND a.userid = :userid";
                 $DB->execute($sql, $params);
             }
@@ -525,14 +525,14 @@ class provider implements
                     'userid' => $user->id,
                 ];
                 $sql = "DELETE gu
-                    FROM {format_ludimoodle_ele_user} gu
-                    INNER JOIN {format_ludimoodle_attributio} a ON a.id = gu.attributionid
+                    FROM {format_ludilearn_ele_user} gu
+                    INNER JOIN {format_ludilearn_attributio} a ON a.id = gu.attributionid
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid AND a.userid = :userid";
                 $DB->execute($sql, $params);
 
                 $sql = "DELETE a
-                    FROM {format_ludimoodle_attributio} a
+                    FROM {format_ludilearn_attributio} a
                     INNER JOIN {gameelements} g ON g.id = a.gameelementid
                     WHERE g.courseid = :instanceid AND a.userid = :userid";
                 $DB->execute($sql, $params);
@@ -542,12 +542,12 @@ class provider implements
             if ($context instanceof context_user) {
                 $params = ['userid' => $user->id];
                 $sql = "DELETE p
-                    FROM {format_ludimoodle_profile} p
+                    FROM {format_ludilearn_profile} p
                     WHERE p.userid = :userid";
                 $DB->execute($sql, $params);
 
                 $sql = "DELETE a
-                    FROM {format_ludimoodle_answers} a
+                    FROM {format_ludilearn_answers} a
                     WHERE a.userid = :userid";
                 $DB->execute($sql, $params);
             }

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\local\adaptation;
+namespace format_ludilearn\local\adaptation;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -23,8 +23,8 @@ require_once('static_values.php');
 /**
  * Hexad scores class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui, Nihal Ouherrou
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -128,7 +128,7 @@ class static_values {
      */
     public static function hexad_affinity_matrix(): string {
         global $CFG;
-        $dirrules = $CFG->dirroot . "/course/format/ludimoodle/classes/local/adaptation/";
+        $dirrules = $CFG->dirroot . "/course/format/ludilearn/classes/local/adaptation/";
         return $dirrules . "rules/hexad_affinity_matrix.json";
     }
 }

@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\local\gameelements;
+namespace format_ludilearn\local\gameelements;
 
 use completion_info;
 use context_module;
@@ -30,8 +30,8 @@ require_once($CFG->libdir . '/gradelib.php');
 /**
  * Class game_element
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -320,7 +320,7 @@ abstract class game_element {
                 $parameters = nogamified::get_parameters_default();
                 break;
             default:
-                throw new \moodle_exception('error_game_element_type', 'format_ludimoodle');
+                throw new \moodle_exception('error_game_element_type', 'format_ludilearn');
         }
         return $parameters;
     }
@@ -358,7 +358,7 @@ abstract class game_element {
                 $cmparameters = nogamified::get_cm_parameters_default($modtype, $cmid);
                 break;
             default:
-                throw new \moodle_exception('error_game_element_type', 'format_ludimoodle');
+                throw new \moodle_exception('error_game_element_type', 'format_ludilearn');
         }
         return $cmparameters;
     }
@@ -489,8 +489,8 @@ abstract class game_element {
         global $DB;
 
         $gameelements = [];
-        $gameelementssql = 'SELECT * FROM {format_ludimoodle_elements} g
-                            INNER JOIN {format_ludimoodle_attributio} a ON g.id = a.gameelementid
+        $gameelementssql = 'SELECT * FROM {format_ludilearn_elements} g
+                            INNER JOIN {format_ludilearn_attributio} a ON g.id = a.gameelementid
                             WHERE g.courseid = :courseid AND a.userid = :userid';
 
         $gameelementsreq = $DB->get_records_sql($gameelementssql, ['courseid' => $courseid, 'userid' => $userid]);
@@ -519,19 +519,19 @@ abstract class game_element {
         $parameters = self::get_parameters_default_by_type($type, $courseid);
 
         // Create the game element if not exists.
-        $gameelementid = $DB->get_field('format_ludimoodle_elements', 'id',
+        $gameelementid = $DB->get_field('format_ludilearn_elements', 'id',
             ['courseid' => $courseid, 'sectionid' => $sectionid, 'type' => $type]);
         if (!$gameelementid) {
-            $gameelementid = $DB->insert_record('format_ludimoodle_elements',
+            $gameelementid = $DB->insert_record('format_ludilearn_elements',
                 ['courseid' => $courseid, 'sectionid' => $sectionid, 'type' => $type, 'timecreated' => time()]);
         }
 
         // Create parameters.
         foreach ($parameters as $name => $value) {
-            $sectionparamexist = $DB->record_exists('format_ludimoodle_params',
+            $sectionparamexist = $DB->record_exists('format_ludilearn_params',
                 ['gameelementid' => $gameelementid, 'name' => $name]);
             if (!$sectionparamexist) {
-                $DB->insert_record('format_ludimoodle_params',
+                $DB->insert_record('format_ludilearn_params',
                     ['gameelementid' => $gameelementid, 'name' => $name, 'value' => $value]);
             }
         }
@@ -546,10 +546,10 @@ abstract class game_element {
             $modetype = $DB->get_field('modules', 'name', ['id' => $cm->module]);
             $cmparameters = self::get_cm_parameters_default_by_type($type, $modetype, $cm->id);
             foreach ($cmparameters as $name => $value) {
-                $cmparamexist = $DB->record_exists('format_ludimoodle_cm_params',
+                $cmparamexist = $DB->record_exists('format_ludilearn_cm_params',
                     ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name]);
                 if (!$cmparamexist) {
-                    $DB->insert_record('format_ludimoodle_cm_params',
+                    $DB->insert_record('format_ludilearn_cm_params',
                         ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]);
                 }
             }
@@ -573,7 +573,7 @@ abstract class game_element {
 
         $gameelementsid = [];
         foreach (self::get_all_types() as $type) {
-            $gameelement = $DB->record_exists('format_ludimoodle_elements',
+            $gameelement = $DB->record_exists('format_ludilearn_elements',
                 ['courseid' => $courseid, 'sectionid' => $sectionid, 'type' => $type]);
             if (!$gameelement) {
                 $gameelementsid[] = self::create($type, $courseid, $sectionid);
@@ -630,7 +630,7 @@ abstract class game_element {
     public static function is_gamified(int $cmid): bool {
         global $DB;
 
-        $cmparamexist = $DB->get_records('format_ludimoodle_cm_params',
+        $cmparamexist = $DB->get_records('format_ludilearn_cm_params',
             ['cmid' => $cmid, 'name' => 'gamified'], 'id', 'value', 0, 1);
         if ($cmparamexist) {
             $cmparam = reset($cmparamexist);
@@ -652,17 +652,17 @@ abstract class game_element {
         global $DB;
 
         // Retrieve all game element for a course id.
-        $gameelements = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid]);
+        $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid]);
 
         // For each game element, check if the param exist for the course module.
         foreach ($gameelements as $gameelement) {
-            $cmparamexist = $DB->get_record('format_ludimoodle_cm_params',
+            $cmparamexist = $DB->get_record('format_ludilearn_cm_params',
                 ['gameelementid' => $gameelement->id, 'cmid' => $cmid, 'name' => 'gamified']);
             if ($cmparamexist) {
                 $cmparamexist->value = 1;
-                $DB->update_record('format_ludimoodle_cm_params', $cmparamexist);
+                $DB->update_record('format_ludilearn_cm_params', $cmparamexist);
             } else {
-                $DB->insert_record('format_ludimoodle_cm_params',
+                $DB->insert_record('format_ludilearn_cm_params',
                     ['gameelementid' => $gameelement->id, 'cmid' => $cmid, 'name' => 'gamified', 'value' => 1]);
             }
         }
@@ -681,17 +681,17 @@ abstract class game_element {
         global $DB;
 
         // Retrieve all game element for a course id.
-        $gameelements = $DB->get_records('format_ludimoodle_elements', ['courseid' => $courseid]);
+        $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid]);
 
         // For each game element, check if the param exist for the course module.
         foreach ($gameelements as $gameelement) {
-            $cmparamexist = $DB->get_record('format_ludimoodle_cm_params',
+            $cmparamexist = $DB->get_record('format_ludilearn_cm_params',
                 ['gameelementid' => $gameelement->id, 'cmid' => $cmid, 'name' => 'gamified']);
             if ($cmparamexist) {
                 $cmparamexist->value = 0;
-                $DB->update_record('format_ludimoodle_cm_params', $cmparamexist);
+                $DB->update_record('format_ludilearn_cm_params', $cmparamexist);
             } else {
-                $DB->insert_record('format_ludimoodle_cm_params',
+                $DB->insert_record('format_ludilearn_cm_params',
                     ['gameelementid' => $gameelement->id, 'cmid' => $cmid, 'name' => 'gamified', 'value' => 0]);
             }
         }
@@ -712,11 +712,11 @@ abstract class game_element {
         $courseparameters = new stdClass();
         // Get a game element of course to get the parameters.
         // (Because all game elements of a same course have the same parameters).
-        $gameelementreq = $DB->get_records('format_ludimoodle_elements',
+        $gameelementreq = $DB->get_records('format_ludilearn_elements',
             ['courseid' => $courseid, 'type' => $type], '', 'id', 0, 1);
         if ($gameelementreq) {
             $gameelementid = reset($gameelementreq)->id;
-            $parameters = $DB->get_records('format_ludimoodle_params', ['gameelementid' => $gameelementid]);
+            $parameters = $DB->get_records('format_ludilearn_params', ['gameelementid' => $gameelementid]);
             if ($parameters) {
                 foreach ($parameters as $parameter) {
                     $courseparameters->{$parameter->name} = $parameter->value;
@@ -738,17 +738,17 @@ abstract class game_element {
         global $DB;
 
         // Remove all cm user progression.
-        $sqlcms = 'DELETE FROM {format_ludimoodle_cm_user}
+        $sqlcms = 'DELETE FROM {format_ludilearn_cm_user}
                     WHERE attributionid IN
-                    (SELECT a.id FROM {format_ludimoodle_attributio} a WHERE a.gameelementid IN
-                        (SELECT g.id FROM {format_ludimoodle_elements} g WHERE g.courseid = :courseid))';
+                    (SELECT a.id FROM {format_ludilearn_attributio} a WHERE a.gameelementid IN
+                        (SELECT g.id FROM {format_ludilearn_elements} g WHERE g.courseid = :courseid))';
         $DB->execute($sqlcms, ['courseid' => $courseid]);
 
         // Remove all section user progression.
-        $sqlsections = 'DELETE FROM {format_ludimoodle_ele_user}
+        $sqlsections = 'DELETE FROM {format_ludilearn_ele_user}
                         WHERE attributionid IN
-                        (SELECT a.id FROM {format_ludimoodle_attributio} a WHERE a.gameelementid IN
-                            (SELECT g.id FROM {format_ludimoodle_elements} g WHERE g.courseid = :courseid))';
+                        (SELECT a.id FROM {format_ludilearn_attributio} a WHERE a.gameelementid IN
+                            (SELECT g.id FROM {format_ludilearn_elements} g WHERE g.courseid = :courseid))';
         $DB->execute($sqlsections, ['courseid' => $courseid]);
     }
 

@@ -16,9 +16,9 @@
 /**
  * Game profile.
  *
- * @module      format_ludimoodle/gameprofile
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @module      format_ludilearn/gameprofile
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -28,18 +28,18 @@ define(['jquery', 'core/str', 'core/log', 'https://cdn.jsdelivr.net/npm/chart.js
             $(document).ready(function() {
                 // Load the translated strings
                 str.get_strings([
-                    {key: 'achiever', component: 'format_ludimoodle'},
-                    {key: 'player', component: 'format_ludimoodle'},
-                    {key: 'socialiser', component: 'format_ludimoodle'},
-                    {key: 'freeSpirit', component: 'format_ludimoodle'},
-                    {key: 'disruptor', component: 'format_ludimoodle'},
-                    {key: 'philanthropist', component: 'format_ludimoodle'},
-                    {key: 'achiever_desc', component: 'format_ludimoodle'},
-                    {key: 'player_desc', component: 'format_ludimoodle'},
-                    {key: 'socialiser_desc', component: 'format_ludimoodle'},
-                    {key: 'freeSpirit_desc', component: 'format_ludimoodle'},
-                    {key: 'disruptor_desc', component: 'format_ludimoodle'},
-                    {key: 'philanthropist_desc', component: 'format_ludimoodle'}
+                    {key: 'achiever', component: 'format_ludilearn'},
+                    {key: 'player', component: 'format_ludilearn'},
+                    {key: 'socialiser', component: 'format_ludilearn'},
+                    {key: 'freeSpirit', component: 'format_ludilearn'},
+                    {key: 'disruptor', component: 'format_ludilearn'},
+                    {key: 'philanthropist', component: 'format_ludilearn'},
+                    {key: 'achiever_desc', component: 'format_ludilearn'},
+                    {key: 'player_desc', component: 'format_ludilearn'},
+                    {key: 'socialiser_desc', component: 'format_ludilearn'},
+                    {key: 'freeSpirit_desc', component: 'format_ludilearn'},
+                    {key: 'disruptor_desc', component: 'format_ludilearn'},
+                    {key: 'philanthropist_desc', component: 'format_ludilearn'}
                 ]).done(function(strings) {
                     const labels = strings.slice(0, 6).map(function(string) {
                         return string;

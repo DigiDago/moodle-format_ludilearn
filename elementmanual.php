@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Format Ludimoodle plugin report page.
+ * Format Ludilearn plugin report page.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,7 +32,7 @@ global $PAGE, $DB, $CFG, $OUTPUT;
 $context = context_system::instance();
 require_login();
 require_capability('moodle/role:manage', $context);
-$PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludimoodle/elementmanual.php", []));
+$PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludilearn/elementmanual.php", []));
 $PAGE->set_context($context);
 $PAGE->set_title('Saisie manuelle de l\'élément de jeu');
 $PAGE->set_heading(
@@ -40,7 +40,7 @@ $PAGE->set_heading(
 );
 $PAGE->add_body_class('limitedwidth');
 
-$renderer = $PAGE->get_renderer('format_ludimoodle');
+$renderer = $PAGE->get_renderer('format_ludilearn');
 
 echo $OUTPUT->header();
 
@@ -72,16 +72,16 @@ if (isset($_POST['element']) && isset($_POST['id'])) {
         die();
     }
 
-    $ludimoodleprofile = $DB->get_record('format_ludimoodle_profile', ['userid' => $_POST['id']]);
-    if ($ludimoodleprofile) {
-        $DB->delete_records('format_ludimoodle_profile', ['userid' => $_POST['id']]);
+    $ludilearnprofile = $DB->get_record('format_ludilearn_profile', ['userid' => $_POST['id']]);
+    if ($ludilearnprofile) {
+        $DB->delete_records('format_ludilearn_profile', ['userid' => $_POST['id']]);
     }
 
-    $ludimoodleprofile = new stdClass();
-    $ludimoodleprofile->type = $_POST['element'];
-    $ludimoodleprofile->userid = $_POST['id'];
-    $ludimoodleprofile->combinedaffinities = 'manual';
-    $DB->insert_record('format_ludimoodle_profile', $ludimoodleprofile);
+    $ludilearnprofile = new stdClass();
+    $ludilearnprofile->type = $_POST['element'];
+    $ludilearnprofile->userid = $_POST['id'];
+    $ludilearnprofile->combinedaffinities = 'manual';
+    $DB->insert_record('format_ludilearn_profile', $ludilearnprofile);
     echo 'L\'élément de jeu a bien été associé à l\'utilisateur';
 }
 echo $OUTPUT->footer();

@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -27,23 +27,23 @@
             <h4 class="text-center">{{ name }}</h4>
             {{#parameters.gamified}}
                 {{#parameters.noscore}}
-                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no score">
+                    <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image no score">
                 {{/parameters.noscore}}
                 {{^parameters.noscore}}
                     {{#school}}
-                        {{> format_ludimoodle/ranking/school/summary}}
+                        {{> format_ludilearn/ranking/school/summary}}
                     {{/school}}
                     {{#professional}}
-                        {{> format_ludimoodle/ranking/professional/summary}}
+                        {{> format_ludilearn/ranking/professional/summary}}
                     {{/professional}}
                     {{#highschool}}
-                        {{> format_ludimoodle/ranking/highschool/summary}}
+                        {{> format_ludilearn/ranking/highschool/summary}}
                     {{/highschool}}
-                    {{> format_ludimoodle/ranking/rankingtable}}
+                    {{> format_ludilearn/ranking/rankingtable}}
                 {{/parameters.noscore}}
             {{/parameters.gamified}}
             {{^parameters.gamified}}
-                <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+                <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
             {{/parameters.gamified}}
             <div class="section-summary">
                 {{{ summary }}}
@@ -65,22 +65,22 @@
                                 <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                                     {{#parameters.gamified}}
                                         {{#parameters.noscore}}
-                                            <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no score">
+                                            <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image no score">
                                         {{/parameters.noscore}}
                                         {{^parameters.noscore}}
                                             {{#school}}
-                                                {{> format_ludimoodle/ranking/school/summary}}
+                                                {{> format_ludilearn/ranking/school/summary}}
                                             {{/school}}
                                             {{#professional}}
-                                                {{> format_ludimoodle/ranking/professional/summary}}
+                                                {{> format_ludilearn/ranking/professional/summary}}
                                             {{/professional}}
                                             {{#highschool}}
-                                                {{> format_ludimoodle/ranking/highschool/summary}}
+                                                {{> format_ludilearn/ranking/highschool/summary}}
                                             {{/highschool}}
                                         {{/parameters.noscore}}
                                     {{/parameters.gamified}}
                                     {{^parameters.gamified}}
-                                        <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image not gamified">
+                                        <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image not gamified">
                                     {{/parameters.gamified}}
                                     <p class="text-center scoretext">
                                         {{#parameters.gamified}}

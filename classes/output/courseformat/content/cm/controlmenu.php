@@ -17,26 +17,26 @@
 /**
  * Contains the cm control menu output class.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace format_ludimoodle\output\courseformat\content\cm;
+namespace format_ludilearn\output\courseformat\content\cm;
 
 use action_menu_link_secondary;
 use context_module;
 use core_courseformat\output\local\content\cm\controlmenu as controlmenu_base;
-use format_ludimoodle\local\gameelements\game_element;
+use format_ludilearn\local\gameelements\game_element;
 use moodle_url;
 use pix_icon;
 
 /**
  * Base class to render a control menu content.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -63,21 +63,21 @@ class controlmenu extends controlmenu_base {
             $gamified = game_element::is_gamified($this->mod->id);
             if ($gamified) {
                 $url->param('gamify', 0);
-                $str = get_string('notgamify', 'format_ludimoodle');
+                $str = get_string('notgamify', 'format_ludilearn');
                 $icon = new pix_icon('i/checkedcircle', '', 'moodle', ['class' => 'iconsmall']);
                 $action = 'cmNotgamify';
 
                 // State after action.
-                $swapname = get_string('gamify', 'format_ludimoodle');
+                $swapname = get_string('gamify', 'format_ludilearn');
                 $swapicon = 'i/uncheckedcircle';
             } else {
                 $url->param('gamify', 1);
-                $str = get_string('gamify', 'format_ludimoodle');
+                $str = get_string('gamify', 'format_ludilearn');
                 $icon = new pix_icon('i/uncheckedcircle', '', 'moodle', ['class' => 'iconsmall']);
                 $action = 'cmGamify';
 
                 // State after action.
-                $swapname = get_string('notgamify', 'format_ludimoodle');
+                $swapname = get_string('notgamify', 'format_ludilearn');
                 $swapicon = 'i/checkedcircle';
             }
 

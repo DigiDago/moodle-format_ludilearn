@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace format_ludimoodle\external\parameters;
+namespace format_ludilearn\external\parameters;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -26,13 +26,13 @@ use external_api;
 use external_function_parameters;
 use external_single_structure;
 use external_value;
-use format_ludimoodle\local\gameelements\score;
+use format_ludilearn\local\gameelements\score;
 
 /**
  * Class for update course parameters for score elements.
  *
- * @package     format_ludimoodle
- * @copyright   2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

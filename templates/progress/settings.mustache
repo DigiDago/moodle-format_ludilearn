@@ -15,21 +15,21 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
 }}
 
-<div id="ludimoodle-settings" class="ludimoodle-world-{{ world }}">
+<div id="ludilearn-settings" class="ludilearn-world-{{ world }}">
     <div class="row justify-content-center">
         <div class="col-6 block_section">
-            <img class="ludimoodle-img img-responsive mb-1 d-block mx-auto"
-                 src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/progress/course-planet-09.svg"
+            <img class="ludilearn-img img-responsive mb-1 d-block mx-auto"
+                 src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/progress/course-planet-09.svg"
                  alt="Image planet progress">
         </div>
     </div>
-    <p class="align-center">{{#str}} settings:progressiondescription, format_ludimoodle {{/str}}</p>
-    <p class="align-center"><b>{{#str}} settings:nosetting, format_ludimoodle {{/str}}</b></p>
-    {{> format_ludimoodle/settings_footer}}
+    <p class="align-center">{{#str}} settings:progressiondescription, format_ludilearn {{/str}}</p>
+    <p class="align-center"><b>{{#str}} settings:nosetting, format_ludilearn {{/str}}</b></p>
+    {{> format_ludilearn/settings_footer}}
 </div>

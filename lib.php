@@ -17,15 +17,15 @@
 /**
  *  Format base class.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 use core\output\inplace_editable;
-use format_ludimoodle\local\gameelements\game_element;
-use format_ludimoodle\output\format_ludimoodle_gameelement;
+use format_ludilearn\local\gameelements\game_element;
+use format_ludilearn\output\format_ludilearn_gameelement;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -33,14 +33,14 @@ global $CFG;
 require_once($CFG->dirroot . '/course/format/lib.php');
 
 /**
- * Format class for the ludimoodle course format.
+ * Format class for the ludilearn course format.
  *
- * @package          format_ludimoodle
- * @copyright        2024 Pimenko <support@pimenko.com><pimenko.com>
+ * @package          format_ludilearn
+ * @copyright        2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author           Jordan Kesraoui
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class format_ludimoodle extends core_courseformat\base {
+class format_ludilearn extends core_courseformat\base {
 
     /**
      * Returns true if this course format uses sections.
@@ -91,7 +91,7 @@ class format_ludimoodle extends core_courseformat\base {
     }
 
     /**
-     * Returns the default section name for the ludimoodle course format.
+     * Returns the default section name for the ludilearn course format.
      *
      * If the section number is 0, it will use the string with key = section0name from the course format's lang file.
      * If the section number is not 0, the base implementation of course_format::get_default_section_name which uses
@@ -105,7 +105,7 @@ class format_ludimoodle extends core_courseformat\base {
     public function get_default_section_name($section) {
         if ($section->section == 0) {
             // Return the general section.
-            return get_string('section0name', 'format_ludimoodle');
+            return get_string('section0name', 'format_ludilearn');
         } else {
             // Use course_format::get_default_section_name implementation which
             // will display the section name in "Topic n" format.
@@ -286,45 +286,45 @@ class format_ludimoodle extends core_courseformat\base {
         if ($foreditform) {
             $optionsedit = [
                 'assignment' => [
-                    'label' => get_string('assignment', "format_ludimoodle"),
+                    'label' => get_string('assignment', "format_ludilearn"),
                     'help' => 'assignment',
-                    'help_component' => 'format_ludimoodle',
+                    'help_component' => 'format_ludilearn',
                     'element_type' => 'select',
                     'element_attributes' => [
                         [
-                            'manual' => get_string('manual', "format_ludimoodle"),
-                            'automatic' => get_string('automatic', "format_ludimoodle"),
-                            'bysection' => get_string('bysection', "format_ludimoodle"),
+                            'manual' => get_string('manual', "format_ludilearn"),
+                            'automatic' => get_string('automatic', "format_ludilearn"),
+                            'bysection' => get_string('bysection', "format_ludilearn"),
                         ],
                     ],
                 ],
                 'default_game_element' => [
-                    'label' => get_string('default_game_element', "format_ludimoodle"),
+                    'label' => get_string('default_game_element', "format_ludilearn"),
                     'help' => 'default_game_element',
-                    'help_component' => 'format_ludimoodle',
+                    'help_component' => 'format_ludilearn',
                     'element_type' => 'select',
                     'element_attributes' => [
                         [
-                            'score' => get_string('score', "format_ludimoodle"),
-                            'badge' => get_string('badge', "format_ludimoodle"),
-                            'progress' => get_string('progress', "format_ludimoodle"),
-                            'avatar' => get_string('avatar', "format_ludimoodle"),
-                            'timer' => get_string('timer', "format_ludimoodle"),
-                            'ranking' => get_string('ranking', "format_ludimoodle"),
-                            'nogamified' => get_string('nogamified', "format_ludimoodle"),
+                            'score' => get_string('score', "format_ludilearn"),
+                            'badge' => get_string('badge', "format_ludilearn"),
+                            'progress' => get_string('progress', "format_ludilearn"),
+                            'avatar' => get_string('avatar', "format_ludilearn"),
+                            'timer' => get_string('timer', "format_ludilearn"),
+                            'ranking' => get_string('ranking', "format_ludilearn"),
+                            'nogamified' => get_string('nogamified', "format_ludilearn"),
                         ],
                     ],
                 ],
                 'world' => [
-                    'label' => get_string('world', "format_ludimoodle"),
+                    'label' => get_string('world', "format_ludilearn"),
                     'help' => 'world',
-                    'help_component' => 'format_ludimoodle',
+                    'help_component' => 'format_ludilearn',
                     'element_type' => 'select',
                     'element_attributes' => [
                         [
-                            'school' => get_string('school', "format_ludimoodle"),
-                            'professional' => get_string('professional', "format_ludimoodle"),
-                            'highschool' => get_string('highschool', "format_ludimoodle"),
+                            'school' => get_string('school', "format_ludilearn"),
+                            'professional' => get_string('professional', "format_ludilearn"),
+                            'highschool' => get_string('highschool', "format_ludilearn"),
                         ],
                     ],
                 ],
@@ -371,7 +371,7 @@ class format_ludimoodle extends core_courseformat\base {
     /**
      * Updates format options for a course.
      *
-     * In case if course format was changed to 'ludimoodle', we try to copy options
+     * In case if course format was changed to 'ludilearn', we try to copy options
      * 'coursedisplay' and 'hiddensections' from the previous format.
      *
      * @param stdClass|array $data return value from {@link moodleform::get_data()} or array with data
@@ -396,9 +396,9 @@ class format_ludimoodle extends core_courseformat\base {
             }
         }
 
-        if (!isset($oldcourse['format']) || ($oldcourse['format'] != 'ludimoodle')) {
+        if (!isset($oldcourse['format']) || ($oldcourse['format'] != 'ludilearn')) {
             // Create game elements if not exist.
-            $manager = new \format_ludimoodle\manager();
+            $manager = new \format_ludilearn\manager();
             game_element::create_all_for_course($this->get_course()->id);
             if (isset($data['assignment']) && isset($data['default_game_element'])) {
                 $manager->sync_user_attribution($this->get_course()->id, $data['assignment'], $data['default_game_element'], false);
@@ -426,7 +426,7 @@ class format_ludimoodle extends core_courseformat\base {
                 && isset($oldoptions['default_game_element'])) {
 
                 // Create game elements if not exist.
-                $manager = new \format_ludimoodle\manager();
+                $manager = new \format_ludilearn\manager();
                 game_element::create_all_for_course($this->get_course()->id);
                 $manager->sync_user_attribution($this->get_course()->id,
                     $data['assignment'],
@@ -462,11 +462,11 @@ class format_ludimoodle extends core_courseformat\base {
     public function inplace_editable_render_section_name($section, $linkifneeded = true,
         $editable = null, $edithint = null, $editlabel = null) {
         if (empty($edithint)) {
-            $edithint = new lang_string('editsectionname', 'format_ludimoodle');
+            $edithint = new lang_string('editsectionname', 'format_ludilearn');
         }
         if (empty($editlabel)) {
             $title = get_section_name($section->course, $section);
-            $editlabel = new lang_string('newsectionname', 'format_ludimoodle', $title);
+            $editlabel = new lang_string('newsectionname', 'format_ludilearn', $title);
         }
         return parent::inplace_editable_render_section_name($section, $linkifneeded, $editable, $edithint, $editlabel);
     }
@@ -512,7 +512,7 @@ class format_ludimoodle extends core_courseformat\base {
         global $PAGE;
 
         if ($section->section && ($action === 'setmarker' || $action === 'removemarker')) {
-            // Format 'ludimoodle' allows to set and remove markers in addition to common section actions.
+            // Format 'ludilearn' allows to set and remove markers in addition to common section actions.
             require_capability('moodle/course:setcurrentsection', context_course::instance($this->courseid));
             course_set_marker($this->courseid, ($action === 'setmarker') ? $section->section : 0);
             return null;
@@ -520,7 +520,7 @@ class format_ludimoodle extends core_courseformat\base {
 
         // For show/hide actions call the parent method and return the new content for .section_availability element.
         $rv = parent::section_action($section, $action, $sr);
-        $renderer = $PAGE->get_renderer('format_ludimoodle');
+        $renderer = $PAGE->get_renderer('format_ludilearn');
 
         if (!($section instanceof section_info)) {
             $modinfo = course_modinfo::instance($this->courseid);
@@ -575,7 +575,8 @@ class format_ludimoodle extends core_courseformat\base {
     public function course_content_header() {
         global $PAGE, $DB;
 
-        if ($PAGE->bodyid != 'page-course-view-ludimoodle' && $PAGE->cm == null) {
+        if (($PAGE->bodyid != 'page-course-view-ludilearn' && $PAGE->bodyid != 'page-course-view-section-ludilearn')
+            && $PAGE->cm == null) {
             return null;
         }
         $section = optional_param('section', -1, PARAM_INT);
@@ -583,16 +584,23 @@ class format_ludimoodle extends core_courseformat\base {
         if ($hideheader) {
             return null;
         }
+        // If we are on section view page.
+        if ($PAGE->bodyid == 'page-course-view-section-ludilearn') {
+            $section = optional_param('id', -1, PARAM_INT);
+            if ($section >= 0) {
+                return new format_ludilearn_gameelement($PAGE->course->id, $section);
+            }
+        }
         if ($section >= 0) {
             $section = $DB->get_record('course_sections', ['course' => $this->courseid, 'section' => $section]);
-            return new format_ludimoodle_gameelement($PAGE->course->id, $section->id);
+            return new format_ludilearn_gameelement($PAGE->course->id, $section->id);
         }
         if ($PAGE->cm != null) {
             $cm = $DB->get_record('course_modules', ['id' => $PAGE->cm->id]);
-            return new format_ludimoodle_gameelement($PAGE->course->id, $cm->section, $cm->id);
+            return new format_ludilearn_gameelement($PAGE->course->id, $cm->section, $cm->id);
         }
 
-        return new format_ludimoodle_gameelement($PAGE->course->id);
+        return new format_ludilearn_gameelement($PAGE->course->id);
     }
 }
 
@@ -606,13 +614,13 @@ class format_ludimoodle extends core_courseformat\base {
  * @return inplace_editable
  * @throws dml_exception
  */
-function format_ludimoodle_inplace_editable($itemtype, $itemid, $newvalue) {
+function format_ludilearn_inplace_editable($itemtype, $itemid, $newvalue) {
     global $DB, $CFG;
     require_once($CFG->dirroot . '/course/lib.php');
     if ($itemtype === 'sectionname' || $itemtype === 'sectionnamenl') {
         $section = $DB->get_record_sql(
             'SELECT s.* FROM {course_sections} s JOIN {course} c ON s.course = c.id WHERE s.id = ? AND c.format = ?',
-            [$itemid, 'ludimoodle'], MUST_EXIST);
+            [$itemid, 'ludilearn'], MUST_EXIST);
         return course_get_format($section->course)->inplace_editable_update_section_name($section, $itemtype, $newvalue);
     }
 }
@@ -627,13 +635,13 @@ function format_ludimoodle_inplace_editable($itemtype, $itemid, $newvalue) {
  * @throws \core\exception\moodle_exception
  * @throws coding_exception
  */
-function format_ludimoodle_extend_navigation_course(navigation_node $navigation, stdClass $course,
+function format_ludilearn_extend_navigation_course(navigation_node $navigation, stdClass $course,
     stdClass $context): void {
     global $USER, $CFG;
     $context = context_course::instance($course->id);
-    if (has_capability('moodle/course:update', $context, $USER) && $course->format == 'ludimoodle') {
-        $url = new moodle_url("$CFG->wwwroot/course/format/ludimoodle/settings_game_elements.php",
+    if (has_capability('moodle/course:update', $context, $USER) && $course->format == 'ludilearn') {
+        $url = new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php",
             ['id' => $course->id, "type" => "score", "hideheader" => 1]);
-        $navigation->add(get_string('settingsname', 'format_ludimoodle'), $url);
+        $navigation->add(get_string('settingsname', 'format_ludilearn'), $url);
     }
 }

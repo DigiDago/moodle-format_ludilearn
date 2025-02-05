@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludimoodle/filename
+    @template format_ludilearn/filename
 
     Example context (json):
     {}
@@ -32,12 +32,12 @@
                         {{#parameters.bronzecount }} badge-number-bronze spinning {{/parameters.bronzecount}}">
                         {{ parameters.bronzecount }}
                     </div>
-                    <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                    <img class="ludilearn-img little-img img-responsive d-block mx-auto"
                         {{#parameters.bronzecount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_bronze.svg"
                         {{/parameters.bronzecount}}
                         {{^parameters.bronzecount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_bronze_none.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_bronze_none.svg"
                         {{/parameters.bronzecount }}
                          alt="Image badge">
                 </div>
@@ -46,12 +46,12 @@
                         {{#parameters.silvercount }} badge-number-silver spinning {{/parameters.silvercount}}">
                         {{ parameters.silvercount }}
                     </div>
-                    <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                    <img class="ludilearn-img little-img img-responsive d-block mx-auto"
                         {{#parameters.silvercount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_silver.svg"
                         {{/parameters.silvercount}}
                         {{^parameters.silvercount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_silver_none.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_silver_none.svg"
                         {{/parameters.silvercount }}
                          alt="Image badge">
                 </div>
@@ -60,12 +60,12 @@
                         {{#parameters.goldcount }} badge-number-gold spinning {{/parameters.goldcount}}">
                         {{ parameters.goldcount }}
                     </div>
-                    <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                    <img class="ludilearn-img little-img img-responsive d-block mx-auto"
                         {{#parameters.goldcount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_gold.svg"
                         {{/parameters.goldcount}}
                         {{^parameters.goldcount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_gold_none.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_gold_none.svg"
                         {{/parameters.goldcount }}
                          alt="Image badge">
                 </div>
@@ -74,19 +74,19 @@
                     {{#parameters.completioncount }} badge-number-bronze spinning {{/parameters.completioncount}}">
                         {{ parameters.completioncount }}
                     </div>
-                    <img class="ludimoodle-img little-img img-responsive d-block mx-auto"
+                    <img class="ludilearn-img little-img img-responsive d-block mx-auto"
                         {{#parameters.completioncount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_completion.svg"
                         {{/parameters.completioncount}}
                         {{^parameters.completioncount }}
-                         src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion_none.svg"
+                         src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_completion_none.svg"
                         {{/parameters.completioncount }}
                          alt="Image badge">
                 </div>
                 {{/parameters.gamified}}
                 {{^parameters.gamified}}
                 <div class="col-12">
-                    <img class="ludimoodle-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" alt="Image no gamified">
+                    <img class="ludilearn-img img-responsive d-block mx-auto" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" alt="Image no gamified">
                 </div>
                 {{/parameters.gamified}}
             </div>
@@ -109,14 +109,14 @@
                             <div class="cm-badge">
                                 <div class="{{#parameters.restricted }}restricted{{/parameters.restricted}} {{^url}} nourl {{/url}}">
                                     <img class="{{#parameters.restricted }}restricted{{/parameters.restricted }} img-responsive mb-1 d-block mx-auto"
-                                        {{#parameters.gamified }}src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_{{ parameters.badge }}.svg" {{/parameters.gamified }}
-                                        {{^parameters.gamified }}src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/none.svg" {{/parameters.gamified }}
+                                        {{#parameters.gamified }}src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_{{ parameters.badge }}.svg" {{/parameters.gamified }}
+                                        {{^parameters.gamified }}src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/none.svg" {{/parameters.gamified }}
                                          alt="Image badge">
 
                                     {{#parameters.gamified }}
                                     {{#parameters.completion}}
                                         <div class="badgecompletion">
-                                            <img src="{{globals.config.wwwroot}}/course/format/ludimoodle/pix/{{ world }}/badge/badge_completion.svg" alt="Icon completion">
+                                            <img src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/{{ world }}/badge/badge_completion.svg" alt="Icon completion">
                                         </div>
                                     {{/parameters.completion}}
                                     {{/parameters.gamified }}
