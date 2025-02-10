@@ -22,21 +22,51 @@
 }}
 
 <div id="ludilearn-questionnaire">
-    <form id="form-questionnaire" action="#">
-        <h3>{{#str}} questionshexad, format_ludilearn  {{/str}}</h3>
-        {{#questionsHEXAD}}
-            <div class="form-check mb-1">
-                <div class="form-control-feedback invalid-feedback" id="id_error_{{ number }}"></div>
-                <span class="font-weight-bold">{{{ content }}}</span><br>
-                <input type="hidden" name="questionid-{{ number }}" value="{{ id }}">
-                <input type="radio" id="question-{{ number }}-1" class="" name="question-{{ number }}" value="1">
-                <label class="mr-2" for="question-{{ number }}-1">1</label>
-                {{#answers}}
-                    <input type="radio" id="question-{{ number }}-{{ value }}" class="" name="question-{{ number }}" value="{{ value }}">
-                    <label class="mr-2" for="question-{{ number }}-{{ value }}">{{ value }}</label>
-                {{/answers}}
-            </div>
-        {{/questionsHEXAD}}
-        <input type="submit" class="btn btn-secondary ml-2" value="{{#str}} save {{/str}} ">
+    <form id="form-questionnaire" action="#" aria-label="{{#str}} questionnaire, format_ludilearn {{/str}}" aria-describedby="questionnaire-instructions">
+        <img class="hexad-illustration" src="{{globals.config.wwwroot}}/course/format/ludilearn/pix/hexad-illustration.svg" alt="Hexad questionnaire">
+        <h3 class="questionnaire-title">{{#str}} questionshexad_title, format_ludilearn {{/str}}</h3>
+        <p id="questionnaire-instructions" class="questionnaire">{{#str}} questionshexad, format_ludilearn {{/str}}</p>
+        <div class="row row-cols-1 mb-3">
+            {{#questionsHEXAD}}
+                <div class="col mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <fieldset>
+                                <legend class="sr-only">Question {{number}} {{#str}} number_question, format_ludilearn {{/str}} {{{ content }}}</legend>
+                                    <div class="form-control-feedback invalid-feedback" id="id_error_{{ number }}" aria-live="polite"></div>
+                                    <div class="question-content">
+                                        <span class="question-text">{{{ content }}}</span>
+                                    </div>
+
+                                    <input type="hidden" name="questionid-{{ number }}" value="{{ id }}">
+
+                                    <div class="rating-scale mt-3" role="group" aria-label="{{#str}} rating_scale, format_ludilearn {{/str}}">
+                                        <div class="rating-option">
+                                            <input type="radio" id="question-{{ number }}-1" name="question-{{ number }}" value="1" aria-required="true" aria-describedby="id_error_{{ number }}">
+                                            <label class="rating-label" for="question-{{ number }}-1" aria-label="1 - {{#str}} not_at_all_agree, format_ludilearn {{/str}}">1</label>
+                                        </div>
+
+                                        {{#answers}}
+                                            <div class="rating-option">
+                                                <input type="radio" id="question-{{ number }}-{{ value }}" name="question-{{ number }}" value="{{ value }}">
+                                                <label class="rating-label" for="question-{{ number }}-{{ value }}">{{ value }}</label>
+                                            </div>
+                                        {{/answers}}
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <small class="text-muted">{{#str}} not_at_all_agree, format_ludilearn {{/str}}</small>
+                                        <small class="text-muted">{{#str}} totally_agree, format_ludilearn {{/str}}</small>
+                                    </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            {{/questionsHEXAD}}
+        </div>
+
+        <div class="mt-3">
+            <input type="submit" class="btn btn-primary w-100" value="{{#str}} save {{/str}}" aria-label="{{#str}} save_questionnaire, format_ludilearn {{/str}}">
+        </div>
     </form>
 </div>
