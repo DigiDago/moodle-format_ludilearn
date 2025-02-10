@@ -208,14 +208,14 @@ $string['execute'] = 'Execute';
 $string['achiever'] = 'Achiever';
 $string['player'] = 'Player';
 $string['socialiser'] = 'Socialiser';
-$string['freeSpirit'] = 'Free spirit';
+$string['freespirit'] = 'Free spirit';
 $string['disruptor'] = 'Disruptor';
 $string['philanthropist'] = 'Philanthropist';
 $string['backtocourse'] = 'Back to course';
 $string['achiever_desc'] = 'Motivated by skill and mastery';
 $string['player_desc'] = 'Motivated by reward';
 $string['socialiser_desc'] = 'Motivated by social relationships and a sense of belonging';
-$string['freeSpirit_desc'] = 'Motivated by autonomy';
+$string['freespirit_desc'] = 'Motivated by autonomy';
 $string['disruptor_desc'] = 'Motivated by change';
 $string['philanthropist_desc'] = 'Motivated by meaning and utility';
 $string['partner_text'] = '<p>Developed by <a href="https://pimenko.com">Pimenko</a>.<br>

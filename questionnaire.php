@@ -32,6 +32,13 @@ context_helper::preload_course($course->id);
 $context = context_course::instance($course->id, MUST_EXIST);
 require_login($course);
 $params = ['id' => $course->id];
+
+// If user has already answered the questionnaire, redirect to the profile page.
+$profile = $DB->record_exists('format_ludilearn_profile', ['userid' => $USER->id]);
+if ($profile) {
+    redirect(new moodle_url("$CFG->wwwroot/course/format/ludilearn/gameprofile.php", ['id' => $course->id]));
+}
+
 $PAGE->set_pagelayout('course');
 $PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludilearn/questionnaire.php", $params));
 $PAGE->set_context($context);
@@ -46,15 +53,6 @@ $course->format = $format->get_format();
 $PAGE->set_pagetype('course-view-' . $course->format);
 
 $renderer = $PAGE->get_renderer('format_ludilearn');
-
 echo $OUTPUT->header();
-
-// If user has already answered the questionnaire, redirect to the profile page.
-$profile = $DB->record_exists('format_ludilearn_profile', ['userid' => $USER->id]);
-if ($profile) {
-    redirect(new moodle_url("$CFG->wwwroot/course/format/ludilearn/gameprofile.php", ['id' => $course->id]));
-}
 echo $renderer->render_questionnaire($course->id);
-
 echo $OUTPUT->footer();
-

@@ -31,13 +31,13 @@ define(['jquery', 'core/str', 'core/log', 'https://cdn.jsdelivr.net/npm/chart.js
                     {key: 'achiever', component: 'format_ludilearn'},
                     {key: 'player', component: 'format_ludilearn'},
                     {key: 'socialiser', component: 'format_ludilearn'},
-                    {key: 'freeSpirit', component: 'format_ludilearn'},
+                    {key: 'freespirit', component: 'format_ludilearn'},
                     {key: 'disruptor', component: 'format_ludilearn'},
                     {key: 'philanthropist', component: 'format_ludilearn'},
                     {key: 'achiever_desc', component: 'format_ludilearn'},
                     {key: 'player_desc', component: 'format_ludilearn'},
                     {key: 'socialiser_desc', component: 'format_ludilearn'},
-                    {key: 'freeSpirit_desc', component: 'format_ludilearn'},
+                    {key: 'freespirit_desc', component: 'format_ludilearn'},
                     {key: 'disruptor_desc', component: 'format_ludilearn'},
                     {key: 'philanthropist_desc', component: 'format_ludilearn'}
                 ]).done(function(strings) {
@@ -60,7 +60,7 @@ define(['jquery', 'core/str', 'core/log', 'https://cdn.jsdelivr.net/npm/chart.js
                                     hexadscores.achiever,
                                     hexadscores.player,
                                     hexadscores.socialiser,
-                                    hexadscores.freeSpirit,
+                                    hexadscores.freespirit,
                                     hexadscores.disruptor,
                                     hexadscores.philanthropist
                                 ],

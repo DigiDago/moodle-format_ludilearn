@@ -97,7 +97,7 @@ class hexad_scores {
             "achiever" => [5, 6],
             "player" => [9, 12],
             "socialiser" => [2, 4],
-            "freeSpirit" => [7, 10],
+            "freespirit" => [7, 10],
             "disruptor" => [8, 11],
             "philanthropist" => [1, 3],
         ];

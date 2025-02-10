@@ -161,7 +161,7 @@ class renderer extends section_renderer {
         $data->hexadscores->achiever = $hexadscores->get_value('achiever');
         $data->hexadscores->player = $hexadscores->get_value('player');
         $data->hexadscores->socialiser = $hexadscores->get_value('socialiser');
-        $data->hexadscores->freeSpirit = $hexadscores->get_value('freeSpirit');
+        $data->hexadscores->freespirit = $hexadscores->get_value('freespirit');
         $data->hexadscores->disruptor = $hexadscores->get_value('disruptor');
         $data->hexadscores->philanthropist = $hexadscores->get_value('philanthropist');
 
