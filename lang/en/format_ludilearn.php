@@ -21,6 +21,7 @@
  * @package     format_ludilearn
  * @category    string
  * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
+*  @author      Jordan Kesraoui - Clément Prudhomme
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -77,21 +78,26 @@ $string['badge'] = 'Badge';
 $string['maxserie'] = 'Maximum serie';
 $string['progress'] = 'Task progression';
 $string['gameprofile'] = 'Gamer profile';
-$string['questionnaire'] = 'Questionnaire';
-$string['questionshexad'] = '<h3>You\'re about to access a gamified course.<h3>
-<p>Help us adapt it to your HEXAD-12 player profile by indicating how each sentence corresponds to you <br> (1: Not at all agree, 7: Totaly agree)</p>';
+$string['questionnaire'] = 'HEXAD-12 player profile questionnaire with 12 questions';
+$string['questionshexad_title'] = 'You\'re about to access a gamified course.';
+$string['questionshexad'] = 'Help us adapt it to your <a href="https://gamified.uk/UserTypeTest2023/user-type-test.php" target="_blank" rel="noopener" aria-label="HEXAD-12 player profile test (opens in new window)">HEXAD-12</a> player profile by indicating how each sentence corresponds to you.<br> Scale: 1 (Not at all agree) to 7 (Totally agree).';
 $string['questionnaire:question1'] = 'It makes me happy to be able to help others';
 $string['questionnaire:question2'] = 'I enjoy group activities';
 $string['questionnaire:question3'] = 'The well-being of others is important to me';
 $string['questionnaire:question4'] = 'I like being part of a team';
 $string['questionnaire:question5'] = 'I like mastering difficult tasks';
-$string['questionnaire:question6'] = 'I enjoy emerging victorious out of difcult circumstances';
+$string['questionnaire:question6'] = 'I enjoy emerging victorious out of difficult circumstances';
 $string['questionnaire:question7'] = 'Being independent is important to me';
 $string['questionnaire:question8'] = 'I dislike following rules';
 $string['questionnaire:question9'] = 'If the reward is sufficient, I will put in the effort';
 $string['questionnaire:question10'] = 'It is important to me to follow my own path';
 $string['questionnaire:question11'] = 'I see myself as a rebel';
 $string['questionnaire:question12'] = 'Rewards are a great way to motivate me';
+$string['not_at_all_agree'] = 'Not at all agree';
+$string['totally_agree'] = 'Totally agree';
+$string['rating_scale'] = 'Rate from 1 (Not at all agree) to 7 (Totally agree)';
+$string['number_question'] = 'of 12:';
+$string['save_questionnaire'] = 'Save questionnaire responses';
 $string['avatar'] = 'Avatar';
 $string['items'] = 'Items';
 $string['itemunlocked'] = 'Items unlocked';
@@ -124,7 +130,7 @@ $string['reference_time'] = 'Reference time';
 $string['ranking'] = 'Ranking';
 $string['report'] = 'Report';
 $string['progression'] = 'Progression';
-$string['missinganswers'] = 'This question must to be answered';
+$string['missinganswers'] = 'You must answer this question to validate the questionnaire';
 $string['equip'] = 'Equip';
 $string['equiped'] = 'Equiped';
 $string['first'] = 'st';
@@ -203,7 +209,11 @@ $string['settings:nogamifieddescription'] = '<p>The non-game element appears on 
 $string['settings:updateprogression'] = 'Update users progression';
 $string['settings:updateprogressiondescription'] = '<p>Update the progression of all users in the course. This action is irreversible.<br>
 This can be usefull when the game elements assigned is changed because the progression is not updated automatically.</p>';
+$string['gameprofile_title'] = 'HEXAD-12 Player Profile Results';
 $string['gameprofile_desc'] = 'Based on your answers, here\'s your HEXAD-12 player profile :';
+$string['hexadchart_desc'] = 'Radar chart showing your HEXAD-12 player profile scores';
+$string['hexad_scores_details'] = 'Your full results';
+$string['score_separator'] = ': ';
 $string['execute'] = 'Execute';
 $string['achiever'] = 'Achiever';
 $string['player'] = 'Player';
@@ -211,13 +221,14 @@ $string['socialiser'] = 'Socialiser';
 $string['freeSpirit'] = 'Free spirit';
 $string['disruptor'] = 'Disruptor';
 $string['philanthropist'] = 'Philanthropist';
-$string['backtocourse'] = 'Back to course';
 $string['achiever_desc'] = 'Motivated by skill and mastery';
 $string['player_desc'] = 'Motivated by reward';
 $string['socialiser_desc'] = 'Motivated by social relationships and a sense of belonging';
 $string['freeSpirit_desc'] = 'Motivated by autonomy';
 $string['disruptor_desc'] = 'Motivated by change';
 $string['philanthropist_desc'] = 'Motivated by meaning and utility';
+$string['navigation'] = 'HEXAD-12 profil navigation';
+$string['backtocourse'] = 'Continue';
 $string['partner_text'] = '<p>Developed by <a href="https://pimenko.com">Pimenko</a>.<br>
 For technical feedback, please use the <a href="https://github.com/DigiDago/moodle-format_ludilearn">Github repository</a><br><br>
 <b>About Ludilearn+</b><br><br>

@@ -21,6 +21,7 @@
  * @package     format_ludilearn
  * @category    string
  * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
+ * @author      Jordan Kesraoui - Clément Prudhomme
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -77,9 +78,9 @@ $string['badge'] = 'Badge';
 $string['maxserie'] = 'Série maximum';
 $string['progress'] = 'Progression';
 $string['gameprofile'] = 'Profil de joueur';
-$string['questionnaire'] = 'Questionnaire';
-$string['questionshexad'] = '<h3>Vous allez accéder à un cours ludifié.</h3>
-<p>Aidez-nous à l\'adapter à votre profil de joueur <a href="https://gamified.uk/UserTypeTest2023/user-type-test.php" target="_blank">HEXAD-12</a> en indiquant à quel point chaque phrase vous correspond (1 : Pas du tout d\'accord, 7 : Totalement d\'accord)</p>';
+$string['questionnaire'] = 'Questionnaire de profil de joueur HEXAD-12 avec 12 questions';
+$string['questionshexad_title'] = 'Vous allez accéder à un cours ludifié.';
+$string['questionshexad'] = 'Aidez-nous à l\'adapter à votre profil de joueur <a href="https://gamified.uk/UserTypeTest2023/user-type-test.php" target="_blank" rel="noopener" aria-label="HEXAD-12 player profile test (opens in new window)">HEXAD-12</a> en indiquant à quel point chaque phrase vous correspond.<br>Échelle : 1 (pas du tout d\'accord) à 7 (Totalement d\'accord)';
 $string['questionnaire:question1'] = 'Cela me rend heureux de pouvoir aider les autres';
 $string['questionnaire:question2'] = 'J\'apprécie les activités de groupe';
 $string['questionnaire:question3'] = 'Le bien-être des autres m\'est important';
@@ -92,6 +93,11 @@ $string['questionnaire:question9'] = 'Si la récompense est suffisante, je ferai
 $string['questionnaire:question10'] = 'Il est important pour moi de suivre ma propre voie';
 $string['questionnaire:question11'] = 'Je me perçois comme étant rebelle';
 $string['questionnaire:question12'] = 'Les récompenses sont un bon moyen de me motiver';
+$string['not_at_all_agree'] = 'Pas du tout d\'accord';
+$string['totally_agree'] = 'Totalement d\'accord';
+$string['rating_scale'] = 'Noter de 1 (pas du tout d\'accord) à 7 (tout à fait d\'accord)';
+$string['number_question'] = 'sur 12 :';
+$string['save_questionnaire'] = 'Enregsistrer les réponses du questionnaire';
 $string['avatar'] = 'Avatar';
 $string['items'] = 'Éléments';
 $string['itemunlocked'] = 'Éléments débloqués';
@@ -124,7 +130,7 @@ $string['reference_time'] = 'Temps de référence';
 $string['ranking'] = 'Classement';
 $string['report'] = 'Rapport';
 $string['progression'] = 'Progression';
-$string['missinganswers'] = 'Cette question doit être complétée';
+$string['missinganswers'] = 'Vous devez répondre à cette question pour valider le questionnaire';
 $string['equip'] = 'Équiper';
 $string['equiped'] = 'Équipé';
 $string['first'] = 'er';
@@ -203,7 +209,11 @@ $string['settings:nogamifieddescription'] = '<p>L\'élément de jeu non ludifié
 $string['settings:updateprogression'] = 'Mettre à jour de la progression';
 $string['settings:updateprogressiondescription'] = '<p>Cette option permet de mettre à jour manuellement la progression des apprenants dans le cours.<br>
 Cela peut être utile lorsque les éléments de jeu attribués sont modifiés car la progression n\'est pas mise à jour automatiquement.</p>';
+$string['gameprofile_title'] = 'Résultat du profil du joueur HEXAD-12';
 $string['gameprofile_desc'] = 'D\'après vos réponses, voici votre profil de joueur HEXAD-12 :';
+$string['hexadchart_desc'] = 'Graphique radar montrant les scores de votre profil de joueur HEXAD-12';
+$string['hexad_scores_details'] = 'Vos résultats complets';
+$string['score_separator'] = ' : ';
 $string['execute'] = 'Executer';
 $string['achiever'] = 'Accomplisseur';
 $string['player'] = 'Joueur';
@@ -211,13 +221,14 @@ $string['socialiser'] = 'Socialiseur';
 $string['freeSpirit'] = 'Esprit libre';
 $string['disruptor'] = 'Disrupteur';
 $string['philanthropist'] = 'Philanthrope';
-$string['backtocourse'] = 'Retour au cours';
 $string['achiever_desc'] = 'Motivé par la compétence et la maîtrise';
 $string['player_desc'] = 'Motivé par la récompense';
 $string['socialiser_desc'] = 'Motivé par les relations sociales et le sentiment d’appartenance';
 $string['freeSpirit_desc'] = 'Motivé par l’autonomie';
 $string['disruptor_desc'] = 'Motivé par le changement';
-$string['philanthropist_desc'] = 'Motivé par le sens et l\’utilité';
+$string['philanthropist_desc'] = 'Motivé par le sens et l\'utilité';
+$string['navigation'] = 'Navigation profil HEXAD-12';
+$string['backtocourse'] = 'Continuer';
 $string['partner_text'] = '<p>Développé par <a href="https://pimenko.com" target="_blank">Pimenko</a>.<br>
 Pour les retours techniques, merci d\'utiliser le <a href="https://github.com/DigiDago/moodle-format_ludilearn" target="_blank">répertoire Github</a><br><br>
 <b>À propos de Ludilearn+</b><br><br>
