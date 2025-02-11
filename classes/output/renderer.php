@@ -112,7 +112,10 @@ class renderer extends section_renderer {
             $number++;
         }
         $data->questionscount = $number - 1;
-        $urlgameprofile = new moodle_url("$CFG->wwwroot/course/format/ludilearn/gameprofile.php", ['id' => $courseid]);
+        $urlgameprofile = $this->page->url;
+        $urlgameprofile->param('gameprofile', true);
+        $urlgameprofile->param('hideheader', 1);
+        $urlgameprofile = new moodle_url($urlgameprofile->out(false), $urlgameprofile->params());
         $this->page->requires->js_call_amd('format_ludilearn/questionnaire', 'init',
             ['courseid' => $courseid,
                 'questionscount' => $data->questionscount,
