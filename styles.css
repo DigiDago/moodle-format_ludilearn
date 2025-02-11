@@ -1795,7 +1795,7 @@
   width: 50px;
   height: 50px;
   padding: 10px;
-  background: orange;
+  background: var(--primary);
   border-radius: 50%;
 }
 .format-ludilearn li.explanation-li .explanation-button .explanation {
@@ -1813,4 +1813,193 @@
 }
 .format-ludilearn #ludilearn-settings .setting-footer {
   margin-top: 5em;
+}
+
+/* Questionnaire styles */
+#ludilearn-questionnaire {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+#ludilearn-questionnaire .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+}
+#ludilearn-questionnaire .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#ludilearn-questionnaire .card:focus-within {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+#ludilearn-questionnaire .hexad-illustration {
+  display: block;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+#ludilearn-questionnaire #questionnaire-instructions {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+#ludilearn-questionnaire .question-text {
+  display: block;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  border-left: 4px solid var(--primary);
+  margin-bottom: 1rem;
+  color: #1d2125;
+}
+#ludilearn-questionnaire .rating-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+#ludilearn-questionnaire .rating-option {
+  text-align: center;
+}
+#ludilearn-questionnaire .rating-option input[type=radio] {
+  position: absolute;
+  opacity: 0;
+}
+#ludilearn-questionnaire .rating-option input[type=radio]:focus + .rating-label {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+}
+#ludilearn-questionnaire .rating-option input[type=radio]:focus:not(:focus-visible) + .rating-label {
+  outline: none;
+  box-shadow: none;
+}
+#ludilearn-questionnaire .rating-option input[type=radio]:checked + .rating-label {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+#ludilearn-questionnaire .rating-option .rating-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  margin: 0 5px;
+  color: #495057;
+}
+#ludilearn-questionnaire .rating-option .rating-label:hover {
+  border-color: var(--primary);
+  background-color: #f8f9fa;
+}
+#ludilearn-questionnaire .rating-option .rating-label:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+}
+#ludilearn-questionnaire .btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+#ludilearn-questionnaire .btn-primary:focus {
+  outline: 2px solid var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+#ludilearn-questionnaire .btn-primary:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+#ludilearn-questionnaire .invalid-feedback {
+  display: none;
+  color: #dc3545;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+#ludilearn-questionnaire .invalid-feedback.show {
+  display: block;
+}
+
+/* Hexad Results Styles */
+.hexad-results {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+.hexad-results .hexad-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #1d2125;
+}
+.hexad-results .hexad-scores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.hexad-results .score-item {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e9ecef;
+  transition: transform 0.2s ease;
+}
+.hexad-results .score-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.hexad-results .score-item .score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e9ecef;
+}
+.hexad-results .score-item .score-header strong {
+  font-size: 1.125rem;
+  color: #1d2125;
+}
+.hexad-results .score-item .score-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+.hexad-results .score-item .score-description {
+  color: #495057;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hexad-scores-grid {
+    grid-template-columns: 1fr;
+  }
+  .hexad-results {
+    padding: 1rem;
+  }
+  .hexad-results .score-item {
+    padding: 1rem;
+  }
+  #ludilearn-questionnaire .rating-option .rating-label {
+    width: 35px;
+    height: 35px;
+    font-size: 0.75rem;
+  }
+  #ludilearn-questionnaire .scale-labels {
+    font-size: 0.75rem;
+  }
 }

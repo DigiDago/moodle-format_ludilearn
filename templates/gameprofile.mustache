@@ -21,21 +21,106 @@
     {}
 }}
 
-<div id="ludilearn-gameprofile">
+<div id="ludilearn-gameprofile" aria-label="{{#str}} gameprofile_title, format_ludilearn {{/str}}">
     <p>{{#str}} gameprofile_desc, format_ludilearn  {{/str}}</p>
 
-    <!-- div pour contenire le canvas centré et avec une taille maximale -->
     <div class="row">
-        <div class="col-8 offset-2">
+        <div class="col-12 col-md-8 offset-md-2">
             <div class="d-flex justify-content-center">
-                <canvas id="hexadChart" aria-label="Hello ARIA World" role="img"></canvas>
+                <canvas
+                    id="hexadChart"
+                    role="img"
+                    aria-label="{{#str}} hexadchart_desc, format_ludilearn {{/str}}">
+                    tabindex="0">
+                </canvas>
             </div>
         </div>
     </div>
-    <!-- Button back to course align in the middle -->
+
+    <div id="hexad-scores-details" class="hexad-results mt-6 mb-2" role="region" aria-labelledby="hexad-results-title">
+    <h2 id="hexad-results-title" class="hexad-title">{{#str}} hexad_scores_details, format_ludilearn {{/str}}</h2>
+    <div class="hexad-scores-grid" role="list">
+        <div class="score-item" role="listitem">
+            <div class="score-header">
+                <strong id="achiever-label" >{{#str}} achiever, format_ludilearn {{/str}}</strong>
+                <span class="score-value" aria-labelledby="achiever-label">
+                    <span class="sr-only">{{#str}} score, format_ludilearn {{/str}}</span>
+                    {{hexadscores.achiever}}
+                </span>
+            </div>
+            <div class="score-description" aria-labelledby="achiever-label">
+                {{#str}} achiever_desc, format_ludilearn {{/str}}
+            </div>
+        </div>
+        <div class="score-item" role="listitem">
+            <div class="score-header">
+                <strong id="player-label">{{#str}} player, format_ludilearn {{/str}}</strong>
+                <span class="score-value" aria-labelledby="player-label">
+                    <span class="sr-only">{{#str}} score, format_ludilearn {{/str}}</span>
+                {{hexadscores.player}}
+                </span>
+            </div>
+            <div class="score-description" aria-labelledby="player-label">
+                {{#str}} player_desc, format_ludilearn {{/str}}
+            </div>
+        </div>
+        <div class="score-item" role="listitem">
+            <div class="score-header">
+                <strong id="socialiser-label">{{#str}} socialiser, format_ludilearn {{/str}}</strong>
+                <span class="score-value" aria-labelledby="socialiser-label">
+                    <span class="sr-only">{{#str}} score, format_ludilearn {{/str}}</span>
+                {{hexadscores.socialiser}}
+                </span>
+            </div>
+            <div class="score-description" aria-labelledby="socialiser-label">
+                {{#str}} socialiser_desc, format_ludilearn {{/str}}
+            </div>
+        </div>
+        <div class="score-item" role="listitem">
+            <div class="score-header">
+                <strong id="freespirit-label">{{#str}} freespirit, format_ludilearn {{/str}}</strong>
+                <span class="score-value" aria-labelledby="freespirit-label">
+                        <span class="sr-only">{{#str}} score, format_ludilearn {{/str}}</span>
+                {{hexadscores.freespirit}}
+                </span>
+            </div>
+            <div class="score-description" aria-labelledby="freespirit-label">
+                {{#str}} freespirit_desc, format_ludilearn {{/str}}
+            </div>
+        </div>
+        <div class="score-item" role="listitem">
+            <div class="score-header">
+                <strong id="disruptor-label">{{#str}} disruptor, format_ludilearn {{/str}}</strong>
+                <span class="score-value" aria-labelledby="disruptor-label">
+                    <span class="sr-only">{{#str}} score, format_ludilearn {{/str}}</span>
+                {{hexadscores.disruptor}}
+                </span>
+            </div>
+            <div class="score-description" aria-labelledby="disruptor-label">
+                {{#str}} disruptor_desc, format_ludilearn {{/str}}
+            </div>
+        </div>
+        <div class="score-item" role="listitem">
+            <div class="score-header">
+                <strong id="philanthropist-label">{{#str}} philanthropist, format_ludilearn {{/str}}</strong>
+                <span class="score-value" aria-labelledby="philanthropist-label">
+                    <span class="sr-only">{{#str}} score, format_ludilearn {{/str}}</span>
+                {{hexadscores.philanthropist}}
+                </span>
+            </div>
+            <div class="score-description" aria-labelledby="philanthropist-label">
+                {{#str}} philanthropist_desc, format_ludilearn {{/str}}
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="row">
         <div class="col-12">
-            <a href="{{globals.config.wwwroot}}/course/view.php?id={{courseid}}" class="btn btn-primary float-right">{{#str}} backtocourse, format_ludilearn {{/str}}</a>
+            <nav aria-label="{{#str}} navigation, format_ludilearn {{/str}}">
+                <a href="{{globals.config.wwwroot}}/course/view.php?id={{courseid}}" class="btn btn-primary float-right" role="button">{{#str}} backtocourse, format_ludilearn {{/str}}
+                </a>
+            </nav>
         </div>
     </div>
 </div>
