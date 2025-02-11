@@ -55,7 +55,6 @@ Feature: Automatic questionnaire assignment in ludimoodle
     And I click on "question-11-3" "radio" in the "region-main" "region"
     And I click on "question-12-7" "radio" in the "region-main" "region"
     And I click on "Save" "button"
-    And I visit "/course/view.php?id=1&gameprofile=1&hideheader=1"
     Then I should see "Based on your answers, here's your HEXAD-12 player profile" in the "region-main" "region"
     And I should see "Your full results" in the "#hexad-results-title" "css_element"
     And I click on "Continue" "link"
