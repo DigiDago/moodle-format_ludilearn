@@ -59,3 +59,6 @@ Feature: Automatic questionnaire assignment in ludimoodle
     And I should see "Your full results" in the "#hexad-results-title" "css_element"
     And I click on "Continue" "link"
     And I am on "LudiLearn Questionnaire" course homepage
+    And I visit "/course/format/ludilearn/gameprofile.php"
+    Then I should see "Based on your answers, here's your HEXAD-12 player profile" in the "region-main" "region"
+    And I should see "Your full results" in the "#hexad-results-title" "css_element"

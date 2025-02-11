@@ -42,7 +42,7 @@ if ($options['assignment'] == 'automatic') {
     $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $USER->id]);
     if (!$profile) {
         // Verify if the user is a teacher or a manager.
-        if (!has_capability('moodle/course:update', $context)) {
+        if (!has_capability('moodle/course:viewhiddenactivities', $context)) {
             $questionaire = true;
         }
     }

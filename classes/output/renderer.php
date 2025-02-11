@@ -153,13 +153,15 @@ class renderer extends section_renderer {
      * @return string HTML to output.
      * @throws \dml_exception
      */
-    public function render_gameprofile(int $courseid): string {
+    public function render_gameprofile(int $courseid = 0): string {
         global $DB, $USER;
 
         $hexadscores = hexad_scores::from_database($USER->id);
 
         $data = new stdClass();
-        $data->courseid = $courseid;
+        if ($courseid != 0) {
+            $data->courseid = $courseid;
+        }
         $data->hexadscores = new stdClass();
         $data->hexadscores->achiever = $hexadscores->get_value('achiever');
         $data->hexadscores->player = $hexadscores->get_value('player');
