@@ -32,8 +32,8 @@ module.exports = function(grunt) {
         // Configuration de la tâche "sass".
         sass: {
             options: {
-                implementation: require('sass'), // Utiliser "node-sass" comme implémentation Sass.
-                outputStyle: 'compressed', // Utiliser le style compressé pour minifier le CSS.
+                implementation: require('sass'),
+                outputStyle: 'expanded',
                 sourceMap: true,
                 precision: 10
             },
