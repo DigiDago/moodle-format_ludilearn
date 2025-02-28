@@ -1,3 +1,1876 @@
-.format-ludilearn .rect-auto,.format-ludilearn .c100.p51 .slice,.format-ludilearn .c100.p52 .slice,.format-ludilearn .c100.p53 .slice,.format-ludilearn .c100.p54 .slice,.format-ludilearn .c100.p55 .slice,.format-ludilearn .c100.p56 .slice,.format-ludilearn .c100.p57 .slice,.format-ludilearn .c100.p58 .slice,.format-ludilearn .c100.p59 .slice,.format-ludilearn .c100.p60 .slice,.format-ludilearn .c100.p61 .slice,.format-ludilearn .c100.p62 .slice,.format-ludilearn .c100.p63 .slice,.format-ludilearn .c100.p64 .slice,.format-ludilearn .c100.p65 .slice,.format-ludilearn .c100.p66 .slice,.format-ludilearn .c100.p67 .slice,.format-ludilearn .c100.p68 .slice,.format-ludilearn .c100.p69 .slice,.format-ludilearn .c100.p70 .slice,.format-ludilearn .c100.p71 .slice,.format-ludilearn .c100.p72 .slice,.format-ludilearn .c100.p73 .slice,.format-ludilearn .c100.p74 .slice,.format-ludilearn .c100.p75 .slice,.format-ludilearn .c100.p76 .slice,.format-ludilearn .c100.p77 .slice,.format-ludilearn .c100.p78 .slice,.format-ludilearn .c100.p79 .slice,.format-ludilearn .c100.p80 .slice,.format-ludilearn .c100.p81 .slice,.format-ludilearn .c100.p82 .slice,.format-ludilearn .c100.p83 .slice,.format-ludilearn .c100.p84 .slice,.format-ludilearn .c100.p85 .slice,.format-ludilearn .c100.p86 .slice,.format-ludilearn .c100.p87 .slice,.format-ludilearn .c100.p88 .slice,.format-ludilearn .c100.p89 .slice,.format-ludilearn .c100.p90 .slice,.format-ludilearn .c100.p91 .slice,.format-ludilearn .c100.p92 .slice,.format-ludilearn .c100.p93 .slice,.format-ludilearn .c100.p94 .slice,.format-ludilearn .c100.p95 .slice,.format-ludilearn .c100.p96 .slice,.format-ludilearn .c100.p97 .slice,.format-ludilearn .c100.p98 .slice,.format-ludilearn .c100.p99 .slice,.format-ludilearn .c100.p100 .slice{clip:rect(auto, auto, auto, auto)}.format-ludilearn .pie,.format-ludilearn .c100 .bar,.format-ludilearn .c100.p51 .fill,.format-ludilearn .c100.p52 .fill,.format-ludilearn .c100.p53 .fill,.format-ludilearn .c100.p54 .fill,.format-ludilearn .c100.p55 .fill,.format-ludilearn .c100.p56 .fill,.format-ludilearn .c100.p57 .fill,.format-ludilearn .c100.p58 .fill,.format-ludilearn .c100.p59 .fill,.format-ludilearn .c100.p60 .fill,.format-ludilearn .c100.p61 .fill,.format-ludilearn .c100.p62 .fill,.format-ludilearn .c100.p63 .fill,.format-ludilearn .c100.p64 .fill,.format-ludilearn .c100.p65 .fill,.format-ludilearn .c100.p66 .fill,.format-ludilearn .c100.p67 .fill,.format-ludilearn .c100.p68 .fill,.format-ludilearn .c100.p69 .fill,.format-ludilearn .c100.p70 .fill,.format-ludilearn .c100.p71 .fill,.format-ludilearn .c100.p72 .fill,.format-ludilearn .c100.p73 .fill,.format-ludilearn .c100.p74 .fill,.format-ludilearn .c100.p75 .fill,.format-ludilearn .c100.p76 .fill,.format-ludilearn .c100.p77 .fill,.format-ludilearn .c100.p78 .fill,.format-ludilearn .c100.p79 .fill,.format-ludilearn .c100.p80 .fill,.format-ludilearn .c100.p81 .fill,.format-ludilearn .c100.p82 .fill,.format-ludilearn .c100.p83 .fill,.format-ludilearn .c100.p84 .fill,.format-ludilearn .c100.p85 .fill,.format-ludilearn .c100.p86 .fill,.format-ludilearn .c100.p87 .fill,.format-ludilearn .c100.p88 .fill,.format-ludilearn .c100.p89 .fill,.format-ludilearn .c100.p90 .fill,.format-ludilearn .c100.p91 .fill,.format-ludilearn .c100.p92 .fill,.format-ludilearn .c100.p93 .fill,.format-ludilearn .c100.p94 .fill,.format-ludilearn .c100.p95 .fill,.format-ludilearn .c100.p96 .fill,.format-ludilearn .c100.p97 .fill,.format-ludilearn .c100.p98 .fill,.format-ludilearn .c100.p99 .fill,.format-ludilearn .c100.p100 .fill{position:absolute;border:.15em solid #307bbb;width:.7em;height:.7em;clip:rect(0em, 0.5em, 1em, 0em);border-radius:50%;-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-ms-transform:rotate(0deg);-o-transform:rotate(0deg);transform:rotate(0deg)}.format-ludilearn .pie-fill,.format-ludilearn .c100.p51 .bar:after,.format-ludilearn .c100.p51 .fill,.format-ludilearn .c100.p52 .bar:after,.format-ludilearn .c100.p52 .fill,.format-ludilearn .c100.p53 .bar:after,.format-ludilearn .c100.p53 .fill,.format-ludilearn .c100.p54 .bar:after,.format-ludilearn .c100.p54 .fill,.format-ludilearn .c100.p55 .bar:after,.format-ludilearn .c100.p55 .fill,.format-ludilearn .c100.p56 .bar:after,.format-ludilearn .c100.p56 .fill,.format-ludilearn .c100.p57 .bar:after,.format-ludilearn .c100.p57 .fill,.format-ludilearn .c100.p58 .bar:after,.format-ludilearn .c100.p58 .fill,.format-ludilearn .c100.p59 .bar:after,.format-ludilearn .c100.p59 .fill,.format-ludilearn .c100.p60 .bar:after,.format-ludilearn .c100.p60 .fill,.format-ludilearn .c100.p61 .bar:after,.format-ludilearn .c100.p61 .fill,.format-ludilearn .c100.p62 .bar:after,.format-ludilearn .c100.p62 .fill,.format-ludilearn .c100.p63 .bar:after,.format-ludilearn .c100.p63 .fill,.format-ludilearn .c100.p64 .bar:after,.format-ludilearn .c100.p64 .fill,.format-ludilearn .c100.p65 .bar:after,.format-ludilearn .c100.p65 .fill,.format-ludilearn .c100.p66 .bar:after,.format-ludilearn .c100.p66 .fill,.format-ludilearn .c100.p67 .bar:after,.format-ludilearn .c100.p67 .fill,.format-ludilearn .c100.p68 .bar:after,.format-ludilearn .c100.p68 .fill,.format-ludilearn .c100.p69 .bar:after,.format-ludilearn .c100.p69 .fill,.format-ludilearn .c100.p70 .bar:after,.format-ludilearn .c100.p70 .fill,.format-ludilearn .c100.p71 .bar:after,.format-ludilearn .c100.p71 .fill,.format-ludilearn .c100.p72 .bar:after,.format-ludilearn .c100.p72 .fill,.format-ludilearn .c100.p73 .bar:after,.format-ludilearn .c100.p73 .fill,.format-ludilearn .c100.p74 .bar:after,.format-ludilearn .c100.p74 .fill,.format-ludilearn .c100.p75 .bar:after,.format-ludilearn .c100.p75 .fill,.format-ludilearn .c100.p76 .bar:after,.format-ludilearn .c100.p76 .fill,.format-ludilearn .c100.p77 .bar:after,.format-ludilearn .c100.p77 .fill,.format-ludilearn .c100.p78 .bar:after,.format-ludilearn .c100.p78 .fill,.format-ludilearn .c100.p79 .bar:after,.format-ludilearn .c100.p79 .fill,.format-ludilearn .c100.p80 .bar:after,.format-ludilearn .c100.p80 .fill,.format-ludilearn .c100.p81 .bar:after,.format-ludilearn .c100.p81 .fill,.format-ludilearn .c100.p82 .bar:after,.format-ludilearn .c100.p82 .fill,.format-ludilearn .c100.p83 .bar:after,.format-ludilearn .c100.p83 .fill,.format-ludilearn .c100.p84 .bar:after,.format-ludilearn .c100.p84 .fill,.format-ludilearn .c100.p85 .bar:after,.format-ludilearn .c100.p85 .fill,.format-ludilearn .c100.p86 .bar:after,.format-ludilearn .c100.p86 .fill,.format-ludilearn .c100.p87 .bar:after,.format-ludilearn .c100.p87 .fill,.format-ludilearn .c100.p88 .bar:after,.format-ludilearn .c100.p88 .fill,.format-ludilearn .c100.p89 .bar:after,.format-ludilearn .c100.p89 .fill,.format-ludilearn .c100.p90 .bar:after,.format-ludilearn .c100.p90 .fill,.format-ludilearn .c100.p91 .bar:after,.format-ludilearn .c100.p91 .fill,.format-ludilearn .c100.p92 .bar:after,.format-ludilearn .c100.p92 .fill,.format-ludilearn .c100.p93 .bar:after,.format-ludilearn .c100.p93 .fill,.format-ludilearn .c100.p94 .bar:after,.format-ludilearn .c100.p94 .fill,.format-ludilearn .c100.p95 .bar:after,.format-ludilearn .c100.p95 .fill,.format-ludilearn .c100.p96 .bar:after,.format-ludilearn .c100.p96 .fill,.format-ludilearn .c100.p97 .bar:after,.format-ludilearn .c100.p97 .fill,.format-ludilearn .c100.p98 .bar:after,.format-ludilearn .c100.p98 .fill,.format-ludilearn .c100.p99 .bar:after,.format-ludilearn .c100.p99 .fill,.format-ludilearn .c100.p100 .bar:after,.format-ludilearn .c100.p100 .fill{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-ms-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg)}.format-ludilearn .c100{position:relative;font-size:120px;width:1em;height:1em;border-radius:50%;float:left;margin:0;background-color:#ccc}.format-ludilearn .c100 *,.format-ludilearn .c100 *:before,.format-ludilearn .c100 *:after{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}.format-ludilearn .c100.center{float:none;margin:0 auto}.format-ludilearn .c100.biggest{font-size:400px}.format-ludilearn .c100.big{font-size:240px}.format-ludilearn .c100.small{font-size:80px}.format-ludilearn .c100>span{position:absolute;overflow:hidden;width:100%;height:100%;max-width:400px;max-height:400px;z-index:1;left:0;top:0;width:5em;line-height:5em;font-size:.2em;color:#ccc;display:block;text-align:center;white-space:nowrap;-webkit-transition-property:all;-moz-transition-property:all;-o-transition-property:all;transition-property:all;-webkit-transition-duration:.2s;-moz-transition-duration:.2s;-o-transition-duration:.2s;transition-duration:.2s;-webkit-transition-timing-function:ease-out;-moz-transition-timing-function:ease-out;-o-transition-timing-function:ease-out;transition-timing-function:ease-out}.format-ludilearn .c100:after{position:absolute;top:.08em;left:.08em;display:block;content:" ";border-radius:50%;background-color:#fce3de;width:.84em;height:.84em;-webkit-transition-property:all;-moz-transition-property:all;-o-transition-property:all;transition-property:all;-webkit-transition-duration:.2s;-moz-transition-duration:.2s;-o-transition-duration:.2s;transition-duration:.2s;-webkit-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-o-transition-timing-function:ease-in;transition-timing-function:ease-in}.format-ludilearn .c100 .slice{position:absolute;width:1em;height:1em;clip:rect(0em, 1em, 1em, 0.5em)}.format-ludilearn .c100.p1 .bar{-webkit-transform:rotate(3.6deg);-moz-transform:rotate(3.6deg);-ms-transform:rotate(3.6deg);-o-transform:rotate(3.6deg);transform:rotate(3.6deg)}.format-ludilearn .c100.p2 .bar{-webkit-transform:rotate(7.2deg);-moz-transform:rotate(7.2deg);-ms-transform:rotate(7.2deg);-o-transform:rotate(7.2deg);transform:rotate(7.2deg)}.format-ludilearn .c100.p3 .bar{-webkit-transform:rotate(10.8deg);-moz-transform:rotate(10.8deg);-ms-transform:rotate(10.8deg);-o-transform:rotate(10.8deg);transform:rotate(10.8deg)}.format-ludilearn .c100.p4 .bar{-webkit-transform:rotate(14.4deg);-moz-transform:rotate(14.4deg);-ms-transform:rotate(14.4deg);-o-transform:rotate(14.4deg);transform:rotate(14.4deg)}.format-ludilearn .c100.p5 .bar{-webkit-transform:rotate(18deg);-moz-transform:rotate(18deg);-ms-transform:rotate(18deg);-o-transform:rotate(18deg);transform:rotate(18deg)}.format-ludilearn .c100.p6 .bar{-webkit-transform:rotate(21.6deg);-moz-transform:rotate(21.6deg);-ms-transform:rotate(21.6deg);-o-transform:rotate(21.6deg);transform:rotate(21.6deg)}.format-ludilearn .c100.p7 .bar{-webkit-transform:rotate(25.2deg);-moz-transform:rotate(25.2deg);-ms-transform:rotate(25.2deg);-o-transform:rotate(25.2deg);transform:rotate(25.2deg)}.format-ludilearn .c100.p8 .bar{-webkit-transform:rotate(28.8deg);-moz-transform:rotate(28.8deg);-ms-transform:rotate(28.8deg);-o-transform:rotate(28.8deg);transform:rotate(28.8deg)}.format-ludilearn .c100.p9 .bar{-webkit-transform:rotate(32.4deg);-moz-transform:rotate(32.4deg);-ms-transform:rotate(32.4deg);-o-transform:rotate(32.4deg);transform:rotate(32.4deg)}.format-ludilearn .c100.p10 .bar{-webkit-transform:rotate(36deg);-moz-transform:rotate(36deg);-ms-transform:rotate(36deg);-o-transform:rotate(36deg);transform:rotate(36deg)}.format-ludilearn .c100.p11 .bar{-webkit-transform:rotate(39.6deg);-moz-transform:rotate(39.6deg);-ms-transform:rotate(39.6deg);-o-transform:rotate(39.6deg);transform:rotate(39.6deg)}.format-ludilearn .c100.p12 .bar{-webkit-transform:rotate(43.2deg);-moz-transform:rotate(43.2deg);-ms-transform:rotate(43.2deg);-o-transform:rotate(43.2deg);transform:rotate(43.2deg)}.format-ludilearn .c100.p13 .bar{-webkit-transform:rotate(46.8deg);-moz-transform:rotate(46.8deg);-ms-transform:rotate(46.8deg);-o-transform:rotate(46.8deg);transform:rotate(46.8deg)}.format-ludilearn .c100.p14 .bar{-webkit-transform:rotate(50.4deg);-moz-transform:rotate(50.4deg);-ms-transform:rotate(50.4deg);-o-transform:rotate(50.4deg);transform:rotate(50.4deg)}.format-ludilearn .c100.p15 .bar{-webkit-transform:rotate(54deg);-moz-transform:rotate(54deg);-ms-transform:rotate(54deg);-o-transform:rotate(54deg);transform:rotate(54deg)}.format-ludilearn .c100.p16 .bar{-webkit-transform:rotate(57.6deg);-moz-transform:rotate(57.6deg);-ms-transform:rotate(57.6deg);-o-transform:rotate(57.6deg);transform:rotate(57.6deg)}.format-ludilearn .c100.p17 .bar{-webkit-transform:rotate(61.2deg);-moz-transform:rotate(61.2deg);-ms-transform:rotate(61.2deg);-o-transform:rotate(61.2deg);transform:rotate(61.2deg)}.format-ludilearn .c100.p18 .bar{-webkit-transform:rotate(64.8deg);-moz-transform:rotate(64.8deg);-ms-transform:rotate(64.8deg);-o-transform:rotate(64.8deg);transform:rotate(64.8deg)}.format-ludilearn .c100.p19 .bar{-webkit-transform:rotate(68.4deg);-moz-transform:rotate(68.4deg);-ms-transform:rotate(68.4deg);-o-transform:rotate(68.4deg);transform:rotate(68.4deg)}.format-ludilearn .c100.p20 .bar{-webkit-transform:rotate(72deg);-moz-transform:rotate(72deg);-ms-transform:rotate(72deg);-o-transform:rotate(72deg);transform:rotate(72deg)}.format-ludilearn .c100.p21 .bar{-webkit-transform:rotate(75.6deg);-moz-transform:rotate(75.6deg);-ms-transform:rotate(75.6deg);-o-transform:rotate(75.6deg);transform:rotate(75.6deg)}.format-ludilearn .c100.p22 .bar{-webkit-transform:rotate(79.2deg);-moz-transform:rotate(79.2deg);-ms-transform:rotate(79.2deg);-o-transform:rotate(79.2deg);transform:rotate(79.2deg)}.format-ludilearn .c100.p23 .bar{-webkit-transform:rotate(82.8deg);-moz-transform:rotate(82.8deg);-ms-transform:rotate(82.8deg);-o-transform:rotate(82.8deg);transform:rotate(82.8deg)}.format-ludilearn .c100.p24 .bar{-webkit-transform:rotate(86.4deg);-moz-transform:rotate(86.4deg);-ms-transform:rotate(86.4deg);-o-transform:rotate(86.4deg);transform:rotate(86.4deg)}.format-ludilearn .c100.p25 .bar{-webkit-transform:rotate(90deg);-moz-transform:rotate(90deg);-ms-transform:rotate(90deg);-o-transform:rotate(90deg);transform:rotate(90deg)}.format-ludilearn .c100.p26 .bar{-webkit-transform:rotate(93.6deg);-moz-transform:rotate(93.6deg);-ms-transform:rotate(93.6deg);-o-transform:rotate(93.6deg);transform:rotate(93.6deg)}.format-ludilearn .c100.p27 .bar{-webkit-transform:rotate(97.2deg);-moz-transform:rotate(97.2deg);-ms-transform:rotate(97.2deg);-o-transform:rotate(97.2deg);transform:rotate(97.2deg)}.format-ludilearn .c100.p28 .bar{-webkit-transform:rotate(100.8deg);-moz-transform:rotate(100.8deg);-ms-transform:rotate(100.8deg);-o-transform:rotate(100.8deg);transform:rotate(100.8deg)}.format-ludilearn .c100.p29 .bar{-webkit-transform:rotate(104.4deg);-moz-transform:rotate(104.4deg);-ms-transform:rotate(104.4deg);-o-transform:rotate(104.4deg);transform:rotate(104.4deg)}.format-ludilearn .c100.p30 .bar{-webkit-transform:rotate(108deg);-moz-transform:rotate(108deg);-ms-transform:rotate(108deg);-o-transform:rotate(108deg);transform:rotate(108deg)}.format-ludilearn .c100.p31 .bar{-webkit-transform:rotate(111.6deg);-moz-transform:rotate(111.6deg);-ms-transform:rotate(111.6deg);-o-transform:rotate(111.6deg);transform:rotate(111.6deg)}.format-ludilearn .c100.p32 .bar{-webkit-transform:rotate(115.2deg);-moz-transform:rotate(115.2deg);-ms-transform:rotate(115.2deg);-o-transform:rotate(115.2deg);transform:rotate(115.2deg)}.format-ludilearn .c100.p33 .bar{-webkit-transform:rotate(118.8deg);-moz-transform:rotate(118.8deg);-ms-transform:rotate(118.8deg);-o-transform:rotate(118.8deg);transform:rotate(118.8deg)}.format-ludilearn .c100.p34 .bar{-webkit-transform:rotate(122.4deg);-moz-transform:rotate(122.4deg);-ms-transform:rotate(122.4deg);-o-transform:rotate(122.4deg);transform:rotate(122.4deg)}.format-ludilearn .c100.p35 .bar{-webkit-transform:rotate(126deg);-moz-transform:rotate(126deg);-ms-transform:rotate(126deg);-o-transform:rotate(126deg);transform:rotate(126deg)}.format-ludilearn .c100.p36 .bar{-webkit-transform:rotate(129.6deg);-moz-transform:rotate(129.6deg);-ms-transform:rotate(129.6deg);-o-transform:rotate(129.6deg);transform:rotate(129.6deg)}.format-ludilearn .c100.p37 .bar{-webkit-transform:rotate(133.2deg);-moz-transform:rotate(133.2deg);-ms-transform:rotate(133.2deg);-o-transform:rotate(133.2deg);transform:rotate(133.2deg)}.format-ludilearn .c100.p38 .bar{-webkit-transform:rotate(136.8deg);-moz-transform:rotate(136.8deg);-ms-transform:rotate(136.8deg);-o-transform:rotate(136.8deg);transform:rotate(136.8deg)}.format-ludilearn .c100.p39 .bar{-webkit-transform:rotate(140.4deg);-moz-transform:rotate(140.4deg);-ms-transform:rotate(140.4deg);-o-transform:rotate(140.4deg);transform:rotate(140.4deg)}.format-ludilearn .c100.p40 .bar{-webkit-transform:rotate(144deg);-moz-transform:rotate(144deg);-ms-transform:rotate(144deg);-o-transform:rotate(144deg);transform:rotate(144deg)}.format-ludilearn .c100.p41 .bar{-webkit-transform:rotate(147.6deg);-moz-transform:rotate(147.6deg);-ms-transform:rotate(147.6deg);-o-transform:rotate(147.6deg);transform:rotate(147.6deg)}.format-ludilearn .c100.p42 .bar{-webkit-transform:rotate(151.2deg);-moz-transform:rotate(151.2deg);-ms-transform:rotate(151.2deg);-o-transform:rotate(151.2deg);transform:rotate(151.2deg)}.format-ludilearn .c100.p43 .bar{-webkit-transform:rotate(154.8deg);-moz-transform:rotate(154.8deg);-ms-transform:rotate(154.8deg);-o-transform:rotate(154.8deg);transform:rotate(154.8deg)}.format-ludilearn .c100.p44 .bar{-webkit-transform:rotate(158.4deg);-moz-transform:rotate(158.4deg);-ms-transform:rotate(158.4deg);-o-transform:rotate(158.4deg);transform:rotate(158.4deg)}.format-ludilearn .c100.p45 .bar{-webkit-transform:rotate(162deg);-moz-transform:rotate(162deg);-ms-transform:rotate(162deg);-o-transform:rotate(162deg);transform:rotate(162deg)}.format-ludilearn .c100.p46 .bar{-webkit-transform:rotate(165.6deg);-moz-transform:rotate(165.6deg);-ms-transform:rotate(165.6deg);-o-transform:rotate(165.6deg);transform:rotate(165.6deg)}.format-ludilearn .c100.p47 .bar{-webkit-transform:rotate(169.2deg);-moz-transform:rotate(169.2deg);-ms-transform:rotate(169.2deg);-o-transform:rotate(169.2deg);transform:rotate(169.2deg)}.format-ludilearn .c100.p48 .bar{-webkit-transform:rotate(172.8deg);-moz-transform:rotate(172.8deg);-ms-transform:rotate(172.8deg);-o-transform:rotate(172.8deg);transform:rotate(172.8deg)}.format-ludilearn .c100.p49 .bar{-webkit-transform:rotate(176.4deg);-moz-transform:rotate(176.4deg);-ms-transform:rotate(176.4deg);-o-transform:rotate(176.4deg);transform:rotate(176.4deg)}.format-ludilearn .c100.p50 .bar{-webkit-transform:rotate(180deg);-moz-transform:rotate(180deg);-ms-transform:rotate(180deg);-o-transform:rotate(180deg);transform:rotate(180deg)}.format-ludilearn .c100.p51 .bar{-webkit-transform:rotate(183.6deg);-moz-transform:rotate(183.6deg);-ms-transform:rotate(183.6deg);-o-transform:rotate(183.6deg);transform:rotate(183.6deg)}.format-ludilearn .c100.p52 .bar{-webkit-transform:rotate(187.2deg);-moz-transform:rotate(187.2deg);-ms-transform:rotate(187.2deg);-o-transform:rotate(187.2deg);transform:rotate(187.2deg)}.format-ludilearn .c100.p53 .bar{-webkit-transform:rotate(190.8deg);-moz-transform:rotate(190.8deg);-ms-transform:rotate(190.8deg);-o-transform:rotate(190.8deg);transform:rotate(190.8deg)}.format-ludilearn .c100.p54 .bar{-webkit-transform:rotate(194.4deg);-moz-transform:rotate(194.4deg);-ms-transform:rotate(194.4deg);-o-transform:rotate(194.4deg);transform:rotate(194.4deg)}.format-ludilearn .c100.p55 .bar{-webkit-transform:rotate(198deg);-moz-transform:rotate(198deg);-ms-transform:rotate(198deg);-o-transform:rotate(198deg);transform:rotate(198deg)}.format-ludilearn .c100.p56 .bar{-webkit-transform:rotate(201.6deg);-moz-transform:rotate(201.6deg);-ms-transform:rotate(201.6deg);-o-transform:rotate(201.6deg);transform:rotate(201.6deg)}.format-ludilearn .c100.p57 .bar{-webkit-transform:rotate(205.2deg);-moz-transform:rotate(205.2deg);-ms-transform:rotate(205.2deg);-o-transform:rotate(205.2deg);transform:rotate(205.2deg)}.format-ludilearn .c100.p58 .bar{-webkit-transform:rotate(208.8deg);-moz-transform:rotate(208.8deg);-ms-transform:rotate(208.8deg);-o-transform:rotate(208.8deg);transform:rotate(208.8deg)}.format-ludilearn .c100.p59 .bar{-webkit-transform:rotate(212.4deg);-moz-transform:rotate(212.4deg);-ms-transform:rotate(212.4deg);-o-transform:rotate(212.4deg);transform:rotate(212.4deg)}.format-ludilearn .c100.p60 .bar{-webkit-transform:rotate(216deg);-moz-transform:rotate(216deg);-ms-transform:rotate(216deg);-o-transform:rotate(216deg);transform:rotate(216deg)}.format-ludilearn .c100.p61 .bar{-webkit-transform:rotate(219.6deg);-moz-transform:rotate(219.6deg);-ms-transform:rotate(219.6deg);-o-transform:rotate(219.6deg);transform:rotate(219.6deg)}.format-ludilearn .c100.p62 .bar{-webkit-transform:rotate(223.2deg);-moz-transform:rotate(223.2deg);-ms-transform:rotate(223.2deg);-o-transform:rotate(223.2deg);transform:rotate(223.2deg)}.format-ludilearn .c100.p63 .bar{-webkit-transform:rotate(226.8deg);-moz-transform:rotate(226.8deg);-ms-transform:rotate(226.8deg);-o-transform:rotate(226.8deg);transform:rotate(226.8deg)}.format-ludilearn .c100.p64 .bar{-webkit-transform:rotate(230.4deg);-moz-transform:rotate(230.4deg);-ms-transform:rotate(230.4deg);-o-transform:rotate(230.4deg);transform:rotate(230.4deg)}.format-ludilearn .c100.p65 .bar{-webkit-transform:rotate(234deg);-moz-transform:rotate(234deg);-ms-transform:rotate(234deg);-o-transform:rotate(234deg);transform:rotate(234deg)}.format-ludilearn .c100.p66 .bar{-webkit-transform:rotate(237.6deg);-moz-transform:rotate(237.6deg);-ms-transform:rotate(237.6deg);-o-transform:rotate(237.6deg);transform:rotate(237.6deg)}.format-ludilearn .c100.p67 .bar{-webkit-transform:rotate(241.2deg);-moz-transform:rotate(241.2deg);-ms-transform:rotate(241.2deg);-o-transform:rotate(241.2deg);transform:rotate(241.2deg)}.format-ludilearn .c100.p68 .bar{-webkit-transform:rotate(244.8deg);-moz-transform:rotate(244.8deg);-ms-transform:rotate(244.8deg);-o-transform:rotate(244.8deg);transform:rotate(244.8deg)}.format-ludilearn .c100.p69 .bar{-webkit-transform:rotate(248.4deg);-moz-transform:rotate(248.4deg);-ms-transform:rotate(248.4deg);-o-transform:rotate(248.4deg);transform:rotate(248.4deg)}.format-ludilearn .c100.p70 .bar{-webkit-transform:rotate(252deg);-moz-transform:rotate(252deg);-ms-transform:rotate(252deg);-o-transform:rotate(252deg);transform:rotate(252deg)}.format-ludilearn .c100.p71 .bar{-webkit-transform:rotate(255.6deg);-moz-transform:rotate(255.6deg);-ms-transform:rotate(255.6deg);-o-transform:rotate(255.6deg);transform:rotate(255.6deg)}.format-ludilearn .c100.p72 .bar{-webkit-transform:rotate(259.2deg);-moz-transform:rotate(259.2deg);-ms-transform:rotate(259.2deg);-o-transform:rotate(259.2deg);transform:rotate(259.2deg)}.format-ludilearn .c100.p73 .bar{-webkit-transform:rotate(262.8deg);-moz-transform:rotate(262.8deg);-ms-transform:rotate(262.8deg);-o-transform:rotate(262.8deg);transform:rotate(262.8deg)}.format-ludilearn .c100.p74 .bar{-webkit-transform:rotate(266.4deg);-moz-transform:rotate(266.4deg);-ms-transform:rotate(266.4deg);-o-transform:rotate(266.4deg);transform:rotate(266.4deg)}.format-ludilearn .c100.p75 .bar{-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-ms-transform:rotate(270deg);-o-transform:rotate(270deg);transform:rotate(270deg)}.format-ludilearn .c100.p76 .bar{-webkit-transform:rotate(273.6deg);-moz-transform:rotate(273.6deg);-ms-transform:rotate(273.6deg);-o-transform:rotate(273.6deg);transform:rotate(273.6deg)}.format-ludilearn .c100.p77 .bar{-webkit-transform:rotate(277.2deg);-moz-transform:rotate(277.2deg);-ms-transform:rotate(277.2deg);-o-transform:rotate(277.2deg);transform:rotate(277.2deg)}.format-ludilearn .c100.p78 .bar{-webkit-transform:rotate(280.8deg);-moz-transform:rotate(280.8deg);-ms-transform:rotate(280.8deg);-o-transform:rotate(280.8deg);transform:rotate(280.8deg)}.format-ludilearn .c100.p79 .bar{-webkit-transform:rotate(284.4deg);-moz-transform:rotate(284.4deg);-ms-transform:rotate(284.4deg);-o-transform:rotate(284.4deg);transform:rotate(284.4deg)}.format-ludilearn .c100.p80 .bar{-webkit-transform:rotate(288deg);-moz-transform:rotate(288deg);-ms-transform:rotate(288deg);-o-transform:rotate(288deg);transform:rotate(288deg)}.format-ludilearn .c100.p81 .bar{-webkit-transform:rotate(291.6deg);-moz-transform:rotate(291.6deg);-ms-transform:rotate(291.6deg);-o-transform:rotate(291.6deg);transform:rotate(291.6deg)}.format-ludilearn .c100.p82 .bar{-webkit-transform:rotate(295.2deg);-moz-transform:rotate(295.2deg);-ms-transform:rotate(295.2deg);-o-transform:rotate(295.2deg);transform:rotate(295.2deg)}.format-ludilearn .c100.p83 .bar{-webkit-transform:rotate(298.8deg);-moz-transform:rotate(298.8deg);-ms-transform:rotate(298.8deg);-o-transform:rotate(298.8deg);transform:rotate(298.8deg)}.format-ludilearn .c100.p84 .bar{-webkit-transform:rotate(302.4deg);-moz-transform:rotate(302.4deg);-ms-transform:rotate(302.4deg);-o-transform:rotate(302.4deg);transform:rotate(302.4deg)}.format-ludilearn .c100.p85 .bar{-webkit-transform:rotate(306deg);-moz-transform:rotate(306deg);-ms-transform:rotate(306deg);-o-transform:rotate(306deg);transform:rotate(306deg)}.format-ludilearn .c100.p86 .bar{-webkit-transform:rotate(309.6deg);-moz-transform:rotate(309.6deg);-ms-transform:rotate(309.6deg);-o-transform:rotate(309.6deg);transform:rotate(309.6deg)}.format-ludilearn .c100.p87 .bar{-webkit-transform:rotate(313.2deg);-moz-transform:rotate(313.2deg);-ms-transform:rotate(313.2deg);-o-transform:rotate(313.2deg);transform:rotate(313.2deg)}.format-ludilearn .c100.p88 .bar{-webkit-transform:rotate(316.8deg);-moz-transform:rotate(316.8deg);-ms-transform:rotate(316.8deg);-o-transform:rotate(316.8deg);transform:rotate(316.8deg)}.format-ludilearn .c100.p89 .bar{-webkit-transform:rotate(320.4deg);-moz-transform:rotate(320.4deg);-ms-transform:rotate(320.4deg);-o-transform:rotate(320.4deg);transform:rotate(320.4deg)}.format-ludilearn .c100.p90 .bar{-webkit-transform:rotate(324deg);-moz-transform:rotate(324deg);-ms-transform:rotate(324deg);-o-transform:rotate(324deg);transform:rotate(324deg)}.format-ludilearn .c100.p91 .bar{-webkit-transform:rotate(327.6deg);-moz-transform:rotate(327.6deg);-ms-transform:rotate(327.6deg);-o-transform:rotate(327.6deg);transform:rotate(327.6deg)}.format-ludilearn .c100.p92 .bar{-webkit-transform:rotate(331.2deg);-moz-transform:rotate(331.2deg);-ms-transform:rotate(331.2deg);-o-transform:rotate(331.2deg);transform:rotate(331.2deg)}.format-ludilearn .c100.p93 .bar{-webkit-transform:rotate(334.8deg);-moz-transform:rotate(334.8deg);-ms-transform:rotate(334.8deg);-o-transform:rotate(334.8deg);transform:rotate(334.8deg)}.format-ludilearn .c100.p94 .bar{-webkit-transform:rotate(338.4deg);-moz-transform:rotate(338.4deg);-ms-transform:rotate(338.4deg);-o-transform:rotate(338.4deg);transform:rotate(338.4deg)}.format-ludilearn .c100.p95 .bar{-webkit-transform:rotate(342deg);-moz-transform:rotate(342deg);-ms-transform:rotate(342deg);-o-transform:rotate(342deg);transform:rotate(342deg)}.format-ludilearn .c100.p96 .bar{-webkit-transform:rotate(345.6deg);-moz-transform:rotate(345.6deg);-ms-transform:rotate(345.6deg);-o-transform:rotate(345.6deg);transform:rotate(345.6deg)}.format-ludilearn .c100.p97 .bar{-webkit-transform:rotate(349.2deg);-moz-transform:rotate(349.2deg);-ms-transform:rotate(349.2deg);-o-transform:rotate(349.2deg);transform:rotate(349.2deg)}.format-ludilearn .c100.p98 .bar{-webkit-transform:rotate(352.8deg);-moz-transform:rotate(352.8deg);-ms-transform:rotate(352.8deg);-o-transform:rotate(352.8deg);transform:rotate(352.8deg)}.format-ludilearn .c100.p99 .bar{-webkit-transform:rotate(356.4deg);-moz-transform:rotate(356.4deg);-ms-transform:rotate(356.4deg);-o-transform:rotate(356.4deg);transform:rotate(356.4deg)}.format-ludilearn .c100.p100 .bar{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}.format-ludilearn .c100:hover{cursor:default}.format-ludilearn .c100:hover>span{width:3.33em;line-height:3.33em;font-size:.3em;color:#307bbb}.format-ludilearn .c100:hover:after{top:.04em;left:.04em;width:.92em;height:.92em}.format-ludilearn .c100.dark{background-color:#777}.format-ludilearn .c100.dark .bar,.format-ludilearn .c100.dark .fill{border-color:#c6ff00 !important}.format-ludilearn .c100.dark>span{color:#777}.format-ludilearn .c100.dark:after{background-color:#666}.format-ludilearn .c100.dark:hover>span{color:#c6ff00}.format-ludilearn .c100.green .bar,.format-ludilearn .c100.green .fill{border-color:#4db53c !important}.format-ludilearn .c100.green:hover>span{color:#4db53c}.format-ludilearn .c100.green.dark .bar,.format-ludilearn .c100.green.dark .fill{border-color:#5fd400 !important}.format-ludilearn .c100.green.dark:hover>span{color:#5fd400}.format-ludilearn .c100.orange .bar,.format-ludilearn .c100.orange .fill{border-color:#dd9d22 !important}.format-ludilearn .c100.orange:hover>span{color:#dd9d22}.format-ludilearn .c100.orange.dark .bar,.format-ludilearn .c100.orange.dark .fill{border-color:#e08833 !important}.format-ludilearn .c100.ludilearn .bar,.format-ludilearn .c100.ludilearn .fill{border-color:#f8b334 !important}.format-ludilearn .c100.orange.dark:hover>span{color:#e08833}.format-ludilearn .btn{min-height:40px;font-weight:bold}.format-ludilearn #pills-tab{background:linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--primary), rgba(0, 0, 0, 0) 32px);height:60px;line-height:60px}.format-ludilearn #pills-tab .nav-item{flex:none}.format-ludilearn .ludilearn-content{border:none;max-width:830px;margin:15px auto auto}.format-ludilearn .ludilearn-content .card-header{background:rgba(0,0,0,0)}.format-ludilearn .scoretext{font-size:1em;font-weight:500;color:#5c5854}.format-ludilearn .scoretext .playerscore{color:var(--primary);filter:brightness(75%);font-size:1.5em}.format-ludilearn .cmname,.format-ludilearn .sectionname{color:#000}.format-ludilearn .bonuscompletion,.format-ludilearn .penalties{position:absolute;top:0;right:0;border-radius:5px;background:#fff;color:orange;font-weight:500;padding:3px 6px;box-shadow:4px -4px orange;width:50%}.format-ludilearn .bonuscompletion.bonuscompletion-cm,.format-ludilearn .bonuscompletion.penalties-cm,.format-ludilearn .penalties.bonuscompletion-cm,.format-ludilearn .penalties.penalties-cm{position:relative;width:100%;max-width:200px;margin:auto;box-shadow:4px 4px orange}.format-ludilearn .bonuscompletion span.bonuscompletion-value,.format-ludilearn .bonuscompletion span.penalties-value,.format-ludilearn .penalties span.bonuscompletion-value,.format-ludilearn .penalties span.penalties-value{display:block;text-align:center;font-size:1em;line-height:1em}.format-ludilearn .bonuscompletion span.bonuscompletion-str,.format-ludilearn .bonuscompletion span.penalties-str,.format-ludilearn .penalties span.bonuscompletion-str,.format-ludilearn .penalties span.penalties-str{display:block;text-align:center;font-size:.8em;line-height:.8em}.format-ludilearn .badgecompletion{position:absolute;top:-10px;right:5px;padding:3px 6px;width:50px}.format-ludilearn .badgecompletion img{width:100%}.format-ludilearn .badgecompletion.badgecompletion-cm{width:75px;margin:auto;left:50%;right:unset;top:-65px}.format-ludilearn .ranking-text{font-size:1.2rem;margin-top:-60px}.format-ludilearn .rightdottedscore{border-right:var(--primary) 5px dotted}@media(max-width: 576px){.format-ludilearn .rightdottedscore.rightdottedscore-notsm{border-right:none}}.format-ludilearn .bottomdotted{border-bottom:var(--primary) 5px dotted}.format-ludilearn .rightlined{border-right:var(--primary) 2px solid;border-color:gray}.format-ludilearn a:hover{text-decoration:none}.format-ludilearn a.restricted.nourl{pointer-events:none;cursor:default}.format-ludilearn .ludilearn-img,.format-ludilearn #pills-activity .ludilearn-img{height:160px}.format-ludilearn .ludilearn-img.little-img,.format-ludilearn #pills-activity .ludilearn-img.little-img{height:55px}.format-ludilearn .img-timer{margin-top:32px}.format-ludilearn #pills-activity .scoretext{font-size:1.5em}.format-ludilearn .restricted{filter:grayscale(1)}.format-ludilearn .maxseriesquare{padding:0;margin-top:10%}.format-ludilearn .notreached{opacity:.5;filter:grayscale(1)}.format-ludilearn .block_section{height:180px;display:flex;align-items:center;justify-content:center}.format-ludilearn .block_section.block_section_avatar{align-items:end}.format-ludilearn .block_section .progression{font-size:48px;font-weight:900;color:#f8b334}.format-ludilearn .badge-number{position:relative;width:30px;height:30px;border-radius:50%;display:flex;justify-content:center;align-items:center;margin:auto auto .25rem;border:2px solid #ddd;color:#ddd}.format-ludilearn .badge-number.badge-number-bronze{color:#fff;background:linear-gradient(135deg, #cd7f32, #eee, #cd7f32, #eee, #cd7f32);border:1px solid #cd7f32;font-weight:900}.format-ludilearn .badge-number.badge-number-silver{color:#fff;background:linear-gradient(135deg, #c0c0c0, #eee, #c0c0c0, #eee, #c0c0c0);border:1px solid silver;font-weight:900}.format-ludilearn .badge-number.badge-number-gold{color:#fff;background:linear-gradient(135deg, #ffd700, #eee, #ffd700, #eee, #ffd700);border:1px solid gold;font-weight:900}.format-ludilearn .badge-number.spinning{animation:spinY 2s linear infinite}@keyframes spinY{0%{transform:rotateY(0deg)}100%{transform:rotateY(360deg)}}.format-ludilearn .progress-image,.format-ludilearn .avatar-image{position:relative;background-repeat:no-repeat;overflow:hidden;background-position:center;width:100%;height:0;padding-bottom:100%;background-size:cover}.format-ludilearn .progress-image .progression-steps-component,.format-ludilearn .progress-image .avatar-slot,.format-ludilearn .progress-image .avatar-character,.format-ludilearn .avatar-image .progression-steps-component,.format-ludilearn .avatar-image .avatar-slot,.format-ludilearn .avatar-image .avatar-character{position:absolute;top:0;left:0;max-width:100%;max-height:100%}.format-ludilearn .avatar-bag{display:block;max-width:75px;margin:auto;cursor:pointer}.format-ludilearn .avatar-bag.avatar-bag-open{display:none}.format-ludilearn .modal-dialog{max-width:830px}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory{display:none}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory.active{display:block}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot{display:flex;flex-wrap:nowrap;flex-direction:row}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert{color:#fff;padding:0}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item{margin:10px;text-align:center;cursor:pointer;transition:transform .2s;outline:none;max-width:100px;flex:auto}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .avatar-item-img{width:100px}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned{cursor:pointer}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:hover,.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:focus{transform:scale(1.1);border:2px solid #007bff;border-radius:10px}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned.selected{border:2px solid #007bff;padding:10px;border-radius:10px}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .alert-equiped{display:none}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped{border:2px solid green;padding:10px;border-radius:10px}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped .alert-equiped{display:block}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button{display:none;margin-top:10px;padding:5px 10px;background:green;color:#fff;border:none;cursor:pointer;border-radius:5px;transition:background .3s;outline:none}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:focus,.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:hover{background:#006400}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert{margin-top:10px}.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0, 0, 0, 0);border:0}.format-ludilearn .modal-dialog .avatar-inventory .tabs{display:flex;justify-content:space-around;margin-bottom:20px}.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory{padding:10px 20px;background:#f0f0f0;border:1px solid orange;border-radius:2px;cursor:pointer;transition:background .3s;outline:none;width:100%}.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory:focus,.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory:hover,.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory.active{background:orange;color:#fff}.format-ludilearn .count-items{width:100%;height:100%;display:inline-block;position:relative}.format-ludilearn .count-items .numerator{color:#f7b53c;font-size:48px;font-weight:bold;position:absolute;bottom:9px;left:0}.format-ludilearn .count-items .numerator.two-digits{left:-24px}.format-ludilearn .count-items .fraction{color:#c9beb6;font-size:32px;position:absolute;left:32px;bottom:12px}.format-ludilearn .count-items .denumerator{color:#c9beb6;font-size:32px;font-weight:bold;position:absolute;bottom:0;left:43px}.format-ludilearn .progression-text{width:fit-content;border-radius:8px;background-color:#f8b334;font-size:30px;font-weight:900;color:#fff;margin:auto;padding-left:15px;padding-right:15px}.format-ludilearn .progression-text.progression-cm{font-size:20px;padding-left:10px;padding-right:10px}.format-ludilearn .progression-text.progression-cm p{margin-bottom:.2rem}.format-ludilearn .progression-bar-component.rocket{position:absolute;width:1200px;height:1200px;max-width:unset;max-height:unset;left:10%;top:10%;animation:percentrocket .5333s infinite step-end}.format-ludilearn .circle-progression.biggest{float:none;margin:auto;font-size:300px}.format-ludilearn .circle-progression.biggest span.show{max-width:300px;max-height:300px}.format-ludilearn .circle-progression.biggest::after{top:.15em;left:.15em;width:.7em;height:.7em}.format-ludilearn .ranking-group-view{margin:auto;width:100%}.format-ludilearn .chrono img{width:100%;max-width:80px}.format-ludilearn .chrono .current-time{font-size:2rem;vertical-align:middle}.format-ludilearn .reference-time{font-size:1.2rem}.format-ludilearn .reference-time span{vertical-align:middle}.format-ludilearn .ranking-summary{margin:auto;width:100%}.format-ludilearn .ranking-table td,.format-ludilearn .ranking-table tr{border-top:none}@keyframes percentrocket{0%{left:10%;top:10%}7.1%{left:-90%;top:10%}14.2%{left:-190%;top:10%}21.3%{left:-290%;top:10%}28.4%{left:10%;top:-90%}35.5%{left:-90%;top:-90%}42.6%{left:-190%;top:-90%}200%{left:-290%;top:-90%}57.1%{left:-90%;top:-190%}64.2%{left:-190%;top:-190%}71.3%{left:-290%;top:-190%}78.4%{left:10%;top:-290%}85.5%{left:-90%;top:-290%}92.6%{left:-190%;top:-290%}100%{left:-290%;top:-290%}}.format-ludilearn .ludilearn-world-professional .avatar-image{background-size:auto}.format-ludilearn .ludilearn-world-professional .avatar-slot,.format-ludilearn .ludilearn-world-professional .avatar-character{top:15%}.format-ludilearn .ludilearn-world-professional .ranking-summary{display:block;max-height:160px;margin-left:auto;margin-right:auto}.format-ludilearn .ludilearn-world-professional .section-progress .asteroids{display:none}.format-ludilearn .ludilearn-world-professional .circle-progression.biggest span.show{max-width:210px;max-height:210px;left:45px;top:45px}.format-ludilearn .ludilearn-world-professional .progression-bar-component.rocket{position:absolute;width:1200px;height:210px;max-width:unset;max-height:unset;left:0;top:0;animation:percentrocketprofessional .345s infinite step-end}@keyframes percentrocketprofessional{0%{left:-75px}25%{left:calc(-75px - 100%)}50%{left:calc(-75px - 200%)}75%{left:calc(-75px - 300%)}100%{left:calc(-75px - 400%)}}.format-ludilearn .ludilearn-world-highschool .avatar-image:has(.item-equiped) .avatar-character{display:none}.format-ludilearn .ludilearn-world-highschool .avatar-image .avatar-slot,.format-ludilearn .ludilearn-world-highschool .avatar-image .avatar-character{width:100%}.format-ludilearn .ludilearn-world-highschool .ranking-summary{display:block;max-height:175px;margin-left:auto;margin-right:auto;margin-top:-15px}.format-ludilearn .ludilearn-world-highschool .progression-planet-inprogress{background-image:url("[[pix:format_ludilearn|highschool/progress/course-planet-bg]]");background-size:contain}.format-ludilearn .ludilearn-world-highschool .progression-planet-max{background-image:url("[[pix:format_ludilearn|highschool/progress/course-planet-max-bg]]");background-size:contain}.format-ludilearn .ludilearn-world-highschool .section-progress .asteroids{display:none}.format-ludilearn .ludilearn-world-highschool .c100>span{line-height:0}.format-ludilearn .ludilearn-world-highschool .progression-bar-component.rocket{position:relative;width:auto;height:auto;max-width:unset;max-height:unset;left:0;top:0;animation:none}.format-ludilearn li.explanation-li{height:50px;margin-top:auto;margin-bottom:auto}.format-ludilearn li.explanation-li .explanation-button{width:50px;height:50px;padding:10px;background:var(--primary);border-radius:50%}.format-ludilearn li.explanation-li .explanation-button .explanation{vertical-align:top}@media screen and (max-width: 600px){.format-ludilearn table.ranking-table tr,.format-ludilearn table.ranking-table td{padding-left:0;padding-right:0}}.format-ludilearn #ludilearn-settings .editsettingssuccess,.format-ludilearn #ludilearn-settings .editsettingsfailed{display:none}.format-ludilearn #ludilearn-settings .setting-footer{margin-top:5em}.format-ludilearn #ludilearn-questionnaire{max-width:800px;margin:0 auto;padding:20px}.format-ludilearn #ludilearn-questionnaire .card{transition:transform .2s ease,box-shadow .2s ease;border:1px solid #dee2e6;margin-bottom:1rem}.format-ludilearn #ludilearn-questionnaire .card:hover{transform:translateY(-5px);box-shadow:0 4px 8px rgba(0,0,0,.1)}.format-ludilearn #ludilearn-questionnaire .card:focus-within{box-shadow:0 0 0 2px var(--primary)}.format-ludilearn #ludilearn-questionnaire .hexad-illustration{display:block;width:150px;margin-left:auto;margin-right:auto;margin-bottom:1rem}.format-ludilearn #ludilearn-questionnaire #questionnaire-instructions{background-color:#f8fafc;border:1px solid #e2e8f0;border-radius:.75rem;padding:1.5rem;margin-bottom:2rem;box-shadow:0 1px 3px rgba(0,0,0,.05)}.format-ludilearn #ludilearn-questionnaire .question-text{display:block;padding:15px;background-color:#f8f9fa;border-radius:.25rem;border-left:4px solid var(--primary);margin-bottom:1rem;color:#1d2125}.format-ludilearn #ludilearn-questionnaire .rating-scale{display:flex;justify-content:space-between;align-items:center;margin:1rem 0}.format-ludilearn #ludilearn-questionnaire .rating-option{text-align:center}.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]{position:absolute;opacity:0}.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus+.rating-label{outline:2px solid var(--primary);outline-offset:2px;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--primary)}.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus:not(:focus-visible)+.rating-label{outline:none;box-shadow:none}.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:checked+.rating-label{background-color:var(--primary);color:#fff;border-color:var(--primary)}.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:2px solid #dee2e6;cursor:pointer;transition:all .2s ease;font-weight:500;margin:0 5px;color:#495057}.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:hover{border-color:var(--primary);background-color:#f8f9fa}.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:focus-visible{outline:2px solid var(--primary);outline-offset:2px;box-shadow:0 0 0 2px #fff,0 0 0 4px var(--primary)}.format-ludilearn #ludilearn-questionnaire .btn-primary{width:100%;padding:.75rem;font-weight:500;margin-top:1rem}.format-ludilearn #ludilearn-questionnaire .btn-primary:focus{outline:2px solid var(--primary);box-shadow:0 0 0 3px rgba(0,123,255,.5)}.format-ludilearn #ludilearn-questionnaire .btn-primary:focus:not(:focus-visible){outline:none;box-shadow:none}.format-ludilearn #ludilearn-questionnaire .invalid-feedback{display:none;color:#dc3545;margin-top:.25rem;font-size:1rem}.format-ludilearn #ludilearn-questionnaire .invalid-feedback.show{display:block}.format-ludilearn .hexad-results{background-color:#f8f9fa;padding:2rem;border-radius:.5rem;margin-top:2rem}.format-ludilearn .hexad-results .hexad-title{font-size:1.5rem;font-weight:bold;margin-bottom:1.5rem;color:#1d2125}.format-ludilearn .hexad-results .hexad-scores-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:1.5rem}.format-ludilearn .hexad-results .score-item{background-color:#fff;padding:1.25rem;border-radius:.5rem;border:1px solid #e9ecef;transition:transform .2s ease}.format-ludilearn .hexad-results .score-item:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,.1)}.format-ludilearn .hexad-results .score-item .score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:1px solid #e9ecef}.format-ludilearn .hexad-results .score-item .score-header strong{font-size:1.125rem;color:#1d2125}.format-ludilearn .hexad-results .score-item .score-value{font-size:1.5rem;font-weight:bold;color:var(--primary)}.format-ludilearn .hexad-results .score-item .score-description{color:#495057;font-size:.95rem;line-height:1.5}@media(max-width: 768px){.format-ludilearn .hexad-scores-grid{grid-template-columns:1fr}.format-ludilearn .hexad-results{padding:1rem}.format-ludilearn .hexad-results .score-item{padding:1rem}.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label{width:35px;height:35px;font-size:.75rem}.format-ludilearn #ludilearn-questionnaire .scale-labels{font-size:.75rem}}
+@charset "UTF-8";
+/**
+ * Styles files for ludilearn format.
+ *
+ * @package     format_ludilearn
+ * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
+ * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+.format-ludilearn .rect-auto,
+.format-ludilearn .c100.p51 .slice,
+.format-ludilearn .c100.p52 .slice,
+.format-ludilearn .c100.p53 .slice,
+.format-ludilearn .c100.p54 .slice,
+.format-ludilearn .c100.p55 .slice,
+.format-ludilearn .c100.p56 .slice,
+.format-ludilearn .c100.p57 .slice,
+.format-ludilearn .c100.p58 .slice,
+.format-ludilearn .c100.p59 .slice,
+.format-ludilearn .c100.p60 .slice,
+.format-ludilearn .c100.p61 .slice,
+.format-ludilearn .c100.p62 .slice,
+.format-ludilearn .c100.p63 .slice,
+.format-ludilearn .c100.p64 .slice,
+.format-ludilearn .c100.p65 .slice,
+.format-ludilearn .c100.p66 .slice,
+.format-ludilearn .c100.p67 .slice,
+.format-ludilearn .c100.p68 .slice,
+.format-ludilearn .c100.p69 .slice,
+.format-ludilearn .c100.p70 .slice,
+.format-ludilearn .c100.p71 .slice,
+.format-ludilearn .c100.p72 .slice,
+.format-ludilearn .c100.p73 .slice,
+.format-ludilearn .c100.p74 .slice,
+.format-ludilearn .c100.p75 .slice,
+.format-ludilearn .c100.p76 .slice,
+.format-ludilearn .c100.p77 .slice,
+.format-ludilearn .c100.p78 .slice,
+.format-ludilearn .c100.p79 .slice,
+.format-ludilearn .c100.p80 .slice,
+.format-ludilearn .c100.p81 .slice,
+.format-ludilearn .c100.p82 .slice,
+.format-ludilearn .c100.p83 .slice,
+.format-ludilearn .c100.p84 .slice,
+.format-ludilearn .c100.p85 .slice,
+.format-ludilearn .c100.p86 .slice,
+.format-ludilearn .c100.p87 .slice,
+.format-ludilearn .c100.p88 .slice,
+.format-ludilearn .c100.p89 .slice,
+.format-ludilearn .c100.p90 .slice,
+.format-ludilearn .c100.p91 .slice,
+.format-ludilearn .c100.p92 .slice,
+.format-ludilearn .c100.p93 .slice,
+.format-ludilearn .c100.p94 .slice,
+.format-ludilearn .c100.p95 .slice,
+.format-ludilearn .c100.p96 .slice,
+.format-ludilearn .c100.p97 .slice,
+.format-ludilearn .c100.p98 .slice,
+.format-ludilearn .c100.p99 .slice,
+.format-ludilearn .c100.p100 .slice {
+  clip: rect(auto, auto, auto, auto);
+}
+.format-ludilearn .pie,
+.format-ludilearn .c100 .bar,
+.format-ludilearn .c100.p51 .fill,
+.format-ludilearn .c100.p52 .fill,
+.format-ludilearn .c100.p53 .fill,
+.format-ludilearn .c100.p54 .fill,
+.format-ludilearn .c100.p55 .fill,
+.format-ludilearn .c100.p56 .fill,
+.format-ludilearn .c100.p57 .fill,
+.format-ludilearn .c100.p58 .fill,
+.format-ludilearn .c100.p59 .fill,
+.format-ludilearn .c100.p60 .fill,
+.format-ludilearn .c100.p61 .fill,
+.format-ludilearn .c100.p62 .fill,
+.format-ludilearn .c100.p63 .fill,
+.format-ludilearn .c100.p64 .fill,
+.format-ludilearn .c100.p65 .fill,
+.format-ludilearn .c100.p66 .fill,
+.format-ludilearn .c100.p67 .fill,
+.format-ludilearn .c100.p68 .fill,
+.format-ludilearn .c100.p69 .fill,
+.format-ludilearn .c100.p70 .fill,
+.format-ludilearn .c100.p71 .fill,
+.format-ludilearn .c100.p72 .fill,
+.format-ludilearn .c100.p73 .fill,
+.format-ludilearn .c100.p74 .fill,
+.format-ludilearn .c100.p75 .fill,
+.format-ludilearn .c100.p76 .fill,
+.format-ludilearn .c100.p77 .fill,
+.format-ludilearn .c100.p78 .fill,
+.format-ludilearn .c100.p79 .fill,
+.format-ludilearn .c100.p80 .fill,
+.format-ludilearn .c100.p81 .fill,
+.format-ludilearn .c100.p82 .fill,
+.format-ludilearn .c100.p83 .fill,
+.format-ludilearn .c100.p84 .fill,
+.format-ludilearn .c100.p85 .fill,
+.format-ludilearn .c100.p86 .fill,
+.format-ludilearn .c100.p87 .fill,
+.format-ludilearn .c100.p88 .fill,
+.format-ludilearn .c100.p89 .fill,
+.format-ludilearn .c100.p90 .fill,
+.format-ludilearn .c100.p91 .fill,
+.format-ludilearn .c100.p92 .fill,
+.format-ludilearn .c100.p93 .fill,
+.format-ludilearn .c100.p94 .fill,
+.format-ludilearn .c100.p95 .fill,
+.format-ludilearn .c100.p96 .fill,
+.format-ludilearn .c100.p97 .fill,
+.format-ludilearn .c100.p98 .fill,
+.format-ludilearn .c100.p99 .fill,
+.format-ludilearn .c100.p100 .fill {
+  position: absolute;
+  border: 0.15em solid #307bbb;
+  width: 0.7em;
+  height: 0.7em;
+  clip: rect(0em, 0.5em, 1em, 0em);
+  border-radius: 50%;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.format-ludilearn .pie-fill,
+.format-ludilearn .c100.p51 .bar:after,
+.format-ludilearn .c100.p51 .fill,
+.format-ludilearn .c100.p52 .bar:after,
+.format-ludilearn .c100.p52 .fill,
+.format-ludilearn .c100.p53 .bar:after,
+.format-ludilearn .c100.p53 .fill,
+.format-ludilearn .c100.p54 .bar:after,
+.format-ludilearn .c100.p54 .fill,
+.format-ludilearn .c100.p55 .bar:after,
+.format-ludilearn .c100.p55 .fill,
+.format-ludilearn .c100.p56 .bar:after,
+.format-ludilearn .c100.p56 .fill,
+.format-ludilearn .c100.p57 .bar:after,
+.format-ludilearn .c100.p57 .fill,
+.format-ludilearn .c100.p58 .bar:after,
+.format-ludilearn .c100.p58 .fill,
+.format-ludilearn .c100.p59 .bar:after,
+.format-ludilearn .c100.p59 .fill,
+.format-ludilearn .c100.p60 .bar:after,
+.format-ludilearn .c100.p60 .fill,
+.format-ludilearn .c100.p61 .bar:after,
+.format-ludilearn .c100.p61 .fill,
+.format-ludilearn .c100.p62 .bar:after,
+.format-ludilearn .c100.p62 .fill,
+.format-ludilearn .c100.p63 .bar:after,
+.format-ludilearn .c100.p63 .fill,
+.format-ludilearn .c100.p64 .bar:after,
+.format-ludilearn .c100.p64 .fill,
+.format-ludilearn .c100.p65 .bar:after,
+.format-ludilearn .c100.p65 .fill,
+.format-ludilearn .c100.p66 .bar:after,
+.format-ludilearn .c100.p66 .fill,
+.format-ludilearn .c100.p67 .bar:after,
+.format-ludilearn .c100.p67 .fill,
+.format-ludilearn .c100.p68 .bar:after,
+.format-ludilearn .c100.p68 .fill,
+.format-ludilearn .c100.p69 .bar:after,
+.format-ludilearn .c100.p69 .fill,
+.format-ludilearn .c100.p70 .bar:after,
+.format-ludilearn .c100.p70 .fill,
+.format-ludilearn .c100.p71 .bar:after,
+.format-ludilearn .c100.p71 .fill,
+.format-ludilearn .c100.p72 .bar:after,
+.format-ludilearn .c100.p72 .fill,
+.format-ludilearn .c100.p73 .bar:after,
+.format-ludilearn .c100.p73 .fill,
+.format-ludilearn .c100.p74 .bar:after,
+.format-ludilearn .c100.p74 .fill,
+.format-ludilearn .c100.p75 .bar:after,
+.format-ludilearn .c100.p75 .fill,
+.format-ludilearn .c100.p76 .bar:after,
+.format-ludilearn .c100.p76 .fill,
+.format-ludilearn .c100.p77 .bar:after,
+.format-ludilearn .c100.p77 .fill,
+.format-ludilearn .c100.p78 .bar:after,
+.format-ludilearn .c100.p78 .fill,
+.format-ludilearn .c100.p79 .bar:after,
+.format-ludilearn .c100.p79 .fill,
+.format-ludilearn .c100.p80 .bar:after,
+.format-ludilearn .c100.p80 .fill,
+.format-ludilearn .c100.p81 .bar:after,
+.format-ludilearn .c100.p81 .fill,
+.format-ludilearn .c100.p82 .bar:after,
+.format-ludilearn .c100.p82 .fill,
+.format-ludilearn .c100.p83 .bar:after,
+.format-ludilearn .c100.p83 .fill,
+.format-ludilearn .c100.p84 .bar:after,
+.format-ludilearn .c100.p84 .fill,
+.format-ludilearn .c100.p85 .bar:after,
+.format-ludilearn .c100.p85 .fill,
+.format-ludilearn .c100.p86 .bar:after,
+.format-ludilearn .c100.p86 .fill,
+.format-ludilearn .c100.p87 .bar:after,
+.format-ludilearn .c100.p87 .fill,
+.format-ludilearn .c100.p88 .bar:after,
+.format-ludilearn .c100.p88 .fill,
+.format-ludilearn .c100.p89 .bar:after,
+.format-ludilearn .c100.p89 .fill,
+.format-ludilearn .c100.p90 .bar:after,
+.format-ludilearn .c100.p90 .fill,
+.format-ludilearn .c100.p91 .bar:after,
+.format-ludilearn .c100.p91 .fill,
+.format-ludilearn .c100.p92 .bar:after,
+.format-ludilearn .c100.p92 .fill,
+.format-ludilearn .c100.p93 .bar:after,
+.format-ludilearn .c100.p93 .fill,
+.format-ludilearn .c100.p94 .bar:after,
+.format-ludilearn .c100.p94 .fill,
+.format-ludilearn .c100.p95 .bar:after,
+.format-ludilearn .c100.p95 .fill,
+.format-ludilearn .c100.p96 .bar:after,
+.format-ludilearn .c100.p96 .fill,
+.format-ludilearn .c100.p97 .bar:after,
+.format-ludilearn .c100.p97 .fill,
+.format-ludilearn .c100.p98 .bar:after,
+.format-ludilearn .c100.p98 .fill,
+.format-ludilearn .c100.p99 .bar:after,
+.format-ludilearn .c100.p99 .fill,
+.format-ludilearn .c100.p100 .bar:after,
+.format-ludilearn .c100.p100 .fill {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.format-ludilearn .c100 {
+  position: relative;
+  font-size: 120px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  float: left;
+  margin: 0;
+  background-color: #ccc;
+}
+.format-ludilearn .c100 *,
+.format-ludilearn .c100 *:before,
+.format-ludilearn .c100 *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.format-ludilearn .c100.center {
+  float: none;
+  margin: 0 auto;
+}
+.format-ludilearn .c100.biggest {
+  font-size: 400px;
+}
+.format-ludilearn .c100.big {
+  font-size: 240px;
+}
+.format-ludilearn .c100.small {
+  font-size: 80px;
+}
+.format-ludilearn .c100 > span {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  max-height: 400px;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 5em;
+  line-height: 5em;
+  font-size: 0.2em;
+  color: #ccc;
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  -o-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.format-ludilearn .c100:after {
+  position: absolute;
+  top: 0.08em;
+  left: 0.08em;
+  display: block;
+  content: " ";
+  border-radius: 50%;
+  background-color: #fce3de;
+  width: 0.84em;
+  height: 0.84em;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+}
+.format-ludilearn .c100 .slice {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  clip: rect(0em, 1em, 1em, 0.5em);
+}
+.format-ludilearn .c100.p1 .bar {
+  -webkit-transform: rotate(3.6deg);
+  -moz-transform: rotate(3.6deg);
+  -ms-transform: rotate(3.6deg);
+  -o-transform: rotate(3.6deg);
+  transform: rotate(3.6deg);
+}
+.format-ludilearn .c100.p2 .bar {
+  -webkit-transform: rotate(7.2deg);
+  -moz-transform: rotate(7.2deg);
+  -ms-transform: rotate(7.2deg);
+  -o-transform: rotate(7.2deg);
+  transform: rotate(7.2deg);
+}
+.format-ludilearn .c100.p3 .bar {
+  -webkit-transform: rotate(10.8deg);
+  -moz-transform: rotate(10.8deg);
+  -ms-transform: rotate(10.8deg);
+  -o-transform: rotate(10.8deg);
+  transform: rotate(10.8deg);
+}
+.format-ludilearn .c100.p4 .bar {
+  -webkit-transform: rotate(14.4deg);
+  -moz-transform: rotate(14.4deg);
+  -ms-transform: rotate(14.4deg);
+  -o-transform: rotate(14.4deg);
+  transform: rotate(14.4deg);
+}
+.format-ludilearn .c100.p5 .bar {
+  -webkit-transform: rotate(18deg);
+  -moz-transform: rotate(18deg);
+  -ms-transform: rotate(18deg);
+  -o-transform: rotate(18deg);
+  transform: rotate(18deg);
+}
+.format-ludilearn .c100.p6 .bar {
+  -webkit-transform: rotate(21.6deg);
+  -moz-transform: rotate(21.6deg);
+  -ms-transform: rotate(21.6deg);
+  -o-transform: rotate(21.6deg);
+  transform: rotate(21.6deg);
+}
+.format-ludilearn .c100.p7 .bar {
+  -webkit-transform: rotate(25.2deg);
+  -moz-transform: rotate(25.2deg);
+  -ms-transform: rotate(25.2deg);
+  -o-transform: rotate(25.2deg);
+  transform: rotate(25.2deg);
+}
+.format-ludilearn .c100.p8 .bar {
+  -webkit-transform: rotate(28.8deg);
+  -moz-transform: rotate(28.8deg);
+  -ms-transform: rotate(28.8deg);
+  -o-transform: rotate(28.8deg);
+  transform: rotate(28.8deg);
+}
+.format-ludilearn .c100.p9 .bar {
+  -webkit-transform: rotate(32.4deg);
+  -moz-transform: rotate(32.4deg);
+  -ms-transform: rotate(32.4deg);
+  -o-transform: rotate(32.4deg);
+  transform: rotate(32.4deg);
+}
+.format-ludilearn .c100.p10 .bar {
+  -webkit-transform: rotate(36deg);
+  -moz-transform: rotate(36deg);
+  -ms-transform: rotate(36deg);
+  -o-transform: rotate(36deg);
+  transform: rotate(36deg);
+}
+.format-ludilearn .c100.p11 .bar {
+  -webkit-transform: rotate(39.6deg);
+  -moz-transform: rotate(39.6deg);
+  -ms-transform: rotate(39.6deg);
+  -o-transform: rotate(39.6deg);
+  transform: rotate(39.6deg);
+}
+.format-ludilearn .c100.p12 .bar {
+  -webkit-transform: rotate(43.2deg);
+  -moz-transform: rotate(43.2deg);
+  -ms-transform: rotate(43.2deg);
+  -o-transform: rotate(43.2deg);
+  transform: rotate(43.2deg);
+}
+.format-ludilearn .c100.p13 .bar {
+  -webkit-transform: rotate(46.8deg);
+  -moz-transform: rotate(46.8deg);
+  -ms-transform: rotate(46.8deg);
+  -o-transform: rotate(46.8deg);
+  transform: rotate(46.8deg);
+}
+.format-ludilearn .c100.p14 .bar {
+  -webkit-transform: rotate(50.4deg);
+  -moz-transform: rotate(50.4deg);
+  -ms-transform: rotate(50.4deg);
+  -o-transform: rotate(50.4deg);
+  transform: rotate(50.4deg);
+}
+.format-ludilearn .c100.p15 .bar {
+  -webkit-transform: rotate(54deg);
+  -moz-transform: rotate(54deg);
+  -ms-transform: rotate(54deg);
+  -o-transform: rotate(54deg);
+  transform: rotate(54deg);
+}
+.format-ludilearn .c100.p16 .bar {
+  -webkit-transform: rotate(57.6deg);
+  -moz-transform: rotate(57.6deg);
+  -ms-transform: rotate(57.6deg);
+  -o-transform: rotate(57.6deg);
+  transform: rotate(57.6deg);
+}
+.format-ludilearn .c100.p17 .bar {
+  -webkit-transform: rotate(61.2deg);
+  -moz-transform: rotate(61.2deg);
+  -ms-transform: rotate(61.2deg);
+  -o-transform: rotate(61.2deg);
+  transform: rotate(61.2deg);
+}
+.format-ludilearn .c100.p18 .bar {
+  -webkit-transform: rotate(64.8deg);
+  -moz-transform: rotate(64.8deg);
+  -ms-transform: rotate(64.8deg);
+  -o-transform: rotate(64.8deg);
+  transform: rotate(64.8deg);
+}
+.format-ludilearn .c100.p19 .bar {
+  -webkit-transform: rotate(68.4deg);
+  -moz-transform: rotate(68.4deg);
+  -ms-transform: rotate(68.4deg);
+  -o-transform: rotate(68.4deg);
+  transform: rotate(68.4deg);
+}
+.format-ludilearn .c100.p20 .bar {
+  -webkit-transform: rotate(72deg);
+  -moz-transform: rotate(72deg);
+  -ms-transform: rotate(72deg);
+  -o-transform: rotate(72deg);
+  transform: rotate(72deg);
+}
+.format-ludilearn .c100.p21 .bar {
+  -webkit-transform: rotate(75.6deg);
+  -moz-transform: rotate(75.6deg);
+  -ms-transform: rotate(75.6deg);
+  -o-transform: rotate(75.6deg);
+  transform: rotate(75.6deg);
+}
+.format-ludilearn .c100.p22 .bar {
+  -webkit-transform: rotate(79.2deg);
+  -moz-transform: rotate(79.2deg);
+  -ms-transform: rotate(79.2deg);
+  -o-transform: rotate(79.2deg);
+  transform: rotate(79.2deg);
+}
+.format-ludilearn .c100.p23 .bar {
+  -webkit-transform: rotate(82.8deg);
+  -moz-transform: rotate(82.8deg);
+  -ms-transform: rotate(82.8deg);
+  -o-transform: rotate(82.8deg);
+  transform: rotate(82.8deg);
+}
+.format-ludilearn .c100.p24 .bar {
+  -webkit-transform: rotate(86.4deg);
+  -moz-transform: rotate(86.4deg);
+  -ms-transform: rotate(86.4deg);
+  -o-transform: rotate(86.4deg);
+  transform: rotate(86.4deg);
+}
+.format-ludilearn .c100.p25 .bar {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.format-ludilearn .c100.p26 .bar {
+  -webkit-transform: rotate(93.6deg);
+  -moz-transform: rotate(93.6deg);
+  -ms-transform: rotate(93.6deg);
+  -o-transform: rotate(93.6deg);
+  transform: rotate(93.6deg);
+}
+.format-ludilearn .c100.p27 .bar {
+  -webkit-transform: rotate(97.2deg);
+  -moz-transform: rotate(97.2deg);
+  -ms-transform: rotate(97.2deg);
+  -o-transform: rotate(97.2deg);
+  transform: rotate(97.2deg);
+}
+.format-ludilearn .c100.p28 .bar {
+  -webkit-transform: rotate(100.8deg);
+  -moz-transform: rotate(100.8deg);
+  -ms-transform: rotate(100.8deg);
+  -o-transform: rotate(100.8deg);
+  transform: rotate(100.8deg);
+}
+.format-ludilearn .c100.p29 .bar {
+  -webkit-transform: rotate(104.4deg);
+  -moz-transform: rotate(104.4deg);
+  -ms-transform: rotate(104.4deg);
+  -o-transform: rotate(104.4deg);
+  transform: rotate(104.4deg);
+}
+.format-ludilearn .c100.p30 .bar {
+  -webkit-transform: rotate(108deg);
+  -moz-transform: rotate(108deg);
+  -ms-transform: rotate(108deg);
+  -o-transform: rotate(108deg);
+  transform: rotate(108deg);
+}
+.format-ludilearn .c100.p31 .bar {
+  -webkit-transform: rotate(111.6deg);
+  -moz-transform: rotate(111.6deg);
+  -ms-transform: rotate(111.6deg);
+  -o-transform: rotate(111.6deg);
+  transform: rotate(111.6deg);
+}
+.format-ludilearn .c100.p32 .bar {
+  -webkit-transform: rotate(115.2deg);
+  -moz-transform: rotate(115.2deg);
+  -ms-transform: rotate(115.2deg);
+  -o-transform: rotate(115.2deg);
+  transform: rotate(115.2deg);
+}
+.format-ludilearn .c100.p33 .bar {
+  -webkit-transform: rotate(118.8deg);
+  -moz-transform: rotate(118.8deg);
+  -ms-transform: rotate(118.8deg);
+  -o-transform: rotate(118.8deg);
+  transform: rotate(118.8deg);
+}
+.format-ludilearn .c100.p34 .bar {
+  -webkit-transform: rotate(122.4deg);
+  -moz-transform: rotate(122.4deg);
+  -ms-transform: rotate(122.4deg);
+  -o-transform: rotate(122.4deg);
+  transform: rotate(122.4deg);
+}
+.format-ludilearn .c100.p35 .bar {
+  -webkit-transform: rotate(126deg);
+  -moz-transform: rotate(126deg);
+  -ms-transform: rotate(126deg);
+  -o-transform: rotate(126deg);
+  transform: rotate(126deg);
+}
+.format-ludilearn .c100.p36 .bar {
+  -webkit-transform: rotate(129.6deg);
+  -moz-transform: rotate(129.6deg);
+  -ms-transform: rotate(129.6deg);
+  -o-transform: rotate(129.6deg);
+  transform: rotate(129.6deg);
+}
+.format-ludilearn .c100.p37 .bar {
+  -webkit-transform: rotate(133.2deg);
+  -moz-transform: rotate(133.2deg);
+  -ms-transform: rotate(133.2deg);
+  -o-transform: rotate(133.2deg);
+  transform: rotate(133.2deg);
+}
+.format-ludilearn .c100.p38 .bar {
+  -webkit-transform: rotate(136.8deg);
+  -moz-transform: rotate(136.8deg);
+  -ms-transform: rotate(136.8deg);
+  -o-transform: rotate(136.8deg);
+  transform: rotate(136.8deg);
+}
+.format-ludilearn .c100.p39 .bar {
+  -webkit-transform: rotate(140.4deg);
+  -moz-transform: rotate(140.4deg);
+  -ms-transform: rotate(140.4deg);
+  -o-transform: rotate(140.4deg);
+  transform: rotate(140.4deg);
+}
+.format-ludilearn .c100.p40 .bar {
+  -webkit-transform: rotate(144deg);
+  -moz-transform: rotate(144deg);
+  -ms-transform: rotate(144deg);
+  -o-transform: rotate(144deg);
+  transform: rotate(144deg);
+}
+.format-ludilearn .c100.p41 .bar {
+  -webkit-transform: rotate(147.6deg);
+  -moz-transform: rotate(147.6deg);
+  -ms-transform: rotate(147.6deg);
+  -o-transform: rotate(147.6deg);
+  transform: rotate(147.6deg);
+}
+.format-ludilearn .c100.p42 .bar {
+  -webkit-transform: rotate(151.2deg);
+  -moz-transform: rotate(151.2deg);
+  -ms-transform: rotate(151.2deg);
+  -o-transform: rotate(151.2deg);
+  transform: rotate(151.2deg);
+}
+.format-ludilearn .c100.p43 .bar {
+  -webkit-transform: rotate(154.8deg);
+  -moz-transform: rotate(154.8deg);
+  -ms-transform: rotate(154.8deg);
+  -o-transform: rotate(154.8deg);
+  transform: rotate(154.8deg);
+}
+.format-ludilearn .c100.p44 .bar {
+  -webkit-transform: rotate(158.4deg);
+  -moz-transform: rotate(158.4deg);
+  -ms-transform: rotate(158.4deg);
+  -o-transform: rotate(158.4deg);
+  transform: rotate(158.4deg);
+}
+.format-ludilearn .c100.p45 .bar {
+  -webkit-transform: rotate(162deg);
+  -moz-transform: rotate(162deg);
+  -ms-transform: rotate(162deg);
+  -o-transform: rotate(162deg);
+  transform: rotate(162deg);
+}
+.format-ludilearn .c100.p46 .bar {
+  -webkit-transform: rotate(165.6deg);
+  -moz-transform: rotate(165.6deg);
+  -ms-transform: rotate(165.6deg);
+  -o-transform: rotate(165.6deg);
+  transform: rotate(165.6deg);
+}
+.format-ludilearn .c100.p47 .bar {
+  -webkit-transform: rotate(169.2deg);
+  -moz-transform: rotate(169.2deg);
+  -ms-transform: rotate(169.2deg);
+  -o-transform: rotate(169.2deg);
+  transform: rotate(169.2deg);
+}
+.format-ludilearn .c100.p48 .bar {
+  -webkit-transform: rotate(172.8deg);
+  -moz-transform: rotate(172.8deg);
+  -ms-transform: rotate(172.8deg);
+  -o-transform: rotate(172.8deg);
+  transform: rotate(172.8deg);
+}
+.format-ludilearn .c100.p49 .bar {
+  -webkit-transform: rotate(176.4deg);
+  -moz-transform: rotate(176.4deg);
+  -ms-transform: rotate(176.4deg);
+  -o-transform: rotate(176.4deg);
+  transform: rotate(176.4deg);
+}
+.format-ludilearn .c100.p50 .bar {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.format-ludilearn .c100.p51 .bar {
+  -webkit-transform: rotate(183.6deg);
+  -moz-transform: rotate(183.6deg);
+  -ms-transform: rotate(183.6deg);
+  -o-transform: rotate(183.6deg);
+  transform: rotate(183.6deg);
+}
+.format-ludilearn .c100.p52 .bar {
+  -webkit-transform: rotate(187.2deg);
+  -moz-transform: rotate(187.2deg);
+  -ms-transform: rotate(187.2deg);
+  -o-transform: rotate(187.2deg);
+  transform: rotate(187.2deg);
+}
+.format-ludilearn .c100.p53 .bar {
+  -webkit-transform: rotate(190.8deg);
+  -moz-transform: rotate(190.8deg);
+  -ms-transform: rotate(190.8deg);
+  -o-transform: rotate(190.8deg);
+  transform: rotate(190.8deg);
+}
+.format-ludilearn .c100.p54 .bar {
+  -webkit-transform: rotate(194.4deg);
+  -moz-transform: rotate(194.4deg);
+  -ms-transform: rotate(194.4deg);
+  -o-transform: rotate(194.4deg);
+  transform: rotate(194.4deg);
+}
+.format-ludilearn .c100.p55 .bar {
+  -webkit-transform: rotate(198deg);
+  -moz-transform: rotate(198deg);
+  -ms-transform: rotate(198deg);
+  -o-transform: rotate(198deg);
+  transform: rotate(198deg);
+}
+.format-ludilearn .c100.p56 .bar {
+  -webkit-transform: rotate(201.6deg);
+  -moz-transform: rotate(201.6deg);
+  -ms-transform: rotate(201.6deg);
+  -o-transform: rotate(201.6deg);
+  transform: rotate(201.6deg);
+}
+.format-ludilearn .c100.p57 .bar {
+  -webkit-transform: rotate(205.2deg);
+  -moz-transform: rotate(205.2deg);
+  -ms-transform: rotate(205.2deg);
+  -o-transform: rotate(205.2deg);
+  transform: rotate(205.2deg);
+}
+.format-ludilearn .c100.p58 .bar {
+  -webkit-transform: rotate(208.8deg);
+  -moz-transform: rotate(208.8deg);
+  -ms-transform: rotate(208.8deg);
+  -o-transform: rotate(208.8deg);
+  transform: rotate(208.8deg);
+}
+.format-ludilearn .c100.p59 .bar {
+  -webkit-transform: rotate(212.4deg);
+  -moz-transform: rotate(212.4deg);
+  -ms-transform: rotate(212.4deg);
+  -o-transform: rotate(212.4deg);
+  transform: rotate(212.4deg);
+}
+.format-ludilearn .c100.p60 .bar {
+  -webkit-transform: rotate(216deg);
+  -moz-transform: rotate(216deg);
+  -ms-transform: rotate(216deg);
+  -o-transform: rotate(216deg);
+  transform: rotate(216deg);
+}
+.format-ludilearn .c100.p61 .bar {
+  -webkit-transform: rotate(219.6deg);
+  -moz-transform: rotate(219.6deg);
+  -ms-transform: rotate(219.6deg);
+  -o-transform: rotate(219.6deg);
+  transform: rotate(219.6deg);
+}
+.format-ludilearn .c100.p62 .bar {
+  -webkit-transform: rotate(223.2deg);
+  -moz-transform: rotate(223.2deg);
+  -ms-transform: rotate(223.2deg);
+  -o-transform: rotate(223.2deg);
+  transform: rotate(223.2deg);
+}
+.format-ludilearn .c100.p63 .bar {
+  -webkit-transform: rotate(226.8deg);
+  -moz-transform: rotate(226.8deg);
+  -ms-transform: rotate(226.8deg);
+  -o-transform: rotate(226.8deg);
+  transform: rotate(226.8deg);
+}
+.format-ludilearn .c100.p64 .bar {
+  -webkit-transform: rotate(230.4deg);
+  -moz-transform: rotate(230.4deg);
+  -ms-transform: rotate(230.4deg);
+  -o-transform: rotate(230.4deg);
+  transform: rotate(230.4deg);
+}
+.format-ludilearn .c100.p65 .bar {
+  -webkit-transform: rotate(234deg);
+  -moz-transform: rotate(234deg);
+  -ms-transform: rotate(234deg);
+  -o-transform: rotate(234deg);
+  transform: rotate(234deg);
+}
+.format-ludilearn .c100.p66 .bar {
+  -webkit-transform: rotate(237.6deg);
+  -moz-transform: rotate(237.6deg);
+  -ms-transform: rotate(237.6deg);
+  -o-transform: rotate(237.6deg);
+  transform: rotate(237.6deg);
+}
+.format-ludilearn .c100.p67 .bar {
+  -webkit-transform: rotate(241.2deg);
+  -moz-transform: rotate(241.2deg);
+  -ms-transform: rotate(241.2deg);
+  -o-transform: rotate(241.2deg);
+  transform: rotate(241.2deg);
+}
+.format-ludilearn .c100.p68 .bar {
+  -webkit-transform: rotate(244.8deg);
+  -moz-transform: rotate(244.8deg);
+  -ms-transform: rotate(244.8deg);
+  -o-transform: rotate(244.8deg);
+  transform: rotate(244.8deg);
+}
+.format-ludilearn .c100.p69 .bar {
+  -webkit-transform: rotate(248.4deg);
+  -moz-transform: rotate(248.4deg);
+  -ms-transform: rotate(248.4deg);
+  -o-transform: rotate(248.4deg);
+  transform: rotate(248.4deg);
+}
+.format-ludilearn .c100.p70 .bar {
+  -webkit-transform: rotate(252deg);
+  -moz-transform: rotate(252deg);
+  -ms-transform: rotate(252deg);
+  -o-transform: rotate(252deg);
+  transform: rotate(252deg);
+}
+.format-ludilearn .c100.p71 .bar {
+  -webkit-transform: rotate(255.6deg);
+  -moz-transform: rotate(255.6deg);
+  -ms-transform: rotate(255.6deg);
+  -o-transform: rotate(255.6deg);
+  transform: rotate(255.6deg);
+}
+.format-ludilearn .c100.p72 .bar {
+  -webkit-transform: rotate(259.2deg);
+  -moz-transform: rotate(259.2deg);
+  -ms-transform: rotate(259.2deg);
+  -o-transform: rotate(259.2deg);
+  transform: rotate(259.2deg);
+}
+.format-ludilearn .c100.p73 .bar {
+  -webkit-transform: rotate(262.8deg);
+  -moz-transform: rotate(262.8deg);
+  -ms-transform: rotate(262.8deg);
+  -o-transform: rotate(262.8deg);
+  transform: rotate(262.8deg);
+}
+.format-ludilearn .c100.p74 .bar {
+  -webkit-transform: rotate(266.4deg);
+  -moz-transform: rotate(266.4deg);
+  -ms-transform: rotate(266.4deg);
+  -o-transform: rotate(266.4deg);
+  transform: rotate(266.4deg);
+}
+.format-ludilearn .c100.p75 .bar {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.format-ludilearn .c100.p76 .bar {
+  -webkit-transform: rotate(273.6deg);
+  -moz-transform: rotate(273.6deg);
+  -ms-transform: rotate(273.6deg);
+  -o-transform: rotate(273.6deg);
+  transform: rotate(273.6deg);
+}
+.format-ludilearn .c100.p77 .bar {
+  -webkit-transform: rotate(277.2deg);
+  -moz-transform: rotate(277.2deg);
+  -ms-transform: rotate(277.2deg);
+  -o-transform: rotate(277.2deg);
+  transform: rotate(277.2deg);
+}
+.format-ludilearn .c100.p78 .bar {
+  -webkit-transform: rotate(280.8deg);
+  -moz-transform: rotate(280.8deg);
+  -ms-transform: rotate(280.8deg);
+  -o-transform: rotate(280.8deg);
+  transform: rotate(280.8deg);
+}
+.format-ludilearn .c100.p79 .bar {
+  -webkit-transform: rotate(284.4deg);
+  -moz-transform: rotate(284.4deg);
+  -ms-transform: rotate(284.4deg);
+  -o-transform: rotate(284.4deg);
+  transform: rotate(284.4deg);
+}
+.format-ludilearn .c100.p80 .bar {
+  -webkit-transform: rotate(288deg);
+  -moz-transform: rotate(288deg);
+  -ms-transform: rotate(288deg);
+  -o-transform: rotate(288deg);
+  transform: rotate(288deg);
+}
+.format-ludilearn .c100.p81 .bar {
+  -webkit-transform: rotate(291.6deg);
+  -moz-transform: rotate(291.6deg);
+  -ms-transform: rotate(291.6deg);
+  -o-transform: rotate(291.6deg);
+  transform: rotate(291.6deg);
+}
+.format-ludilearn .c100.p82 .bar {
+  -webkit-transform: rotate(295.2deg);
+  -moz-transform: rotate(295.2deg);
+  -ms-transform: rotate(295.2deg);
+  -o-transform: rotate(295.2deg);
+  transform: rotate(295.2deg);
+}
+.format-ludilearn .c100.p83 .bar {
+  -webkit-transform: rotate(298.8deg);
+  -moz-transform: rotate(298.8deg);
+  -ms-transform: rotate(298.8deg);
+  -o-transform: rotate(298.8deg);
+  transform: rotate(298.8deg);
+}
+.format-ludilearn .c100.p84 .bar {
+  -webkit-transform: rotate(302.4deg);
+  -moz-transform: rotate(302.4deg);
+  -ms-transform: rotate(302.4deg);
+  -o-transform: rotate(302.4deg);
+  transform: rotate(302.4deg);
+}
+.format-ludilearn .c100.p85 .bar {
+  -webkit-transform: rotate(306deg);
+  -moz-transform: rotate(306deg);
+  -ms-transform: rotate(306deg);
+  -o-transform: rotate(306deg);
+  transform: rotate(306deg);
+}
+.format-ludilearn .c100.p86 .bar {
+  -webkit-transform: rotate(309.6deg);
+  -moz-transform: rotate(309.6deg);
+  -ms-transform: rotate(309.6deg);
+  -o-transform: rotate(309.6deg);
+  transform: rotate(309.6deg);
+}
+.format-ludilearn .c100.p87 .bar {
+  -webkit-transform: rotate(313.2deg);
+  -moz-transform: rotate(313.2deg);
+  -ms-transform: rotate(313.2deg);
+  -o-transform: rotate(313.2deg);
+  transform: rotate(313.2deg);
+}
+.format-ludilearn .c100.p88 .bar {
+  -webkit-transform: rotate(316.8deg);
+  -moz-transform: rotate(316.8deg);
+  -ms-transform: rotate(316.8deg);
+  -o-transform: rotate(316.8deg);
+  transform: rotate(316.8deg);
+}
+.format-ludilearn .c100.p89 .bar {
+  -webkit-transform: rotate(320.4deg);
+  -moz-transform: rotate(320.4deg);
+  -ms-transform: rotate(320.4deg);
+  -o-transform: rotate(320.4deg);
+  transform: rotate(320.4deg);
+}
+.format-ludilearn .c100.p90 .bar {
+  -webkit-transform: rotate(324deg);
+  -moz-transform: rotate(324deg);
+  -ms-transform: rotate(324deg);
+  -o-transform: rotate(324deg);
+  transform: rotate(324deg);
+}
+.format-ludilearn .c100.p91 .bar {
+  -webkit-transform: rotate(327.6deg);
+  -moz-transform: rotate(327.6deg);
+  -ms-transform: rotate(327.6deg);
+  -o-transform: rotate(327.6deg);
+  transform: rotate(327.6deg);
+}
+.format-ludilearn .c100.p92 .bar {
+  -webkit-transform: rotate(331.2deg);
+  -moz-transform: rotate(331.2deg);
+  -ms-transform: rotate(331.2deg);
+  -o-transform: rotate(331.2deg);
+  transform: rotate(331.2deg);
+}
+.format-ludilearn .c100.p93 .bar {
+  -webkit-transform: rotate(334.8deg);
+  -moz-transform: rotate(334.8deg);
+  -ms-transform: rotate(334.8deg);
+  -o-transform: rotate(334.8deg);
+  transform: rotate(334.8deg);
+}
+.format-ludilearn .c100.p94 .bar {
+  -webkit-transform: rotate(338.4deg);
+  -moz-transform: rotate(338.4deg);
+  -ms-transform: rotate(338.4deg);
+  -o-transform: rotate(338.4deg);
+  transform: rotate(338.4deg);
+}
+.format-ludilearn .c100.p95 .bar {
+  -webkit-transform: rotate(342deg);
+  -moz-transform: rotate(342deg);
+  -ms-transform: rotate(342deg);
+  -o-transform: rotate(342deg);
+  transform: rotate(342deg);
+}
+.format-ludilearn .c100.p96 .bar {
+  -webkit-transform: rotate(345.6deg);
+  -moz-transform: rotate(345.6deg);
+  -ms-transform: rotate(345.6deg);
+  -o-transform: rotate(345.6deg);
+  transform: rotate(345.6deg);
+}
+.format-ludilearn .c100.p97 .bar {
+  -webkit-transform: rotate(349.2deg);
+  -moz-transform: rotate(349.2deg);
+  -ms-transform: rotate(349.2deg);
+  -o-transform: rotate(349.2deg);
+  transform: rotate(349.2deg);
+}
+.format-ludilearn .c100.p98 .bar {
+  -webkit-transform: rotate(352.8deg);
+  -moz-transform: rotate(352.8deg);
+  -ms-transform: rotate(352.8deg);
+  -o-transform: rotate(352.8deg);
+  transform: rotate(352.8deg);
+}
+.format-ludilearn .c100.p99 .bar {
+  -webkit-transform: rotate(356.4deg);
+  -moz-transform: rotate(356.4deg);
+  -ms-transform: rotate(356.4deg);
+  -o-transform: rotate(356.4deg);
+  transform: rotate(356.4deg);
+}
+.format-ludilearn .c100.p100 .bar {
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+.format-ludilearn .c100:hover {
+  cursor: default;
+}
+.format-ludilearn .c100:hover > span {
+  width: 3.33em;
+  line-height: 3.33em;
+  font-size: 0.3em;
+  color: #307bbb;
+}
+.format-ludilearn .c100:hover:after {
+  top: 0.04em;
+  left: 0.04em;
+  width: 0.92em;
+  height: 0.92em;
+}
+.format-ludilearn .c100.dark {
+  background-color: #777;
+}
+.format-ludilearn .c100.dark .bar,
+.format-ludilearn .c100.dark .fill {
+  border-color: #c6ff00 !important;
+}
+.format-ludilearn .c100.dark > span {
+  color: #777;
+}
+.format-ludilearn .c100.dark:after {
+  background-color: #666;
+}
+.format-ludilearn .c100.dark:hover > span {
+  color: #c6ff00;
+}
+.format-ludilearn .c100.green .bar,
+.format-ludilearn .c100.green .fill {
+  border-color: #4db53c !important;
+}
+.format-ludilearn .c100.green:hover > span {
+  color: #4db53c;
+}
+.format-ludilearn .c100.green.dark .bar,
+.format-ludilearn .c100.green.dark .fill {
+  border-color: #5fd400 !important;
+}
+.format-ludilearn .c100.green.dark:hover > span {
+  color: #5fd400;
+}
+.format-ludilearn .c100.orange .bar,
+.format-ludilearn .c100.orange .fill {
+  border-color: #dd9d22 !important;
+}
+.format-ludilearn .c100.orange:hover > span {
+  color: #dd9d22;
+}
+.format-ludilearn .c100.orange.dark .bar,
+.format-ludilearn .c100.orange.dark .fill {
+  border-color: #e08833 !important;
+}
+.format-ludilearn .c100.ludilearn .bar,
+.format-ludilearn .c100.ludilearn .fill {
+  border-color: #f8b334 !important;
+}
+.format-ludilearn .c100.orange.dark:hover > span {
+  color: #e08833;
+}
+
+.format-ludilearn {
+  /* Largeur d'écran inférieure à 600px. */
+  /* Settings pages */
+  /* Questionnaire styles */
+  /* Hexad Results Styles */
+  /* Media Queries */
+}
+.format-ludilearn .btn {
+  min-height: 40px;
+  font-weight: bold;
+}
+.format-ludilearn #pills-tab {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--primary), rgba(0, 0, 0, 0) 32px);
+  height: 60px;
+  line-height: 60px;
+}
+.format-ludilearn #pills-tab .nav-item {
+  flex: none;
+}
+.format-ludilearn .ludilearn-content {
+  border: none;
+  max-width: 830px;
+  margin: 15px auto auto;
+}
+.format-ludilearn .ludilearn-content .card-header {
+  background: transparent;
+}
+.format-ludilearn .scoretext {
+  font-size: 1em;
+  font-weight: 500;
+  color: #5c5854;
+}
+.format-ludilearn .scoretext .playerscore {
+  color: var(--primary);
+  filter: brightness(75%);
+  font-size: 1.5em;
+}
+.format-ludilearn .cmname, .format-ludilearn .sectionname {
+  color: black;
+}
+.format-ludilearn .bonuscompletion, .format-ludilearn .penalties {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 5px;
+  background: #fff;
+  color: orange;
+  font-weight: 500;
+  padding: 3px 6px;
+  box-shadow: 4px -4px orange;
+  width: 50%;
+}
+.format-ludilearn .bonuscompletion.bonuscompletion-cm, .format-ludilearn .bonuscompletion.penalties-cm, .format-ludilearn .penalties.bonuscompletion-cm, .format-ludilearn .penalties.penalties-cm {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  margin: auto;
+  box-shadow: 4px 4px orange;
+}
+.format-ludilearn .bonuscompletion span.bonuscompletion-value, .format-ludilearn .bonuscompletion span.penalties-value, .format-ludilearn .penalties span.bonuscompletion-value, .format-ludilearn .penalties span.penalties-value {
+  display: block;
+  text-align: center;
+  font-size: 1em;
+  line-height: 1em;
+}
+.format-ludilearn .bonuscompletion span.bonuscompletion-str, .format-ludilearn .bonuscompletion span.penalties-str, .format-ludilearn .penalties span.bonuscompletion-str, .format-ludilearn .penalties span.penalties-str {
+  /* width: 60%; */
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 0.8em;
+}
+.format-ludilearn .badgecompletion {
+  position: absolute;
+  top: -10px;
+  right: 5px;
+  padding: 3px 6px;
+  width: 50px;
+}
+.format-ludilearn .badgecompletion img {
+  width: 100%;
+}
+.format-ludilearn .badgecompletion.badgecompletion-cm {
+  width: 75px;
+  margin: auto;
+  left: 50%;
+  right: unset;
+  top: -65px;
+}
+.format-ludilearn .ranking-text {
+  font-size: 1.2rem;
+  margin-top: -60px;
+}
+.format-ludilearn .rightdottedscore {
+  border-right: var(--primary) 5px dotted;
+}
+@media (max-width: 576px) {
+  .format-ludilearn .rightdottedscore.rightdottedscore-notsm {
+    border-right: none;
+  }
+}
+.format-ludilearn .bottomdotted {
+  border-bottom: var(--primary) 5px dotted;
+}
+.format-ludilearn .rightlined {
+  border-right: var(--primary) 2px solid;
+  border-color: grey;
+}
+.format-ludilearn a:hover {
+  text-decoration: none;
+}
+.format-ludilearn a.restricted.nourl {
+  pointer-events: none;
+  cursor: default;
+}
+.format-ludilearn .ludilearn-img,
+.format-ludilearn #pills-activity .ludilearn-img {
+  height: 160px;
+}
+.format-ludilearn .ludilearn-img.little-img,
+.format-ludilearn #pills-activity .ludilearn-img.little-img {
+  height: 55px;
+}
+.format-ludilearn .img-timer {
+  margin-top: 32px;
+}
+.format-ludilearn #pills-activity .scoretext {
+  font-size: 1.5em;
+}
+.format-ludilearn .restricted {
+  filter: grayscale(1);
+}
+.format-ludilearn .maxseriesquare {
+  padding: 0;
+  margin-top: 10%;
+}
+.format-ludilearn .notreached {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+.format-ludilearn .block_section {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.format-ludilearn .block_section.block_section_avatar {
+  align-items: end;
+}
+.format-ludilearn .block_section .progression {
+  font-size: 48px;
+  font-weight: 900;
+  color: #f8b334;
+}
+.format-ludilearn .badge-number {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto auto 0.25rem;
+  border: 2px solid #ddd;
+  color: #ddd;
+}
+.format-ludilearn .badge-number.badge-number-bronze {
+  color: #ffffff;
+  background: linear-gradient(135deg, #cd7f32, #eee, #cd7f32, #eee, #cd7f32);
+  border: 1px solid #cd7f32;
+  font-weight: 900;
+}
+.format-ludilearn .badge-number.badge-number-silver {
+  color: #ffffff;
+  background: linear-gradient(135deg, #c0c0c0, #eee, #c0c0c0, #eee, #c0c0c0);
+  border: 1px solid #c0c0c0;
+  font-weight: 900;
+}
+.format-ludilearn .badge-number.badge-number-gold {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffd700, #eee, #ffd700, #eee, #ffd700);
+  border: 1px solid #ffd700;
+  font-weight: 900;
+}
+.format-ludilearn .badge-number.spinning {
+  animation: spinY 2s linear infinite;
+}
+@keyframes spinY {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+.format-ludilearn .progress-image,
+.format-ludilearn .avatar-image {
+  position: relative;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-position: center;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  background-size: cover;
+}
+.format-ludilearn .progress-image .progression-steps-component,
+.format-ludilearn .progress-image .avatar-slot,
+.format-ludilearn .progress-image .avatar-character,
+.format-ludilearn .avatar-image .progression-steps-component,
+.format-ludilearn .avatar-image .avatar-slot,
+.format-ludilearn .avatar-image .avatar-character {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  max-height: 100%;
+}
+.format-ludilearn .avatar-bag {
+  display: block;
+  max-width: 75px;
+  margin: auto;
+  cursor: pointer;
+}
+.format-ludilearn .avatar-bag.avatar-bag-open {
+  display: none;
+}
+.format-ludilearn .modal-dialog {
+  max-width: 830px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory {
+  display: none;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory.active {
+  display: block;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert {
+  color: white;
+  padding: 0;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item {
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  outline: none;
+  max-width: 100px;
+  flex: auto;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .avatar-item-img {
+  width: 100px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned {
+  cursor: pointer;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:hover, .format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned:focus {
+  transform: scale(1.1);
+  border: 2px solid #007bff;
+  border-radius: 10px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-owned.selected {
+  border: 2px solid #007bff;
+  padding: 10px;
+  border-radius: 10px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item .alert-equiped {
+  display: none;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped {
+  border: 2px solid green;
+  padding: 10px;
+  border-radius: 10px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped .alert-equiped {
+  display: block;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button {
+  display: none;
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+  outline: none;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:focus, .format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button:hover {
+  background: darkgreen;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .alert {
+  margin-top: 10px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  border: 1px solid orange;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s;
+  outline: none;
+  width: 100%;
+}
+.format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory:focus, .format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory:hover, .format-ludilearn .modal-dialog .avatar-inventory .tabs .tab-inventory.active {
+  background: orange;
+  color: white;
+}
+.format-ludilearn .count-items {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+}
+.format-ludilearn .count-items .numerator {
+  color: #F7B53C;
+  font-size: 48px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 9px;
+  left: 0;
+}
+.format-ludilearn .count-items .numerator.two-digits {
+  left: -24px;
+}
+.format-ludilearn .count-items .fraction {
+  color: #C9BEB6;
+  font-size: 32px;
+  position: absolute;
+  left: 32px;
+  bottom: 12px;
+}
+.format-ludilearn .count-items .denumerator {
+  color: #C9BEB6;
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  left: 43px;
+}
+.format-ludilearn .progression-text {
+  width: fit-content;
+  border-radius: 8px;
+  background-color: #f8b334;
+  font-size: 30px;
+  font-weight: 900;
+  color: #fff;
+  margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.format-ludilearn .progression-text.progression-cm {
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.format-ludilearn .progression-text.progression-cm p {
+  margin-bottom: 0.2rem;
+}
+.format-ludilearn .progression-bar-component.rocket {
+  position: absolute;
+  width: 1200px;
+  height: 1200px;
+  max-width: unset;
+  max-height: unset;
+  left: 10%;
+  top: 10%;
+  animation: percentrocket 0.5333s infinite step-end;
+}
+.format-ludilearn .circle-progression.biggest {
+  float: none;
+  margin: auto;
+  font-size: 300px;
+}
+.format-ludilearn .circle-progression.biggest span.show {
+  max-width: 300px;
+  max-height: 300px;
+}
+.format-ludilearn .circle-progression.biggest::after {
+  top: 0.15em;
+  left: 0.15em;
+  width: 0.7em;
+  height: 0.7em;
+}
+.format-ludilearn .ranking-group-view {
+  margin: auto;
+  width: 100%;
+}
+.format-ludilearn .chrono img {
+  width: 100%;
+  max-width: 80px;
+}
+.format-ludilearn .chrono .current-time {
+  font-size: 2rem;
+  vertical-align: middle;
+}
+.format-ludilearn .reference-time {
+  font-size: 1.2rem;
+}
+.format-ludilearn .reference-time span {
+  vertical-align: middle;
+}
+.format-ludilearn .ranking-summary {
+  margin: auto;
+  width: 100%;
+}
+.format-ludilearn .ranking-table td, .format-ludilearn .ranking-table tr {
+  border-top: none;
+}
+@keyframes percentrocket {
+  0% {
+    left: 10%;
+    top: 10%;
+  }
+  7.1% {
+    left: -90%;
+    top: 10%;
+  }
+  14.2% {
+    left: -190%;
+    top: 10%;
+  }
+  21.3% {
+    left: -290%;
+    top: 10%;
+  }
+  28.4% {
+    left: 10%;
+    top: -90%;
+  }
+  35.5% {
+    left: -90%;
+    top: -90%;
+  }
+  42.6% {
+    left: -190%;
+    top: -90%;
+  }
+  200% {
+    left: -290%;
+    top: -90%;
+  }
+  57.1% {
+    left: -90%;
+    top: -190%;
+  }
+  64.2% {
+    left: -190%;
+    top: -190%;
+  }
+  71.3% {
+    left: -290%;
+    top: -190%;
+  }
+  78.4% {
+    left: 10%;
+    top: -290%;
+  }
+  85.5% {
+    left: -90%;
+    top: -290%;
+  }
+  92.6% {
+    left: -190%;
+    top: -290%;
+  }
+  100% {
+    left: -290%;
+    top: -290%;
+  }
+}
+.format-ludilearn .ludilearn-world-professional .avatar-image {
+  background-size: auto;
+}
+.format-ludilearn .ludilearn-world-professional .avatar-slot,
+.format-ludilearn .ludilearn-world-professional .avatar-character {
+  top: 15%;
+}
+.format-ludilearn .ludilearn-world-professional .ranking-summary {
+  display: block;
+  max-height: 160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.format-ludilearn .ludilearn-world-professional .section-progress .asteroids {
+  display: none;
+}
+.format-ludilearn .ludilearn-world-professional .circle-progression.biggest span.show {
+  max-width: 210px;
+  max-height: 210px;
+  left: 45px;
+  top: 45px;
+}
+.format-ludilearn .ludilearn-world-professional .progression-bar-component.rocket {
+  position: absolute;
+  width: 1200px;
+  height: 210px;
+  max-width: unset;
+  max-height: unset;
+  left: 0;
+  top: 0;
+  animation: percentrocketprofessional 0.345s infinite step-end;
+}
+@keyframes percentrocketprofessional {
+  0% {
+    left: -75px;
+  }
+  25% {
+    left: calc(-75px - 100%);
+  }
+  50% {
+    left: calc(-75px - 200%);
+  }
+  75% {
+    left: calc(-75px - 300%);
+  }
+  100% {
+    left: calc(-75px - 400%);
+  }
+}
+.format-ludilearn .ludilearn-world-highschool .avatar-image:has(.item-equiped) .avatar-character {
+  display: none;
+}
+.format-ludilearn .ludilearn-world-highschool .avatar-image .avatar-slot,
+.format-ludilearn .ludilearn-world-highschool .avatar-image .avatar-character {
+  width: 100%;
+}
+.format-ludilearn .ludilearn-world-highschool .ranking-summary {
+  display: block;
+  max-height: 175px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -15px;
+}
+.format-ludilearn .ludilearn-world-highschool .progression-planet-inprogress {
+  background-image: url("[[pix:format_ludilearn|highschool/progress/course-planet-bg]]");
+  background-size: contain;
+}
+.format-ludilearn .ludilearn-world-highschool .progression-planet-max {
+  background-image: url("[[pix:format_ludilearn|highschool/progress/course-planet-max-bg]]");
+  background-size: contain;
+}
+.format-ludilearn .ludilearn-world-highschool .section-progress .asteroids {
+  display: none;
+}
+.format-ludilearn .ludilearn-world-highschool .c100 > span {
+  line-height: 0;
+}
+.format-ludilearn .ludilearn-world-highschool .progression-bar-component.rocket {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: unset;
+  max-height: unset;
+  left: 0;
+  top: 0;
+  animation: none;
+}
+.format-ludilearn li.explanation-li {
+  height: 50px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.format-ludilearn li.explanation-li .explanation-button {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+.format-ludilearn li.explanation-li .explanation-button .explanation {
+  vertical-align: top;
+}
+@media screen and (max-width: 600px) {
+  .format-ludilearn table.ranking-table tr, .format-ludilearn table.ranking-table td {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.format-ludilearn #ludilearn-settings .editsettingssuccess,
+.format-ludilearn #ludilearn-settings .editsettingsfailed {
+  display: none;
+}
+.format-ludilearn #ludilearn-settings .setting-footer {
+  margin-top: 5em;
+}
+.format-ludilearn #ludilearn-questionnaire {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.format-ludilearn #ludilearn-questionnaire .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #dee2e6;
+  margin-bottom: 1rem;
+}
+.format-ludilearn #ludilearn-questionnaire .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.format-ludilearn #ludilearn-questionnaire .card:focus-within {
+  box-shadow: 0 0 0 2px var(--primary);
+}
+.format-ludilearn #ludilearn-questionnaire .hexad-illustration {
+  display: block;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+.format-ludilearn #ludilearn-questionnaire #questionnaire-instructions {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+.format-ludilearn #ludilearn-questionnaire .question-text {
+  display: block;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  border-left: 4px solid var(--primary);
+  margin-bottom: 1rem;
+  color: #1d2125;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option {
+  text-align: center;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio] {
+  position: absolute;
+  opacity: 0;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus + .rating-label {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus:not(:focus-visible) + .rating-label {
+  outline: none;
+  box-shadow: none;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:checked + .rating-label {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  margin: 0 5px;
+  color: #495057;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:hover {
+  border-color: var(--primary);
+  background-color: #f8f9fa;
+}
+.format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+}
+.format-ludilearn #ludilearn-questionnaire .btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+.format-ludilearn #ludilearn-questionnaire .btn-primary:focus {
+  outline: 2px solid var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+.format-ludilearn #ludilearn-questionnaire .btn-primary:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+.format-ludilearn #ludilearn-questionnaire .invalid-feedback {
+  display: none;
+  color: #dc3545;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+.format-ludilearn #ludilearn-questionnaire .invalid-feedback.show {
+  display: block;
+}
+.format-ludilearn .hexad-results {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+.format-ludilearn .hexad-results .hexad-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #1d2125;
+}
+.format-ludilearn .hexad-results .hexad-scores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.format-ludilearn .hexad-results .score-item {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e9ecef;
+  transition: transform 0.2s ease;
+}
+.format-ludilearn .hexad-results .score-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.format-ludilearn .hexad-results .score-item .score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #e9ecef;
+}
+.format-ludilearn .hexad-results .score-item .score-header strong {
+  font-size: 1.125rem;
+  color: #1d2125;
+}
+.format-ludilearn .hexad-results .score-item .score-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+.format-ludilearn .hexad-results .score-item .score-description {
+  color: #495057;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .format-ludilearn .hexad-scores-grid {
+    grid-template-columns: 1fr;
+  }
+  .format-ludilearn .hexad-results {
+    padding: 1rem;
+  }
+  .format-ludilearn .hexad-results .score-item {
+    padding: 1rem;
+  }
+  .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label {
+    width: 35px;
+    height: 35px;
+    font-size: 0.75rem;
+  }
+  .format-ludilearn #ludilearn-questionnaire .scale-labels {
+    font-size: 0.75rem;
+  }
+}
 
 /*# sourceMappingURL=styles.css.map */
