@@ -50,6 +50,7 @@ class update_timer_parameters extends external_api {
 
         $context = context_course::instance($courseid);
         self::validate_context($context);
+        require_capability('format/ludilearn:manage', $context);
 
         return [
             'success' => timer::update_course_parameters($courseid, $penalties),

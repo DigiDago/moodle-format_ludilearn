@@ -59,6 +59,7 @@ class get_report extends external_api {
 
         $context = context_course::instance($courseid);
         self::validate_context($context);
+        require_capability('format/ludilearn:manage', $context);
         $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
         $users = [];
         $params = [

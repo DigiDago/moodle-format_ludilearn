@@ -29,6 +29,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Ludilearn';
 $string['plugin_description'] = 'The course offers gamification with game elements (score, badge, progression, avatar, timer, ranking) automatically assigned based on the learner\'s profile or chosen by the teacher.';
+$string['ludilearn:view'] = 'View gamified course';
+$string['ludilearn:manage'] = 'Manage gamified course';
 $string['assignment'] = 'Allocation of game elements';
 $string['assignment_help'] = 'Reminder: Ludilearn is a powerful course format, but its effectiveness depends on your mastery of the concepts of gamification and your pedagogical scripting.<br><br>
 Allocation determines how game elements are assigned to learners. The 3 allocation modes are:<br><br>
