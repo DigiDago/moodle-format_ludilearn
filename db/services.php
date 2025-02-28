@@ -26,13 +26,6 @@
 defined('MOODLE_INTERNAL') || die;
 
 $functions = [
-    'format_ludilearn_update_cm_parameters' => [
-        'classname' => 'format_ludilearn\external\update_cm_parameters',
-        'description' => 'Update course module parameters.',
-        'type' => 'write',
-        'ajax' => true,
-        'loginrequired' => true,
-    ],
     'format_ludilearn_submit_questionnaire' => [
         'classname' => 'format_ludilearn\external\submit_questionnaire',
         'description' => 'Submit questionnaire.',

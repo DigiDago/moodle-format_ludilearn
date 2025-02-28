@@ -55,6 +55,7 @@ class get_inventory extends external_api {
 
         $context = context_course::instance($courseid);
         self::validate_context($context);
+        require_capability('format/ludilearn:view', $context);
         $gameelement = avatar::get($courseid, $sectionid, $USER->id);
 
         $counttheme = $gameelement->get_count_theme();

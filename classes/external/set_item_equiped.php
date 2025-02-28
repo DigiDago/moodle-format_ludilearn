@@ -53,6 +53,7 @@ class set_item_equiped extends external_api {
 
         $context = context_course::instance($courseid);
         self::validate_context($context);
+        require_capability('format/ludilearn:view', $context);
         $manager = new manager();
         $gameelements = game_element::get_all($courseid, $USER->id);
         $success = true;

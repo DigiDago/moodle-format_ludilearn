@@ -52,6 +52,7 @@ class update_score_parameters extends external_api {
 
         $context = context_course::instance($courseid);
         self::validate_context($context);
+        require_capability('format/ludilearn:manage', $context);
 
         return [
             'success' => score::update_course_parameters($courseid, $multiplier, $bonuscompletion, $percentagecompletion),

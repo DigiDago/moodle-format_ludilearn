@@ -29,6 +29,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Ludilearn';
 $string['plugin_description'] = 'Le cours propose une ludification avec des éléments de jeu (score, badge, progression, avatar, chronomètre, classement) attribués automatiquement selon le profil de l’apprenant ou choisis par l’enseignant.';
+$string['ludilearn:view'] = 'Voire le cours gamifié';
+$string['ludilearn:manage'] = 'Gérer le cours gamifié';
 $string['assignment'] = 'Mode d\'attribution des éléments de jeu';
 $string['assignment_help'] = 'Rappel : Ludilearn est un format de cours puissant mais son efficacité repose sur votre maîtrise des concepts de ludification et votre scénarisation pédagogique.<br><br>
 L\'attribution détermine comment les éléments de jeu sont assignés aux apprenants. Les 3 modes d\'attribution sont :<br><br>
