@@ -71,11 +71,13 @@ class get_report extends external_api {
                     INNER JOIN {enrol} e ON ue.enrolid = e.id
                     WHERE e.courseid = :courseid";
         if (!empty($contain)) {
-            $lastnamelikecontain = $DB->sql_like('lastname', ':contain');
-            $firstnamelikecontain = $DB->sql_like('firstname', ':contain');
-            $usernamelikecontain = $DB->sql_like('username', ':contain');
-            $sql .= " AND ({${$lastnamelikecontain}} OR {${$firstnamelikecontain}} OR {${$usernamelikecontain}}')";
-            $params['contain'] = '%' . $contain . '%';
+            $lastnamelikecontain = $DB->sql_like('lastname', ':lastnamelikecontain');
+            $firstnamelikecontain = $DB->sql_like('firstname', ':firstnamelikecontain');
+            $usernamelikecontain = $DB->sql_like('username', ':usernamelikecontain');
+            $sql .= " AND ($lastnamelikecontain OR $firstnamelikecontain OR $usernamelikecontain)";
+            $params['lastnamelikecontain'] = '%' . $contain . '%';
+            $params['firstnamelikecontain'] = '%' . $contain . '%';
+            $params['usernamelikecontain'] = '%' . $contain . '%';
         }
         $sql .= " ORDER BY :sort";
         $usersenrolled = $DB->get_records_sql($sql, $params, $offset, $limit);
