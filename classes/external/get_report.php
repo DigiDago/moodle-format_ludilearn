@@ -133,21 +133,22 @@ class get_report extends external_api {
             'contain' => new external_value(
                 PARAM_TEXT,
                 'Contain string in firstname or lastname',
-                false
+                VALUE_REQUIRED
             ),
             'limit' => new external_value(
                 PARAM_INT,
                 'Result limit',
-                false
+                VALUE_REQUIRED
+
             ),
             'offset' => new external_value(
                 PARAM_INT,
                 'Resultat limit offset',
-                false
+                VALUE_REQUIRED
             ),
             'sort' => new external_value(PARAM_TEXT,
                 'Field sort',
-                false
+                VALUE_REQUIRED
             ),
         ];
         return new external_function_parameters($parameters);
