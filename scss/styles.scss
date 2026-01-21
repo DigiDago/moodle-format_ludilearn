@@ -598,11 +598,11 @@
     .ludilearn-world-professional {
         // Avatar image.
         .avatar-image {
-            background-size: auto;
+            background-size: contain;
         }
         .avatar-slot,
         .avatar-character {
-            top: 15%;
+            top: 12%;
         }
 
         // Ranking.
