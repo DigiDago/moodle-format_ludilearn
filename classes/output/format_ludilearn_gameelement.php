@@ -278,6 +278,12 @@ class format_ludilearn_gameelement implements renderable, templatable {
                         $cmdata->labeltext = $cminfo->get_formatted_content();
                     }
 
+                    // Not display if the label is restricted.
+                    $contextactivity = context_module::instance($cminfo->id);
+                    if (!$cminfo->available && !has_capability('moodle/course:viewhiddenactivities', $contextactivity)) {
+                        // Le label est restreint pour l'utilisateur.
+                        continue;
+                    }
                     // Add the label to the section.
                     // And no need to continue because label is not gamified.
                     $data->section->cms[] = $cmdata;
