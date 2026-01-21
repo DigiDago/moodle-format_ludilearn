@@ -1680,11 +1680,11 @@
     }
 }
 .format-ludilearn .ludilearn-world-professional .avatar-image {
-    background-size: auto;
+    background-size: contain;
 }
 .format-ludilearn .ludilearn-world-professional .avatar-slot,
 .format-ludilearn .ludilearn-world-professional .avatar-character {
-    top: 15%;
+    top: 12%;
 }
 .format-ludilearn .ludilearn-world-professional .ranking-summary {
     display: block;

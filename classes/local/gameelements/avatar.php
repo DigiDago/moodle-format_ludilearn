@@ -472,8 +472,8 @@ class avatar extends game_element {
             return match ($itemslot) {
                 1 => get_string('decoration', 'format_ludilearn'),
                 2 => get_string('picture', 'format_ludilearn'),
-                3 => get_string('lamp', 'format_ludilearn'),
-                4 => get_string('sportstuff', 'format_ludilearn'),
+                3 => get_string('sportstuff', 'format_ludilearn'),
+                4 => get_string('lamp', 'format_ludilearn'),
                 5 => get_string('pet', 'format_ludilearn'),
                 6 => get_string('desk', 'format_ludilearn'),
                 7 => get_string('tshirt', 'format_ludilearn'),
