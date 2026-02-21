@@ -42,7 +42,6 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_report extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -117,7 +116,8 @@ class get_report extends external_api {
             } else {
                 $user->progression = '0%';
             }
-            $lastaccess = $DB->get_record('user_lastaccess',
+            $lastaccess = $DB->get_record(
+                'user_lastaccess',
                 ['userid' => $user->id, 'courseid' => $courseid]
             );
             if ($lastaccess) {
@@ -166,14 +166,14 @@ class get_report extends external_api {
                 PARAM_INT,
                 'Result limit',
                 VALUE_REQUIRED
-
             ),
             'offset' => new external_value(
                 PARAM_INT,
                 'Resultat limit offset',
                 VALUE_REQUIRED
             ),
-            'sort' => new external_value(PARAM_TEXT,
+            'sort' => new external_value(
+                PARAM_TEXT,
                 'Field sort',
                 VALUE_REQUIRED
             ),

@@ -32,7 +32,6 @@
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_format_ludilearn_plugin extends backup_format_plugin {
-
     /**
      * Define the backup ludilearn_plugin section structure.
      *
@@ -82,41 +81,43 @@ class backup_format_ludilearn_plugin extends backup_format_plugin {
         $plugin->add_child($pluginwrapper);
 
         // Filter the data to select only the gameelements of the current section.
-        $gameelements->set_source_table('format_ludilearn_elements',
-            ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]);
+        $gameelements->set_source_table(
+            'format_ludilearn_elements',
+            ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]
+        );
 
-        $bysection->set_source_sql('
-            SELECT b.* FROM {format_ludilearn_bysection} b
+        $bysection->set_source_sql(
+            'SELECT b.* FROM {format_ludilearn_bysection} b
             JOIN {format_ludilearn_elements} e ON e.id = b.gameelementid
             WHERE e.courseid = :courseid AND e.sectionid = :sectionid',
             ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]
         );
 
-        $params->set_source_sql('
-            SELECT p.* FROM {format_ludilearn_params} p
+        $params->set_source_sql(
+            'SELECT p.* FROM {format_ludilearn_params} p
             JOIN {format_ludilearn_elements} e ON e.id = p.gameelementid
             WHERE e.courseid = :courseid AND e.sectionid = :sectionid',
             ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]
         );
 
         if ($this->get_setting_value('users')) {
-            $attributions->set_source_sql('
-                SELECT a.* FROM {format_ludilearn_attributio} a
+            $attributions->set_source_sql(
+                'SELECT a.* FROM {format_ludilearn_attributio} a
                 JOIN {format_ludilearn_elements} e ON e.id = a.gameelementid
                 WHERE e.courseid = :courseid AND e.sectionid = :sectionid',
                 ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]
             );
 
-            $gameeleuser->set_source_sql('
-                SELECT eu.* FROM {format_ludilearn_ele_user} eu
+            $gameeleuser->set_source_sql(
+                'SELECT eu.* FROM {format_ludilearn_ele_user} eu
                 JOIN {format_ludilearn_attributio} a ON a.id = eu.attributionid
                 JOIN {format_ludilearn_elements} e ON e.id = a.gameelementid
                 WHERE e.courseid = :courseid AND e.sectionid = :sectionid',
                 ['courseid' => backup::VAR_COURSEID, 'sectionid' => backup::VAR_SECTIONID]
             );
 
-            $manual->set_source_sql('
-                SELECT m.* FROM {format_ludilearn_manual} m
+            $manual->set_source_sql(
+                'SELECT m.* FROM {format_ludilearn_manual} m
                 WHERE m.courseid = :courseid',
                 ['courseid' => backup::VAR_COURSEID]
             );
@@ -138,30 +139,34 @@ class backup_format_ludilearn_plugin extends backup_format_plugin {
         $plugin = $this->get_plugin_element(null, $this->get_format_condition(), 'ludilearn');
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
         // Table format_ludilearn_cm_params.
-        $cmparams = new backup_nested_element('cm_params', ['id'], [
-            'gameelementid', 'cmid', 'name', 'value',
-        ]);
+        $cmparams = new backup_nested_element(
+            'cm_params',
+            ['id'],
+            ['gameelementid', 'cmid', 'name', 'value']
+        );
 
         // Table format_ludilearn_cm_user.
-        $cmuser = new backup_nested_element('cm_user', ['id'], [
-            'attributionid', 'cmid', 'name', 'value',
-        ]);
+        $cmuser = new backup_nested_element(
+            'cm_user',
+            ['id'],
+            ['attributionid', 'cmid', 'name', 'value']
+        );
 
         $pluginwrapper->add_child($cmparams);
         $pluginwrapper->add_child($cmuser);
         $plugin->add_child($pluginwrapper);
 
         if ($this->get_setting_value('users')) {
-            $cmuser->set_source_sql('
-                SELECT u.* FROM {format_ludilearn_cm_user} u
+            $cmuser->set_source_sql(
+                'SELECT u.* FROM {format_ludilearn_cm_user} u
                 JOIN {format_ludilearn_attributio} a ON a.id = u.attributionid
                 JOIN {format_ludilearn_elements} e ON e.id = a.gameelementid
                 WHERE e.courseid = :courseid AND u.cmid = :cmid',
                 ['courseid' => backup::VAR_COURSEID, 'cmid' => backup::VAR_MODID]
             );
 
-            $cmparams->set_source_sql('
-                SELECT p.* FROM {format_ludilearn_cm_params} p
+            $cmparams->set_source_sql(
+                'SELECT p.* FROM {format_ludilearn_cm_params} p
                 JOIN {format_ludilearn_elements} e ON e.id = p.gameelementid
                 WHERE e.courseid = :courseid AND p.cmid = :cmid',
                 ['courseid' => backup::VAR_COURSEID, 'cmid' => backup::VAR_MODID]

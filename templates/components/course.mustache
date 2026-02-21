@@ -16,6 +16,14 @@
 }}
 {{!
     @template format_ludilearn/components/course
+
+    Example context (json):
+    {
+        "jsonstate": "[]",
+        "id": 1,
+        "type": "course",
+        "courseid": 2
+    }
 }}
 {{#js}}
     require([
@@ -24,14 +32,14 @@
     ], function(reactive, component) {
 
         // Initialize state before component init.
-        const jsonstate = {{{jsonstate}}};
+        const jsonstate = {{{jsonstate}}}{{^jsonstate}}[]{{/jsonstate}};
         const stateManager = reactive.ludilearn.getStateManager();
         stateManager.setReadOnly(false);
         stateManager.processUpdates(jsonstate);
         stateManager.setReadOnly(true);
         // Data to pass to the component.
         const data = {
-            courseid: {{courseid}}
+            courseid: {{courseid}}{{^courseid}}0{{/courseid}}
         };
         component.init('ludilearn-course-{{type}}-section-{{id}}', reactive.ludilearn, data);
     });

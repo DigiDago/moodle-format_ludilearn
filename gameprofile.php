@@ -32,8 +32,13 @@ $context = context_system::instance();
 $PAGE->set_pagelayout('course');
 $PAGE->set_url(new moodle_url("$CFG->wwwroot/course/format/ludilearn/gameprofile.php", []));
 $PAGE->set_context($context);
-$PAGE->set_title(get_string('coursetitle', 'moodle',
-    ['course' => get_string('gameprofile', 'format_ludilearn')]));
+$PAGE->set_title(
+    get_string(
+        'coursetitle',
+        'moodle',
+        ['course' => get_string('gameprofile', 'format_ludilearn')]
+    )
+);
 $PAGE->set_heading(
     get_string('gameprofile', 'format_ludilearn')
 );

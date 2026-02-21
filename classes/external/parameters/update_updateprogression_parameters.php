@@ -38,7 +38,6 @@ use format_ludilearn\manager;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_updateprogression_parameters extends external_api {
-
     /**
      * Execute the webservice.
      *

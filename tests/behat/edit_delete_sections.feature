@@ -27,16 +27,17 @@ Feature: Sections can be edited and deleted in ludilearn format
   Scenario: Add a section and then add an activity in ludilearn format
     Given I am on "Course Ludilearn" course homepage with editing mode on
     When I click on "Add section" "link" in the "course-addsection" "region"
-    And I turn editing mode off
+    And I am on "Course Ludilearn" course homepage with editing mode off
     Then I should see "Section 4" in the ".col-6:nth-child(5) .sectionname" "css_element"
 
   @ludilearn_deleting_section
   Scenario: Deleting the last section in ludilearn format
     Given I am on "Course Ludilearn" course homepage with editing mode on
-    When I delete section "2"
+    When I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "Delete" "link" in the "#section-2 .section_action_menu" "css_element"
     Then I should see "This will delete Section 2 and all the activities it contains."
     And I click on "Delete" "button" in the "Delete section?" "dialogue"
-    And I turn editing mode off
+    And I am on "Course Ludilearn" course homepage with editing mode off
     And I should see "Section 1" in the ".col-6:nth-child(2) .sectionname" "css_element"
     And I should not see "Section 2" in the ".col-6:nth-child(3) .sectionname" "css_element"
 
@@ -44,9 +45,12 @@ Feature: Sections can be edited and deleted in ludilearn format
   Scenario: Check section name, description and label in Ludilearn format
     Given I log in as "teacher1"
     And I am on "Course Ludilearn" course homepage with editing mode on
-    When I edit the section "1" and I fill the form with:
+    When I click on "Edit" "link" in the "#section-1 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-1 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | Section name | Section 1 - Introduction                                  |
       | Description | This is section 1 description with some LudiLearn content |
+    And I press "Save changes"
     And I am on "Course Ludilearn" course homepage
     Then I should see "Section 1 - Introduction" in the ".col-6:nth-child(2) .sectionname" "css_element"
     And I click on "Section 1 - Introduction" "link" in the "region-main" "region"

@@ -45,7 +45,6 @@ require_once($CFG->dirroot . '/course/format/lib.php');
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manager {
-
     /**
      * Get game elements ID by section.
      *
@@ -101,8 +100,13 @@ class manager {
         $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid, 'type' => $type]);
         foreach ($gameelements as $gameelement) {
             // Check attribution.
-            $attribution = $DB->get_record('format_ludilearn_attributio',
-                ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+            $attribution = $DB->get_record(
+                'format_ludilearn_attributio',
+                [
+                    'gameelementid' => $gameelement->id,
+                    'userid' => $userid,
+                ]
+            );
             if (!$attribution) {
                 $this->attribution_game_element($gameelement->id, $userid);
             }
@@ -125,8 +129,14 @@ class manager {
         $gameelement = $DB->get_record('format_ludilearn_elements', ['id' => $gameelementid]);
         $attribution = $DB->get_record('format_ludilearn_attributio', ['gameelementid' => $gameelementid, 'userid' => $userid]);
         $req = 'SELECT * FROM {format_ludilearn_elements} WHERE courseid = :courseid AND sectionid = :sectionid AND type != :type';
-        $gameelementtodeletes = $DB->get_records_sql($req,
-            ['courseid' => $gameelement->courseid, 'sectionid' => $gameelement->sectionid, 'type' => $gameelement->type]);
+        $gameelementtodeletes = $DB->get_records_sql(
+            $req,
+            [
+                'courseid' => $gameelement->courseid,
+                'sectionid' => $gameelement->sectionid,
+                'type' => $gameelement->type,
+            ]
+        );
         foreach ($gameelementtodeletes as $gameelementtodelete) {
             $DB->delete_records('format_ludilearn_attributio', ['gameelementid' => $gameelementtodelete->id, 'userid' => $userid]);
         }
@@ -138,9 +148,14 @@ class manager {
 
             return $attribution->id;
         } else {
-            return $DB->insert_record('format_ludilearn_attributio', ['gameelementid' => $gameelementid,
-                'userid' => $userid,
-                'timecreated' => time()]);
+            return $DB->insert_record(
+                'format_ludilearn_attributio',
+                [
+                    'gameelementid' => $gameelementid,
+                    'userid' => $userid,
+                    'timecreated' => time(),
+                ]
+            );
         }
     }
 
@@ -196,8 +211,10 @@ class manager {
             $bysection->courseid = $courseid;
             $bysection->sectionid = $sectionid;
             $bysection->gameelementid = $gameelementid;
-            $id = $DB->insert_record('format_ludilearn_bysection',
-                ['courseid' => $courseid, 'sectionid' => $sectionid, 'gameelementid' => $gameelementid]);
+            $id = $DB->insert_record(
+                'format_ludilearn_bysection',
+                ['courseid' => $courseid, 'sectionid' => $sectionid, 'gameelementid' => $gameelementid]
+            );
             $bysection->id = $id;
         }
         return $bysection;
@@ -220,19 +237,24 @@ class manager {
             $sqlcourses = 'SELECT * FROM {course_format_options}
                             WHERE format = :format AND name = :name
                             AND ' . $DB->sql_compare_text("value") . ' = ' . $DB->sql_compare_text(":value");
-            $courses = $DB->get_records_sql($sqlcourses,
-                ['format' => 'ludilearn', 'name' => 'assignment', 'value' => 'automatic']);
+            $courses = $DB->get_records_sql(
+                $sqlcourses,
+                ['format' => 'ludilearn', 'name' => 'assignment', 'value' => 'automatic']
+            );
             foreach ($courses as $course) {
-                $gameelems = $DB->get_records('format_ludilearn_elements',
-                    ['courseid' => $course->courseid, 'type' => $type]);
+                $gameelems = $DB->get_records(
+                    'format_ludilearn_elements',
+                    ['courseid' => $course->courseid, 'type' => $type]
+                );
                 $gameelements = array_merge($gameelements, $gameelems);
             }
         } else {
-            $gameelems = $DB->get_records('format_ludilearn_elements',
-                ['courseid' => $courseid, 'type' => $type]);
+            $gameelems = $DB->get_records(
+                'format_ludilearn_elements',
+                ['courseid' => $courseid, 'type' => $type]
+            );
             $gameelements = $gameelems;
         }
-
         return $gameelements;
     }
 
@@ -262,8 +284,10 @@ class manager {
         foreach ($parameters as $name => $value) {
             $exist = $DB->record_exists('format_ludilearn_params', ['gameelementid' => $gameelementid, 'name' => $name]);
             if (!$exist) {
-                $DB->insert_record('format_ludilearn_params',
-                    ['gameelementid' => $gameelementid, 'name' => $name, 'value' => $value]);
+                $DB->insert_record(
+                    'format_ludilearn_params',
+                    ['gameelementid' => $gameelementid, 'name' => $name, 'value' => $value]
+                );
             }
         }
 
@@ -273,12 +297,15 @@ class manager {
             $modetype = $DB->get_field('modules', 'name', ['id' => $cm->module]);
             $cmparameters = game_element::get_cm_parameters_default_by_type($type, $modetype);
             foreach ($cmparameters as $name => $value) {
-
-                $exist = $DB->record_exists('format_ludilearn_cm_params',
-                    ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name]);
+                $exist = $DB->record_exists(
+                    'format_ludilearn_cm_params',
+                    ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name]
+                );
                 if (!$exist) {
-                    $DB->insert_record('format_ludilearn_cm_params',
-                        ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]);
+                    $DB->insert_record(
+                        'format_ludilearn_cm_params',
+                        ['gameelementid' => $gameelementid, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]
+                    );
                 }
             }
         }
@@ -297,8 +324,12 @@ class manager {
      */
     public function update_cm_parameter(int $gameelementid, int $cmid, string $name, string $value): bool {
         global $DB;
-        return $DB->set_field('format_ludilearn_cm_params', 'value', $value,
-            ['gameelementid' => $gameelementid, 'cmid' => $cmid, 'name' => $name]);
+        return $DB->set_field(
+            'format_ludilearn_cm_params',
+            'value',
+            $value,
+            ['gameelementid' => $gameelementid, 'cmid' => $cmid, 'name' => $name]
+        );
     }
 
     /**
@@ -435,20 +466,33 @@ class manager {
      */
     public function update_cm_user(int $gameelementid, int $cmid, int $userid, string $name, string $value): bool {
         global $DB;
-        $attributionid = $DB->get_field('format_ludilearn_attributio', 'id',
-            ['gameelementid' => $gameelementid, 'userid' => $userid]);
-        $exists = $DB->record_exists('format_ludilearn_cm_user',
-            ['attributionid' => $attributionid, 'name' => $name]);
+        $attributionid = $DB->get_field(
+            'format_ludilearn_attributio',
+            'id',
+            ['gameelementid' => $gameelementid,
+            'userid' => $userid]
+        );
+        $exists = $DB->record_exists(
+            'format_ludilearn_cm_user',
+            ['attributionid' => $attributionid, 'name' => $name]
+        );
 
         // Update the value of the parameter if it exists, otherwise insert a new record.
         if ($exists) {
-            return $DB->set_field('format_ludilearn_cm_user', 'value', $value,
-                ['attributionid' => $attributionid, 'name' => $name]);
+            return $DB->set_field(
+                'format_ludilearn_cm_user',
+                'value',
+                $value,
+                ['attributionid' => $attributionid, 'name' => $name]
+            );
         } else {
-            return $DB->insert_record('format_ludilearn_cm_user',
-                ['attributionid' => $attributionid,
+            return $DB->insert_record(
+                'format_ludilearn_cm_user',
+                [
+                    'attributionid' => $attributionid,
                     'name' => $name,
-                    'value' => $value]
+                    'value' => $value,
+                ]
             );
         }
     }
@@ -466,20 +510,32 @@ class manager {
      */
     public function update_gameelement_user(int $gameelementid, int $userid, string $name, string $value): bool {
         global $DB;
-        $attributionid = $DB->get_field('format_ludilearn_attributio', 'id',
-            ['gameelementid' => $gameelementid, 'userid' => $userid]);
-        $exists = $DB->record_exists('format_ludilearn_ele_user',
-            ['attributionid' => $attributionid, 'name' => $name]);
+        $attributionid = $DB->get_field(
+            'format_ludilearn_attributio',
+            'id',
+            ['gameelementid' => $gameelementid, 'userid' => $userid]
+        );
+        $exists = $DB->record_exists(
+            'format_ludilearn_ele_user',
+            ['attributionid' => $attributionid, 'name' => $name]
+        );
 
         // Update the value of the parameter if it exists, otherwise insert a new record.
         if ($exists) {
-            return $DB->set_field('format_ludilearn_ele_user', 'value', $value,
-                ['attributionid' => $attributionid, 'name' => $name]);
+            return $DB->set_field(
+                'format_ludilearn_ele_user',
+                'value',
+                $value,
+                ['attributionid' => $attributionid, 'name' => $name]
+            );
         } else {
-            return $DB->insert_record('format_ludilearn_ele_user',
-                ['attributionid' => $attributionid,
+            return $DB->insert_record(
+                'format_ludilearn_ele_user',
+                [
+                    'attributionid' => $attributionid,
                     'name' => $name,
-                    'value' => $value]
+                    'value' => $value,
+                ]
             );
         }
     }
@@ -494,7 +550,6 @@ class manager {
      */
     public function quiz_calculate_best_grade(object $quiz, array $attempts): float {
         switch ($quiz->grademethod) {
-
             case QUIZ_ATTEMPTFIRST:
             case QUIZ_ATTEMPTLAST:
             case QUIZ_GRADEAVERAGE:
@@ -506,7 +561,7 @@ class manager {
                         $count++;
                     }
                 }
-
+                // No break - intentional fall-through to calculate/compare highest score.
             case QUIZ_GRADEHIGHEST:
             default:
                 $max = 0;
@@ -714,8 +769,11 @@ class manager {
             $attempt = reset($attempt);
             $questions = $DB->get_records('question_attempts', ['questionusageid' => $attempt->uniqueid], 'timemodified DESC');
             if ($questions) {
-                $page = $DB->get_field('quiz_slots', 'page',
-                    ['slot' => reset($questions)->slot, 'quizid' => $quizid]);
+                $page = $DB->get_field(
+                    'quiz_slots',
+                    'page',
+                    ['slot' => reset($questions)->slot, 'quizid' => $quizid]
+                );
                 if ($page) {
                     return intval($page);
                 }
@@ -766,8 +824,12 @@ class manager {
      * @return void
      * @throws \dml_exception
      */
-    public function sync_user_attribution(int $courseid, string $assignment, string $defaultgameelement,
-                                          bool $assignmentchanged): void {
+    public function sync_user_attribution(
+        int $courseid,
+        string $assignment,
+        string $defaultgameelement,
+        bool $assignmentchanged
+    ): void {
         global $DB;
 
         $context = context_course::instance($courseid);
@@ -776,12 +838,16 @@ class manager {
         $sections = $DB->get_records('course_sections', ['course' => $courseid]);
         foreach ($sections as $section) {
             // Get the default game element.
-            $gameelementbydefault = $DB->get_record('format_ludilearn_elements',
-                ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]);
+            $gameelementbydefault = $DB->get_record(
+                'format_ludilearn_elements',
+                ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]
+            );
 
             // To verify if attribution by section already exist in case the attribtion is by section.
-            $bysection = $DB->get_record('format_ludilearn_bysection',
-                ['courseid' => $courseid, 'sectionid' => $section->id]);
+            $bysection = $DB->get_record(
+                'format_ludilearn_bysection',
+                ['courseid' => $courseid, 'sectionid' => $section->id]
+            );
             if (!$bysection && $assignment == 'bysection') {
                 $bysection = $this->update_attribution_by_section($courseid, $section->id, $gameelementbydefault->id);
             }
@@ -806,8 +872,10 @@ class manager {
                 // Attribution game element.
                 if (isset($type)) {
                     if ($assignment != 'bysection') {
-                        $gameelement = $DB->get_record('format_ludilearn_elements',
-                            ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $type]);
+                        $gameelement = $DB->get_record(
+                            'format_ludilearn_elements',
+                            ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $type]
+                        );
                         $this->attribution_game_element($gameelement->id, $user->id);
                     } else {
                         // If the game element by section already exist, we attribute it to the user.
@@ -831,8 +899,12 @@ class manager {
      * @return void
      * @throws \dml_exception
      */
-    public function sync_user_attribution_by_user(int $courseid, string $assignment, string $defaultgameelement,
-                                                  int $userid): void {
+    public function sync_user_attribution_by_user(
+        int $courseid,
+        string $assignment,
+        string $defaultgameelement,
+        int $userid
+    ): void {
         global $DB;
 
         // Verify if the user has been attributed the game element manually.
@@ -842,14 +914,17 @@ class manager {
 
         $sections = $DB->get_records('course_sections', ['course' => $courseid]);
         foreach ($sections as $section) {
-
             // Get the default game element.
-            $gameelementbydefault = $DB->get_record('format_ludilearn_elements',
-                ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]);
+            $gameelementbydefault = $DB->get_record(
+                'format_ludilearn_elements',
+                ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]
+            );
 
             // To verify if attribution by section already exist in case the attribtion is by section.
-            $bysection = $DB->get_record('format_ludilearn_bysection',
-                ['courseid' => $courseid, 'sectionid' => $section->id]);
+            $bysection = $DB->get_record(
+                'format_ludilearn_bysection',
+                ['courseid' => $courseid, 'sectionid' => $section->id]
+            );
             if (!$bysection && $assignment == 'bysection') {
                 $bysection = $this->update_attribution_by_section($courseid, $section->id, $gameelementbydefault->id);
             }
@@ -867,8 +942,10 @@ class manager {
             // Attribution game element.
             if (isset($type)) {
                 if ($assignment != 'bysection') {
-                    $gameelement = $DB->get_record('format_ludilearn_elements',
-                        ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $type]);
+                    $gameelement = $DB->get_record(
+                        'format_ludilearn_elements',
+                        ['courseid' => $courseid, 'sectionid' => $section->id, 'type' => $type]
+                    );
                     $this->attribution_game_element($gameelement->id, $userid);
                 } else {
                     // If the game element by section already exist, we attribute it to the user.
@@ -893,10 +970,16 @@ class manager {
         require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
         require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 
-        return $DB->record_exists_sql('
-            SELECT * FROM {backup_controllers}
+        return $DB->record_exists_sql(
+            'SELECT * FROM {backup_controllers}
              WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
-            ['type' => 'course', 'itemid' => $courseid, 'operation' => 'restore', 'status' => backup::STATUS_FINISHED_OK]);
+            [
+                'type' => 'course',
+                'itemid' => $courseid,
+                'operation' => 'restore',
+                'status' => backup::STATUS_FINISHED_OK,
+            ]
+        );
     }
 
     /**
@@ -919,8 +1002,12 @@ class manager {
             $attributions = $DB->get_records('format_ludilearn_attributio', ['gameelementid' => $gameelementrecord->id]);
             foreach ($attributions as $attribution) {
                 // Get the game element of the user.
-                $gameelement = game_element::get_element($courseid, $gameelementrecord->sectionid,
-                    $attribution->userid, $gameelementrecord->type);
+                $gameelement = game_element::get_element(
+                    $courseid,
+                    $gameelementrecord->sectionid,
+                    $attribution->userid,
+                    $gameelementrecord->type
+                );
 
                 // For each course module.
                 $cms = $gameelement->get_cm_parameters();
@@ -950,7 +1037,6 @@ class manager {
                         }
                     }
                 }
-
             }
         }
     }
@@ -983,13 +1069,13 @@ class manager {
 
                 // Count of badges for each type.
                 $parameters->bronzecount = $section->gameelement->get_bronze_count() == 0
-                        ? false : $section->gameelement->get_bronze_count();
+                    ? false : $section->gameelement->get_bronze_count();
                 $parameters->silvercount = $section->gameelement->get_silver_count() == 0
-                        ? false : $section->gameelement->get_silver_count();
+                    ? false : $section->gameelement->get_silver_count();
                 $parameters->goldcount = $section->gameelement->get_gold_count() == 0
-                        ? false : $section->gameelement->get_gold_count();
+                    ? false : $section->gameelement->get_gold_count();
                 $parameters->completioncount = $section->gameelement->get_completion_count() == 0
-                        ? false : $section->gameelement->get_completion_count();
+                    ? false : $section->gameelement->get_completion_count();
 
                 break;
             case 'progress':
@@ -1153,7 +1239,7 @@ class manager {
         if (!$sectioninfo->get_available()) {
             $parameters->restricted = true;
             $parameters->restrictedinfo =
-                    \core_availability\info::format_info($sectioninfo->availableinfo, $course->id);
+                \core_availability\info::format_info($sectioninfo->availableinfo, $course->id);
         }
         return $parameters;
     }
@@ -1172,8 +1258,13 @@ class manager {
      * @throws \dml_exception
      * @throws \moodle_exception
      */
-    public function populate_cm(stdClass $course, stdClass $parameters, stdClass $cm, stdClass $parentsection,
-            string $type): stdClass {
+    public function populate_cm(
+        stdClass $course,
+        stdClass $parameters,
+        stdClass $cm,
+        stdClass $parentsection,
+        string $type
+    ): stdClass {
         global $PAGE, $DB;
         $cminfo = get_fast_modinfo($course)->get_cm($cm->id);
 
@@ -1220,7 +1311,7 @@ class manager {
                 }
                 $parameters->sectionparameters = $parentsection->parameters;
                 break;
-            case 'timer';
+            case 'timer':
                 if ($parameters->gamified) {
                     // Format best time.
                     if ($parameters->besttime > 0) {
@@ -1231,7 +1322,7 @@ class manager {
 
                         if ($parameters->bestpenalties > 0) {
                             $parameters->bestpenaltiescalc = $parameters->bestpenalties *
-                                    $parentsection->gameelement->get_penalties();
+                                $parentsection->gameelement->get_penalties();
                         }
                     } else {
                         $parameters->besttime = "--:--";
@@ -1305,7 +1396,7 @@ class manager {
         if (!$cminfo->available) {
             $parameters->restricted = true;
             $parameters->restrictedinfo =
-                    \core_availability\info::format_info($cminfo->availableinfo, $course->id);
+                \core_availability\info::format_info($cminfo->availableinfo, $course->id);
         }
         return $parameters;
     }
@@ -1334,50 +1425,84 @@ class manager {
         $typeassigedmanually = $this->get_game_element_manually_assigned($courseid, $USER->id);
         // Verify if the user has been attributed the game element manually.
         if ($typeassigedmanually) {
-             return game_element::get_element($courseid, $sectionid, $USER->id,
-                    $typeassigedmanually);
+            return game_element::get_element(
+                $courseid,
+                $sectionid,
+                $USER->id,
+                $typeassigedmanually
+            );
         }
         if ($assignment != 'bysection' || !$isenrolled) {
-            $gameelement = game_element::get_element($courseid, $sectionid, $USER->id,
-                    $type);
+            $gameelement = game_element::get_element(
+                $courseid,
+                $sectionid,
+                $USER->id,
+                $type
+            );
             // If attribution is missing, create one.
             if ($gameelement == null && $isenrolled) {
-                $gameelement = $DB->get_record('format_ludilearn_elements',
-                        ['courseid' => $courseid, 'sectionid' => $sectionid, 'type' => $type]);
+                $gameelement = $DB->get_record(
+                    'format_ludilearn_elements',
+                    [
+                        'courseid' => $courseid,
+                        'sectionid' => $sectionid,
+                        'type' => $type,
+                    ]
+                );
                 $this->attribution_game_element($gameelement->id, $USER->id);
-                $gameelement = game_element::get_element($courseid, $sectionid, $USER->id,
-                        $type);
+                $gameelement = game_element::get_element(
+                    $courseid,
+                    $sectionid,
+                    $USER->id,
+                    $type
+                );
             }
         } else {
             // Get the attributions by section.
             $sql = "SELECT ge.id, ge.type FROM {format_ludilearn_bysection} bs
                         INNER JOIN {format_ludilearn_elements} ge ON bs.gameelementid = ge.id
                         WHERE bs.courseid = :courseid AND bs.sectionid = :sectionid";
-            $bysection = $DB->get_record_sql($sql,
-                    ['courseid' => $courseid, 'sectionid' => $sectionid]);
+            $bysection = $DB->get_record_sql(
+                $sql,
+                ['courseid' => $courseid, 'sectionid' => $sectionid]
+            );
             if ($bysection) {
-                $gameelement = game_element::get_element($courseid,
-                        $sectionid,
-                        $USER->id,
-                        $bysection->type);
+                $gameelement = game_element::get_element(
+                    $courseid,
+                    $sectionid,
+                    $USER->id,
+                    $bysection->type
+                );
                 // If attribution is missing, create one.
                 if ($gameelement == null) {
                     $this->attribution_game_element($bysection->id, $USER->id);
-                    $gameelement = game_element::get_element($courseid, $sectionid, $USER->id,
-                            $bysection->type);
-                }
-            } else {
-                $gameelement = game_element::get_element($courseid,
+                    $gameelement = game_element::get_element(
+                        $courseid,
                         $sectionid,
                         $USER->id,
-                        $type);
+                        $bysection->type
+                    );
+                }
+            } else {
+                $gameelement = game_element::get_element(
+                    $courseid,
+                    $sectionid,
+                    $USER->id,
+                    $type
+                );
                 // If attribution is missing, create one.
                 if ($gameelement == null) {
-                    $gameelement = $DB->get_record('format_ludilearn_elements',
-                            ['courseid' => $courseid, 'sectionid' => $sectionid, 'type' => $type]);
+                    $gameelement = $DB->get_record(
+                        'format_ludilearn_elements',
+                        ['courseid' => $courseid, 'sectionid' => $sectionid, 'type' => $type]
+                    );
                     $this->attribution_game_element($gameelement->id, $USER->id);
-                    $gameelement = game_element::get_element($courseid, $sectionid, $USER->id,
-                            $type);
+                    $gameelement = game_element::get_element(
+                        $courseid,
+                        $sectionid,
+                        $USER->id,
+                        $type
+                    );
                 }
             }
         }
@@ -1398,8 +1523,6 @@ class manager {
         $context = context_course::instance($courseid);
         $format = course_get_format($courseid);
         require_once($CFG->libdir . '/accesslib.php');
-
-
         // Verify if the game elements has been assigned manually to the user.
         $gameelementtype = $this->get_game_element_manually_assigned($courseid, $userid);
         if ($gameelementtype) {
@@ -1432,10 +1555,13 @@ class manager {
 
         // If the user has capabilities to update the course or is role switched and has an attribution for the course,
         // And he is not enrolled or the course is assigned automatically.
-        if (($USER->id == $userid) &&
-                ((has_capability('moodle/course:update', $context)
-                || (is_role_switched($courseid) && $this->has_attribution($courseid, $userid))))
-                && (($assignment == 'automatic') || !$isenrolled)) {
+        $canupdate = has_capability('moodle/course:update', $context);
+        $roleswitchedandattr = is_role_switched($courseid) && $this->has_attribution($courseid, $userid);
+        if (
+            $USER->id == $userid
+            && ($canupdate || $roleswitchedandattr)
+            && ($assignment == 'automatic' || !$isenrolled)
+        ) {
             // Verify is there is an attribution for this user.
             $attributionexist = $this->has_attribution($courseid, $userid);
             // If not attribution exist, create one with nogamified type.
@@ -1448,12 +1574,12 @@ class manager {
 
         // If the user is not enrolled and doesn't have game element assiged but his role is switched.
         if ($USER->id == $userid && !$isenrolled && is_role_switched($courseid) && !$this->has_attribution($courseid, $userid)) {
-
             $this->sync_user_attribution_by_user(
                 $courseid,
                 $options['assignment'],
                 $options['default_game_element'],
-                $userid);
+                $userid
+            );
             return $this->get_element_type($courseid, $userid);
         }
 
@@ -1576,7 +1702,6 @@ class manager {
         // Get all the sections with their game element.
         $sections = $DB->get_records('course_sections', ['course' => $courseid], 'section');
         foreach ($sections as $key => $section) {
-
             // Don't get hidden sections.
             $sectioninfo = get_fast_modinfo($course)->get_section_info($section->section);
             $uservisible = $format->is_section_visible($sectioninfo);
@@ -1584,9 +1709,11 @@ class manager {
                 continue;
             }
 
-            $gameelement = $this->get_element_by_section($courseid,
+            $gameelement = $this->get_element_by_section(
+                $courseid,
                 $section->id,
-                $gameelementtype);
+                $gameelementtype
+            );
 
             // Prepare the state.
             $state = new stdClass();
@@ -1620,6 +1747,7 @@ class manager {
     /**
      * Get the state of a course section for a user.
      *
+     * @param stdClass $course Course.
      * @param stdClass $section Section.
      * @param game_element $gameelement Game element.
      *
@@ -1738,14 +1866,18 @@ class manager {
                     // Verify if the cm is a subsection.
                     if ($cminfo->modname == 'subsection') {
                         // Get section and the game element associated.
-                        $subsection = $DB->get_record('course_sections',
-                                ['itemid' => $cminfo->instance, 'component' => 'mod_subsection']);
-                        $subsection->gamelement = $this->get_element_by_section($course->id,
-                                $cm->subsection->id,
-                                $gameelement->get_type());
+                        $subsection = $DB->get_record(
+                            'course_sections',
+                            ['itemid' => $cminfo->instance, 'component' => 'mod_subsection']
+                        );
+                        $subsection->gamelement = $this->get_element_by_section(
+                            $course->id,
+                            $subsection->id,
+                            $gameelement->get_type()
+                        );
 
                         // Don't show if the section is not visible.
-                        $sectioninfo = get_fast_modinfo($course)->get_section_info($cm->subsection->section);
+                        $sectioninfo = get_fast_modinfo($course)->get_section_info($subsection->section);
                         $format = course_get_format($course->id);
                         $uservisible = $format->is_section_visible($sectioninfo);
                         if (!$uservisible) {
@@ -1755,7 +1887,7 @@ class manager {
                         $state->fields->subsection = true;
                         $state->fields->courseid = $course->id;
                         $state->fields->sectionid = $section->id;
-                        $state->fields->section = $cm->subsection->section;
+                        $state->fields->section = $subsection->section;
                         $state->fields->name = format_string(get_section_name($course, $subsection));
                         if (isset($subsection->gameelement)) {
                             $type = $subsection->gameelement->get_type();
@@ -1768,7 +1900,6 @@ class manager {
 
                             // Populate the section parameters.
                             $state->fields = $this->populate_section($course, $state->fields, $subsection, $type);
-
                             $state->fields->gamified = false;
                             if ($subsection->gameelement->get_count_cm_gamified() > 0) {
                                 $state->fields->gamified = true;
@@ -1777,10 +1908,9 @@ class manager {
                             if ($subsection->visible) {
                                 $state->fields->visible = true;
                             }
-
                         }
                         if (has_capability('moodle/course:update', $contextcourse) || $sectioninfo->get_available()) {
-                            $urlsection = new moodle_url('/course/section.php?id=' . $cm->subsection->id);
+                            $urlsection = new moodle_url('/course/section.php?id=' . $subsection->id);
                             $state->fields->url = $urlsection->out(false);
                         }
                         $states[] = $state;
@@ -1799,18 +1929,19 @@ class manager {
                     $state->fields = $this->populate_cm($course, $state->fields, $cm, $section, $gameelement->get_type());
 
                     $contextactivity = context_module::instance($cminfo->id);
-                    if (has_capability('moodle/course:viewhiddenactivities', $contextactivity)
-                            || has_capability('moodle/course:update', $contextcourse) || $cminfo->available) {
+                    if (
+                        has_capability('moodle/course:viewhiddenactivities', $contextactivity)
+                        || has_capability('moodle/course:update', $contextcourse)
+                        || $cminfo->available
+                    ) {
                         if ($cminfo->get_url()) {
                             $state->fields->url = $cminfo->get_url()->out(false);
                         }
-
                     }
                     $states[] = $state;
                 }
             }
         }
-
         return json_encode($states);
     }
 
@@ -1896,9 +2027,11 @@ class manager {
                     return json_encode($states);
                 }
 
-                $gameelement = $this->get_element_by_section($course->id,
-                        $section->id,
-                        $gameelementtype);
+                $gameelement = $this->get_element_by_section(
+                    $course->id,
+                    $section->id,
+                    $gameelementtype
+                );
                 return $this->get_section_state($section, $gameelement);
             case 'cm':
                 $cm = $DB->get_record('course_modules', ['id' => $id]);
@@ -1921,10 +2054,11 @@ class manager {
                     return json_encode($states);
                 }
 
-                $gameelement = $this->get_element_by_section($course->id,
-                        $section->id,
-                        $gameelementtype);
-
+                $gameelement = $this->get_element_by_section(
+                    $course->id,
+                    $section->id,
+                    $gameelementtype
+                );
                 return $this->get_cm_state($cm, $section, $gameelement);
         }
         return json_encode($states);

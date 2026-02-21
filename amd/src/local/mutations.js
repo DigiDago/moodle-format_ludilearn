@@ -24,6 +24,7 @@
 
 
 import Ajax from 'core/ajax';
+import Notification from 'core/notification';
 
 class Mutations {
     init() {

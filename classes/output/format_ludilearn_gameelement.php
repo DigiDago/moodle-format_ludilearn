@@ -37,7 +37,6 @@ use templatable;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class format_ludilearn_gameelement implements renderable, templatable {
-
     /**
      * @var stdClass $course The course.
      */
@@ -102,17 +101,20 @@ class format_ludilearn_gameelement implements renderable, templatable {
         $this->course->sections = $DB->get_records('course_sections', ['course' => $this->course->id], 'section');
 
         foreach ($this->course->sections as $key => $value) {
-            $this->course->sections[$key]->gameelement = $manager->get_element_by_section($this->course->id,
+            $this->course->sections[$key]->gameelement = $manager->get_element_by_section(
+                $this->course->id,
                 $value->id,
-                $gameelementtype);
+                $gameelementtype
+            );
         }
 
         // Get the section.
         if ($sectionid != -1) {
             $this->section = $DB->get_record('course_sections', ['id' => $sectionid]);
-            $this->section->gameelement = $manager->get_element_by_section($this->course->id,
-                    $sectionid,
-                    $gameelementtype
+            $this->section->gameelement = $manager->get_element_by_section(
+                $this->course->id,
+                $sectionid,
+                $gameelementtype
             );
 
             // Get the cmid sorted.
@@ -126,11 +128,15 @@ class format_ludilearn_gameelement implements renderable, templatable {
                         $cminfo = get_fast_modinfo($this->course->id)->get_cm($cm->id);
                         if ($cminfo->modname == 'subsection') {
                             // Get section and the game element associated.
-                            $cm->subsection = $DB->get_record('course_sections',
-                                ['itemid' => $cminfo->instance, 'component' => 'mod_subsection']);
-                            $cm->subsection->gamelement = $manager->get_element_by_section($this->course->id,
+                            $cm->subsection = $DB->get_record(
+                                'course_sections',
+                                ['itemid' => $cminfo->instance, 'component' => 'mod_subsection']
+                            );
+                            $cm->subsection->gamelement = $manager->get_element_by_section(
+                                $this->course->id,
                                 $cm->subsection->id,
-                                $gameelementtype);
+                                $gameelementtype
+                            );
                         }
                         $this->section->cms[] = $cm;
                     }
@@ -145,7 +151,6 @@ class format_ludilearn_gameelement implements renderable, templatable {
                 }
             }
         }
-
     }
 
     /**
@@ -179,6 +184,7 @@ class format_ludilearn_gameelement implements renderable, templatable {
         $data->world = $world;
         $data->$world = true;
         $data->sections = [];
+
         // For each section.
         foreach ($this->course->sections as $section) {
             // Don't show hidden sections and subsections.
@@ -215,8 +221,12 @@ class format_ludilearn_gameelement implements renderable, templatable {
                 }
 
                 // Populate the section parameters.
-                $sectiondata->parameters = $manager->populate_section($this->course, $sectiondata->parameters, $section, $type);
-
+                $sectiondata->parameters = $manager->populate_section(
+                    $this->course,
+                    $sectiondata->parameters,
+                    $section,
+                    $type
+                );
             }
             if (has_capability('moodle/course:update', $contextcourse) || $sectioninfo->get_available()) {
                 $urlsection = new moodle_url('/course/view.php?id=' . $this->course->id . '&section=' . $section->section);
@@ -227,6 +237,7 @@ class format_ludilearn_gameelement implements renderable, templatable {
             $sectiondata->jsonstate = $manager->get_course_section_state($this->course, $section, $section->gameelement);
             $data->sections[] = $sectiondata;
         }
+
         // Section view.
         if ($this->section != null && $this->section->gameelement) {
             $data->section = new stdClass();
@@ -250,13 +261,18 @@ class format_ludilearn_gameelement implements renderable, templatable {
             }
 
             // Populate the section parameters.
-            $data->section->parameters = $manager->populate_section($this->course, $data->section->parameters,
-                    $this->section, $type);
+            $data->section->parameters = $manager->populate_section(
+                $this->course,
+                $data->section->parameters,
+                $this->section,
+                $type
+            );
 
             // Update last access.
             $manager->update_gameelement_user($this->section->gameelement->get_id(), $USER->id, 'lastaccess', time());
             $this->section->parameters = $data->section->parameters;
             $data->section->cms = [];
+
             // For each course module of the section.
             foreach ($this->section->cms as $cm) {
                 $cminfo = get_fast_modinfo($this->course->id)->get_cm($cm->id);
@@ -284,8 +300,7 @@ class format_ludilearn_gameelement implements renderable, templatable {
                         // Le label est restreint pour l'utilisateur.
                         continue;
                     }
-                    // Add the label to the section.
-                    // And no need to continue because label is not gamified.
+                    // Add the label to the section, and no need to continue because label is not gamified.
                     $data->section->cms[] = $cmdata;
                     continue;
                 }
@@ -319,13 +334,16 @@ class format_ludilearn_gameelement implements renderable, templatable {
                         }
 
                         // Populate the section parameters.
-                        $cmdata->parameters = $manager->populate_section($this->course, $cmdata->parameters,
-                                $cm->subsection, $type);
+                        $cmdata->parameters = $manager->populate_section(
+                            $this->course,
+                            $cmdata->parameters,
+                            $cm->subsection,
+                            $type
+                        );
 
                         if ($cm->subsection->visible) {
                             $cmdata->visible = true;
                         }
-
                     }
                     if (has_capability('moodle/course:update', $contextcourse) || $sectioninfo->get_available()) {
                         $urlsection = new moodle_url('/course/section.php?id=' . $cm->subsection->id);
@@ -344,15 +362,23 @@ class format_ludilearn_gameelement implements renderable, templatable {
                 }
 
                 // Populate the course module parameters.
-                $cmdata->parameters = $manager->populate_cm($this->course, $cmdata->parameters, $cm, $this->section, $type);
+                $cmdata->parameters = $manager->populate_cm(
+                    $this->course,
+                    $cmdata->parameters,
+                    $cm,
+                    $this->section,
+                    $type
+                );
 
                 $contextactivity = context_module::instance($cminfo->id);
-                if (has_capability('moodle/course:viewhiddenactivities', $contextactivity)
-                    || has_capability('moodle/course:update', $contextcourse) || $cminfo->available) {
+                if (
+                    has_capability('moodle/course:viewhiddenactivities', $contextactivity)
+                    || has_capability('moodle/course:update', $contextcourse)
+                    || $cminfo->available
+                ) {
                     if ($cminfo->get_url()) {
                         $cmdata->url = $cminfo->get_url()->out(false);
                     }
-
                 }
                 $data->section->cms[] = $cmdata;
             }
@@ -378,8 +404,13 @@ class format_ludilearn_gameelement implements renderable, templatable {
                     }
 
                     // Populate the course module parameters.
-                    $data->cm->parameters = $manager->populate_cm($this->course, $data->cm->parameters, $this->cm,
-                            $this->section, $type);
+                    $data->cm->parameters = $manager->populate_cm(
+                        $this->course,
+                        $data->cm->parameters,
+                        $this->cm,
+                        $this->section,
+                        $type
+                    );
 
                     // Case it's timer game element on quiz attempt page.
                     if ($type == 'timer' && $PAGE->bodyid == 'page-mod-quiz-attempt') {
@@ -393,14 +424,17 @@ class format_ludilearn_gameelement implements renderable, templatable {
 
                             if ($data->cm->parameters->currentpenalties > 0) {
                                 $data->cm->parameters->currentpenaltiescalc = $data->cm->parameters->currentpenalties *
-                                        $data->cm->parameters->gameelement->get_penalties();
+                                    $data->cm->parameters->gameelement->get_penalties();
                             }
-                            $PAGE->requires->js_call_amd('format_ludilearn/chrono', 'init',
-                                    ['timestart' => $attempt->timestart]);
-
+                            $PAGE->requires->js_call_amd(
+                                'format_ludilearn/chrono',
+                                'init',
+                                ['timestart' => $attempt->timestart]
+                            );
                         }
                     }
                 }
+
                 // Check if the course module is restricted.
                 $data->cm->parameters->restricted = false;
                 if ($cminfo->available) {
@@ -420,10 +454,15 @@ class format_ludilearn_gameelement implements renderable, templatable {
 
             // Call Js only if the section is an avatar game element.
             if ($this->section->gameelement instanceof avatar) {
-                $PAGE->requires->js_call_amd('format_ludilearn/items', 'init',
-                    ['courseid' => $this->course->id,
+                $PAGE->requires->js_call_amd(
+                    'format_ludilearn/items',
+                    'init',
+                    [
+                        'courseid' => $this->course->id,
                         'sectionid' => $this->section->id,
-                        'urlimages' => $urlimages]);
+                        'urlimages' => $urlimages,
+                    ]
+                );
             }
         }
 
@@ -459,8 +498,14 @@ class format_ludilearn_gameelement implements renderable, templatable {
      */
     public function format_summary_text(stdClass $section): string {
         $context = context_course::instance($section->course);
-        $summarytext = file_rewrite_pluginfile_urls($section->summary, 'pluginfile.php',
-            $context->id, 'course', 'section', $section->id);
+        $summarytext = file_rewrite_pluginfile_urls(
+            $section->summary,
+            'pluginfile.php',
+            $context->id,
+            'course',
+            'section',
+            $section->id
+        );
 
         $options = new stdClass();
         $options->noclean = true;

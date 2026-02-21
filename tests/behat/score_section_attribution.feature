@@ -11,43 +11,52 @@ Feature: Score game element section attribution in Ludilearn course format
       | student1 | Student | One | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname | format | numsections | enablecompletion |
-      | Ludilearn Score | L1 | ludilearn | 3 | 1 |
+      | Ludilearn Score | LS1 | ludilearn | 3 | 1 |
     And the following "course enrolments" exist:
       | user | course | role |
-      | teacher1 | L1 | editingteacher |
-      | student1 | L1 | student |
+      | teacher1 | LS1 | editingteacher |
+      | student1 | LS1 | student |
     And I log in as "teacher1"
     And I am on "Ludilearn Score" course homepage
-    And I navigate to "Settings" in current page administration
+    And I visit Ludilearn course settings page for "LS1"
     And I expand all fieldsets
     And I set the following fields to these values:
       | id_assignment | bysection |
     And I press "Save and display"
-    And I turn editing mode on
-    And I edit the section "1" and I fill the form with:
+    And I am on "Ludilearn Score" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-1 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-1 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Score Section |
+    And I press "Save changes"
     And I am on "Ludilearn Score" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
-      | assign | Score Note Only | Test score with grade | L1 | score1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
-      | page | Score Completion Only | Test score with completion | L1 | score2 | 1 | 1 | 0 | 0 | | | | | |
-      | quiz | Score Both | Test score with grade and completion | L1 | score3 | 1 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
-      | forum | Score No Gamification | Test score without gamification | L1 | score4 | 1 | 0 | 0 | 0 | | | | | |
+      | assign | Score Note Only | Test score with grade | LS1 | score1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
+      | page | Score Completion Only | Test score with completion | LS1 | score2 | 1 | 1 | 0 | 0 | | | | | |
+      | quiz | Score Both | Test score with grade and completion | LS1 | score3 | 1 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
+      | forum | Score No Gamification | Test score without gamification | LS1 | score4 | 1 | 0 | 0 | 0 | | | | | |
     And I log out
 
   @score_section_display_homepage
   Scenario: Verify score sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
     And I am on "Ludilearn Score" course homepage
-    And I turn editing mode on
-    And I edit the section "2" and I fill the form with:
+    And I am on "Ludilearn Score" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-2 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | No Game Section |
+    And I press "Save changes"
     And I am on "Ludilearn Score" course homepage
-    And I edit the section "3" and I fill the form with:
+    And I click on "Edit" "link" in the "#section-3 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-3 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Empty Section |
-    And I turn editing mode off
+    And I press "Save changes"
+    And I am on "Ludilearn Score" course homepage with editing mode off
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I set the field "No Game Section" to "No gamified"
@@ -73,7 +82,7 @@ Feature: Score game element section attribution in Ludilearn course format
     Given I log in as "teacher1"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
-      | Course       | L1        | Test questions |
+      | Course       | LS1       | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
@@ -83,21 +92,27 @@ Feature: Score game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Score" course homepage
-    And I turn editing mode on
-    And I edit the section "2" and I fill the form with:
+    And I am on "Ludilearn Score" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-2 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | No Game Section |
+    And I press "Save changes"
     And I am on "Ludilearn Score" course homepage
-    And I edit the section "3" and I fill the form with:
+    And I click on "Edit" "link" in the "#section-3 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-3 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Empty Section |
-    And I turn editing mode off
+    And I press "Save changes"
+    And I am on "Ludilearn Score" course homepage with editing mode off
     And I am on "Ludilearn Score" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade |
-      | assign | Regular Note Only | Test without game element | L1 | reg1 | 2 | 0 | 100 |
-      | page | Regular Completion Only | Test without game element | L1 | reg2 | 2 | 2 | 0 |
-      | quiz | Regular Both | Test without game element | L1 | reg3 | 2 | 1 | 100 |
-      | forum | Regular Forum | Test without game element | L1 | reg4 | 2 | 0 | 0 |
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+      | assign | Regular Note Only | Test without game element | LS1 | reg1 | 2 | 0 | 100 |
+      | page | Regular Completion Only | Test without game element | LS1 | reg2 | 2 | 2 | 0 |
+      | quiz | Regular Both | Test without game element | LS1 | reg3 | 2 | 1 | 100 |
+      | forum | Regular Forum | Test without game element | LS1 | reg4 | 2 | 0 | 0 |
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I set the field "No Game Section" to "No gamified"
@@ -110,7 +125,7 @@ Feature: Score game element section attribution in Ludilearn course format
     And I am on "Ludilearn Score" course homepage
 
     # Checking the score display at section level
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "Score Section" in the "div.section-score h4" "css_element"
     And "img.ludilearn-img[src*='chest.svg']" "css_element" should exist in the "div.rightdottedscore" "css_element"
     And I should see "0" in the "div.rightdottedscore span.playerscore" "css_element"
@@ -123,44 +138,44 @@ Feature: Score game element section attribution in Ludilearn course format
     And I should see "Score Note Only" in the ".col-8 .row .cm-score:first-child .cmname" "css_element"
 
     # Score Completion Only
-    And "img.ludilearn-img[src*='bag.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(2) .cm-score" "css_element"
-    And I should see "0" in the ".col-8 .row div:nth-child(2) .cm-score .playerscore" "css_element"
-    And I should see "150 pts" in the ".col-8 .row div:nth-child(2) .cm-score .scoretext" "css_element"
-    And I should see "Score Completion Only" in the ".col-8 .row div:nth-child(2) .cm-score .cmname" "css_element"
+    And "img.ludilearn-img[src*='bag.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(2) .cm-score" "css_element"
+    And I should see "0" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .playerscore" "css_element"
+    And I should see "150 pts" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .scoretext" "css_element"
+    And I should see "Score Completion Only" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .cmname" "css_element"
 
     # Score Both
-    And "img.ludilearn-img[src*='bag.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(3) .cm-score" "css_element"
-    And I should see "0" in the ".col-8 .row div:nth-child(3) .cm-score .playerscore" "css_element"
-    And I should see "8000 pts" in the ".col-8 .row div:nth-child(3) .cm-score .scoretext" "css_element"
-    And I should see "Score Both" in the ".col-8 .row div:nth-child(3) .cm-score .cmname" "css_element"
+    And "img.ludilearn-img[src*='bag.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(3) .cm-score" "css_element"
+    And I should see "0" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .playerscore" "css_element"
+    And I should see "8000 pts" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .scoretext" "css_element"
+    And I should see "Score Both" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .cmname" "css_element"
 
     # Score No Gamification
-    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(4) .cm-score" "css_element"
-    And I should see "Score No Gamification" in the ".col-8 .row div:nth-child(4) .cm-score .cmname" "css_element"
+    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(4) .cm-score" "css_element"
+    And I should see "Score No Gamification" in the ".col-8 .row > .col-6:nth-child(4) .cm-score .cmname" "css_element"
 
     # Check display for non-gamified section
     When I am on "Ludilearn Score" course homepage
-    And I click on "No Game Section" "link" in the "region-main" "region"
+    And I click on "No Game Section" "link" in the "#region-main" "css_element"
     And I should see "No Game Section" in the "div.section-nogamified h4" "css_element"
-    And I should see "Regular Note Only" in the ".col-8 .row div:nth-child(1) .cm-nogamified .cmname" "css_element"
-    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(1)" "css_element"
-    And I should see "Regular Completion Only" in the ".col-8 .row div:nth-child(2) .cm-nogamified .cmname" "css_element"
-    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(2)" "css_element"
-    And I should see "Regular Both" in the ".col-8 .row div:nth-child(3) .cm-nogamified .cmname" "css_element"
-    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(3)" "css_element"
-    And I should see "Regular Forum" in the ".col-8 .row div:nth-child(4) .cm-nogamified .cmname" "css_element"
-    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row div:nth-child(4)" "css_element"
+    And I should see "Regular Note Only" in the ".col-8 .row > .col-6:nth-child(1) .cm-nogamified .cmname" "css_element"
+    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(1)" "css_element"
+    And I should see "Regular Completion Only" in the ".col-8 .row > .col-6:nth-child(2) .cm-nogamified .cmname" "css_element"
+    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(2)" "css_element"
+    And I should see "Regular Both" in the ".col-8 .row > .col-6:nth-child(3) .cm-nogamified .cmname" "css_element"
+    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(3)" "css_element"
+    And I should see "Regular Forum" in the ".col-8 .row > .col-6:nth-child(4) .cm-nogamified .cmname" "css_element"
+    And "img.ludilearn-img[src*='none.svg']" "css_element" should exist in the ".col-8 .row > .col-6:nth-child(4)" "css_element"
 
     # Check empty section
     And I am on "Ludilearn Score" course homepage
-    When I click on "Empty Section" "link" in the "region-main" "region"
+    When I click on "Empty Section" "link" in the "#region-main" "css_element"
     Then I should see "Empty Section" in the ".section-score h4" "css_element"
 
   @score_section_update @score_grade
   Scenario: Score updates correctly when student receives grade
     Given I log in as "teacher1"
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
@@ -176,16 +191,14 @@ Feature: Score game element section attribution in Ludilearn course format
     # Teacher grades submission
     And I log in as "teacher1"
     And I am on the "score1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "80"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem        | user     | grade |
+      | Score Note Only  | student1 | 80    |
     And I log out
     # Student verifies updated score
     And I log in as "student1"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "6400" in the "div.rightdottedscore span.playerscore" "css_element"
     And I should see "pts" in the "div.rightdottedscore p.scoretext" "css_element"
     And I should see "6400" in the ".col-8 .row .cm-score:first-child .playerscore" "css_element"
@@ -195,7 +208,7 @@ Feature: Score game element section attribution in Ludilearn course format
   Scenario: Score updates correctly when activity is completed
     Given I log in as "teacher1"
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
@@ -208,18 +221,18 @@ Feature: Score game element section attribution in Ludilearn course format
     And I wait until the page is ready
     # Check updated scores
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "150" in the "div.rightdottedscore span.playerscore" "css_element"
     And I should see "pts" in the "div.rightdottedscore p.scoretext" "css_element"
-    And I should see "150" in the ".col-8 .row div:nth-child(2) .cm-score .playerscore" "css_element"
-    And I should see "150 pts" in the ".col-8 .row div:nth-child(2) .cm-score .scoretext" "css_element"
+    And I should see "150" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .playerscore" "css_element"
+    And I should see "150 pts" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .scoretext" "css_element"
 
   @score_both_completion_and_grade
   Scenario: Score updates correctly with both grade and completion
     Given I log in as "teacher1"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
-      | Course       | L1        | Test questions |
+      | Course       | LS1       | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
@@ -229,7 +242,7 @@ Feature: Score game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
@@ -245,18 +258,18 @@ Feature: Score game element section attribution in Ludilearn course format
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "4000" in the "div.rightdottedscore span.playerscore" "css_element"
-    And I should see "4000" in the ".col-8 .row div:nth-child(3) .cm-score .playerscore" "css_element"
-    And I should see "8000 pts" in the ".col-8 .row div:nth-child(3) .cm-score .scoretext" "css_element"
+    And I should see "4000" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .playerscore" "css_element"
+    And I should see "8000 pts" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .scoretext" "css_element"
     # Mark activity as done
     And I am on the "score3" "quiz activity" page
     And I press "Mark as done"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "5600" in the "div.rightdottedscore span.playerscore" "css_element"
-    And I should see "5600" in the ".col-8 .row div:nth-child(3) .cm-score .playerscore" "css_element"
-    And I should see "8000 pts" in the ".col-8 .row div:nth-child(3) .cm-score .scoretext" "css_element"
+    And I should see "5600" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .playerscore" "css_element"
+    And I should see "8000 pts" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .scoretext" "css_element"
     # Second attempt - Full points
     And I am on the "score3" "quiz activity" page
     And I press "Re-attempt quiz"
@@ -266,17 +279,17 @@ Feature: Score game element section attribution in Ludilearn course format
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "9600" in the "div.rightdottedscore span.playerscore" "css_element"
-    And I should see "9600" in the ".col-8 .row div:nth-child(3) .cm-score .playerscore" "css_element"
-    And I should see "8000 pts" in the ".col-8 .row div:nth-child(3) .cm-score .scoretext" "css_element"
+    And I should see "9600" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .playerscore" "css_element"
+    And I should see "8000 pts" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .scoretext" "css_element"
 
   @score_settings
   Scenario: Teacher can configure score settings
     Given I log in as "teacher1"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
-      | Course       | L1        | Test questions |
+      | Course       | LS1       | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
@@ -286,12 +299,12 @@ Feature: Score game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Score" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Score Section" to "Score"
     And I press "Save"
     Then I should see "The changes made have been applied"
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LS1"
     And I set the field "Settings" to "Score"
     And I set the field "Multiplier" to "200"
     And I set the field "Completion bonus" to "300"
@@ -307,21 +320,21 @@ Feature: Score game element section attribution in Ludilearn course format
     And I press "Submit all and finish"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "20000" in the "div.rightdottedscore span.playerscore" "css_element"
-    And I should see "20000" in the ".col-8 .row div:nth-child(3) .cm-score .playerscore" "css_element"
-    And I should see "20000 pts" in the ".col-8 .row div:nth-child(3) .cm-score .scoretext" "css_element"
+    And I should see "20000" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .playerscore" "css_element"
+    And I should see "20000 pts" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .scoretext" "css_element"
     And I am on the "score3" "quiz activity" page
     And I press "Mark as done"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "22000" in the "div.rightdottedscore span.playerscore" "css_element"
-    And I should see "22000" in the ".col-8 .row div:nth-child(3) .cm-score .playerscore" "css_element"
-    And I should see "20000 pts" in the ".col-8 .row div:nth-child(3) .cm-score .scoretext" "css_element"
+    And I should see "22000" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .playerscore" "css_element"
+    And I should see "20000 pts" in the ".col-8 .row > .col-6:nth-child(3) .cm-score .scoretext" "css_element"
     And I am on the "score2" "page activity" page
     And I press "Mark as done"
     And I am on "Ludilearn Score" course homepage
-    When I click on "Score Section" "link" in the "region-main" "region"
+    When I click on "Score Section" "link" in the "#region-main" "css_element"
     Then I should see "22300" in the "div.rightdottedscore span.playerscore" "css_element"
-    And I should see "300" in the ".col-8 .row div:nth-child(2) .cm-score .playerscore" "css_element"
-    And I should see "300 pts" in the ".col-8 .row div:nth-child(2) .cm-score .scoretext" "css_element"
+    And I should see "300" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .playerscore" "css_element"
+    And I should see "300 pts" in the ".col-8 .row > .col-6:nth-child(2) .cm-score .scoretext" "css_element"

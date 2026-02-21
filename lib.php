@@ -41,7 +41,6 @@ require_once($CFG->dirroot . '/course/format/lib.php');
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class format_ludilearn extends core_courseformat\base {
-
     /**
      * Returns true if this course format uses sections.
      *
@@ -97,8 +96,11 @@ class format_ludilearn extends core_courseformat\base {
     public function get_section_name($section): string {
         $section = $this->get_section($section);
         if ((string)$section->name !== '') {
-            return format_string($section->name, true,
-                ['context' => context_course::instance($this->courseid)]);
+            return format_string(
+                $section->name,
+                true,
+                ['context' => context_course::instance($this->courseid)]
+            );
         } else {
             return $this->get_default_section_name($section);
         }
@@ -207,8 +209,14 @@ class format_ludilearn extends core_courseformat\base {
         // If section is specified in course/view.php, make sure it is expanded in navigation.
         if ($navigation->includesectionnum === false) {
             $selectedsection = optional_param('section', null, PARAM_INT);
-            if ($selectedsection !== null && (!defined('AJAX_SCRIPT') || AJAX_SCRIPT == '0') &&
-                $PAGE->url->compare(new moodle_url('/course/view.php'), URL_MATCH_BASE)) {
+            if (
+                $selectedsection !== null
+                && ( !defined('AJAX_SCRIPT') || AJAX_SCRIPT == '0')
+                && $PAGE->url->compare(
+                    new moodle_url('/course/view.php'),
+                    URL_MATCH_BASE
+                )
+            ) {
                 $navigation->includesectionnum = $selectedsection;
             }
         }
@@ -434,18 +442,23 @@ class format_ludilearn extends core_courseformat\base {
         $changed = parent::update_format_options($data, $sectionid);
         if (isset($data['assignment'])) {
             // If the assignment or default game element has changed, we need to update the database.
-            if (($oldoptions['assignment'] != $data['assignment']
-                    || $oldoptions['default_game_element'] != $data['default_game_element'])
+            if (
+                (
+                    $oldoptions['assignment'] != $data['assignment']
+                    || $oldoptions['default_game_element'] != $data['default_game_element']
+                )
                 && isset($oldoptions['assignment'])
-                && isset($oldoptions['default_game_element'])) {
-
+                && isset($oldoptions['default_game_element'])
+            ) {
                 // Create game elements if not exist.
                 $manager = new \format_ludilearn\manager();
                 game_element::create_all_for_course($this->get_course()->id);
-                $manager->sync_user_attribution($this->get_course()->id,
+                $manager->sync_user_attribution(
+                    $this->get_course()->id,
                     $data['assignment'],
                     $data['default_game_element'],
-                    $oldoptions['assignment'] != $data['assignment']);
+                    $oldoptions['assignment'] != $data['assignment']
+                );
             }
         }
         return $changed;
@@ -471,8 +484,13 @@ class format_ludilearn extends core_courseformat\base {
      * @param null|lang_string|string $editlabel
      * @return inplace_editable
      */
-    public function inplace_editable_render_section_name($section, $linkifneeded = true,
-        $editable = null, $edithint = null, $editlabel = null) {
+    public function inplace_editable_render_section_name(
+        $section,
+        $linkifneeded = true,
+        $editable = null,
+        $edithint = null,
+        $editlabel = null
+    ) {
         if (empty($edithint)) {
             $edithint = new lang_string('editsectionname', 'format_ludilearn');
         }
@@ -557,25 +575,6 @@ class format_ludilearn extends core_courseformat\base {
     }
 
     /**
-    public static function course_updated(int $courseid) {
-        global $DB;
-        $course = $DB->get_record('course', ['id' => $courseid]);
-        $format = course_get_format($course);
-
-        // Get the format options.
-        $options = $format->get_format_options();
-        $assignment = $options['assignment'];
-
-        // If the assignment is manual or default, we need to check if attributions of game elements are up-to-date.
-        if (($assignment == 'default') || ($assignment == 'manual')) {
-            $task = new check_format_options_changements();
-            $task->set_custom_data(['courseid' => $courseid, 'assignment' => $assignment]);
-            manager::queue_adhoc_task($task);
-        }
-    }
-     */
-
-    /**
      * Course-specific information to be output immediately above content on any course page
      *
      * See course_format::course_header() for usage
@@ -587,8 +586,10 @@ class format_ludilearn extends core_courseformat\base {
     public function course_content_header() {
         global $PAGE, $DB, $USER;
 
-        if (($PAGE->bodyid != 'page-course-view-ludilearn' && $PAGE->bodyid != 'page-course-view-section-ludilearn')
-            && $PAGE->cm == null) {
+        if (
+            ($PAGE->bodyid != 'page-course-view-ludilearn' && $PAGE->bodyid != 'page-course-view-section-ludilearn')
+            && $PAGE->cm == null
+        ) {
             return null;
         }
 
@@ -646,7 +647,9 @@ function format_ludilearn_inplace_editable($itemtype, $itemid, $newvalue) {
     if ($itemtype === 'sectionname' || $itemtype === 'sectionnamenl') {
         $section = $DB->get_record_sql(
             'SELECT s.* FROM {course_sections} s JOIN {course} c ON s.course = c.id WHERE s.id = ? AND c.format = ?',
-            [$itemid, 'ludilearn'], MUST_EXIST);
+            [$itemid, 'ludilearn'],
+            MUST_EXIST
+        );
         return course_get_format($section->course)->inplace_editable_update_section_name($section, $itemtype, $newvalue);
     }
     if ($itemtype === 'element_types') {
@@ -664,13 +667,25 @@ function format_ludilearn_inplace_editable($itemtype, $itemid, $newvalue) {
  * @throws \core\exception\moodle_exception
  * @throws coding_exception
  */
-function format_ludilearn_extend_navigation_course(navigation_node $navigation, stdClass $course,
-    stdClass $context): void {
+function format_ludilearn_extend_navigation_course(
+    navigation_node $navigation,
+    stdClass $course,
+    stdClass $context
+): void {
     global $USER, $CFG;
     $context = context_course::instance($course->id);
-    if (has_capability('moodle/course:update', $context, $USER) && $course->format == 'ludilearn') {
-        $url = new moodle_url("$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php",
-            ['id' => $course->id, "type" => "score", "hideheader" => 1]);
+    if (
+        has_capability('moodle/course:update', $context, $USER)
+        && $course->format == 'ludilearn'
+    ) {
+        $url = new moodle_url(
+            "$CFG->wwwroot/course/format/ludilearn/settings_game_elements.php",
+            [
+                'id' => $course->id,
+                "type" => "score",
+                "hideheader" => 1,
+            ]
+        );
         $navigation->add(get_string('settingsname', 'format_ludilearn'), $url);
     }
 }

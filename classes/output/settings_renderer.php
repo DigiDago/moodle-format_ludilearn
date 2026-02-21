@@ -30,7 +30,6 @@ use plugin_renderer_base;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class settings_renderer extends plugin_renderer_base {
-
     /**
      * Render the settings page.
      *
@@ -47,22 +46,33 @@ class settings_renderer extends plugin_renderer_base {
         $rendermenu = $this->render_menu($settings->get_courseid(), $settings->get_url()->out(false));
 
         // Call js.
-        $this->page->requires->js_call_amd('format_ludilearn/settings', 'init',
-            ['courseid' => $settings->get_courseid(),
+        $this->page->requires->js_call_amd(
+            'format_ludilearn/settings',
+            'init',
+            [
+                'courseid' => $settings->get_courseid(),
                 'type' => $settings->get_type(),
-                'parameterslist' => $settings->get_parameterslist()]);
+                'parameterslist' => $settings->get_parameterslist(),
+            ]
+        );
 
         // If the type is not a game element but the assignment by section setting page.
         if ($settings->get_type() == 'assignmentbysection') {
-            return $rendermenu . $this->render_from_template('format_ludilearn/settings_assignment_by_section',
-                    $settings->export_for_template($this));
+            return $rendermenu . $this->render_from_template(
+                'format_ludilearn/settings_assignment_by_section',
+                $settings->export_for_template($this)
+            );
         } else if ($settings->get_type() == 'updateprogression') {
-            return $rendermenu . $this->render_from_template('format_ludilearn/settings_update_progression',
-                    $settings->export_for_template($this));
+            return $rendermenu . $this->render_from_template(
+                'format_ludilearn/settings_update_progression',
+                $settings->export_for_template($this)
+            );
         }
 
-        return $rendermenu . $this->render_from_template('format_ludilearn/' . $settings->get_type() . '/settings',
-                $settings->export_for_template($this));
+        return $rendermenu . $this->render_from_template(
+            'format_ludilearn/' . $settings->get_type() . '/settings',
+            $settings->export_for_template($this)
+        );
     }
 
     /**
@@ -116,12 +126,16 @@ class settings_renderer extends plugin_renderer_base {
         $selectmenu->set_label(get_string('settings'), ['class' => 'sr-only']);
         $options = \html_writer::tag(
             'div',
-            $this->render_from_template('core/tertiary_navigation_selector', $selectmenu->export_for_template($this)),
+            $this->render_from_template(
+                'core/tertiary_navigation_selector',
+                $selectmenu->export_for_template($this)
+            ),
             ['class' => 'row pb-3']
         );
         return \html_writer::tag(
             'div',
             $options,
-            ['class' => 'tertiary-navigation full-width-bottom-border ml-0', 'id' => 'tertiary-navigation']);
+            ['class' => 'tertiary-navigation full-width-bottom-border ml-0', 'id' => 'tertiary-navigation']
+        );
     }
 }

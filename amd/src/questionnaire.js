@@ -17,7 +17,6 @@
  * Questionnaire.
  *
  * @module      format_ludilearn/questionnaire
- * @package     format_ludilearn
  * @copyright   2025 Pimenko <support@pimenko.com><pimenko.com>
  * @author      Jordan Kesraoui
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

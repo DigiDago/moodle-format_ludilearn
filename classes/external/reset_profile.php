@@ -36,7 +36,6 @@ use external_value;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class reset_profile extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -57,7 +56,7 @@ class reset_profile extends external_api {
         }
 
         return [
-                'success' => true,
+            'success' => true,
         ];
     }
 
@@ -68,11 +67,11 @@ class reset_profile extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
-                'userid' => new external_value(
-                        PARAM_INT,
-                        'User Id',
-                        VALUE_REQUIRED
-                )
+            'userid' => new external_value(
+                PARAM_INT,
+                'User Id',
+                VALUE_REQUIRED
+            ),
         ];
         return new external_function_parameters($parameters);
     }
@@ -84,15 +83,15 @@ class reset_profile extends external_api {
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
-                'success' => new external_value(
-                        PARAM_BOOL,
-                        'Success'
-                ),
+            'success' => new external_value(
+                PARAM_BOOL,
+                'Success'
+            ),
         ];
 
         return new external_single_structure(
-                $keys,
-                'reset profile result'
+            $keys,
+            'reset profile result'
         );
     }
 }

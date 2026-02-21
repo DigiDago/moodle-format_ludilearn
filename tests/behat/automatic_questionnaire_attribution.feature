@@ -11,11 +11,11 @@ Feature: Automatic questionnaire assignment in ludimoodle
       | student1 | Student   | One      | student1@example.com |
     And the following "courses" exist:
       | fullname                  | shortname | format     | numsections | enablecompletion |
-      | LudiLearn Questionnaire | L1        | ludilearn | 3           | 1                |
+      | LudiLearn Questionnaire | LAQ1      | ludilearn | 3           | 1                |
     And the following "course enrolments" exist:
       | user     | course | role           |
-      | teacher1 | L1     | editingteacher |
-      | student1 | L1     | student        |
+      | teacher1 | LAQ1   | editingteacher |
+      | student1 | LAQ1   | student        |
     And I log in as "teacher1"
     And I am on "LudiLearn Questionnaire" course homepage
     And I navigate to "Settings" in current page administration
@@ -23,16 +23,19 @@ Feature: Automatic questionnaire assignment in ludimoodle
     And I set the following fields to these values:
       | id_assignment | automatic |
     And I press "Save and display"
-    And I turn editing mode on
-    And I edit the section "1" and I fill the form with:
+    And I am on "LudiLearn Questionnaire" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-1 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-1 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Activities Section |
+    And I press "Save changes"
     And I am on "LudiLearn Questionnaire" course homepage
     And the following "activities" exist:
      | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
-      | assign | Progress Note Only | Test progression with grade | L1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
-      | page | Progress Completion Only | Test progression with completion | L1 | reg2 | 2 | 1 | 0 | 0 | | | | | |
-      | quiz | Progress Both | Test progression with grade and completion | L1 | reg3 | 2 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
-      | forum | Progress No Gamification | Test progression without gamification | L1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
+      | assign | Progress Note Only | Test progression with grade | LAQ1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
+      | page | Progress Completion Only | Test progression with completion | LAQ1 | reg2 | 2 | 1 | 0 | 0 | | | | | |
+      | quiz | Progress Both | Test progression with grade and completion | LAQ1 | reg3 | 2 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
+      | forum | Progress No Gamification | Test progression without gamification | LAQ1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
     And I log out
 
   @automatic_attribution_questionnaire

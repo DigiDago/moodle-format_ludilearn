@@ -55,7 +55,6 @@ class provider implements
 
     // This plugin is capable of determining which users have data within it.
     core_userlist_provider {
-
     /**
      * Get the metadata for this plugin.
      *

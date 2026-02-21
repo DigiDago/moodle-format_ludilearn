@@ -33,7 +33,6 @@ require_once($CFG->libdir . '/adminlib.php');
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class ranking extends game_element {
-
     /**
      * @var int
      */
@@ -70,7 +69,6 @@ class ranking extends game_element {
         $this->score = 0;
         $this->maxscore = 0;
         foreach ($cmparameters as $key => $value) {
-
             if (!$this->is_gradable($key) || !$this->is_activity_available_for_user($key, $this->userid)) {
                 $cmparameters[$key]['gamified'] = false;
                 continue;
@@ -93,12 +91,10 @@ class ranking extends game_element {
                     $cmparameters[$key]['maxscore'] = $this->get_grademax($key);
                 }
                 $this->maxscore += $cmparameters[$key]['maxscore'];
-
             } else {
                 $cmparameters[$key]['gamified'] = false;
             }
         }
-
         // Search the global ranking of the user.
         $ranking = $this->search_global_ranking();
         $this->sectionparameters['ranking'] = $ranking;
@@ -235,14 +231,17 @@ class ranking extends game_element {
         global $DB;
 
         // Get game element.
-        $gameelement = $DB->get_record('format_ludilearn_elements',
-            ['sectionid' => $coursemodule->section, 'type' => 'ranking']);
+        $gameelement = $DB->get_record(
+            'format_ludilearn_elements',
+            ['sectionid' => $coursemodule->section, 'type' => 'ranking']
+        );
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $gameelement->id, 'userid' => $userid]
+        );
         if ($attribution) {
-
             // Get grade.
             $grades = grade_get_grades($courseid, 'mod', $modulename, $coursemodule->instance, $userid);
             $score = 0;
@@ -254,8 +253,10 @@ class ranking extends game_element {
             }
 
             // Update the score or create it if it does not exist.
-            $cmuser = $DB->get_record('format_ludilearn_cm_user',
-                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'score']);
+            $cmuser = $DB->get_record(
+                'format_ludilearn_cm_user',
+                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'score']
+            );
             if ($cmuser) {
                 // If the score is different from the previous one.
                 if ($score != $cmuser->value) {
@@ -280,18 +281,18 @@ class ranking extends game_element {
      *
      * @param int $quizid    The quiz id.
      * @param int $userid    The user id.
-     * @param int $attemptid The attempt id.
      *
      * @return void
      * @throws \dml_exception
      */
-    public static function update_quiz_immediate_feedback(int $quizid, int $userid, int $attemptid = 0): void {
+    public static function update_quiz_immediate_feedback(int $quizid, int $userid): void {
         global $DB;
 
         $manager = new manager();
         $quiz = $DB->get_record('quiz', ['id' => $quizid]);
         $module = $DB->get_record('modules', ['name' => 'quiz']);
-        $coursemodule = $DB->get_record('course_modules',
+        $coursemodule = $DB->get_record(
+            'course_modules',
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
@@ -299,14 +300,17 @@ class ranking extends game_element {
             ]
         );
 
-        $gameelement = $DB->get_record('format_ludilearn_elements',
-            ['sectionid' => $coursemodule->section, 'type' => 'ranking']);
+        $gameelement = $DB->get_record(
+            'format_ludilearn_elements',
+            ['sectionid' => $coursemodule->section, 'type' => 'ranking']
+        );
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $gameelement->id, 'userid' => $userid]
+        );
         if ($attribution) {
-
             // Get max score.
             $maxscore = $quiz->grade;
 
@@ -320,8 +324,14 @@ class ranking extends game_element {
                 $score = intval($grade * $maxscore / $grademax);
             }
             // Update the score or create it if it does not exist.
-            $cmuser = $DB->get_record('format_ludilearn_cm_user',
-                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'score']);
+            $cmuser = $DB->get_record(
+                'format_ludilearn_cm_user',
+                [
+                    'cmid' => $coursemodule->id,
+                    'attributionid' => $attribution->id,
+                    'name' => 'score',
+                ]
+            );
             if ($cmuser) {
                 // If the score is different from the previous one.
                 if ($score != $cmuser->value) {
@@ -361,11 +371,13 @@ class ranking extends game_element {
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
-        $gameelementreq = $DB->get_record_sql($gameelementsql,
+        $gameelementreq = $DB->get_record_sql(
+            $gameelementsql,
             ['courseid' => $courseid,
                 'sectionid' => $sectionid,
                 'userid' => $userid,
-                'type' => 'ranking']);
+                'type' => 'ranking']
+        );
 
         if (!$gameelementreq) {
             return null;
@@ -420,12 +432,14 @@ class ranking extends game_element {
             }
         }
 
-        return new ranking($gameelementreq->gameelementid,
+        return new ranking(
+            $gameelementreq->gameelementid,
             $gameelementreq->courseid,
             $gameelementreq->sectionid,
             $gameelementreq->userid,
             $parameters,
-            $cmparameters);
+            $cmparameters
+        );
     }
 
     /**

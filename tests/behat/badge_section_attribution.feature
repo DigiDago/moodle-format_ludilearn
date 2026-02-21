@@ -11,43 +11,52 @@ Feature: Badge game element configuration and validation by section in Ludilearn
       | student1 | Student | One | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname | format | numsections | enablecompletion |
-      | Ludilearn Badge | L1 | ludilearn | 3 | 1 |
+      | Ludilearn Badge | LB1 | ludilearn | 3 | 1 |
     And the following "course enrolments" exist:
       | user | course | role |
-      | teacher1 | L1 | editingteacher |
-      | student1 | L1 | student |
+      | teacher1 | LB1 | editingteacher |
+      | student1 | LB1 | student |
     And I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    And I navigate to "Settings" in current page administration
+    And I visit Ludilearn course settings page for "LB1"
     And I expand all fieldsets
     And I set the following fields to these values:
       | id_assignment | bysection |
     And I press "Save and display"
-    And I turn editing mode on
-    And I edit the section "1" and I fill the form with:
+    And I am on "Ludilearn Badge" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-1 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-1 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Badge Section |
+    And I press "Save changes"
     And I am on "Ludilearn Badge" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
-      | assign | Badge Note Only | Test badge with grade | L1 | badge1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
-      | page | Badge Completion Only | Test badge with completion | L1 | badge2 | 1 | 1 | 0 | 0 | | | | | |
-      | quiz | Badge Both | Test badge with grade and completion | L1 | badge3 | 1 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
-      | forum | Badge No Gamification | Test badge without gamification | L1 | badge4 | 1 | 0 | 0 | 0 | | | | | |
+      | assign | Badge Note Only | Test badge with grade | LB1 | badge1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
+      | page | Badge Completion Only | Test badge with completion | LB1 | badge2 | 1 | 1 | 0 | 0 | | | | | |
+      | quiz | Badge Both | Test badge with grade and completion | LB1 | badge3 | 1 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
+      | forum | Badge No Gamification | Test badge without gamification | LB1 | badge4 | 1 | 0 | 0 | 0 | | | | | |
     And I log out
 
   @score_section_display_homepage
   Scenario: Verify badge sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    And I turn editing mode on
-    And I edit the section "2" and I fill the form with:
+    And I am on "Ludilearn Badge" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-2 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | No Game Section |
+    And I press "Save changes"
     And I am on "Ludilearn Badge" course homepage
-    And I edit the section "3" and I fill the form with:
+    And I click on "Edit" "link" in the "#section-3 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-3 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Empty Section |
-    And I turn editing mode off
+    And I press "Save changes"
+    And I am on "Ludilearn Badge" course homepage with editing mode off
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I set the field "No Game Section" to "No gamified"
@@ -72,21 +81,27 @@ Feature: Badge game element configuration and validation by section in Ludilearn
   Scenario: Verify badge elements appear only in configured section
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    And I turn editing mode on
-    And I edit the section "2" and I fill the form with:
+    And I am on "Ludilearn Badge" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-2 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | No Game Section |
+    And I press "Save changes"
     And I am on "Ludilearn Badge" course homepage
-    And I edit the section "3" and I fill the form with:
+    And I click on "Edit" "link" in the "#section-3 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-3 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Empty Section |
-    And I turn editing mode off
+    And I press "Save changes"
+    And I am on "Ludilearn Badge" course homepage with editing mode off
     And I am on "Ludilearn Badge" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
-      | assign | Regular Note Only | Test without game element | L1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
-      | page | Regular Completion Only | Test without game element | L1 | reg2 | 2 | 2 | 0 | 0 | | | | | |
-      | quiz | Regular Both | Test without game element | L1 | reg3 | 2 | 1 | 100 | 1 | ##yesterday## | ##tomorrow## | | | |
-      | forum | Regular Forum | Test without game element | L1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+      | assign | Regular Note Only | Test without game element | LB1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
+      | page | Regular Completion Only | Test without game element | LB1 | reg2 | 2 | 2 | 0 | 0 | | | | | |
+      | quiz | Regular Both | Test without game element | LB1 | reg3 | 2 | 1 | 100 | 1 | ##yesterday## | ##tomorrow## | | | |
+      | forum | Regular Forum | Test without game element | LB1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I set the field "No Game Section" to "No gamified"
@@ -140,7 +155,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
   Scenario: Badge updates correctly when activity is completed
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
@@ -172,7 +187,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
   Scenario: Badge updates correctly from silver to gold when student receives grade
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
@@ -204,12 +219,10 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     And I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
     And I click on "Badge Section" "link" in the "region-main" "region"
-    And I click on "Badge Note Only" "link" in the "region-main" "region"
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "80"
-    And I press "Save changes"
+    And I am on the "badge1" "assign activity" page
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Badge Note Only | student1 | 80    |
     And I log out
 
     # Student verifies updated badges
@@ -227,11 +240,9 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     # Teacher updates grade to 90%
     And I log in as "teacher1"
     And I am on the "badge1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "90"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Badge Note Only | student1 | 90    |
     And I log out
     # Student verifies updated badges after grade
     And I log in as "student1"
@@ -246,11 +257,9 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     # Teacher updates grade to 100%
     And I log in as "teacher1"
     And I am on the "badge1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "100"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Badge Note Only | student1 | 100   |
     And I log out
     # Student verifies updated badges after grade
     And I log in as "student1"
@@ -269,7 +278,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     Given I log in as "teacher1"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
-      | Course       | L1        | Test questions |
+      | Course       | LB1       | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
@@ -279,7 +288,7 @@ Feature: Badge game element configuration and validation by section in Ludilearn
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
@@ -337,14 +346,14 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     # Teacher configures game elements allocation
     Given I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Badge Section" to "Badge"
     And I press "Save"
     Then I should see "The changes made have been applied"
 
     # Teacher sets badge thresholds
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LB1"
     And I set the field "Settings" to "Badge"
     And I set the field "Gold badge threshold" to "85"
     And I set the field "Silver badge threshold" to "70"
@@ -376,12 +385,10 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     And I log in as "teacher1"
     And I am on "Ludilearn Badge" course homepage
     And I click on "Badge Section" "link" in the "region-main" "region"
-    And I click on "Badge Note Only" "link" in the "region-main" "region"
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "60"
-    And I press "Save changes"
+    And I am on the "badge1" "assign activity" page
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Badge Note Only | student1 | 60    |
     And I log out
 
     # Student verifies Bronze badge earned
@@ -399,11 +406,9 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     # Teacher updates grade - Silver badge (75%)
     And I log in as "teacher1"
     And I am on the "badge1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "75"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Badge Note Only | student1 | 75    |
     And I log out
 
     # Student verifies Silver badge earned
@@ -421,11 +426,9 @@ Feature: Badge game element configuration and validation by section in Ludilearn
     # Teacher updates grade - Gold badge (90%)
     And I log in as "teacher1"
     And I am on the "badge1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "90"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem       | user     | grade |
+      | Badge Note Only | student1 | 90    |
     And I log out
 
     # Student verifies Gold badge earned

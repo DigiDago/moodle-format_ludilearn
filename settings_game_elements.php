@@ -55,4 +55,3 @@ echo $OUTPUT->header();
 $settings = new settings($course->id, $type);
 echo $renderer->render_settings($settings);
 echo $OUTPUT->footer();
-

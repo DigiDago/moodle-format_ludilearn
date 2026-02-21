@@ -37,7 +37,6 @@ use format_ludilearn\local\gameelements\avatar;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_avatar_parameters extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -64,16 +63,16 @@ class update_avatar_parameters extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
-                'courseid' => new external_value(
-                        PARAM_INT,
-                        'Course ID',
-                        VALUE_REQUIRED
-                ),
-                'thresholdtoearn' => new external_value(
-                        PARAM_INT,
-                        'Threshold to earn item',
-                        VALUE_REQUIRED
-                ),
+            'courseid' => new external_value(
+                PARAM_INT,
+                'Course ID',
+                VALUE_REQUIRED
+            ),
+            'thresholdtoearn' => new external_value(
+                PARAM_INT,
+                'Threshold to earn item',
+                VALUE_REQUIRED
+            ),
         ];
         return new external_function_parameters($parameters);
     }
@@ -85,16 +84,16 @@ class update_avatar_parameters extends external_api {
      */
     public static function execute_returns(): external_single_structure {
         $keys = [
-                'success' => new external_value(
-                        PARAM_BOOL,
-                        'Success of the update',
-                        VALUE_REQUIRED
-                ),
+            'success' => new external_value(
+                PARAM_BOOL,
+                'Success of the update',
+                VALUE_REQUIRED
+            ),
         ];
 
         return new external_single_structure(
-                $keys,
-                'update_avatar_parameters'
+            $keys,
+            'update_avatar_parameters'
         );
     }
 }

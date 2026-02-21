@@ -31,8 +31,6 @@ use Symfony\Component\HttpClient\Response\MockResponse;
  * @covers           \format_ludilearn\local\gameelements\score
  */
 final class score_test extends \advanced_testcase {
-
-
     /**
      * Generate default data.
      *
@@ -90,8 +88,12 @@ final class score_test extends \advanced_testcase {
         $manager->attribution_game_element($gameelementid, $default->user->id);
 
         // Genenerate args.
-        $scoreargs = $this->generate_score_constructor_args($default->course->id, $default->section->id, $default->user->id,
-                $cmsids);
+        $scoreargs = $this->generate_score_constructor_args(
+            $default->course->id,
+            $default->section->id,
+            $default->user->id,
+            $cmsids
+        );
 
         // Create mocks.
         $score = $this->getMockBuilder(score::class)
@@ -103,7 +105,8 @@ final class score_test extends \advanced_testcase {
                     'is_gradable',
                     'is_activity_available_for_user',
                     'get_grademax',
-                ])
+                ]
+            )
             ->getMock();
         $score->method('is_completion_enabled')
             ->willReturn(true);
@@ -115,9 +118,14 @@ final class score_test extends \advanced_testcase {
             ->willReturn(true);
         $score->method('get_grademax')
             ->willReturn(10.0);
-
-        $score->__construct($scoreargs['id'], $scoreargs['courseid'], $scoreargs['sectionid'],
-            $scoreargs['userid'], $scoreargs['parameters'], $scoreargs['cmparameters']);
+        $score->__construct(
+            $scoreargs['id'],
+            $scoreargs['courseid'],
+            $scoreargs['sectionid'],
+            $scoreargs['userid'],
+            $scoreargs['parameters'],
+            $scoreargs['cmparameters']
+        );
 
         // Check section parameters.
         $sectionparameters = $score->get_parameters();
@@ -147,11 +155,15 @@ final class score_test extends \advanced_testcase {
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
-        $gameelementreq = $DB->get_record_sql($gameelementsql,
-                ['courseid' => $courseid,
-                        'sectionid' => $sectionid,
-                        'userid' => $userid,
-                        'type' => 'score']);
+        $gameelementreq = $DB->get_record_sql(
+            $gameelementsql,
+            [
+                'courseid' => $courseid,
+                'sectionid' => $sectionid,
+                'userid' => $userid,
+                'type' => 'score',
+            ]
+        );
 
         if (!$gameelementreq) {
             return null;

@@ -28,8 +28,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'format_ludilearn/pagination', 
      Templates,
      Pagination,
      Loading,
-     Notification,
-     InplaceEditable) => {
+     Notification) => {
         let COURSE_ID;
 
         /**
@@ -125,7 +124,7 @@ define(['jquery', 'core/ajax', 'core/templates', 'format_ludilearn/pagination', 
                 }
             }], true, true)[0].done((response) => {
                 if (response.success) {
-                    console.log($('[data-for="report-reset-profile"][data-id="' + userid + '"]'));
+                    // console.log($('[data-for="report-reset-profile"][data-id="' + userid + '"]'));
                     $('[data-for="report-reset-profile"][data-id="' + userid + '"]').remove();
                 }
             }).fail(Notification.exception);

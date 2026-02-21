@@ -39,7 +39,6 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class submit_questionnaire extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -54,17 +53,25 @@ class submit_questionnaire extends external_api {
         $success = true;
 
         foreach ($answers as $answer) {
-            $existing = $DB->get_record('format_ludilearn_answers',
-                ['userid' => $USER->id, 'questionid' => $answer['id']]);
+            $existing = $DB->get_record(
+                'format_ludilearn_answers',
+                ['userid' => $USER->id, 'questionid' => $answer['id']]
+            );
             if ($existing) {
                 $existing->score = $answer['score'];
-                $success = $success && $DB->update_record('format_ludilearn_answers', $existing);
+                $success = $success && $DB->update_record(
+                    'format_ludilearn_answers',
+                    $existing
+                );
             } else {
                 $notexisting = new stdClass();
                 $notexisting->userid = $USER->id;
                 $notexisting->questionid = $answer['id'];
                 $notexisting->score = $answer['score'];
-                $success = $success && $DB->insert_record('format_ludilearn_answers', $notexisting);
+                $success = $success && $DB->insert_record(
+                    'format_ludilearn_answers',
+                    $notexisting
+                );
             }
         }
 

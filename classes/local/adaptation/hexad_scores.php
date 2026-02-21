@@ -67,12 +67,14 @@ class hexad_scores {
      * @param float $disruptor Disruptor score.
      * @param float $philanthropist Philanthropist score.
      */
-    public function __construct(float $achiever,
+    public function __construct(
+        float $achiever,
         float $player,
         float $socialiser,
         float $freespirit,
         float $disruptor,
-        float $philanthropist) {
+        float $philanthropist
+    ) {
         $this->achiever = $achiever;
         $this->player = $player;
         $this->socialiser = $socialiser;
@@ -107,7 +109,7 @@ class hexad_scores {
 
         // Retrieve the scores for each Hexad type.
         foreach ($questioncorrespondences as $hexadtype => $questionids) {
-            list($insql, $inparams) = $DB->get_in_or_equal($questionids, SQL_PARAMS_NAMED);
+            [$insql, $inparams] = $DB->get_in_or_equal($questionids, SQL_PARAMS_NAMED);
             $query = "SELECT questionid, score
                 FROM {format_ludilearn_answers}
                 WHERE userid = :userid
