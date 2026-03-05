@@ -30,7 +30,13 @@ use plugin_renderer_base;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class editable_renderer extends plugin_renderer_base {
-
+    /**
+     * Render the element types editable.
+     *
+     * @param element_types_editable $element the element to render
+     *
+     * @return string the rendered element
+     */
     public function render_element_types_editable(element_types_editable $element): string {
         return $this->render_from_template('core/inplace_editable', $element->export_for_template($this));
     }

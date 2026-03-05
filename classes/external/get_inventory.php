@@ -41,7 +41,6 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_inventory extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -87,7 +86,10 @@ class get_inventory extends external_api {
             $slot['slot'] = $s;
 
             // Get item slot name.
-            $slot['slotname'] = avatar::get_item_slot_name($s, $gameelement->get_world());;
+            $slot['slotname'] = avatar::get_item_slot_name(
+                $s,
+                $gameelement->get_world()
+            );
 
             $items = [];
             $countthemeforslot = $gameelement->get_count_theme_for_slot($s);
@@ -196,7 +198,7 @@ class get_inventory extends external_api {
                 ),
                 'Inventory of the user',
                 VALUE_REQUIRED,
-                ),
+            ),
         ];
 
         return new external_single_structure(

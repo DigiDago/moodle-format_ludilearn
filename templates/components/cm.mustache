@@ -15,7 +15,15 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template format_ludilearn/components/course
+    @template format_ludilearn/components/cm
+
+    Example context (json):
+    {
+        "jsonstate": "[]",
+        "id": 1,
+        "type": "cm",
+        "courseid": 2
+    }
 }}
 {{#js}}
     require([
@@ -24,7 +32,7 @@
     ], function(reactive, component) {
 
         // Initialize state before component init.
-        const jsonstate = {{{jsonstate}}};
+        const jsonstate = {{{jsonstate}}}{{^jsonstate}}[]{{/jsonstate}};
         const stateManager = reactive.ludilearn.getStateManager();
         stateManager.setReadOnly(false);
         stateManager.processUpdates(jsonstate);
@@ -32,7 +40,7 @@
 
         // Data to pass to the component.
         const data = {
-            cmid: {{id}}
+            cmid: {{id}}{{^id}}0{{/id}}
         };
         component.init('ludilearn-{{type}}-cm', reactive.ludilearn, data);
     });

@@ -33,8 +33,6 @@ use Symfony\Component\HttpClient\Response\MockResponse;
  * @covers           \format_ludilearn\output\renderer
  */
 final class renderer_test extends \advanced_testcase {
-
-
     /**
      * Generate data.
      */

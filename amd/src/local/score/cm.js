@@ -50,7 +50,6 @@ export default class extends BaseComponent {
     }
 
     getWatchers() {
-        let cmwatchers = [];
 
         return [
             {watch: `currentcm.bonuscompletion:updated`, handler: this._refreshBonusCompletion},
@@ -104,10 +103,14 @@ export default class extends BaseComponent {
         /*
         Create the following HTML structure:
         <div class="bonuscompletion">
-            + <span class="bonuscompletion-value" data-for="ludilearn-cm-bonuscompletion" data-id="{{id}}">{{ parameters.bonuscompletion }}</span>
+            + <span
+                class="bonuscompletion-value"
+                data-for="ludilearn-cm-bonuscompletion"
+                data-id="{{id}}">{{ parameters.bonuscompletion }}
+            </span>
             <span class="bonuscompletion-str">{{#str}} settings:bonuscompletion, format_ludilearn {{/str}}</span>
         </div>
-         */
+        */
         const bonuscompletiondiv = document.createElement('div');
         bonuscompletiondiv.className = 'bonuscompletion bonuscompletion-cm';
 

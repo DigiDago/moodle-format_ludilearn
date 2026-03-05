@@ -33,7 +33,6 @@ require_once($CFG->libdir . '/adminlib.php');
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class avatar extends game_element {
-
     /**
      * @var int
      */
@@ -110,8 +109,10 @@ class avatar extends game_element {
                 $cmparameters[$key]['gamified'] = true;
 
                 // Do not gamify the activity if it is not gradable and the completion is not enabled.
-                if ((!$this->is_gradable($key) && !$this->is_completion_enabled($key))
-                    || !$this->is_activity_available_for_user($key, $this->userid)) {
+                if (
+                    (!$this->is_gradable($key) && !$this->is_completion_enabled($key))
+                    || !$this->is_activity_available_for_user($key, $this->userid)
+                ) {
                     $cmparameters[$key]['gamified'] = false;
                     continue;
                 }
@@ -304,6 +305,7 @@ class avatar extends game_element {
     /**
      * Get parameters by default.
      *
+     * @param int $courseid The course id.
      * @return array Parameters by default.
      */
     public static function get_parameters_default($courseid = 0): array {
@@ -520,32 +522,42 @@ class avatar extends game_element {
     public function earn_item(int $cmid): void {
         global $DB;
         // Retrieve attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $this->id, 'userid' => $this->userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $this->id, 'userid' => $this->userid],
+        );
 
         // We can earn a new item.
         $lastitemnotowned = $this->get_last_item_not_owned();
-        $itemowned = $DB->get_record('format_ludilearn_ele_user',
+        $itemowned = $DB->get_record(
+            'format_ludilearn_ele_user',
             [
                 'attributionid' => $attribution->id,
                 'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
-            ]
+            ],
         );
         if ($itemowned) {
             $param = new stdClass();
             $param->id = $itemowned->id;
             $param->value = 1;
-            $DB->update_record('format_ludilearn_ele_user', $param);
+            $DB->update_record(
+                'format_ludilearn_ele_user',
+                $param
+            );
         } else {
-            $DB->insert_record('format_ludilearn_ele_user', [
-                'attributionid' => $attribution->id,
+            $DB->insert_record(
+                'format_ludilearn_ele_user',
+                ['attributionid' => $attribution->id,
                 'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
-                'value' => 1]);
+                'value' => 1]
+            );
         }
 
         // Mark the threshold as exceeded.
-        $thresholdexceeded = $DB->get_record('format_ludilearn_cm_user',
-            ['attributionid' => $attribution->id, 'cmid' => $cmid, 'name' => 'thresholdexceeded']);
+        $thresholdexceeded = $DB->get_record(
+            'format_ludilearn_cm_user',
+            ['attributionid' => $attribution->id, 'cmid' => $cmid, 'name' => 'thresholdexceeded']
+        );
         if ($thresholdexceeded) {
             $param = new stdClass();
             $param->id = $thresholdexceeded->id;
@@ -576,8 +588,13 @@ class avatar extends game_element {
         global $DB;
         $count = new stdClass();
         // Get the avatar game elements.
-        $avatars = $DB->get_records('format_ludilearn_elements',
-            ['courseid' => $courseid, 'type' => 'avatar'], '', 'id, sectionid');
+        $avatars = $DB->get_records(
+            'format_ludilearn_elements',
+            ['courseid' => $courseid, 'type' => 'avatar'],
+            '',
+            'id,
+            sectionid'
+        );
 
         // Get the count of items owned and the count of items ownable.
         $count->owned = 0;
@@ -650,12 +667,16 @@ class avatar extends game_element {
 
         $manager = new manager();
 
-        $gameelement = $DB->get_record('format_ludilearn_elements',
-            ['sectionid' => $coursemodule->section, 'type' => 'avatar']);
+        $gameelement = $DB->get_record(
+            'format_ludilearn_elements',
+            ['sectionid' => $coursemodule->section, 'type' => 'avatar']
+        );
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $gameelement->id, 'userid' => $userid]
+        );
         if ($attribution) {
             $gameelement = self::get($courseid, $coursemodule->section, $userid);
 
@@ -677,8 +698,10 @@ class avatar extends game_element {
             }
 
             // Update the score or create it if it does not exist.
-            $cmuser = $DB->get_record('format_ludilearn_cm_user',
-                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'progression']);
+            $cmuser = $DB->get_record(
+                'format_ludilearn_cm_user',
+                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'progression']
+            );
             if ($cmuser) {
                 // If the score is different from the previous one.
                 if ($progression != $cmuser->value) {
@@ -702,7 +725,8 @@ class avatar extends game_element {
                 if ($gameelement->get_thresholdexceeded($coursemodule->id) == 0) {
                     // We can earn a new item.
                     $lastitemnotowned = $gameelement->get_last_item_not_owned();
-                    $itemowned = $DB->get_record('format_ludilearn_ele_user',
+                    $itemowned = $DB->get_record(
+                        'format_ludilearn_ele_user',
                         [
                             'attributionid' => $attribution->id,
                             'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
@@ -721,8 +745,10 @@ class avatar extends game_element {
                     }
 
                     // Mark the threshold as exceeded.
-                    $thresholdexceeded = $DB->get_record('format_ludilearn_cm_user',
-                        ['attributionid' => $attribution->id, 'cmid' => $coursemodule->id, 'name' => 'thresholdexceeded']);
+                    $thresholdexceeded = $DB->get_record(
+                        'format_ludilearn_cm_user',
+                        ['attributionid' => $attribution->id, 'cmid' => $coursemodule->id, 'name' => 'thresholdexceeded']
+                    );
                     if ($thresholdexceeded) {
                         $param = new stdClass();
                         $param->id = $thresholdexceeded->id;
@@ -753,16 +779,20 @@ class avatar extends game_element {
         global $DB;
 
         // Retrieve all game elements of the course.
-        $gameelements = $DB->get_records('format_ludilearn_elements', ['courseid' => $courseid, 'type' => 'avatar']);
+        $gameelements = $DB->get_records(
+            'format_ludilearn_elements',
+            ['courseid' => $courseid, 'type' => 'avatar']
+        );
 
         if (!$gameelements) {
             return false;
         } else {
             foreach ($gameelements as $gameelement) {
                 // Retrieve existing values for penalties parameter.
-                $thresholdtoearnrecord = $DB->get_record('format_ludilearn_params',
-                        ['gameelementid' => $gameelement->id,
-                                'name' => 'thresholdtoearn']);
+                $thresholdtoearnrecord = $DB->get_record(
+                    'format_ludilearn_params',
+                    ['gameelementid' => $gameelement->id, 'name' => 'thresholdtoearn']
+                );
                 // Check value.
                 if ($thresholdtoearn < 0) {
                     $thresholdtoearn = 0;
@@ -797,7 +827,8 @@ class avatar extends game_element {
         $manager = new manager();
         $quiz = $DB->get_record('quiz', ['id' => $quizid]);
         $module = $DB->get_record('modules', ['name' => 'quiz']);
-        $coursemodule = $DB->get_record('course_modules',
+        $coursemodule = $DB->get_record(
+            'course_modules',
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
@@ -806,12 +837,16 @@ class avatar extends game_element {
         );
 
         // Get game element.
-        $gameelement = $DB->get_record('format_ludilearn_elements',
-            ['sectionid' => $coursemodule->section, 'type' => 'avatar']);
+        $gameelement = $DB->get_record(
+            'format_ludilearn_elements',
+            ['sectionid' => $coursemodule->section, 'type' => 'avatar']
+        );
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $gameelement->id, 'userid' => $userid]
+        );
         if ($attribution) {
             $gameelement = self::get($quiz->course, $coursemodule->section, $userid);
 
@@ -826,8 +861,10 @@ class avatar extends game_element {
                 $progression = intval($grade * 100 / $grademax);
             }
             // Update the score or create it if it does not exist.
-            $cmuser = $DB->get_record('format_ludilearn_cm_user',
-                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'progression']);
+            $cmuser = $DB->get_record(
+                'format_ludilearn_cm_user',
+                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'progression']
+            );
             if ($cmuser) {
                 // If the progression is different from the previous one.
                 if ($progression != $cmuser->value) {
@@ -851,37 +888,49 @@ class avatar extends game_element {
                 if ($gameelement->get_thresholdexceeded($coursemodule->id) == 0) {
                     // We can earn a new item.
                     $lastitemnotowned = $gameelement->get_last_item_not_owned();
-                    $itemowned = $DB->get_record('format_ludilearn_ele_user',
+                    $itemowned = $DB->get_record(
+                        'format_ludilearn_ele_user',
                         [
                             'attributionid' => $attribution->id,
                             'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
-                        ]);
+                        ]
+                    );
                     if ($itemowned) {
                         $param = new stdClass();
                         $param->id = $itemowned->id;
                         $param->value = 1;
                         $DB->update_record('format_ludilearn_ele_user', $param);
                     } else {
-                        $DB->insert_record('format_ludilearn_ele_user', [
-                            'attributionid' => $attribution->id,
-                            'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
-                            'value' => 1]);
+                        $DB->insert_record(
+                            'format_ludilearn_ele_user',
+                            [
+                                'attributionid' => $attribution->id,
+                                'name' => 'item_owned-' . $lastitemnotowned->theme . '-' . $lastitemnotowned->slot,
+                                'value' => 1,
+                            ]
+                        );
                     }
 
                     // Mark the threshold as exceeded.
-                    $thresholdexceeded = $DB->get_record('format_ludilearn_cm_user',
-                        ['attributionid' => $attribution->id, 'cmid' => $coursemodule->id, 'name' => 'thresholdexceeded']);
+                    $thresholdexceeded = $DB->get_record(
+                        'format_ludilearn_cm_user',
+                        ['attributionid' => $attribution->id, 'cmid' => $coursemodule->id, 'name' => 'thresholdexceeded']
+                    );
                     if ($thresholdexceeded) {
                         $param = new stdClass();
                         $param->id = $thresholdexceeded->id;
                         $param->value = 1;
                         $DB->update_record('format_ludilearn_cm_user', $param);
                     } else {
-                        $DB->insert_record('format_ludilearn_cm_user', [
-                            'attributionid' => $attribution->id,
-                            'cmid' => $coursemodule->id,
-                            'name' => 'thresholdexceeded',
-                            'value' => 1]);
+                        $DB->insert_record(
+                            'format_ludilearn_cm_user',
+                            [
+                                'attributionid' => $attribution->id,
+                                'cmid' => $coursemodule->id,
+                                'name' => 'thresholdexceeded',
+                                'value' => 1,
+                            ]
+                        );
                     }
                 }
             }
@@ -905,11 +954,15 @@ class avatar extends game_element {
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
-        $gameelementreq = $DB->get_record_sql($gameelementsql,
-            ['courseid' => $courseid,
+        $gameelementreq = $DB->get_record_sql(
+            $gameelementsql,
+            [
+                'courseid' => $courseid,
                 'sectionid' => $sectionid,
                 'userid' => $userid,
-                'type' => 'avatar']);
+                'type' => 'avatar',
+            ]
+        );
 
         if (!$gameelementreq) {
             return null;
@@ -950,7 +1003,6 @@ class avatar extends game_element {
             if (key_exists($cmparameterreq->cmid, $cmparameters)) {
                 $cmparameters[$cmparameterreq->cmid][$cmparameterreq->name] = $cmparameterreq->value;
             }
-
         }
 
         $sqlcms = 'SELECT cm.id, cm.cmid, cm.name, cm.value
@@ -996,11 +1048,13 @@ class avatar extends game_element {
         }
         $parameters['itemowned'] = $itemsowned;
 
-        return new avatar($gameelementreq->gameelementid,
+        return new avatar(
+            $gameelementreq->gameelementid,
             $gameelementreq->courseid,
             $gameelementreq->sectionid,
             $gameelementreq->userid,
             $parameters,
-            $cmparameters);
+            $cmparameters
+        );
     }
 }

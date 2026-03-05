@@ -33,7 +33,6 @@ require_once($CFG->libdir . '/adminlib.php');
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class nogamified extends game_element {
-
     /**
      * Constructor.
      *
@@ -68,30 +67,39 @@ class nogamified extends game_element {
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
-        $gameelementreq = $DB->get_record_sql($gameelementsql,
-            ['courseid' => $courseid,
+        $gameelementreq = $DB->get_record_sql(
+            $gameelementsql,
+            [
+                'courseid' => $courseid,
                 'sectionid' => $sectionid,
                 'userid' => $userid,
-                'type' => 'nogamified']);
+                'type' => 'nogamified',
+            ]
+        );
 
         if (!$gameelementreq) {
-            $nogamifiedelement = $DB->get_record('format_ludilearn_elements',
-                ['courseid' => $courseid,
+            $nogamifiedelement = $DB->get_record(
+                'format_ludilearn_elements',
+                [
+                    'courseid' => $courseid,
                     'sectionid' => $sectionid,
-                    'type' => 'nogamified']);
+                    'type' => 'nogamified',
+                ]
+            );
             $coursemodules = $DB->get_records('course_modules', ['course' => $courseid]);
             $cmsparams = [];
             foreach ($coursemodules as $coursemodule) {
                 $cmsparams[$coursemodule->id]['id'] = $coursemodule->id;
                 $cmsparams[$coursemodule->id]['condition'] = 'nogamification';
-
             }
-            return new nogamified($nogamifiedelement->id,
+            return new nogamified(
+                $nogamifiedelement->id,
                 $courseid,
                 $sectionid,
                 $userid,
                 ['condition' => 'nogamification'],
-                $cmsparams);
+                $cmsparams
+            );
         }
         // Get all cm of the section.
         $cms = $DB->get_records('course_modules', ['section' => $sectionid]);
@@ -142,11 +150,13 @@ class nogamified extends game_element {
             }
         }
 
-        return new nogamified($gameelementreq->gameelementid,
+        return new nogamified(
+            $gameelementreq->gameelementid,
             $gameelementreq->courseid,
             $gameelementreq->sectionid,
             $gameelementreq->userid,
             $parameters,
-            $cmparameters);
+            $cmparameters
+        );
     }
 }

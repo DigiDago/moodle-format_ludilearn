@@ -32,7 +32,6 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class element_types_editable extends \core\output\inplace_editable {
-
     /** @var string $typeassigned */
     private $typeassigned;
 
@@ -61,7 +60,6 @@ class element_types_editable extends \core\output\inplace_editable {
         $formattedtypeassigned = format_string(get_string($this->typeassigned, 'format_ludilearn'));
         parent::__construct('format_ludilearn', 'element_types', $itemid, $editable, $formattedtypeassigned, $this->typeassigned);
 
-
         $options = [];
         // If manually assigned, add default option.
         if ($manuallyassigned) {
@@ -79,15 +77,6 @@ class element_types_editable extends \core\output\inplace_editable {
         $this->set_type_select($options);
     }
 
-    /**
-     * Export this data so it can be used as the context for a mustache template.
-     *
-     * @param \renderer_base $output
-     * @return array
-     */
-    public function export_for_template(\renderer_base $output) {
-        return parent::export_for_template($output);
-    }
 
     /**
      * Updates the value in database and returns itself, called from inplace_editable callback
@@ -103,7 +92,7 @@ class element_types_editable extends \core\output\inplace_editable {
         // Do the thing.
         // Return one of me.
         // Validate the inputs.
-        list($courseid, $userid) = explode(':', $itemid, 2);
+        [$courseid, $userid] = explode(':', $itemid, 2);
 
         $courseid = clean_param($courseid, PARAM_INT);
         $userid = clean_param($userid, PARAM_INT);

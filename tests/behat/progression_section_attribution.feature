@@ -11,43 +11,52 @@ Feature: Progression game element section attribution in Ludilearn course format
       | student1 | Student | One | student1@example.com |
     And the following "courses" exist:
       | fullname | shortname | format | numsections | enablecompletion |
-      | Ludilearn Progression | L1 | ludilearn | 3 | 1 |
+      | Ludilearn Progression | LP1 | ludilearn | 3 | 1 |
     And the following "course enrolments" exist:
       | user | course | role |
-      | teacher1 | L1 | editingteacher |
-      | student1 | L1 | student |
+      | teacher1 | LP1 | editingteacher |
+      | student1 | LP1 | student |
     And I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    And I navigate to "Settings" in current page administration
+    And I visit Ludilearn course settings page for "LP1"
     And I expand all fieldsets
     And I set the following fields to these values:
       | id_assignment | bysection |
     And I press "Save and display"
-    And I turn editing mode on
-    And I edit the section "1" and I fill the form with:
+    And I am on "Ludilearn Progression" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-1 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-1 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Progression Section |
+    And I press "Save changes"
     And I am on "Ludilearn Progression" course homepage
     And the following "activities" exist:
       | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
-      | assign | Progress Note Only | Test progression with grade | L1 | prog1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
-      | page | Progress Completion Only | Test progression with completion | L1 | prog2 | 1 | 1 | 0 | 0 | | | | | |
-      | quiz | Progress Both | Test progression with grade and completion | L1 | prog3 | 1 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
-      | forum | Progress No Gamification | Test progression without gamification | L1 | prog4 | 1 | 0 | 0 | 0 | | | | | |
+      | assign | Progress Note Only | Test progression with grade | LP1 | prog1 | 1 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
+      | page | Progress Completion Only | Test progression with completion | LP1 | prog2 | 1 | 1 | 0 | 0 | | | | | |
+      | quiz | Progress Both | Test progression with grade and completion | LP1 | prog3 | 1 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
+      | forum | Progress No Gamification | Test progression without gamification | LP1 | prog4 | 1 | 0 | 0 | 0 | | | | | |
     And I log out
 
   @score_section_display_homepage
   Scenario: Verify progression sections visualization and titles on course homepage before visiting sections
     Given I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    And I turn editing mode on
-    And I edit the section "2" and I fill the form with:
+    And I am on "Ludilearn Progression" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-2 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | No Game Section |
+    And I press "Save changes"
     And I am on "Ludilearn Progression" course homepage
-    And I edit the section "3" and I fill the form with:
+    And I click on "Edit" "link" in the "#section-3 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-3 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Empty Section |
-    And I turn editing mode off
+    And I press "Save changes"
+    And I am on "Ludilearn Progression" course homepage with editing mode off
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LP1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I set the field "No Game Section" to "No gamified"
@@ -72,21 +81,27 @@ Feature: Progression game element section attribution in Ludilearn course format
   Scenario: Verify progression elements for activies and resources appear only in configured section
     Given I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    And I turn editing mode on
-    And I edit the section "2" and I fill the form with:
+    And I am on "Ludilearn Progression" course homepage with editing mode on
+    And I click on "Edit" "link" in the "#section-2 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-2 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | No Game Section |
+    And I press "Save changes"
     And I am on "Ludilearn Progression" course homepage
-    And I edit the section "3" and I fill the form with:
+    And I click on "Edit" "link" in the "#section-3 .section_action_menu" "css_element"
+    And I click on "a[href*='/course/editsection.php']" "css_element" in the "#section-3 .section_action_menu" "css_element"
+    And I set the following fields to these values:
       | name | Empty Section |
-    And I turn editing mode off
+    And I press "Save changes"
+    And I am on "Ludilearn Progression" course homepage with editing mode off
     And I am on "Ludilearn Progression" course homepage
     And the following "activities" exist:
      | activity | name | intro | course | idnumber | section | completion | grade | completionusegrade | allowsubmissionsfromdate | duedate | assignsubmission_file_enabled | assignsubmission_file_maxfiles | assignsubmission_file_maxsizebytes |
-      | assign | Progress Note Only | Test progression with grade | L1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
-      | page | Progress Completion Only | Test progression with completion | L1 | reg2 | 2 | 1 | 0 | 0 | | | | | |
-      | quiz | Progress Both | Test progression with grade and completion | L1 | reg3 | 2 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
-      | forum | Progress No Gamification | Test progression without gamification | L1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+      | assign | Progress Note Only | Test progression with grade | LP1 | reg1 | 2 | 0 | 100 | 0 | ##yesterday## | ##tomorrow## | 1 | 1 | 4096 |
+      | page | Progress Completion Only | Test progression with completion | LP1 | reg2 | 2 | 1 | 0 | 0 | | | | | |
+      | quiz | Progress Both | Test progression with grade and completion | LP1 | reg3 | 2 | 1 | 100 | 0 | ##yesterday## | ##tomorrow## | | | |
+      | forum | Progress No Gamification | Test progression without gamification | LP1 | reg4 | 2 | 0 | 0 | 0 | | | | | |
+    When I visit Ludilearn game elements settings page for "LP1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I set the field "No Game Section" to "No gamified"
@@ -146,7 +161,7 @@ Feature: Progression game element section attribution in Ludilearn course format
   Scenario: Progression updates correctly when activity is completed
     Given I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LP1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -180,7 +195,7 @@ Feature: Progression game element section attribution in Ludilearn course format
   Scenario: Progression updates correctly when student receives grade
     Given I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LP1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -206,11 +221,9 @@ Feature: Progression game element section attribution in Ludilearn course format
     # Teacher grades submission
     And I log in as "teacher1"
     And I am on the "prog1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "80"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem           | user     | grade |
+      | Progress Note Only  | student1 | 80    |
     And I log out
 
     # Student verifies updated progression
@@ -227,11 +240,9 @@ Feature: Progression game element section attribution in Ludilearn course format
     # Teacher update grade
     And I log in as "teacher1"
     And I am on the "prog1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "90"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem           | user     | grade |
+      | Progress Note Only  | student1 | 90    |
     And I log out
 
     # Student verifies updated progression
@@ -248,11 +259,9 @@ Feature: Progression game element section attribution in Ludilearn course format
     # Teacher update grade
     And I log in as "teacher1"
     And I am on the "prog1" "assign activity" page
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "100"
-    And I press "Save changes"
+    And the following "grade grades" exist:
+      | gradeitem           | user     | grade |
+      | Progress Note Only  | student1 | 100   |
     And I log out
 
     # Student verifies updated progression
@@ -271,7 +280,7 @@ Feature: Progression game element section attribution in Ludilearn course format
     Given I log in as "teacher1"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
-      | Course       | L1        | Test questions |
+      | Course       | LP1       | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
@@ -281,7 +290,7 @@ Feature: Progression game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LP1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -339,7 +348,7 @@ Feature: Progression game element section attribution in Ludilearn course format
     Given I log in as "teacher1"
     And the following "question categories" exist:
       | contextlevel | reference | name           |
-      | Course       | L1        | Test questions |
+      | Course       | LP1       | Test questions |
     And the following "questions" exist:
       | questioncategory | qtype     | name           | questiontext              | answer 1 | grade |
       | Test questions   | truefalse | First question | This is the first question| True     | 50    |
@@ -349,7 +358,7 @@ Feature: Progression game element section attribution in Ludilearn course format
       | First question | 1    | 50      |
       | Second question| 1    | 50      |
     And I am on "Ludilearn Progression" course homepage
-    When I navigate to "LudiLearn customisation of game elements" in current page administration
+    When I visit Ludilearn game elements settings page for "LP1"
     And I set the field "Settings" to "Allocation of game elements by section"
     And I set the field "Progression Section" to "Task progression"
     And I press "Save"
@@ -373,12 +382,10 @@ Feature: Progression game element section attribution in Ludilearn course format
     And I log in as "teacher1"
     And I am on "Ludilearn Progression" course homepage
     And I click on "Progression Section" "link" in the "region-main" "region"
-    And I click on "Progress Note Only" "link" in the "region-main" "region"
-    And I navigate to "Submissions" in current page administration
-    And I click on "Grade actions" "actionmenu" in the "student1@example.com" "table_row"
-    And I choose "Grade" in the open action menu
-    And I set the field "Grade out of 100" to "100"
-    And I press "Save changes"
+    And I am on the "prog1" "assign activity" page
+    And the following "grade grades" exist:
+      | gradeitem           | user     | grade |
+      | Progress Note Only  | student1 | 100   |
     And I log out
     And I log in as "student1"
     And I am on "Ludilearn Progression" course homepage

@@ -37,7 +37,6 @@ use format_ludilearn\local\gameelements\timer;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class update_timer_parameters extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -47,7 +46,6 @@ class update_timer_parameters extends external_api {
      * @return array The web service return.
      */
     public static function execute(int $courseid, int $penalties): array {
-
         $context = context_course::instance($courseid);
         self::validate_context($context);
         require_capability('format/ludilearn:manage', $context);

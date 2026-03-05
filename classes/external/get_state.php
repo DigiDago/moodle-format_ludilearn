@@ -41,7 +41,6 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class get_state extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -68,16 +67,16 @@ class get_state extends external_api {
      */
     public static function execute_parameters(): external_function_parameters {
         $parameters = [
-                'ressource' => new external_value(
-                        PARAM_TEXT,
-                        'Ressource get state (course, section, cm)',
-                        VALUE_REQUIRED
-                ),
-                'ressourceid' => new external_value(
-                        PARAM_INT,
-                        'Ressource id (course id, section id, cm id)',
-                        VALUE_REQUIRED
-                ),
+            'ressource' => new external_value(
+                PARAM_TEXT,
+                'Ressource get state (course, section, cm)',
+                VALUE_REQUIRED
+            ),
+            'ressourceid' => new external_value(
+                PARAM_INT,
+                'Ressource id (course id, section id, cm id)',
+                VALUE_REQUIRED
+            ),
         ];
         return new external_function_parameters($parameters);
     }

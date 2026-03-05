@@ -158,10 +158,17 @@ export default class extends BaseComponent {
         /*
         Create the following HTML structure:
         <div class="bonuscompletion">
-            + <span class="bonuscompletion-value" data-for="ludilearn-section-cm-bonuscompletion" data-id="{{id}}">{{ parameters.bonuscompletion }}</span>
-            <span class="bonuscompletion-str">{{#str}} settings:bonuscompletion, format_ludilearn {{/str}}</span>
+            + <span
+                class="bonuscompletion-value"
+                data-for="ludilearn-section-cm-bonuscompletion"
+                data-id="{{id}}">{{ parameters.bonuscompletion }}
+            </span>
+            <span
+                class="bonuscompletion-str">{{#str}}
+                settings:bonuscompletion, format_ludilearn {{/str}}
+            </span>
         </div>
-         */
+        */
         const bonuscompletiondiv = document.createElement('div');
         bonuscompletiondiv.className = 'bonuscompletion';
 

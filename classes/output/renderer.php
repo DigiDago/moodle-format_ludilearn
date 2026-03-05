@@ -36,7 +36,6 @@ use stdClass;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends section_renderer {
-
     /**
      * Constructor method, calls the parent constructor.
      *
@@ -116,7 +115,9 @@ class renderer extends section_renderer {
         $urlgameprofile->param('gameprofile', true);
         $urlgameprofile->param('hideheader', 1);
         $urlgameprofile = new moodle_url($urlgameprofile->out(false), $urlgameprofile->params());
-        $this->page->requires->js_call_amd('format_ludilearn/questionnaire', 'init',
+        $this->page->requires->js_call_amd(
+            'format_ludilearn/questionnaire',
+            'init',
             [
                 'questionscount' => $data->questionscount,
                 'urlgameprofile' => $urlgameprofile->out(false),
@@ -137,8 +138,11 @@ class renderer extends section_renderer {
      */
     public function render_report(int $courseid): string {
 
-        $this->page->requires->js_call_amd('format_ludilearn/report', 'init',
-            ['courseid' => $courseid]);
+        $this->page->requires->js_call_amd(
+            'format_ludilearn/report',
+            'init',
+            ['courseid' => $courseid]
+        );
         return $this->render_from_template(
             'format_ludilearn/report/report',
             ['courseid' => $courseid]
@@ -158,8 +162,11 @@ class renderer extends section_renderer {
 
         $data = $this->data_for_gameprofile($courseid);
 
-        $this->page->requires->js_call_amd('format_ludilearn/gameprofile', 'init',
-            ['hexadscores' => $data->hexadscores]);
+        $this->page->requires->js_call_amd(
+            'format_ludilearn/gameprofile',
+            'init',
+            ['hexadscores' => $data->hexadscores]
+        );
         return $this->render_from_template(
             'format_ludilearn/gameprofile',
             $data
@@ -204,17 +211,27 @@ class renderer extends section_renderer {
         $freespiritpercentage = intval($data->hexadscores->freespirit * 100 / $total);
         $disruptorpercentage = intval($data->hexadscores->disruptor * 100 / $total);
         $philanthropistpercentage = intval($data->hexadscores->philanthropist * 100 / $total);
-        $totalpercentage = $achieverpercentage + $playerpercentage + $socialiserpercentage + $freespiritpercentage +
-                $disruptorpercentage + $philanthropistpercentage;
+        $totalpercentage =
+            $achieverpercentage
+            + $playerpercentage
+            + $socialiserpercentage
+            + $freespiritpercentage
+            + $disruptorpercentage
+            + $philanthropistpercentage;
 
         // If the total percentage is not 100 (because of intval), we need to adjust the highest percentage to make it 100.
-
         if ($totalpercentage != 100) {
             $diff = 100 - $totalpercentage;
 
             while ($diff > 0) {
-                $max = max($achieverpercentage, $playerpercentage, $socialiserpercentage, $freespiritpercentage,
-                        $disruptorpercentage, $philanthropistpercentage);
+                $max = max(
+                    $achieverpercentage,
+                    $playerpercentage,
+                    $socialiserpercentage,
+                    $freespiritpercentage,
+                    $disruptorpercentage,
+                    $philanthropistpercentage
+                );
 
                 if ($max == $achieverpercentage) {
                     $achieverpercentage += 1;

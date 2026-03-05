@@ -68,7 +68,7 @@ class format_ludilearn_observer {
             $manager = new manager();
             $course = get_course($event->courseid);
             if ($course->format == 'ludilearn') {
-                require_once($CFG->dirroot.'/course/lib.php');
+                require_once($CFG->dirroot . '/course/lib.php');
                 $userid = $event->relateduserid;
                 $format = course_get_format($course);
                 // Get the format options.
@@ -77,7 +77,8 @@ class format_ludilearn_observer {
                     $event->courseid,
                     $options['assignment'],
                     $options['default_game_element'],
-                    $userid);
+                    $userid
+                );
             }
         }
     }
@@ -96,7 +97,7 @@ class format_ludilearn_observer {
             $manager = new manager();
             $course = get_course($event->courseid);
             if ($course->format == 'ludilearn') {
-                require_once($CFG->dirroot.'/course/lib.php');
+                require_once($CFG->dirroot . '/course/lib.php');
                 $userid = $event->relateduserid;
                 $format = course_get_format($course);
                 // Get the format options.
@@ -105,7 +106,8 @@ class format_ludilearn_observer {
                     $event->courseid,
                     $options['assignment'],
                     $options['default_game_element'],
-                    $userid);
+                    $userid
+                );
             }
         }
     }
@@ -127,7 +129,7 @@ class format_ludilearn_observer {
                     $manager = new manager();
                     $course = get_course($parentcontext->instanceid);
                     if ($course->format == 'ludilearn') {
-                        require_once($CFG->dirroot.'/course/lib.php');
+                        require_once($CFG->dirroot . '/course/lib.php');
                         $userid = $event->relateduserid;
                         $format = course_get_format($course);
 
@@ -138,7 +140,8 @@ class format_ludilearn_observer {
                             $event->courseid,
                             $options['assignment'],
                             $options['default_game_element'],
-                            $userid);
+                            $userid
+                        );
                     }
                 }
             }
@@ -164,7 +167,7 @@ class format_ludilearn_observer {
         if (self::is_restoring($event->courseid)) {
             return;
         }
-        require_once($CFG->dirroot.'/course/lib.php');
+        require_once($CFG->dirroot . '/course/lib.php');
         $format = course_get_format($course);
         // Get the format options.
         $options = $format->get_format_options();
@@ -174,11 +177,18 @@ class format_ludilearn_observer {
             game_element::create_all($course->id, $event->objectid);
 
             $gameelement = false;
-            $users = get_enrolled_users(context_course::instance($course->id));
+            $coursecontext = context_course::instance($course->id);
+            $users = get_enrolled_users($coursecontext);
 
             // Get the default game element.
-            $gameelementbydefault = $DB->get_record('format_ludilearn_elements',
-                ['courseid' => $course->id, 'sectionid' => $event->objectid, 'type' => $options['default_game_element']]);
+            $gameelementbydefault = $DB->get_record(
+                'format_ludilearn_elements',
+                [
+                    'courseid' => $course->id,
+                    'sectionid' => $event->objectid,
+                    'type' => $options['default_game_element'],
+                ]
+            );
 
             foreach ($users as $user) {
                 $type = $options['default_game_element'];
@@ -189,20 +199,31 @@ class format_ludilearn_observer {
                         $type = $profile->type;
                     }
                 } else if ($options['assignment'] == 'bysection') {
-                    $bysection = $DB->get_record('format_ludilearn_bysection',
-                        ['courseid' => $course->id, 'sectionid' => $event->objectid]);
+                    $bysection = $DB->get_record(
+                        'format_ludilearn_bysection',
+                        ['courseid' => $course->id, 'sectionid' => $event->objectid]
+                    );
                     if ($bysection) {
                         $type = 'bysection';
                     } else {
-                        $bysection = $manager->update_attribution_by_section($course->id, $event->objectid,
-                            $gameelementbydefault->id);
+                        $bysection = $manager->update_attribution_by_section(
+                            $course->id,
+                            $event->objectid,
+                            $gameelementbydefault->id
+                        );
                     }
                 }
                 // Attribution game element.
                 if (isset($type)) {
                     if ($options['assignment'] != 'bysection') {
-                        $gameelement = $DB->get_record('format_ludilearn_elements',
-                            ['courseid' => $course->id, 'sectionid' => $event->objectid, 'type' => $type]);
+                        $gameelement = $DB->get_record(
+                            'format_ludilearn_elements',
+                            [
+                                'courseid' => $course->id,
+                                'sectionid' => $event->objectid,
+                                'type' => $type,
+                            ]
+                        );
                         $manager->attribution_game_element($gameelement->id, $user->id);
                     } else {
                         // If the game element by section already exist, we attribute it to the user.
@@ -210,7 +231,8 @@ class format_ludilearn_observer {
                             $manager->attribution_game_element($bysection->gameelementid, $user->id);
                         }
                     }
-                    $gameelement = $DB->get_record('format_ludilearn_elements',
+                    $gameelement = $DB->get_record(
+                        'format_ludilearn_elements',
                         [
                             'sectionid' => $event->objectid,
                             'type' => $type,
@@ -271,18 +293,29 @@ class format_ludilearn_observer {
         $course = $DB->get_record('course', ['id' => $event->courseid]);
         $cm = $DB->get_record('course_modules', ['id' => $event->objectid]);
         if ($course->format == 'ludilearn') {
-            $gameelements = $DB->get_records('format_ludilearn_elements',
+            $gameelements = $DB->get_records(
+                'format_ludilearn_elements',
                 [
                     'courseid' => $course->id,
                     'sectionid' => $cm->section,
                 ]
             );
             foreach ($gameelements as $gameelement) {
-                $cmparameters = game_element::get_cm_parameters_default_by_type($gameelement->type, $event->other['modulename'],
-                    $event->objectid);
+                $cmparameters = game_element::get_cm_parameters_default_by_type(
+                    $gameelement->type,
+                    $event->other['modulename'],
+                    $event->objectid
+                );
                 foreach ($cmparameters as $name => $value) {
-                    $DB->insert_record('format_ludilearn_cm_params',
-                        ['gameelementid' => $gameelement->id, 'cmid' => $cm->id, 'name' => $name, 'value' => $value]);
+                    $DB->insert_record(
+                        'format_ludilearn_cm_params',
+                        [
+                            'gameelementid' => $gameelement->id,
+                            'cmid' => $cm->id,
+                            'name' => $name,
+                            'value' => $value,
+                        ]
+                    );
                 }
             }
         }
@@ -321,8 +354,10 @@ class format_ludilearn_observer {
             // If the section has changed, we need to update the game element.
             foreach (game_element::get_all_types() as $type) {
                 // Game element of the next section.
-                $nextgameelement = $DB->get_record('format_ludilearn_elements',
-                    ['courseid' => $event->courseid, 'sectionid' => $cm->section, 'type' => $type]);
+                $nextgameelement = $DB->get_record(
+                    'format_ludilearn_elements',
+                    ['courseid' => $event->courseid, 'sectionid' => $cm->section, 'type' => $type]
+                );
 
                 $previousgameelementsql = 'SELECT ge.id FROM {format_ludilearn_cm_params} cmp
                                     INNER JOIN {format_ludilearn_elements} ge ON ge.id = cmp.gameelementid
@@ -345,8 +380,10 @@ class format_ludilearn_observer {
                 $DB->execute($sql, ['nextgameelement' => $nextgameelement->id, 'id' => $previsousgameelement->id]);
 
                 // Attributions of the next section.
-                $attributions = $DB->get_records('format_ludilearn_attributio',
-                    ['gameelementid' => $nextgameelement->id]);
+                $attributions = $DB->get_records(
+                    'format_ludilearn_attributio',
+                    ['gameelementid' => $nextgameelement->id]
+                );
 
                 // Update the attribution of the course module.
                 foreach ($attributions as $attribution) {
@@ -385,7 +422,8 @@ class format_ludilearn_observer {
         }
 
         // Get course module.
-        $coursemodule = $DB->get_record('course_modules',
+        $coursemodule = $DB->get_record(
+            'course_modules',
             [
                 'course' => $event->courseid,
                 'module' => $module->id,
@@ -399,8 +437,12 @@ class format_ludilearn_observer {
             score::update_elements($event->courseid, $coursemodule, $module->name, $userid);
 
             // Update badge elements.
-            \format_ludilearn\local\gameelements\badge::update_elements($event->courseid, $coursemodule,
-                $module->name, $userid);
+            \format_ludilearn\local\gameelements\badge::update_elements(
+                $event->courseid,
+                $coursemodule,
+                $module->name,
+                $userid
+            );
 
             // Update progress elements.
             progress::update_elements($event->courseid, $coursemodule, $module->name, $userid);
@@ -428,7 +470,6 @@ class format_ludilearn_observer {
         // Check if the quiz is in a ludilearn course.
         $course = $DB->get_record('course', ['id' => $event->courseid]);
         if ($course->format == 'ludilearn') {
-
             // Ignore if quiz with defered feedback.
             if (!$quiz || $quiz->preferredbehaviour != 'immediatefeedback') {
                 return;
@@ -438,8 +479,10 @@ class format_ludilearn_observer {
             score::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
 
             // Update badge element.
-            \format_ludilearn\local\gameelements\badge::update_quiz_immediate_feedback($quiz->id,
-                $event->relateduserid);
+            \format_ludilearn\local\gameelements\badge::update_quiz_immediate_feedback(
+                $quiz->id,
+                $event->relateduserid
+            );
 
             // Update progress element.
             progress::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
@@ -478,8 +521,10 @@ class format_ludilearn_observer {
             score::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
 
             // Update badge element.
-            \format_ludilearn\local\gameelements\badge::update_quiz_immediate_feedback($quiz->id,
-                $event->relateduserid);
+            \format_ludilearn\local\gameelements\badge::update_quiz_immediate_feedback(
+                $quiz->id,
+                $event->relateduserid
+            );
 
             // Update progress element.
             progress::update_quiz_immediate_feedback($quiz->id, $event->relateduserid);
@@ -494,7 +539,6 @@ class format_ludilearn_observer {
             ranking::update_quiz_immediate_feedback($quiz->id, $event->relateduserid, $event->objectid);
 
             // Trigger event question attempt updated.
-
         }
     }
 
@@ -553,17 +597,19 @@ class format_ludilearn_observer {
         // If the course is restored, we need to update the game elements.
         $course = $DB->get_record('course', ['id' => $event->objectid]);
         if ($course->format == 'ludilearn') {
-            require_once($CFG->dirroot.'/course/lib.php');
+            require_once($CFG->dirroot . '/course/lib.php');
             $format = course_get_format($course);
             $options = $format->get_format_options();
             $manager = new manager();
             game_element::create_all_for_course($course->id);
 
             // Sync attribution for Ludilearn course format.
-            $manager->sync_user_attribution($course->id,
-                    $options['assignment'],
-                    $options['default_game_element'],
-                    true);
+            $manager->sync_user_attribution(
+                $course->id,
+                $options['assignment'],
+                $options['default_game_element'],
+                true
+            );
         }
     }
 
@@ -580,8 +626,10 @@ class format_ludilearn_observer {
         require_once($CFG->dirroot . '/backup/util/includes/backup_includes.php');
         require_once($CFG->dirroot . '/backup/util/includes/restore_includes.php');
 
-        return $DB->record_exists_sql('SELECT * FROM {backup_controllers}
-         WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
-            ['type' => 'course', 'itemid' => $courseid, 'operation' => 'restore', 'status' => backup::STATUS_FINISHED_OK]);
+        return $DB->record_exists_sql(
+            'SELECT * FROM {backup_controllers}
+            WHERE type = :type AND itemid = :itemid AND operation = :operation AND status < :status',
+            ['type' => 'course', 'itemid' => $courseid, 'operation' => 'restore', 'status' => backup::STATUS_FINISHED_OK]
+        );
     }
 }

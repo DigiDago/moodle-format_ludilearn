@@ -82,21 +82,70 @@ function xmldb_format_ludilearn_upgrade($oldversion = 0) {
         // Add new table ludilearn_bysection.
         $dbman = $DB->get_manager();
         $table = new xmldb_table('ludilearn_bysection');
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('sectionid', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('gameelementid', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, null, null);
+        $table->add_field(
+            'id',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            XMLDB_SEQUENCE,
+            null
+        );
+        $table->add_field(
+            'courseid',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            null
+        );
+        $table->add_field(
+            'sectionid',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            null
+        );
+        $table->add_field(
+            'gameelementid',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            null
+        );
 
         // Adding keys to table ludilearn_bysection.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
-        $table->add_key('courseid', XMLDB_KEY_FOREIGN, ['courseid'], 'course', ['id']);
-        $table->add_key('sectionid', XMLDB_KEY_FOREIGN, ['sectionid'], 'course_sections', ['id']);
-        $table->add_key('gameelementid', XMLDB_KEY_FOREIGN, ['gameelementid'], 'ludilearn_gameelements',
-            ['id']);
+        $table->add_key(
+            'primary',
+            XMLDB_KEY_PRIMARY,
+            ['id']
+        );
+        $table->add_key(
+            'courseid',
+            XMLDB_KEY_FOREIGN,
+            ['courseid'],
+            'course',
+            ['id']
+        );
+        $table->add_key(
+            'sectionid',
+            XMLDB_KEY_FOREIGN,
+            ['sectionid'],
+            'course_sections',
+            ['id']
+        );
+        $table->add_key(
+            'gameelementid',
+            XMLDB_KEY_FOREIGN,
+            ['gameelementid'],
+            'ludilearn_gameelements',
+            ['id']
+        );
 
         // Create table.
         try {
@@ -259,14 +308,42 @@ function xmldb_format_ludilearn_upgrade($oldversion = 0) {
         // Create table format_ludilearn_manual.
         $dbman = $DB->get_manager();
         $table = new xmldb_table('format_ludilearn_manual');
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('userid', XMLDB_TYPE_INTEGER, '10', null,
-                XMLDB_NOTNULL, null, null);
-        $table->add_field('courseid', XMLDB_TYPE_INTEGER, '10', null,
-            XMLDB_NOTNULL, null, null);
-        $table->add_field('type', XMLDB_TYPE_CHAR, '255', null,
-            XMLDB_NOTNULL, null, null);
+        $table->add_field(
+            'id',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            XMLDB_SEQUENCE,
+            null
+        );
+        $table->add_field(
+            'userid',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            null
+        );
+        $table->add_field(
+            'courseid',
+            XMLDB_TYPE_INTEGER,
+            '10',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            null
+        );
+        $table->add_field(
+            'type',
+            XMLDB_TYPE_CHAR,
+            '255',
+            null,
+            XMLDB_NOTNULL,
+            null,
+            null
+        );
 
         // Adding keys to table format_ludilearn_manual.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);

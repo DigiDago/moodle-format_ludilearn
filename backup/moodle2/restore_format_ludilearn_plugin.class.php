@@ -35,7 +35,6 @@ use format_ludilearn\manager;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_format_ludilearn_plugin extends restore_format_plugin {
-
     /**
      * Define the restore structure of the section plugin.
      *

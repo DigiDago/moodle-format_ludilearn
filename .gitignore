@@ -476,3 +476,5 @@ node_modules
 
 Gruntfile.js
 package-lock.json
+
+.phpunit.result.cache

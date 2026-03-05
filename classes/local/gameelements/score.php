@@ -23,7 +23,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->libdir.'/completionlib.php');
+require_once($CFG->libdir . '/completionlib.php');
 
 /**
  * Score game element class.
@@ -34,7 +34,6 @@ require_once($CFG->libdir.'/completionlib.php');
  * @license          http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class score extends game_element {
-
     /**
      * @var int
      */
@@ -138,8 +137,10 @@ class score extends game_element {
                 $gradable = $this->is_gradable($key);
 
                 // If the module is not gradable and completien is disabled, gamification is disabled.
-                if ((!$gradable && !$completion)
-                    || !$this->is_activity_available_for_user($key, $this->userid)) {
+                if (
+                    (!$gradable && !$completion)
+                    || !$this->is_activity_available_for_user($key, $this->userid)
+                ) {
                     $cmparameters[$key]['gamified'] = false;
                     continue;
                 }
@@ -194,7 +195,6 @@ class score extends game_element {
         $this->sectionparameters['score'] = $this->score;
         $this->sectionparameters['maxscore'] = $this->maxscore;
         $this->sectionparameters['totalbonuscompletion'] = $this->totalbonuscompletion;
-
     }
 
     /**
@@ -267,7 +267,8 @@ class score extends game_element {
         $parameters['maxscore'] = 0;
         $coursemodule = $DB->get_record('course_modules', ['id' => $cmid]);
         if ($coursemodule) {
-            $gradeitem = $DB->get_record('grade_items',
+            $gradeitem = $DB->get_record(
+                'grade_items',
                 [
                     'courseid' => $coursemodule->course,
                     'itemmodule' => $moduletype,
@@ -323,14 +324,17 @@ class score extends game_element {
         global $DB;
 
         // Get game element.
-        $gameelement = $DB->get_record('format_ludilearn_elements',
-            ['sectionid' => $coursemodule->section, 'type' => 'score']);
+        $gameelement = $DB->get_record(
+            'format_ludilearn_elements',
+            ['sectionid' => $coursemodule->section, 'type' => 'score']
+        );
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $gameelement->id, 'userid' => $userid]
+        );
         if ($attribution) {
-
             // Get grade.
             $grades = grade_get_grades($courseid, 'mod', $modulename, $coursemodule->instance, $userid);
 
@@ -349,8 +353,10 @@ class score extends game_element {
             }
 
             // Update the score or create it if it does not exist.
-            $userscore = $DB->get_record('format_ludilearn_cm_user',
-                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'score']);
+            $userscore = $DB->get_record(
+                'format_ludilearn_cm_user',
+                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'score']
+            );
 
             if ($userscore) {
                 // If the score is different from the previous one.
@@ -386,7 +392,8 @@ class score extends game_element {
         $manager = new manager();
         $quiz = $DB->get_record('quiz', ['id' => $quizid]);
         $module = $DB->get_record('modules', ['name' => 'quiz']);
-        $coursemodule = $DB->get_record('course_modules',
+        $coursemodule = $DB->get_record(
+            'course_modules',
             [
                 'course' => $quiz->course,
                 'module' => $module->id,
@@ -395,23 +402,33 @@ class score extends game_element {
         );
 
         // Get score game element.
-        $gameelement = $DB->get_record('format_ludilearn_elements',
-            ['sectionid' => $coursemodule->section,
-                'type' => 'score']);
+        $gameelement = $DB->get_record(
+            'format_ludilearn_elements',
+            [
+                'sectionid' => $coursemodule->section,
+                'type' => 'score',
+            ]
+        );
 
         // Verify attribution.
-        $attribution = $DB->get_record('format_ludilearn_attributio',
-            ['gameelementid' => $gameelement->id, 'userid' => $userid]);
+        $attribution = $DB->get_record(
+            'format_ludilearn_attributio',
+            ['gameelementid' => $gameelement->id, 'userid' => $userid]
+        );
         if ($attribution) {
-
             // Calculate the score.
             $maxscore = $quiz->grade;
-            // Calculate the score.
             // Get grade.
             $score = $manager->calculate_quiz_grade($quiz, $userid);
             // Update the score or create it if it does not exist.
-            $userscore = $DB->get_record('format_ludilearn_cm_user',
-                ['cmid' => $coursemodule->id, 'attributionid' => $attribution->id, 'name' => 'score']);
+            $userscore = $DB->get_record(
+                'format_ludilearn_cm_user',
+                [
+                    'cmid' => $coursemodule->id,
+                    'attributionid' => $attribution->id,
+                    'name' => 'score',
+                ]
+            );
             if ($userscore) {
                 // If the score is different from the previous one.
                 if ($score != $userscore->value) {
@@ -451,11 +468,15 @@ class score extends game_element {
                             WHERE g.courseid = :courseid AND g.sectionid = :sectionid
                             AND a.userid = :userid AND g.type = :type';
 
-        $gameelementreq = $DB->get_record_sql($gameelementsql,
-            ['courseid' => $courseid,
+        $gameelementreq = $DB->get_record_sql(
+            $gameelementsql,
+            [
+                'courseid' => $courseid,
                 'sectionid' => $sectionid,
                 'userid' => $userid,
-                'type' => 'score']);
+                'type' => 'score',
+            ]
+        );
 
         if (!$gameelementreq) {
             return null;
@@ -510,12 +531,14 @@ class score extends game_element {
             }
         }
 
-        return new score($gameelementreq->gameelementid,
+        return new score(
+            $gameelementreq->gameelementid,
             $gameelementreq->courseid,
             $gameelementreq->sectionid,
             $gameelementreq->userid,
             $parameters,
-            $cmparameters);
+            $cmparameters
+        );
     }
 
     /**
@@ -529,8 +552,12 @@ class score extends game_element {
      * @return bool Returns true if the course parameters were successfully updated, false otherwise.
      * @throws \dml_exception
      */
-    public static function update_course_parameters(int $courseid, int $multiplier, int $bonuscompletion,
-        int $percentagecompletion): bool {
+    public static function update_course_parameters(
+        int $courseid,
+        int $multiplier,
+        int $bonuscompletion,
+        int $percentagecompletion
+    ): bool {
         global $DB;
 
         // Retrieve all game elements of the course.
@@ -541,9 +568,10 @@ class score extends game_element {
         } else {
             foreach ($gameelements as $gameelement) {
                 // Retrieve existing values for multiplier parameter.
-                $multiplierrecord = $DB->get_record('format_ludilearn_params',
-                    ['gameelementid' => $gameelement->id,
-                    'name' => 'multiplier']);
+                $multiplierrecord = $DB->get_record(
+                    'format_ludilearn_params',
+                    ['gameelementid' => $gameelement->id, 'name' => 'multiplier']
+                );
                 // If existing update values, else add value.
                 if ($multiplierrecord) {
                     $multiplierrecord->value = $multiplier;
@@ -557,9 +585,10 @@ class score extends game_element {
                 }
 
                 // Retrieve existing values for bonus completion parameter.
-                $bonuscompletionrecord = $DB->get_record('format_ludilearn_params',
-                    ['gameelementid' => $gameelement->id,
-                        'name' => 'bonuscompletion']);
+                $bonuscompletionrecord = $DB->get_record(
+                    'format_ludilearn_params',
+                    ['gameelementid' => $gameelement->id, 'name' => 'bonuscompletion']
+                );
                 // If existing update values, else add value.
                 if ($bonuscompletionrecord) {
                     $bonuscompletionrecord->value = $bonuscompletion;
@@ -573,9 +602,10 @@ class score extends game_element {
                 }
 
                 // Retrieve existing values for percentage completion parameter.
-                $percentagecompletionrecord = $DB->get_record('format_ludilearn_params',
-                    ['gameelementid' => $gameelement->id,
-                        'name' => 'percentagecompletion']);
+                $percentagecompletionrecord = $DB->get_record(
+                    'format_ludilearn_params',
+                    ['gameelementid' => $gameelement->id, 'name' => 'percentagecompletion']
+                );
                 // If existing update values, else add value.
                 if ($percentagecompletionrecord) {
                     $percentagecompletionrecord->value = $percentagecompletion;

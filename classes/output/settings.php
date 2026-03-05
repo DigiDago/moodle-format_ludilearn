@@ -39,7 +39,6 @@ use templatable;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class settings implements renderable, templatable {
-
     /**
      * @var int $courseid The course id.
      */
@@ -277,8 +276,14 @@ class settings implements renderable, templatable {
     protected function get_data_assignmentbysection(stdClass $data): stdClass {
         global $DB;
         $context = context_course::instance($this->courseid);
-        $sections = $DB->get_records('course_sections', ['course' => $this->courseid],
-            'section', 'id, name, section');
+        $sections = $DB->get_records(
+            'course_sections',
+            ['course' => $this->courseid],
+            'section',
+            'id,
+            name,
+            section'
+        );
         $data->sections = [];
         $courseformat = course_get_format($this->courseid);
 
@@ -295,21 +300,33 @@ class settings implements renderable, templatable {
             }
 
             // Get the game element of the section.
-            $bysection = $DB->get_record('format_ludilearn_bysection',
-                ['courseid' => $this->courseid, 'sectionid' => $section->id]);
-            $gameelements = $DB->get_records('format_ludilearn_elements',
-                ['courseid' => $this->courseid, 'sectionid' => $section->id]);
+            $bysection = $DB->get_record(
+                'format_ludilearn_bysection',
+                ['courseid' => $this->courseid, 'sectionid' => $section->id]
+            );
+            $gameelements = $DB->get_records(
+                'format_ludilearn_elements',
+                ['courseid' => $this->courseid, 'sectionid' => $section->id]
+            );
 
             if ($bysection) {
                 $s->gameelementid = $bysection->gameelementid;
-                $gameelement = $DB->get_record('format_ludilearn_elements',
-                    ['id' => $s->gameelementid]);
+                $gameelement = $DB->get_record(
+                    'format_ludilearn_elements',
+                    ['id' => $s->gameelementid]
+                );
                 $s->type = $gameelement->type;
             } else {
                 // If no game element is set, set the default game element.
                 $defaultgameelement = $courseformat->get_format_options()['default_game_element'];
-                $gameelement = $DB->get_record('format_ludilearn_elements',
-                    ['courseid' => $this->courseid, 'sectionid' => $section->id, 'type' => $defaultgameelement]);
+                $gameelement = $DB->get_record(
+                    'format_ludilearn_elements',
+                    [
+                        'courseid' => $this->courseid,
+                        'sectionid' => $section->id,
+                        'type' => $defaultgameelement,
+                    ]
+                );
                 $s->gameelementid = $gameelement->id;
                 $s->type = $gameelement->type;
             }

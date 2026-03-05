@@ -38,7 +38,6 @@ use format_ludilearn\manager;
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class set_item_equiped extends external_api {
-
     /**
      * Execute the webservice.
      *
@@ -61,7 +60,6 @@ class set_item_equiped extends external_api {
         $olditemid = null;
         foreach ($gameelements as $gameelement) {
             if ($gameelement->get_type() == 'avatar') {
-
                 // Search old item equiped.
                 if ($olditemid == null) {
                     $oldthemeequiped = $gameelement->get_item_equiped($slot);
@@ -71,8 +69,12 @@ class set_item_equiped extends external_api {
                         $olditemid = $slot . '-' . $oldthemeequiped;
                     }
                 }
-                $success = $success && $manager->update_gameelement_user($gameelement->get_id(),
-                        $USER->id, 'item-equiped-' . $slot, $theme);
+                $success = $success && $manager->update_gameelement_user(
+                    $gameelement->get_id(),
+                    $USER->id,
+                    'item-equiped-' . $slot,
+                    $theme
+                );
             }
         }
 
