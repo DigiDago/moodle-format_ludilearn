@@ -1081,13 +1081,21 @@
 .format-ludilearn .c100.orange.dark:hover > span {
     color: #e08833;
 }
-
-.format-ludilearn {
-    /* Largeur d'écran inférieure à 600px. */
-    /* Settings pages */
-    /* Questionnaire styles */
-    /* Hexad Results Styles */
-    /* Media Queries */
+.format-ludilearn .course-avatar,
+.format-ludilearn .course-badge,
+.format-ludilearn .course-nogamified,
+.format-ludilearn .course-progress,
+.format-ludilearn .course-ranking,
+.format-ludilearn .course-score {
+    position: relative;
+}
+.format-ludilearn .cm-avatar,
+.format-ludilearn .cm-badge,
+.format-ludilearn .cm-nogamified,
+.format-ludilearn .cm-progress,
+.format-ludilearn .cm-ranking,
+.format-ludilearn .cm-score {
+    position: relative;
 }
 .format-ludilearn .btn {
     min-height: 40px;
@@ -1189,7 +1197,6 @@
 .format-ludilearn .rightdottedscore {
     border-right: var(--primary) 5px dotted;
 }
-
 @media (max-width: 576px) {
     .format-ludilearn .rightdottedscore.rightdottedscore-notsm {
         border-right: none;
@@ -1281,7 +1288,6 @@
 .format-ludilearn .badge-number.spinning {
     animation: spinY 2s linear infinite;
 }
-
 @keyframes spinY {
     0% {
         transform: rotateY(0deg);
@@ -1374,8 +1380,7 @@
     padding: 10px;
     border-radius: 10px;
 }
-.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped
-.alert-equiped {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped .alert-equiped {
     display: block;
 }
 .format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button {
@@ -1530,7 +1535,6 @@
 .format-ludilearn .ranking-table tr {
     border-top: none;
 }
-
 @keyframes percentrocket {
     0% {
         left: 10%;
@@ -1629,7 +1633,6 @@
     top: 0;
     animation: percentrocketprofessional 0.345s infinite step-end;
 }
-
 @keyframes percentrocketprofessional {
     0% {
         left: -75px;
@@ -1700,7 +1703,6 @@
 .format-ludilearn li.explanation-li .explanation-button .explanation {
     vertical-align: top;
 }
-
 @media screen and (max-width: 600px) {
     .format-ludilearn table.ranking-table tr,
     .format-ludilearn table.ranking-table td {
@@ -1879,7 +1881,6 @@
     font-size: 0.95rem;
     line-height: 1.5;
 }
-
 @media (max-width: 768px) {
     .format-ludilearn .hexad-scores-grid {
         grid-template-columns: 1fr;
