@@ -23,6 +23,24 @@
 @use 'progress-rocket';
 .format-ludilearn {
 
+    .course-avatar,
+    .course-badge,
+    .course-nogamified,
+    .course-progress,
+    .course-ranking,
+    .course-score {
+        position: relative;
+    }
+
+    .cm-avatar,
+    .cm-badge,
+    .cm-nogamified,
+    .cm-progress,
+    .cm-ranking,
+    .cm-score {
+        position: relative;
+    }
+
     .btn {
         min-height: 40px;
         font-weight: bold;
