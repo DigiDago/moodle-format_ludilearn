@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2026022031;
+$plugin->version = 2026031730;
 $plugin->component = 'format_ludilearn';
-$plugin->release = '1.1.2';
+$plugin->release = '1.1.3-moodle405';
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_STABLE;
