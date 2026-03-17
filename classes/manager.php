@@ -1439,9 +1439,15 @@ class manager {
             // Verify is there is an attribution for this user.
             $attributionexist = $this->has_attribution($courseid, $userid);
             // If not attribution exist, create one with nogamified type.
-            $gameelementtype = 'nogamified';
-            if (!$attributionexist) {
-                $this->check_attribution_course($courseid, $userid, $gameelementtype);
+            // But only if it is not role switched and automatic.
+            // Because if it is role switched and automatic,
+            // The user can simulate automatic behavior by switching role and answering the questionnaire,
+            // So we don't want to create nogamified attribution in this case because it can be confusing for the user.
+            if (!($assignment == 'automatic' && $roleswitchedandattr)) {
+                $gameelementtype = 'nogamified';
+                if (!$attributionexist) {
+                    $this->check_attribution_course($courseid, $userid, $gameelementtype);
+                }
             }
             $notanswered = false;
         }
