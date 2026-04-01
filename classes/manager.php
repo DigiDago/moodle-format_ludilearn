@@ -1714,7 +1714,6 @@ class manager {
             if (!$uservisible) {
                 continue;
             }
-
             $gameelement = $this->get_element_by_section(
                 $courseid,
                 $section->id,
@@ -1737,7 +1736,7 @@ class manager {
             }
             $section->gameelement = $gameelement;
             // Populate the section parameters with more specific data.
-            $state->fields = $this->populate_section($course, $state->fields, $section, $gameelementtype);
+            $state->fields = $this->populate_section($course, $state->fields, $section, $gameelement->get_type());
             // Check if the gamelement is gamified.
             $state->fields->gamified = false;
             if ($section->gameelement->get_count_cm_gamified() > 0) {
