@@ -1528,6 +1528,7 @@ class manager {
         if ($gameelementtype) {
             return $gameelementtype;
         }
+
         // Get the format options.
         $options = $format->get_format_options();
 
