@@ -1102,7 +1102,7 @@
     font-weight: bold;
 }
 .format-ludilearn #pills-tab {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--primary), rgba(0, 0, 0, 0) 32px);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--bs-primary), rgba(0, 0, 0, 0) 32px);
     height: 60px;
     line-height: 60px;
 }
@@ -1123,7 +1123,7 @@
     color: #5c5854;
 }
 .format-ludilearn .scoretext .playerscore {
-    color: var(--primary);
+    color: var(--bs-primary);
     filter: brightness(75%);
     font-size: 1.5em;
 }
@@ -1195,7 +1195,7 @@
     margin-top: -60px;
 }
 .format-ludilearn .rightdottedscore {
-    border-right: var(--primary) 5px dotted;
+    border-right: var(--bs-primary) 5px dotted;
 }
 @media (max-width: 576px) {
     .format-ludilearn .rightdottedscore.rightdottedscore-notsm {
@@ -1203,10 +1203,10 @@
     }
 }
 .format-ludilearn .bottomdotted {
-    border-bottom: var(--primary) 5px dotted;
+    border-bottom: var(--bs-primary) 5px dotted;
 }
 .format-ludilearn .rightlined {
-    border-right: var(--primary) 2px solid;
+    border-right: var(--bs-primary) 2px solid;
     border-color: grey;
 }
 .format-ludilearn a:hover {
@@ -1697,7 +1697,7 @@
     width: 50px;
     height: 50px;
     padding: 10px;
-    background: var(--primary);
+    background: var(--bs-primary);
     border-radius: 50%;
 }
 .format-ludilearn li.explanation-li .explanation-button .explanation {
@@ -1732,7 +1732,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .format-ludilearn #ludilearn-questionnaire .card:focus-within {
-    box-shadow: 0 0 0 2px var(--primary);
+    box-shadow: 0 0 0 2px var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .hexad-illustration {
     display: block;
@@ -1754,7 +1754,7 @@
     padding: 15px;
     background-color: #f8f9fa;
     border-radius: 0.25rem;
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--bs-primary);
     margin-bottom: 1rem;
     color: #1d2125;
 }
@@ -1772,18 +1772,18 @@
     opacity: 0;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus + .rating-label {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus:not(:focus-visible) + .rating-label {
     outline: none;
     box-shadow: none;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:checked + .rating-label {
-    background-color: var(--primary);
+    background-color: var(--bs-primary);
     color: #fff;
-    border-color: var(--primary);
+    border-color: var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label {
     display: flex;
@@ -1800,13 +1800,13 @@
     color: #495057;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:hover {
-    border-color: var(--primary);
+    border-color: var(--bs-primary);
     background-color: #f8f9fa;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .btn-primary {
     width: 100%;
@@ -1815,7 +1815,7 @@
     margin-top: 1rem;
 }
 .format-ludilearn #ludilearn-questionnaire .btn-primary:focus {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--bs-primary);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 .format-ludilearn #ludilearn-questionnaire .btn-primary:focus:not(:focus-visible) {
@@ -1874,7 +1874,7 @@
 .format-ludilearn .hexad-results .score-item .score-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary);
+    color: var(--bs-primary);
 }
 .format-ludilearn .hexad-results .score-item .score-description {
     color: #495057;
