@@ -57,6 +57,9 @@ class element_types_editable extends \core\output\inplace_editable {
         $itemid = $course->id . ':' . $user->id;
         $this->types = game_element::get_all_types();
         $this->typeassigned = $typeassigned;
+        if (empty($this->typeassigned)) {
+            $this->typeassigned = 'default';
+        }
         $formattedtypeassigned = format_string(get_string($this->typeassigned, 'format_ludilearn'));
         parent::__construct('format_ludilearn', 'element_types', $itemid, $editable, $formattedtypeassigned, $this->typeassigned);
 
@@ -129,7 +132,9 @@ class element_types_editable extends \core\output\inplace_editable {
 
         $course = $DB->get_record('course', ['id' => $courseid], '*', MUST_EXIST);
         $user = $DB->get_record('user', ['id' => $userid], '*', MUST_EXIST);
-
+        if (!$type) {
+            $type = 'nogamified';
+        }
         return new self($course, $user, $type, $manuallyassigned);
     }
 }

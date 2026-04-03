@@ -1528,6 +1528,7 @@ class manager {
         if ($gameelementtype) {
             return $gameelementtype;
         }
+
         // Get the format options.
         $options = $format->get_format_options();
 
@@ -1565,9 +1566,15 @@ class manager {
             // Verify is there is an attribution for this user.
             $attributionexist = $this->has_attribution($courseid, $userid);
             // If not attribution exist, create one with nogamified type.
-            $gameelementtype = 'nogamified';
-            if (!$attributionexist) {
-                $this->check_attribution_course($courseid, $userid, $gameelementtype);
+            // But only if it is not role switched and automatic.
+            // Because if it is role switched and automatic,
+            // The user can simulate automatic behavior by switching role and answering the questionnaire,
+            // So we don't want to create nogamified attribution in this case because it can be confusing for the user.
+            if (!($assignment == 'automatic' && $roleswitchedandattr)) {
+                $gameelementtype = 'nogamified';
+                if (!$attributionexist) {
+                    $this->check_attribution_course($courseid, $userid, $gameelementtype);
+                }
             }
             $notanswered = false;
         }
@@ -1708,7 +1715,6 @@ class manager {
             if (!$uservisible) {
                 continue;
             }
-
             $gameelement = $this->get_element_by_section(
                 $courseid,
                 $section->id,
@@ -1731,7 +1737,7 @@ class manager {
             }
             $section->gameelement = $gameelement;
             // Populate the section parameters with more specific data.
-            $state->fields = $this->populate_section($course, $state->fields, $section, $gameelementtype);
+            $state->fields = $this->populate_section($course, $state->fields, $section, $gameelement->get_type());
             // Check if the gamelement is gamified.
             $state->fields->gamified = false;
             if ($section->gameelement->get_count_cm_gamified() > 0) {

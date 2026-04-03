@@ -1081,20 +1081,28 @@
 .format-ludilearn .c100.orange.dark:hover > span {
     color: #e08833;
 }
-
-.format-ludilearn {
-    /* Largeur d'écran inférieure à 600px. */
-    /* Settings pages */
-    /* Questionnaire styles */
-    /* Hexad Results Styles */
-    /* Media Queries */
+.format-ludilearn .course-avatar,
+.format-ludilearn .course-badge,
+.format-ludilearn .course-nogamified,
+.format-ludilearn .course-progress,
+.format-ludilearn .course-ranking,
+.format-ludilearn .course-score {
+    position: relative;
+}
+.format-ludilearn .cm-avatar,
+.format-ludilearn .cm-badge,
+.format-ludilearn .cm-nogamified,
+.format-ludilearn .cm-progress,
+.format-ludilearn .cm-ranking,
+.format-ludilearn .cm-score {
+    position: relative;
 }
 .format-ludilearn .btn {
     min-height: 40px;
     font-weight: bold;
 }
 .format-ludilearn #pills-tab {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--primary), rgba(0, 0, 0, 0) 32px);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 28px, var(--bs-primary), rgba(0, 0, 0, 0) 32px);
     height: 60px;
     line-height: 60px;
 }
@@ -1115,7 +1123,7 @@
     color: #5c5854;
 }
 .format-ludilearn .scoretext .playerscore {
-    color: var(--primary);
+    color: var(--bs-primary);
     filter: brightness(75%);
     font-size: 1.5em;
 }
@@ -1187,19 +1195,18 @@
     margin-top: -60px;
 }
 .format-ludilearn .rightdottedscore {
-    border-right: var(--primary) 5px dotted;
+    border-right: var(--bs-primary) 5px dotted;
 }
-
 @media (max-width: 576px) {
     .format-ludilearn .rightdottedscore.rightdottedscore-notsm {
         border-right: none;
     }
 }
 .format-ludilearn .bottomdotted {
-    border-bottom: var(--primary) 5px dotted;
+    border-bottom: var(--bs-primary) 5px dotted;
 }
 .format-ludilearn .rightlined {
-    border-right: var(--primary) 2px solid;
+    border-right: var(--bs-primary) 2px solid;
     border-color: grey;
 }
 .format-ludilearn a:hover {
@@ -1281,7 +1288,6 @@
 .format-ludilearn .badge-number.spinning {
     animation: spinY 2s linear infinite;
 }
-
 @keyframes spinY {
     0% {
         transform: rotateY(0deg);
@@ -1374,8 +1380,7 @@
     padding: 10px;
     border-radius: 10px;
 }
-.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped
-.alert-equiped {
+.format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .avatar-item.avatar-item-equiped .alert-equiped {
     display: block;
 }
 .format-ludilearn .modal-dialog .avatar-inventory .tab-content-inventory .avatar-slot .equip-button {
@@ -1530,7 +1535,6 @@
 .format-ludilearn .ranking-table tr {
     border-top: none;
 }
-
 @keyframes percentrocket {
     0% {
         left: 10%;
@@ -1629,7 +1633,6 @@
     top: 0;
     animation: percentrocketprofessional 0.345s infinite step-end;
 }
-
 @keyframes percentrocketprofessional {
     0% {
         left: -75px;
@@ -1694,13 +1697,12 @@
     width: 50px;
     height: 50px;
     padding: 10px;
-    background: var(--primary);
+    background: var(--bs-primary);
     border-radius: 50%;
 }
 .format-ludilearn li.explanation-li .explanation-button .explanation {
     vertical-align: top;
 }
-
 @media screen and (max-width: 600px) {
     .format-ludilearn table.ranking-table tr,
     .format-ludilearn table.ranking-table td {
@@ -1730,7 +1732,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .format-ludilearn #ludilearn-questionnaire .card:focus-within {
-    box-shadow: 0 0 0 2px var(--primary);
+    box-shadow: 0 0 0 2px var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .hexad-illustration {
     display: block;
@@ -1752,7 +1754,7 @@
     padding: 15px;
     background-color: #f8f9fa;
     border-radius: 0.25rem;
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--bs-primary);
     margin-bottom: 1rem;
     color: #1d2125;
 }
@@ -1770,18 +1772,18 @@
     opacity: 0;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus + .rating-label {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:focus:not(:focus-visible) + .rating-label {
     outline: none;
     box-shadow: none;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option input[type=radio]:checked + .rating-label {
-    background-color: var(--primary);
+    background-color: var(--bs-primary);
     color: #fff;
-    border-color: var(--primary);
+    border-color: var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label {
     display: flex;
@@ -1798,13 +1800,13 @@
     color: #495057;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:hover {
-    border-color: var(--primary);
+    border-color: var(--bs-primary);
     background-color: #f8f9fa;
 }
 .format-ludilearn #ludilearn-questionnaire .rating-option .rating-label:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--bs-primary);
     outline-offset: 2px;
-    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--bs-primary);
 }
 .format-ludilearn #ludilearn-questionnaire .btn-primary {
     width: 100%;
@@ -1813,7 +1815,7 @@
     margin-top: 1rem;
 }
 .format-ludilearn #ludilearn-questionnaire .btn-primary:focus {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--bs-primary);
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 .format-ludilearn #ludilearn-questionnaire .btn-primary:focus:not(:focus-visible) {
@@ -1872,14 +1874,13 @@
 .format-ludilearn .hexad-results .score-item .score-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary);
+    color: var(--bs-primary);
 }
 .format-ludilearn .hexad-results .score-item .score-description {
     color: #495057;
     font-size: 0.95rem;
     line-height: 1.5;
 }
-
 @media (max-width: 768px) {
     .format-ludilearn .hexad-scores-grid {
         grid-template-columns: 1fr;
