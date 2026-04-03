@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 20260401030;
+$plugin->version = 2026040130;
 $plugin->component = 'format_ludilearn';
 $plugin->release = '1.1.4-Moodle4.5';
 $plugin->requires = 2022041900;
