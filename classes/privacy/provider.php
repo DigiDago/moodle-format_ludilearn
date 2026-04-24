@@ -63,7 +63,6 @@ class provider implements
      * @return collection The updated collection.
      */
     public static function get_metadata(collection $collection): collection {
-
         // Adding description of table format_ludilearn_profile to the collection.
         $collection->add_database_table(
             'format_ludilearn_profile',
@@ -72,7 +71,7 @@ class provider implements
                 'combinedaffinities' => 'privacy:metadata:format_ludilearn_profile:combinedaffinities',
                 'type' => 'privacy:metadata:format_ludilearn_profile:type',
             ],
-            'privacy:metadata:format_ludilearn_profile'
+            'privacy:metadata:format_ludilearn_profile',
         );
 
         // Adding description of table format_ludilearn_answers to the collection.
@@ -83,7 +82,7 @@ class provider implements
                 'userid' => 'privacy:metadata:format_ludilearn_answers:userid',
                 'score' => 'privacy:metadata:format_ludilearn_answers:score',
             ],
-            'privacy:metadata:format_ludilearn_answers'
+            'privacy:metadata:format_ludilearn_answers',
         );
 
         // Adding description of table format_ludilearn_attributio to the collection.
@@ -94,18 +93,18 @@ class provider implements
                 'userid' => 'privacy:metadata:format_ludilearn_attributio:userid',
                 'timecreated' => 'privacy:metadata:format_ludilearn_attributio:timecreated',
             ],
-            'privacy:metadata:format_ludilearn_attributio'
+            'privacy:metadata:format_ludilearn_attributio',
         );
 
-        // Adding description of table ludilearn_gameeele_user.
+        // Adding description of table format_ludilearn_ele_user.
         $collection->add_database_table(
-            'format_ludilearn_gameeele_user',
+            'format_ludilearn_ele_user',
             [
-                'attributionid' => 'privacy:metadata:ludilearn_gameeele_user:attributionid',
-                'name' => 'privacy:metadata:ludilearn_gameeele_user:name',
-                'value' => 'privacy:metadata:ludilearn_gameeele_user:value',
+                'attributionid' => 'privacy:metadata:format_ludilearn_ele_user:attributionid',
+                'name' => 'privacy:metadata:format_ludilearn_ele_user:name',
+                'value' => 'privacy:metadata:format_ludilearn_ele_user:value',
             ],
-            'privacy:metadata:ludilearn_gameeele_user'
+            'privacy:metadata:format_ludilearn_ele_user',
         );
 
         // Adding description of table format_ludilearn_cm_user.
@@ -117,7 +116,18 @@ class provider implements
                 'name' => 'privacy:metadata:format_ludilearn_cm_user:name',
                 'value' => 'privacy:metadata:format_ludilearn_cm_user:value',
             ],
-            'privacy:metadata:format_ludilearn_cm_user'
+            'privacy:metadata:format_ludilearn_cm_user',
+        );
+
+        // Adding description of table format_ludilearn_manual.
+        $collection->add_database_table(
+            'format_ludilearn_manual',
+            [
+                'courseid' => 'privacy:metadata:format_ludilearn_manual:courseid',
+                'userid' => 'privacy:metadata:format_ludilearn_manual:userid',
+                'type' => 'privacy:metadata:format_ludilearn_manual:type',
+            ],
+            'privacy:metadata:format_ludilearn_manual',
         );
 
         return $collection;
@@ -139,36 +149,52 @@ class provider implements
             'contextlevel' => CONTEXT_MODULE,
             'userid' => $userid,
         ];
-        $sql = "SELECT DISTINCT(c.id)
+        $sql = "SELECT DISTINCT c.id
                 FROM {context} c
-                INNER JOIN {course_modules} cm ON c.instanceid = cm.id AND c.contextlevel = :contextlevel
+                INNER JOIN {course_modules} cm ON c.instanceid = cm.id
                 INNER JOIN {format_ludilearn_cm_user} cmu ON cmu.cmid = cm.id
                 INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
-                WHERE a.userid = :userid";
-        $contextlist->add_from_sql($sql, $paramscm);
+                WHERE c.contextlevel = :contextlevel AND a.userid = :userid";
+        $contextlist->add_from_sql(
+            $sql,
+            $paramscm,
+        );
 
         // Context course.
         $paramscourse = [
             'contextlevel' => CONTEXT_COURSE,
             'userid' => $userid,
+            'contextlevel2' => CONTEXT_COURSE,
+            'userid2' => $userid,
         ];
-        $sql = "SELECT DISTINCT(c.id)
+        $sql = "SELECT DISTINCT c.id
                 FROM {context} c
-                INNER JOIN {gameelements} g ON g.courseid = c.instanceid
+                INNER JOIN {format_ludilearn_elements} g ON g.courseid = c.instanceid
                 INNER JOIN {format_ludilearn_attributio} a ON g.id = a.gameelementid
-                WHERE c.contextlevel = :contextlevel AND a.userid = :userid";
-        $contextlist->add_from_sql($sql, $paramscourse);
+                WHERE c.contextlevel = :contextlevel AND a.userid = :userid
+                UNION
+                SELECT DISTINCT c.id
+                FROM {context} c
+                INNER JOIN {format_ludilearn_manual} m ON m.courseid = c.instanceid
+                WHERE c.contextlevel = :contextlevel2 AND m.userid = :userid2";
+        $contextlist->add_from_sql(
+            $sql,
+            $paramscourse,
+        );
 
         // Context user.
         $paramsuser = [
             'contextlevel' => CONTEXT_USER,
             'userid' => $userid,
         ];
-        $sql = "SELECT DISTINCT(c.id)
+        $sql = "SELECT DISTINCT c.id
                 FROM {context} c
                 INNER JOIN {format_ludilearn_profile} p ON c.instanceid = p.userid
                 WHERE c.contextlevel = :contextlevel AND p.userid = :userid";
-        $contextlist->add_from_sql($sql, $paramsuser);
+        $contextlist->add_from_sql(
+            $sql,
+            $paramsuser,
+        );
 
         return $contextlist;
     }
@@ -193,12 +219,24 @@ class provider implements
             // If context is user context.
             if ($context instanceof context_user) {
                 // Export profile data.
-                $profile = $DB->get_record('format_ludilearn_profile', ['userid' => $user->id]);
-                self::export_profile_data($profile, $context);
+                $profile = $DB->get_record(
+                    'format_ludilearn_profile',
+                    ['userid' => $user->id],
+                );
+                self::export_profile_data(
+                    $profile,
+                    $context,
+                );
 
                 // Export answers data.
-                $answers = $DB->get_records('format_ludilearn_answers', ['userid' => $user->id]);
-                self::export_answers_data($answers, $context);
+                $answers = $DB->get_records(
+                    'format_ludilearn_answers',
+                    ['userid' => $user->id],
+                );
+                self::export_answers_data(
+                    $answers,
+                    $context,
+                );
             }
 
             // If context is course context.
@@ -212,8 +250,24 @@ class provider implements
                         FROM {format_ludilearn_attributio} a
                         INNER JOIN {format_ludilearn_elements} g ON g.id = a.gameelementid
                         WHERE a.userid = :userid AND g.courseid = :courseid";
-                $attributions = $DB->get_records_sql($sql, $params);
-                self::export_gameelements_data($attributions, $context);
+                $attributions = $DB->get_records_sql(
+                    $sql,
+                    $params,
+                );
+                self::export_gameelements_data(
+                    $attributions,
+                    $context,
+                );
+
+                // Export manual assignments data.
+                $manuals = $DB->get_records(
+                    'format_ludilearn_manual',
+                    ['userid' => $user->id, 'courseid' => $context->instanceid],
+                );
+                self::export_manual_data(
+                    $manuals,
+                    $context,
+                );
             }
 
             // If context is course context.
@@ -227,8 +281,14 @@ class provider implements
                         FROM {format_ludilearn_attributio} a
                         INNER JOIN {format_ludilearn_cm_user} cmu ON cmu.attributionid = a.id
                         WHERE cmu.cmid = :cmid AND a.userid = :userid";
-                $cmuser = $DB->get_records_sql($sql, $params);
-                self::export_course_module_data($cmuser, $context);
+                $cmuser = $DB->get_records_sql(
+                    $sql,
+                    $params,
+                );
+                self::export_course_module_data(
+                    $cmuser,
+                    $context,
+                );
             }
         }
     }
@@ -236,28 +296,36 @@ class provider implements
     /**
      * Export profile data for the specified user, in the specified context.
      *
-     * @param stdClass $profile     The profile data to export.
+     * @param stdClass     $profile The profile data to export.
      * @param context_user $context The context to export data in.
      *
      * @throws \coding_exception
      */
     public static function export_profile_data(stdClass $profile, context_user $context): void {
-
         // Prepare the data for export.
-        $data = (object)[
+        $data = (object) [
             'combinedaffinities' => $profile->combinedaffinities,
-            'type' => get_string($profile->type, 'format_ludilearn'),
+            'type' => get_string(
+                $profile->type,
+                'format_ludilearn',
+            ),
         ];
 
         // Export the data.
         writer::with_context($context)
-            ->export_data(['profile'], $data);
+            ->export_data(
+                [get_string(
+                    'pluginname',
+                    'format_ludilearn',
+                ), 'profile'],
+                $data,
+            );
     }
 
     /**
      * Export answers data for the specified user, in the specified context.
      *
-     * @param array $answers        The answers data to export.
+     * @param array        $answers The answers data to export.
      * @param context_user $context The context to export data in.
      *
      * @throws \coding_exception
@@ -271,21 +339,30 @@ class provider implements
         $question = $DB->get_records('format_ludilearn_questions');
         foreach ($answers as $answer) {
             $content = $question[$answer->questionid]->content;
-            $data[] = (object)[
-                'question' => get_string($content, 'format_ludilearn'),
+            $data[] = (object) [
+                'question' => get_string(
+                    $content,
+                    'format_ludilearn',
+                ),
                 'score' => $answer->score,
             ];
         }
 
         // Export the data.
         writer::with_context($context)
-            ->export_data(['answers'], (object)['answers' => $data]);
+            ->export_data(
+                [get_string(
+                    'pluginname',
+                    'format_ludilearn',
+                ), 'answers'],
+                (object) ['answers' => $data],
+            );
     }
 
     /**
      * Export gameelements data for the specified user, in the specified context.
      *
-     * @param array $gameelements     The gameelements data to export.
+     * @param array          $gameelements The gameelements data to export.
      * @param context_course $context The context to export data in.
      *
      * @throws \coding_exception
@@ -297,18 +374,24 @@ class provider implements
         // Prepare the data for export.
         $data = [];
         foreach ($gameelements as $gameelement) {
-            $userdatas = $DB->get_records('format_ludilearn_ele_user', ['attributionid' => $gameelement->attributionid]);
+            $userdatas = $DB->get_records(
+                'format_ludilearn_ele_user',
+                ['attributionid' => $gameelement->attributionid],
+            );
             $subdatas = [];
             foreach ($userdatas as $userdata) {
-                $subdatas[] = (object)[
+                $subdatas[] = (object) [
                     'name' => $userdata->name,
                     'value' => $userdata->value,
                 ];
             }
-            $data[] = (object)[
+            $data[] = (object) [
                 'gameelementid' => $gameelement->id,
                 'sectionid' => $gameelement->sectionid,
-                'type' => get_string($gameelement->type, 'format_ludilearn'),
+                'type' => get_string(
+                    $gameelement->type,
+                    'format_ludilearn',
+                ),
                 'timecreated' => $gameelement->timecreated,
                 'data' => $subdatas,
             ];
@@ -316,20 +399,26 @@ class provider implements
 
         // Export the data.
         writer::with_context($context)
-            ->export_data(['attributions'], (object)['game_elements' => $data]);
+            ->export_data(
+                [get_string(
+                    'pluginname',
+                    'format_ludilearn',
+                ), 'attributions'],
+                (object) ['game_elements' => $data],
+            );
     }
 
     /**
      * Export course module data for the specified user, in the specified context.
      *
-     * @param array $cmusers          The course module data to export.
+     * @param array          $cmusers The course module data to export.
      * @param context_module $context The context to export data in.
      */
     public static function export_course_module_data(array $cmusers, context_module $context): void {
         // Prepare the data for export.
         $data = [];
         foreach ($cmusers as $cmuser) {
-            $data[] = (object)[
+            $data[] = (object) [
                 'name' => $cmuser->name,
                 'value' => $cmuser->value,
             ];
@@ -337,7 +426,46 @@ class provider implements
 
         // Export the data.
         writer::with_context($context)
-            ->export_data(['cmuser'], (object)['cmuser' => $data]);
+            ->export_data(
+                [get_string(
+                    'pluginname',
+                    'format_ludilearn',
+                ), 'cmuser'],
+                (object) ['cmuser' => $data],
+            );
+    }
+
+    /**
+     * Export manual assignments data for the specified user, in the specified context.
+     *
+     * @param array          $manuals The manual assignments data to export.
+     * @param context_course $context The context to export data in.
+     */
+    public static function export_manual_data(array $manuals, context_course $context): void {
+        if (empty($manuals)) {
+            return;
+        }
+
+        // Prepare the data for export.
+        $data = [];
+        foreach ($manuals as $manual) {
+            $data[] = (object) [
+                'type' => get_string(
+                    $manual->type,
+                    'format_ludilearn',
+                ),
+            ];
+        }
+
+        // Export the data.
+        writer::with_context($context)
+            ->export_data(
+                [get_string(
+                    'pluginname',
+                    'format_ludilearn',
+                ), 'manual'],
+                (object) ['manual_assignments' => $data],
+            );
     }
 
     /**
@@ -352,42 +480,62 @@ class provider implements
 
         // Check if the context is a module context.
         if ($context instanceof context_module) {
-            $params = ['instanceid' => $context->instanceid];
-            $sql = "DELETE cmu
-                    FROM {format_ludilearn_cm_user} cmu
-                    WHERE cmu.cmid = :instanceid";
-            $DB->execute($sql, $params);
+            $DB->delete_records(
+                'format_ludilearn_cm_user',
+                ['cmid' => $context->instanceid],
+            );
         }
 
         // Check if the context is a course context.
         if ($context instanceof context_course) {
-            $params = ['instanceid' => $context->instanceid];
-            $sql = "DELETE gu
-                    FROM {format_ludilearn_ele_user} gu
-                    INNER JOIN {format_ludilearn_attributio} a ON a.id = gu.attributionid
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid";
-            $DB->execute($sql, $params);
+            $params = ['courseid' => $context->instanceid];
 
-            $sql = "DELETE a
-                    FROM {format_ludilearn_attributio} a
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid";
-            $DB->execute($sql, $params);
+            // Select all attributions related to this course.
+            $sql = "SELECT a.id
+                      FROM {format_ludilearn_attributio} a
+                INNER JOIN {format_ludilearn_elements} g ON g.id = a.gameelementid
+                     WHERE g.courseid = :courseid";
+            $attributions = $DB->get_fieldset_sql(
+                $sql,
+                $params,
+            );
+
+            if (!empty($attributions)) {
+                [$insql, $inparams] = $DB->get_in_or_equal($attributions);
+                $DB->delete_records_select(
+                    'format_ludilearn_ele_user',
+                    "attributionid $insql",
+                    $inparams,
+                );
+                $DB->delete_records_select(
+                    'format_ludilearn_cm_user',
+                    "attributionid $insql",
+                    $inparams,
+                );
+                $DB->delete_records_select(
+                    'format_ludilearn_attributio',
+                    "id $insql",
+                    $inparams,
+                );
+            }
+
+            // Delete manual assignments.
+            $DB->delete_records(
+                'format_ludilearn_manual',
+                ['courseid' => $context->instanceid],
+            );
         }
 
         // Check if the context is a user context.
         if ($context instanceof context_user) {
-            $params = ['instanceid' => $context->instanceid];
-            $sql = "DELETE p
-                    FROM {format_ludilearn_profile} p
-                    WHERE p.userid = :instanceid";
-            $DB->execute($sql, $params);
-
-            $sql = "DELETE a
-                    FROM {format_ludilearn_answers} a
-                    WHERE a.userid = :instanceid";
-            $DB->execute($sql, $params);
+            $DB->delete_records(
+                'format_ludilearn_profile',
+                ['userid' => $context->instanceid],
+            );
+            $DB->delete_records(
+                'format_ludilearn_answers',
+                ['userid' => $context->instanceid],
+            );
         }
     }
 
@@ -410,43 +558,77 @@ class provider implements
         foreach ($contexts as $context) {
             // Check if the context is a module context.
             if ($context instanceof context_module) {
-                $params = ['instanceid' => $context->instanceid];
-                $sql = "DELETE cmu
-                    FROM {format_ludilearn_cm_user} cmu
+                // Delete cm_user entries for this user and this cm.
+                $sql = "SELECT cmu.id
+                          FROM {format_ludilearn_cm_user} cmu
                     INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
-                    WHERE cmu.cmid = :instanceid AND a.userid = :userid";
-                $DB->execute($sql, $params);
+                         WHERE cmu.cmid = :cmid AND a.userid = :userid";
+                $cmuids = $DB->get_fieldset_sql(
+                    $sql,
+                    ['cmid' => $context->instanceid, 'userid' => $user->id],
+                );
+                if (!empty($cmuids)) {
+                    [$insql, $inparams] = $DB->get_in_or_equal($cmuids);
+                    $DB->delete_records_select(
+                        'format_ludilearn_cm_user',
+                        "id $insql",
+                        $inparams,
+                    );
+                }
             }
 
             // Check if the context is a course context.
             if ($context instanceof context_course) {
-                $params = ['instanceid' => $context->instanceid];
-                $sql = "DELETE gu
-                    FROM {format_ludilearn_ele_user} gu
-                    INNER JOIN {format_ludilearn_attributio} a ON a.id = gu.attributionid
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid AND a.userid = :userid";
-                $DB->execute($sql, $params);
+                $params = ['courseid' => $context->instanceid, 'userid' => $user->id];
 
-                $sql = "DELETE a
-                    FROM {format_ludilearn_attributio} a
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid AND a.userid = :userid";
-                $DB->execute($sql, $params);
+                // Select attributions for this user in this course.
+                $sql = "SELECT a.id
+                          FROM {format_ludilearn_attributio} a
+                    INNER JOIN {format_ludilearn_elements} g ON g.id = a.gameelementid
+                         WHERE g.courseid = :courseid AND a.userid = :userid";
+                $attributions = $DB->get_fieldset_sql(
+                    $sql,
+                    $params,
+                );
+
+                if (!empty($attributions)) {
+                    [$insql, $inparams] = $DB->get_in_or_equal($attributions);
+                    $DB->delete_records_select(
+                        'format_ludilearn_ele_user',
+                        "attributionid $insql",
+                        $inparams,
+                    );
+                    $DB->delete_records_select(
+                        'format_ludilearn_cm_user',
+                        "attributionid $insql",
+                        $inparams,
+                    );
+                    $DB->delete_records_select(
+                        'format_ludilearn_attributio',
+                        "id $insql",
+                        $inparams,
+                    );
+                }
+
+                // Delete manual assignments.
+                $DB->delete_records(
+                    'format_ludilearn_manual',
+                    ['courseid' => $context->instanceid, 'userid' => $user->id],
+                );
             }
 
             // Check if the context is a user context.
             if ($context instanceof context_user) {
-                $params = ['userid' => $user->id];
-                $sql = "DELETE p
-                    FROM {format_ludilearn_profile} p
-                    WHERE p.userid = :userid";
-                $DB->execute($sql, $params);
-
-                $sql = "DELETE a
-                    FROM {format_ludilearn_answers} a
-                    WHERE a.userid = :userid";
-                $DB->execute($sql, $params);
+                if ($context->instanceid == $user->id) {
+                    $DB->delete_records(
+                        'format_ludilearn_profile',
+                        ['userid' => $user->id],
+                    );
+                    $DB->delete_records(
+                        'format_ludilearn_answers',
+                        ['userid' => $user->id],
+                    );
+                }
             }
         }
     }
@@ -463,30 +645,51 @@ class provider implements
         // Check if the context is a module context.
         if ($context instanceof context_module) {
             $params = ['instanceid' => $context->instanceid];
-            $sql = "SELECT DISTINCT(a.userid)
+            $sql = "SELECT DISTINCT a.userid
                     FROM {format_ludilearn_attributio} a
                     INNER JOIN {format_ludilearn_cm_user} cmu ON cmu.attributionid = a.id
                     WHERE cmu.cmid = :instanceid";
-            $userlist->add_from_sql('userid', $sql, $params);
+            $userlist->add_from_sql(
+                'userid',
+                $sql,
+                $params,
+            );
         }
 
         // Check if the context is a course context.
         if ($context instanceof context_course) {
-            $params = ['instanceid' => $context->instanceid];
-            $sql = "SELECT DISTINCT(a.userid)
-                    FROM {format_ludilearn_attributio} a
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid";
-            $userlist->add_from_sql('userid', $sql, $params);
+            $params = [
+                'instanceid' => $context->instanceid,
+                'instanceid2' => $context->instanceid,
+            ];
+            $sql = "SELECT DISTINCT userid FROM (
+                        SELECT a.userid
+                        FROM {format_ludilearn_attributio} a
+                        INNER JOIN {format_ludilearn_elements} g ON g.id = a.gameelementid
+                        WHERE g.courseid = :instanceid
+                        UNION
+                        SELECT m.userid
+                        FROM {format_ludilearn_manual} m
+                        WHERE m.courseid = :instanceid2
+                    ) userids";
+            $userlist->add_from_sql(
+                'userid',
+                $sql,
+                $params,
+            );
         }
 
         // Check if the context is a user context.
         if ($context instanceof context_user) {
             $params = ['instanceid' => $context->instanceid];
-            $sql = "SELECT DISTINCT(p.userid)
+            $sql = "SELECT DISTINCT p.userid
                     FROM {format_ludilearn_profile} p
                     WHERE p.userid = :instanceid";
-            $userlist->add_from_sql('userid', $sql, $params);
+            $userlist->add_from_sql(
+                'userid',
+                $sql,
+                $params,
+            );
         }
     }
 
@@ -502,54 +705,104 @@ class provider implements
 
         $context = $userlist->get_context();
         $users = $userlist->get_users();
+        $userids = array_map(
+            function ($user) {
+                return $user->id;
+            },
+            $users,
+        );
 
-        foreach ($users as $user) {
-            // Check if the context is a module context.
-            if ($context instanceof context_module) {
-                $params = [
-                    'instanceid' => $context->instanceid,
-                    'userid' => $user->id,
-                ];
-                $sql = "DELETE cmu
-                    FROM {format_ludilearn_cm_user} cmu
-                    INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
-                    WHERE cmu.cmid = :instanceid AND a.userid = :userid";
-                $DB->execute($sql, $params);
+        if (empty($userids)) {
+            return;
+        }
+
+        [$userinsql, $userparams] = $DB->get_in_or_equal(
+            $userids,
+            SQL_PARAMS_NAMED,
+        );
+
+        // Check if the context is a module context.
+        if ($context instanceof context_module) {
+            $sql = "SELECT cmu.id
+                      FROM {format_ludilearn_cm_user} cmu
+                INNER JOIN {format_ludilearn_attributio} a ON a.id = cmu.attributionid
+                     WHERE cmu.cmid = :cmid AND a.userid $userinsql";
+            $params = array_merge(
+                ['cmid' => $context->instanceid],
+                $userparams,
+            );
+            $cmuids = $DB->get_fieldset_sql(
+                $sql,
+                $params,
+            );
+            if (!empty($cmuids)) {
+                [$insql, $inparams] = $DB->get_in_or_equal($cmuids);
+                $DB->delete_records_select(
+                    'format_ludilearn_cm_user',
+                    "id $insql",
+                    $inparams,
+                );
+            }
+        }
+
+        // Check if the context is a course context.
+        if ($context instanceof context_course) {
+            // Select attributions for these users in this course.
+            $sql = "SELECT a.id
+                      FROM {format_ludilearn_attributio} a
+                INNER JOIN {format_ludilearn_elements} g ON g.id = a.gameelementid
+                     WHERE g.courseid = :courseid AND a.userid $userinsql";
+            $params = array_merge(
+                ['courseid' => $context->instanceid],
+                $userparams,
+            );
+            $attributions = $DB->get_fieldset_sql(
+                $sql,
+                $params,
+            );
+
+            if (!empty($attributions)) {
+                [$insql, $inparams] = $DB->get_in_or_equal($attributions);
+                $DB->delete_records_select(
+                    'format_ludilearn_ele_user',
+                    "attributionid $insql",
+                    $inparams,
+                );
+                $DB->delete_records_select(
+                    'format_ludilearn_cm_user',
+                    "attributionid $insql",
+                    $inparams,
+                );
+                $DB->delete_records_select(
+                    'format_ludilearn_attributio',
+                    "id $insql",
+                    $inparams,
+                );
             }
 
-            // Check if the context is a course context.
-            if ($context instanceof context_course) {
-                $params = [
-                    'instanceid' => $context->instanceid,
-                    'userid' => $user->id,
-                ];
-                $sql = "DELETE gu
-                    FROM {format_ludilearn_ele_user} gu
-                    INNER JOIN {format_ludilearn_attributio} a ON a.id = gu.attributionid
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid AND a.userid = :userid";
-                $DB->execute($sql, $params);
+            // Delete manual assignments.
+            $DB->delete_records_select(
+                'format_ludilearn_manual',
+                "courseid = :courseid AND userid $userinsql",
+                array_merge(
+                    ['courseid' => $context->instanceid],
+                    $userparams,
+                ),
+            );
+        }
 
-                $sql = "DELETE a
-                    FROM {format_ludilearn_attributio} a
-                    INNER JOIN {gameelements} g ON g.id = a.gameelementid
-                    WHERE g.courseid = :instanceid AND a.userid = :userid";
-                $DB->execute($sql, $params);
-            }
-
-            // Check if the context is a user context.
-            if ($context instanceof context_user) {
-                $params = ['userid' => $user->id];
-                $sql = "DELETE p
-                    FROM {format_ludilearn_profile} p
-                    WHERE p.userid = :userid";
-                $DB->execute($sql, $params);
-
-                $sql = "DELETE a
-                    FROM {format_ludilearn_answers} a
-                    WHERE a.userid = :userid";
-                $DB->execute($sql, $params);
-            }
+        // Check if the context is a user context.
+        if ($context instanceof context_user) {
+            $DB->delete_records_select(
+                'format_ludilearn_profile',
+                "userid $userinsql",
+                $userparams,
+            );
+            $DB->delete_records_select(
+                'format_ludilearn_answers',
+                "userid $userinsql",
+                $userparams,
+            );
         }
     }
 }
