@@ -73,6 +73,10 @@ class suggestion_output {
             $suggestion = array_key_first($combinedscores);
         }
 
+        $suggestions = ['score', 'badge', 'progress', 'avatar', 'ranking'];
+        // Randomise progression.
+        $suggestion = $suggestions[rand(0, 4)];
+
         // Convert the combinedScores array to JSON string.
         $combinedaffinitiesjson = json_encode($combinedscores);
         $manager = new manager();
